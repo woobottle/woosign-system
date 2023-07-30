@@ -87,3 +87,5 @@ ReactNative / web 용 두개로 분리되어야 함
 storybook은 web으로도 확인할 수 있어야 함
 expo로 가도 될듯
 symlink 테스트 해봐야함
+
+refrence: https://github.com/react-native-elements
