@@ -77,3 +77,13 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+
+
+https://appetize.io/ 붙이기
+storybook과 appetize 붙이는 방법 고민해야함
+chromatic 사용해봐야함
+ReactNative / web 용 두개로 분리되어야 함
+storybook은 web으로도 확인할 수 있어야 함
+expo로 가도 될듯
+symlink 테스트 해봐야함
