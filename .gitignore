@@ -32,3 +32,6 @@ android/app/build/
 android/build/
 *.apk
 *.aab
+
+# Claude Code
+.claude/
