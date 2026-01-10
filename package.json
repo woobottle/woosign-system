@@ -33,11 +33,14 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "storybook:native:generate": "sb-rn-get-stories --config-path ./.storybook-native",
+    "storybook:native:ios": "STORYBOOK_ENABLED=true react-native run-ios",
+    "storybook:native:android": "STORYBOOK_ENABLED=true react-native run-android"
   },
   "peerDependencies": {
     "react": ">=17.0.0",
-    "react-native": ">=0.70.0"
+    "react-native": ">=0.78.0"
   },
   "peerDependenciesMeta": {
     "react-native": {
@@ -45,20 +48,25 @@
     }
   },
   "dependencies": {
-    "react": "18.2.0",
-    "react-native": "0.72.3"
+    "react": ">=17.0.0",
+    "react-native": ">=0.78.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@babel/preset-env": "^7.20.0",
     "@babel/runtime": "^7.20.0",
+    "@gorhom/bottom-sheet": "^5.2.8",
+    "@react-native-community/cli": "^20.1.0",
     "@react-native/eslint-config": "^0.72.2",
     "@react-native/metro-config": "^0.72.9",
     "@storybook/addon-a11y": "^7.6.0",
     "@storybook/addon-essentials": "^7.6.0",
     "@storybook/addon-interactions": "^7.6.0",
+    "@storybook/addon-ondevice-actions": "^8.6.4",
+    "@storybook/addon-ondevice-controls": "^8.6.4",
     "@storybook/blocks": "^7.6.0",
     "@storybook/react": "^7.6.0",
+    "@storybook/react-native": "^8.6.4",
     "@storybook/react-vite": "^7.6.0",
     "@tsconfig/react-native": "^3.0.0",
     "@types/react": "^18.0.24",
@@ -71,6 +79,10 @@
     "prettier": "^2.4.1",
     "react-dom": "18.2.0",
     "react-native-builder-bob": "^0.23.0",
+    "react-native-gesture-handler": "^2.30.0",
+    "react-native-reanimated": "^3.19.5",
+    "react-native-safe-area-context": "^5.6.2",
+    "react-native-svg": "^15.15.1",
     "react-test-renderer": "18.2.0",
     "storybook": "^7.6.0",
     "typescript": "^5.0.0",

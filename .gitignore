@@ -18,3 +18,17 @@ storybook-static/
 # IDE
 .idea
 *.iml
+
+# iOS
+ios/Pods/
+ios/build/
+ios/*.xcworkspace
+ios/.xcode.env.local
+ios/Podfile.lock
+
+# Android
+android/.gradle/
+android/app/build/
+android/build/
+*.apk
+*.aab
