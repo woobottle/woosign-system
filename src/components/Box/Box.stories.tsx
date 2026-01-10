@@ -5,8 +5,8 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import { Box } from './Box.web';
-import { Text } from '../Text/Text.web';
+import { Box } from './Box';
+import { Text } from '../Text/Text';
 import { colors } from '../../core/theme/tokens';
 
 const meta: Meta<typeof Box> = {

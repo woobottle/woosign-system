@@ -5,7 +5,7 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import { Button } from './Button.web';
+import { Button } from './Button';
 import type { ButtonVariant, ButtonSize } from './types';
 
 // Icons for demo

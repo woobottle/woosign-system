@@ -5,7 +5,7 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import { Text } from './Text.web';
+import { Text } from './Text';
 import type { TextVariant, TextWeight } from './types';
 
 const meta: Meta<typeof Text> = {
