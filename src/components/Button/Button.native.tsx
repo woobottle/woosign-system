@@ -2,7 +2,7 @@
  * Button component - React Native implementation
  */
 
-import React, { forwardRef, useCallback } from 'react';
+import { forwardRef, useCallback } from 'react';
 import {
   Pressable,
   Text,

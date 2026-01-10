@@ -2,7 +2,7 @@
  * Text component - React Native implementation
  */
 
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { Text as RNText } from 'react-native';
 import type { TextNativeProps } from './types';
 import { textVariants } from './Text.styles';

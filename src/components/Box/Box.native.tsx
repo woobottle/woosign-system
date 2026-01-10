@@ -2,7 +2,7 @@
  * Box component - React Native implementation
  */
 
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { View, StyleSheet } from 'react-native';
 import type { BoxNativeProps, BorderRadiusPreset } from './types';
 import { borderRadius as radiusTokens } from '../../core/theme/tokens';

@@ -101,9 +101,12 @@ export function createVariants<
 
 /**
  * Helper to merge multiple style objects
+ * Accepts any object type for flexibility with CSSProperties, ViewStyle, TextStyle, etc.
  */
 export function mergeStyles(
-  ...styles: (StyleObject | undefined | null | false)[]
-): StyleObject {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ...styles: (any | undefined | null | false)[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): any {
   return Object.assign({}, ...styles.filter(Boolean));
 }

@@ -3,8 +3,6 @@
  */
 
 import type {
-  colors,
-  darkColors,
   spacing,
   borderRadius,
   typography,
@@ -16,9 +14,28 @@ import type {
 // Color scheme type
 export type ColorScheme = 'light' | 'dark' | 'system';
 
-// Color tokens type
-export type Colors = typeof colors;
-export type DarkColors = typeof darkColors;
+// Color tokens type - use base structure for compatibility
+export type Colors = {
+  readonly background: string;
+  readonly foreground: string;
+  readonly card: string;
+  readonly cardForeground: string;
+  readonly popover: string;
+  readonly popoverForeground: string;
+  readonly primary: string;
+  readonly primaryForeground: string;
+  readonly secondary: string;
+  readonly secondaryForeground: string;
+  readonly muted: string;
+  readonly mutedForeground: string;
+  readonly accent: string;
+  readonly accentForeground: string;
+  readonly destructive: string;
+  readonly destructiveForeground: string;
+  readonly border: string;
+  readonly input: string;
+  readonly ring: string;
+};
 
 // Theme tokens interface
 export interface ThemeTokens {
