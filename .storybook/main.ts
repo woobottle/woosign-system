@@ -1,4 +1,5 @@
 import type { StorybookConfig } from '@storybook/react-vite';
+import path from 'path';
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
@@ -25,6 +26,14 @@ const config: StorybookConfig = {
       '.js',
       '.json',
     ];
+
+    // Force React 18 for web Storybook
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'react': path.resolve(__dirname, '../node_modules/react'),
+      'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
+    };
+
     return config;
   },
   docs: {
