@@ -6,6 +6,9 @@ const config = {
   transformer: {
     unstable_allowRequireContext: true,
   },
+  resolver: {
+    unstable_enablePackageExports: true,
+  },
 };
 
 module.exports = mergeConfig(defaultConfig, config);
