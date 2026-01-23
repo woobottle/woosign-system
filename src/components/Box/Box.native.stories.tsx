@@ -3,7 +3,7 @@
  * Layout container showcase
  */
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-native';
 import React from 'react';
 import { Box } from './Box';
 import { Text } from '../Text/Text';
@@ -385,16 +385,10 @@ export const Sizing: Story = {
 // Semantic Elements
 export const SemanticElements: Story = {
   render: () => (
-    <Box as="article" padding={24} backgroundColor={colors.secondary} borderRadius="lg">
-      <Box as="header" marginBottom={16}>
-        <Text variant="h3">Article Header</Text>
-      </Box>
-      <Box as="main">
-        <Text>Main content of the article goes here.</Text>
-      </Box>
-      <Box as="footer" marginTop={16}>
-        <Text variant="muted">Footer information</Text>
-      </Box>
+    <Box padding={24} backgroundColor={colors.secondary} borderRadius="lg">
+      <Text variant="h3">Article Header</Text>
+      <Text>Main content of the article goes here.</Text>
+      <Text variant="muted">Footer information</Text>
     </Box>
   ),
   parameters: {

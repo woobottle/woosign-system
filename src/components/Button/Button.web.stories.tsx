@@ -1,5 +1,5 @@
 /**
- * Button component stories
+ * Button component stories (Web)
  * shadcn/ui inspired design showcase
  */
 
@@ -13,7 +13,6 @@ import type { ButtonVariant, ButtonSize } from './types';
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
   component: Button,
-  tags: ['autodocs'],
   argTypes: {
     variant: {
       control: 'select',
@@ -42,10 +41,6 @@ const meta: Meta<typeof Button> = {
     fullWidth: {
       control: 'boolean',
       description: 'Whether the button takes full width',
-    },
-    onPress: {
-      action: 'pressed',
-      description: 'Called when the button is pressed',
     },
   },
   args: {

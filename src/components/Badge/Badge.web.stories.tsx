@@ -1,5 +1,5 @@
 /**
- * Badge component stories
+ * Badge component stories (Web)
  * shadcn/ui inspired design showcase
  */
 
@@ -13,7 +13,6 @@ import type { BadgeVariant } from './types';
 const meta: Meta<typeof Badge> = {
   title: 'Components/Badge',
   component: Badge,
-  tags: ['autodocs'],
   argTypes: {
     variant: {
       control: 'select',
@@ -59,13 +58,6 @@ export const AllVariants: Story = {
         ))}
       </Box>
     );
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'All available badge variants inspired by shadcn/ui',
-      },
-    },
   },
 };
 
@@ -123,11 +115,4 @@ export const StatusExamples: Story = {
       </Box>
     </Box>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Common use cases for badges: status indicators, notification counts, and labels',
-      },
-    },
-  },
 };
