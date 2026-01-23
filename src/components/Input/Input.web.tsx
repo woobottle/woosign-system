@@ -68,7 +68,7 @@ export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputWeb
 
     const handleChange = useCallback(
       (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        onChangeText?.(e.target.value);
+        onChangeText?.(e.currentTarget.value);
       },
       [onChangeText]
     );

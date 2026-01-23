@@ -4,6 +4,7 @@
 
 import { forwardRef, useCallback } from 'react';
 import { View, Pressable, Text, StyleSheet } from 'react-native';
+import type { ViewStyle, TextStyle } from 'react-native';
 import type {
   CardNativeProps,
   CardHeaderProps,
@@ -92,7 +93,7 @@ Card.displayName = 'Card';
  * CardHeader component
  */
 export function CardHeader({ children, style }: CardHeaderProps) {
-  return <View style={[cardHeaderStyle, style]}>{children}</View>;
+  return <View style={[cardHeaderStyle, style as ViewStyle]}>{children}</View>;
 }
 
 CardHeader.displayName = 'CardHeader';
@@ -102,7 +103,7 @@ CardHeader.displayName = 'CardHeader';
  */
 export function CardTitle({ children, style }: CardTitleProps) {
   return (
-    <Text style={[cardTitleStyle, style]}>
+    <Text style={[cardTitleStyle, style as TextStyle]}>
       {children}
     </Text>
   );
@@ -115,7 +116,7 @@ CardTitle.displayName = 'CardTitle';
  */
 export function CardDescription({ children, style }: CardDescriptionProps) {
   return (
-    <Text style={[cardDescriptionStyle, style]}>
+    <Text style={[cardDescriptionStyle, style as TextStyle]}>
       {children}
     </Text>
   );
@@ -127,7 +128,7 @@ CardDescription.displayName = 'CardDescription';
  * CardContent component
  */
 export function CardContent({ children, style }: CardContentProps) {
-  return <View style={[cardContentStyle, style]}>{children}</View>;
+  return <View style={[cardContentStyle, style as ViewStyle]}>{children}</View>;
 }
 
 CardContent.displayName = 'CardContent';
@@ -136,7 +137,7 @@ CardContent.displayName = 'CardContent';
  * CardFooter component
  */
 export function CardFooter({ children, style }: CardFooterProps) {
-  return <View style={[cardFooterStyle, style]}>{children}</View>;
+  return <View style={[cardFooterStyle, style as ViewStyle]}>{children}</View>;
 }
 
 CardFooter.displayName = 'CardFooter';

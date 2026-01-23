@@ -46,7 +46,7 @@ export const cardVariants = createVariants({
  * Card header styles
  */
 export const cardHeaderStyle = {
-  display: 'flex',
+  display: 'flex' as const,
   flexDirection: 'column' as const,
   gap: spacing[1.5],
   padding: spacing[6],
@@ -83,9 +83,9 @@ export const cardContentStyle = {
  * Card footer styles
  */
 export const cardFooterStyle = {
-  display: 'flex',
+  display: 'flex' as const,
   flexDirection: 'row' as const,
-  alignItems: 'center',
+  alignItems: 'center' as const,
   padding: spacing[6],
   paddingTop: 0,
 };
