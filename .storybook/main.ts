@@ -1,11 +1,12 @@
 import type { StorybookConfig } from '@storybook/react-vite';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
+  stories: ['../src/**/*.web.stories.@(ts|tsx)'],
   addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
     '@storybook/addon-a11y',
   ],
   framework: {
@@ -35,9 +36,6 @@ const config: StorybookConfig = {
     };
 
     return config;
-  },
-  docs: {
-    autodocs: 'tag',
   },
 };
 
