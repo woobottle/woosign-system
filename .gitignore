@@ -11,6 +11,7 @@ yarn-error.log
 
 # Storybook
 storybook-static/
+debug-storybook.log
 
 # Testing
 /coverage
