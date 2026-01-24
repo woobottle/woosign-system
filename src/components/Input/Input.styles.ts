@@ -32,16 +32,19 @@ export const inputContainerVariants = createVariants({
     size: {
       default: {
         height: 40,
-        paddingHorizontal: spacing[3],
+        paddingLeft: spacing[3],
+        paddingRight: spacing[3],
       },
       sm: {
         height: 36,
-        paddingHorizontal: spacing[2],
+        paddingLeft: spacing[2],
+        paddingRight: spacing[2],
         borderRadius: borderRadius.sm,
       },
       lg: {
         height: 44,
-        paddingHorizontal: spacing[4],
+        paddingLeft: spacing[4],
+        paddingRight: spacing[4],
       },
     },
   },
