@@ -1,0 +1,45 @@
+# WooSign
+
+> A cross-platform UI component library for React Native and Web, inspired by shadcn/ui design system. Supports both native mobile and web platforms with a unified API.
+
+## Overview
+
+WooSign provides a consistent set of UI components that work seamlessly across React Native (iOS/Android) and Web platforms. Built with TypeScript and following shadcn/ui design principles.
+
+### Key Features
+
+- Cross-platform (React Native + Web)
+- TypeScript-first with full type safety
+- shadcn/ui inspired design tokens and variants
+- Platform-specific optimizations with unified API
+- Light and dark theme support
+
+## Components
+
+- [Button](src/components/Button/types.ts): Interactive button with variants (default, destructive, outline, secondary, ghost, link) and sizes (default, sm, lg, icon)
+- [Text](src/components/Text/types.ts): Typography component with variants (h1-h4, p, lead, large, small, muted)
+- [Box](src/components/Box/types.ts): Flexible layout container with padding, margin, flexbox, and styling props
+- [Card](src/components/Card/types.ts): Container card with header, content, footer subcomponents and variants (default, outline, ghost)
+- [Input](src/components/Input/types.ts): Text input with variants (default, error), sizes, and icon support
+- [Badge](src/components/Badge/types.ts): Label badge with variants (default, secondary, destructive, outline)
+
+## Core
+
+- [Theme Tokens](src/core/theme/tokens.ts): Design tokens including colors, spacing, typography, shadows, and border radius
+- [Theme Context](src/core/theme/ThemeContext.tsx): React context for theme management
+- [useTheme Hook](src/core/hooks/useTheme.ts): Hook for accessing current theme
+- [Variant System](src/core/variants/createVariants.ts): Utility for creating component variants
+
+## File Structure
+
+Components follow this structure:
+- `Component.tsx` - Platform-agnostic facade
+- `Component.web.tsx` - Web-specific implementation
+- `Component.native.tsx` - React Native implementation
+- `types.ts` - TypeScript interfaces and types
+- `Component.styles.ts` - Shared style definitions
+
+## Optional
+
+- [Storybook Web](.storybook/): Web Storybook configuration
+- [Storybook Native](.storybook-native/): React Native Storybook configuration

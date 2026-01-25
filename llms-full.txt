@@ -1,0 +1,489 @@
+# WooSign
+
+> A cross-platform UI component library for React Native and Web, inspired by shadcn/ui design system. Supports both native mobile and web platforms with a unified API.
+
+## Overview
+
+WooSign provides a consistent set of UI components that work seamlessly across React Native (iOS/Android) and Web platforms. Built with TypeScript and following shadcn/ui design principles.
+
+### Key Features
+
+- Cross-platform (React Native + Web)
+- TypeScript-first with full type safety
+- shadcn/ui inspired design tokens and variants
+- Platform-specific optimizations with unified API
+- Light and dark theme support
+
+### File Structure Convention
+
+Each component follows this structure:
+- `Component.tsx` - Platform-agnostic facade (auto-selects web/native)
+- `Component.web.tsx` - Web-specific implementation
+- `Component.native.tsx` - React Native implementation
+- `types.ts` - TypeScript interfaces and types
+- `Component.styles.ts` - Shared style definitions
+- `index.ts` - Public exports
+
+---
+
+## Components
+
+### Button
+
+Interactive button component with multiple variants and sizes.
+
+**Location:** `src/components/Button/`
+
+**Variants:**
+- `default` - Primary button style
+- `destructive` - Red/danger button
+- `outline` - Bordered, transparent background
+- `secondary` - Secondary style
+- `ghost` - Minimal, transparent
+- `link` - Text link style
+
+**Sizes:**
+- `default` - Standard size
+- `sm` - Small
+- `lg` - Large
+- `icon` - Square icon button
+
+**Props:**
+```typescript
+interface ButtonBaseProps {
+  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
+  size?: 'default' | 'sm' | 'lg' | 'icon';
+  children?: ReactNode;
+  disabled?: boolean;
+  loading?: boolean;        // Shows spinner
+  onPress?: () => void;     // Use onPress (not onClick) for RN compatibility
+  fullWidth?: boolean;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
+  testID?: string;
+}
+```
+
+**Usage:**
+```tsx
+import { Button } from 'woosign';
+
+<Button variant="default" size="lg" onPress={() => {}}>
+  Click Me
+</Button>
+
+<Button variant="destructive" loading>
+  Deleting...
+</Button>
+
+<Button variant="outline" leftIcon={<Icon />}>
+  With Icon
+</Button>
+```
+
+---
+
+### Text
+
+Typography component for displaying text with semantic variants.
+
+**Location:** `src/components/Text/`
+
+**Variants:**
+- `h1` - Heading 1
+- `h2` - Heading 2
+- `h3` - Heading 3
+- `h4` - Heading 4
+- `p` - Paragraph (default)
+- `lead` - Lead paragraph
+- `large` - Large text
+- `small` - Small text
+- `muted` - Muted/secondary text
+
+**Props:**
+```typescript
+interface TextBaseProps {
+  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'lead' | 'large' | 'small' | 'muted';
+  weight?: 'normal' | 'medium' | 'semibold' | 'bold';
+  align?: 'left' | 'center' | 'right';
+  color?: string;
+  muted?: boolean;          // Apply muted foreground color
+  children?: ReactNode;
+  testID?: string;
+}
+```
+
+**Usage:**
+```tsx
+import { Text } from 'woosign';
+
+<Text variant="h1">Heading</Text>
+<Text variant="p" weight="semibold">Bold paragraph</Text>
+<Text variant="small" muted>Helper text</Text>
+```
+
+---
+
+### Box
+
+Flexible layout container with comprehensive styling props.
+
+**Location:** `src/components/Box/`
+
+**Props:**
+```typescript
+interface BoxBaseProps {
+  // Padding
+  padding?: number;
+  paddingX?: number;        // Horizontal (left + right)
+  paddingY?: number;        // Vertical (top + bottom)
+  paddingTop?: number;
+  paddingRight?: number;
+  paddingBottom?: number;
+  paddingLeft?: number;
+
+  // Margin
+  margin?: number;
+  marginX?: number;
+  marginY?: number;
+  marginTop?: number;
+  marginRight?: number;
+  marginBottom?: number;
+  marginLeft?: number;
+
+  // Flexbox
+  flex?: number;
+  flexDirection?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
+  alignItems?: 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
+  justifyContent?: 'flex-start' | 'center' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly';
+  flexWrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
+  gap?: number;
+  rowGap?: number;
+  columnGap?: number;
+
+  // Appearance
+  backgroundColor?: string;
+  borderRadius?: number | 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
+  borderWidth?: number;
+  borderColor?: string;
+
+  // Size
+  width?: number | string;
+  height?: number | string;
+  minWidth?: number | string;
+  minHeight?: number | string;
+  maxWidth?: number | string;
+  maxHeight?: number | string;
+
+  children?: ReactNode;
+  testID?: string;
+}
+```
+
+**Usage:**
+```tsx
+import { Box } from 'woosign';
+
+<Box padding={16} flexDirection="row" alignItems="center" gap={8}>
+  <Text>Item 1</Text>
+  <Text>Item 2</Text>
+</Box>
+
+<Box
+  backgroundColor="#f0f0f0"
+  borderRadius="lg"
+  padding={24}
+>
+  Card content
+</Box>
+```
+
+---
+
+### Card
+
+Container component with header, content, and footer sections.
+
+**Location:** `src/components/Card/`
+
+**Variants:**
+- `default` - Standard card with background and shadow
+- `outline` - Bordered card
+- `ghost` - Minimal styling
+
+**Subcomponents:**
+- `Card` - Main container
+- `CardHeader` - Header section
+- `CardTitle` - Title text
+- `CardDescription` - Description text
+- `CardContent` - Main content area
+- `CardFooter` - Footer section
+
+**Props:**
+```typescript
+interface CardBaseProps {
+  variant?: 'default' | 'outline' | 'ghost';
+  children?: ReactNode;
+  fullWidth?: boolean;
+  onPress?: () => void;     // Makes card interactive
+  disabled?: boolean;
+  testID?: string;
+}
+```
+
+**Usage:**
+```tsx
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from 'woosign';
+
+<Card variant="default">
+  <CardHeader>
+    <CardTitle>Card Title</CardTitle>
+    <CardDescription>Card description text</CardDescription>
+  </CardHeader>
+  <CardContent>
+    Main card content goes here
+  </CardContent>
+  <CardFooter>
+    <Button>Action</Button>
+  </CardFooter>
+</Card>
+```
+
+---
+
+### Input
+
+Text input component with validation states and icon support.
+
+**Location:** `src/components/Input/`
+
+**Variants:**
+- `default` - Standard input
+- `error` - Error state styling
+
+**Sizes:**
+- `default` - Standard height
+- `sm` - Smaller height
+- `lg` - Larger height
+
+**Props:**
+```typescript
+interface InputBaseProps {
+  variant?: 'default' | 'error';
+  size?: 'default' | 'sm' | 'lg';
+  placeholder?: string;
+  value?: string;
+  defaultValue?: string;
+  disabled?: boolean;
+  readOnly?: boolean;
+  onChangeText?: (text: string) => void;  // Use onChangeText (not onChange)
+  onFocus?: () => void;
+  onBlur?: () => void;
+  onSubmitEditing?: () => void;
+  fullWidth?: boolean;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
+  testID?: string;
+  type?: 'text' | 'password' | 'email' | 'number' | 'tel' | 'url';
+  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
+  autoCorrect?: boolean;
+  autoFocus?: boolean;
+  keyboardType?: 'default' | 'email-address' | 'numeric' | 'phone-pad' | 'decimal-pad' | 'url';
+  returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send';
+  maxLength?: number;
+  multiline?: boolean;
+  numberOfLines?: number;
+}
+```
+
+**Usage:**
+```tsx
+import { Input } from 'woosign';
+
+<Input
+  placeholder="Enter email"
+  type="email"
+  keyboardType="email-address"
+  onChangeText={(text) => setEmail(text)}
+/>
+
+<Input
+  variant="error"
+  placeholder="Password"
+  type="password"
+  leftIcon={<LockIcon />}
+/>
+```
+
+---
+
+### Badge
+
+Label component for status indicators and tags.
+
+**Location:** `src/components/Badge/`
+
+**Variants:**
+- `default` - Primary badge
+- `secondary` - Secondary/muted badge
+- `destructive` - Red/error badge
+- `outline` - Bordered badge
+
+**Props:**
+```typescript
+interface BadgeBaseProps {
+  variant?: 'default' | 'secondary' | 'destructive' | 'outline';
+  children?: ReactNode;
+  testID?: string;
+}
+```
+
+**Usage:**
+```tsx
+import { Badge } from 'woosign';
+
+<Badge variant="default">New</Badge>
+<Badge variant="destructive">Error</Badge>
+<Badge variant="outline">Draft</Badge>
+```
+
+---
+
+## Theme System
+
+### Design Tokens
+
+**Location:** `src/core/theme/tokens.ts`
+
+**Colors (Light Theme):**
+```typescript
+colors = {
+  background: '#FFFFFF',
+  foreground: '#0F172A',
+  primary: '#0F172A',
+  primaryForeground: '#F8FAFC',
+  secondary: '#F1F5F9',
+  secondaryForeground: '#0F172A',
+  muted: '#F1F5F9',
+  mutedForeground: '#64748B',
+  destructive: '#EF4444',
+  destructiveForeground: '#F8FAFC',
+  border: '#E2E8F0',
+  input: '#E2E8F0',
+  ring: '#0F172A',
+  card: '#FFFFFF',
+  cardForeground: '#0F172A',
+}
+```
+
+**Spacing Scale (4px base):**
+```typescript
+spacing = {
+  0: 0,
+  1: 4,
+  2: 8,
+  3: 12,
+  4: 16,
+  5: 20,
+  6: 24,
+  8: 32,
+  10: 40,
+  12: 48,
+  // ...
+}
+```
+
+**Border Radius:**
+```typescript
+borderRadius = {
+  none: 0,
+  sm: 4,
+  DEFAULT: 6,
+  md: 8,
+  lg: 12,
+  xl: 16,
+  '2xl': 24,
+  full: 9999,
+}
+```
+
+**Typography:**
+```typescript
+fontSize = {
+  xs: { size: 12, lineHeight: 16 },
+  sm: { size: 14, lineHeight: 20 },
+  base: { size: 16, lineHeight: 24 },
+  lg: { size: 18, lineHeight: 28 },
+  xl: { size: 20, lineHeight: 28 },
+  '2xl': { size: 24, lineHeight: 32 },
+  '3xl': { size: 30, lineHeight: 36 },
+  '4xl': { size: 36, lineHeight: 40 },
+}
+```
+
+### Theme Context
+
+**Location:** `src/core/theme/ThemeContext.tsx`
+
+Provides theme values throughout the component tree.
+
+**Usage:**
+```tsx
+import { ThemeProvider, useTheme } from 'woosign';
+
+// Wrap app
+<ThemeProvider theme="light">
+  <App />
+</ThemeProvider>
+
+// Access theme in components
+const { colors, spacing } = useTheme();
+```
+
+---
+
+## Platform Conventions
+
+### Event Handlers
+
+Use React Native naming conventions for cross-platform compatibility:
+- `onPress` instead of `onClick`
+- `onChangeText` instead of `onChange` for text inputs
+- `onSubmitEditing` for form submission
+
+### Styling
+
+- Web: Supports `className` and CSS-in-JS `style` objects
+- Native: Uses React Native `style` objects (ViewStyle, TextStyle)
+- Both platforms accept the same base props for consistency
+
+### Imports
+
+```tsx
+// Import from package root
+import { Button, Text, Box, Card, Input, Badge } from 'woosign';
+
+// Or import specific components
+import { Button } from 'woosign/components/Button';
+```
+
+---
+
+## Development
+
+### Storybook
+
+- Web: `pnpm storybook` (runs on localhost)
+- Native: `pnpm storybook:native`
+
+### Build
+
+```bash
+pnpm build
+```
+
+### Type Check
+
+```bash
+pnpm typecheck
+```
