@@ -22,14 +22,14 @@ Register an `@font-face` rule pointing at this folder, e.g.
 ```css
 @font-face {
   font-family: 'Woobottle';
-  src: url('@woosign/ui/assets/fonts/Woobottle-Regular.woff2') format('woff2'),
-       url('@woosign/ui/assets/fonts/Woobottle-Regular.ttf') format('truetype');
+  src: url('@woosign/ui/src/assets/fonts/Woobottle-Regular.woff2') format('woff2'),
+       url('@woosign/ui/src/assets/fonts/Woobottle-Regular.ttf') format('truetype');
   font-display: swap;
 }
 @font-face {
   font-family: 'Woobottle Signature';
-  src: url('@woosign/ui/assets/fonts/Woobottle-Signature.subset.woff2') format('woff2'),
-       url('@woosign/ui/assets/fonts/Woobottle-Signature.ttf') format('truetype');
+  src: url('@woosign/ui/src/assets/fonts/Woobottle-Signature.subset.woff2') format('woff2'),
+       url('@woosign/ui/src/assets/fonts/Woobottle-Signature.ttf') format('truetype');
   font-display: swap;
 }
 ```

@@ -124,11 +124,11 @@ preserved so existing integrations keep working.
 
 ## Fonts
 
-**Web** — drop an `@font-face` rule pointing at `@woosign/ui/assets/fonts`:
+**Web** — drop an `@font-face` rule pointing at `@woosign/ui/src/assets/fonts`:
 ```css
 @font-face {
   font-family: 'Woobottle';
-  src: url('@woosign/ui/assets/fonts/Woobottle-Regular.woff2') format('woff2');
+  src: url('@woosign/ui/src/assets/fonts/Woobottle-Regular.woff2') format('woff2');
   font-display: swap;
 }
 ```
