@@ -13,7 +13,7 @@
     "@gorhom/bottom-sheet": "^5.2.8",
     "@react-native-async-storage/async-storage": "^2.1.0",
     "@storybook/react-native": "^10.1.11",
-    "@woosign/ui": "link:../",
+    "woosign-system": "link:../",
     "react": "19.0.0",
     "react-native": "0.78.3",
     "react-native-gesture-handler": "^2.20.0",

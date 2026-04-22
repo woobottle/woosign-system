@@ -19,8 +19,8 @@
     "noUnusedParameters": true,
     "baseUrl": ".",
     "paths": {
-      "@woosign/ui": ["./src/index.ts"],
-      "@woosign/ui/*": ["./src/*"]
+      "woosign-system": ["./src/index.ts"],
+      "woosign-system/*": ["./src/*"]
     }
   },
   "include": ["src/**/*"],

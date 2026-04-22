@@ -22,14 +22,14 @@ Register an `@font-face` rule pointing at this folder, e.g.
 ```css
 @font-face {
   font-family: 'Woobottle';
-  src: url('@woosign/ui/src/assets/fonts/Woobottle-Regular.woff2') format('woff2'),
-       url('@woosign/ui/src/assets/fonts/Woobottle-Regular.ttf') format('truetype');
+  src: url('woosign-system/src/assets/fonts/Woobottle-Regular.woff2') format('woff2'),
+       url('woosign-system/src/assets/fonts/Woobottle-Regular.ttf') format('truetype');
   font-display: swap;
 }
 @font-face {
   font-family: 'Woobottle Signature';
-  src: url('@woosign/ui/src/assets/fonts/Woobottle-Signature.subset.woff2') format('woff2'),
-       url('@woosign/ui/src/assets/fonts/Woobottle-Signature.ttf') format('truetype');
+  src: url('woosign-system/src/assets/fonts/Woobottle-Signature.subset.woff2') format('woff2'),
+       url('woosign-system/src/assets/fonts/Woobottle-Signature.ttf') format('truetype');
   font-display: swap;
 }
 ```
@@ -48,7 +48,7 @@ which will:
 
 Then in code:
 ```ts
-import {resolveFontFamily} from '@woosign/ui';
+import {resolveFontFamily} from 'woosign-system';
 
 <Text style={{fontFamily: resolveFontFamily('display')}}>
   A warmer kind of morning.
@@ -67,7 +67,7 @@ Load via `expo-font`:
 import {useFonts} from 'expo-font';
 
 const [loaded] = useFonts({
-  Woobottle: require('@woosign/ui/src/assets/fonts/Woobottle-Regular.ttf'),
-  'Woobottle Signature': require('@woosign/ui/src/assets/fonts/Woobottle-Signature.ttf'),
+  Woobottle: require('woosign-system/src/assets/fonts/Woobottle-Regular.ttf'),
+  'Woobottle Signature': require('woosign-system/src/assets/fonts/Woobottle-Signature.ttf'),
 });
 ```

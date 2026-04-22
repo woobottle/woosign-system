@@ -1,6 +1,6 @@
 <div align="center">
 
-# @woosign/ui
+# woosign-system
 
 **WooBottle "Paper & Ink" design system — one API, two platforms.**
 
@@ -43,9 +43,9 @@ Cross-platform React Native + Web, hand-tuned to the WooBottle spec.
 ## Install
 
 ```bash
-pnpm add @woosign/ui
+pnpm add woosign-system
 # or
-npm i @woosign/ui
+npm i woosign-system
 ```
 
 Host app also needs peer deps: `react`, and optionally `react-native` if
@@ -54,7 +54,7 @@ you're shipping to iOS/Android.
 ## Use it
 
 ```tsx
-import { ThemeProvider, Button, Card, Badge } from '@woosign/ui';
+import { ThemeProvider, Button, Card, Badge } from 'woosign-system';
 
 export function App() {
   return (
@@ -110,7 +110,7 @@ platforms — TypeScript is the contract.
 One source of truth for both platforms (`src/core/theme/tokens.ts`):
 
 ```ts
-import { colors, typography, borderRadius, shadows, wbSpace } from '@woosign/ui';
+import { colors, typography, borderRadius, shadows, wbSpace } from 'woosign-system';
 
 colors.actionPrimary     // '#D35B1F'
 borderRadius.pill         // 999 — buttons are ALWAYS pill
@@ -124,11 +124,11 @@ preserved so existing integrations keep working.
 
 ## Fonts
 
-**Web** — drop an `@font-face` rule pointing at `@woosign/ui/src/assets/fonts`:
+**Web** — drop an `@font-face` rule pointing at `woosign-system/src/assets/fonts`:
 ```css
 @font-face {
   font-family: 'Woobottle';
-  src: url('@woosign/ui/src/assets/fonts/Woobottle-Regular.woff2') format('woff2');
+  src: url('woosign-system/src/assets/fonts/Woobottle-Regular.woff2') format('woff2');
   font-display: swap;
 }
 ```
@@ -142,7 +142,7 @@ Fonts get linked into Xcode + `UIAppFonts` and copied into
 
 Then cross-platform access via the helper:
 ```ts
-import { resolveFontFamily } from '@woosign/ui';
+import { resolveFontFamily } from 'woosign-system';
 
 <Text style={{ fontFamily: resolveFontFamily('display') }}>
   A warmer kind of morning.

@@ -4,12 +4,12 @@ import { start, updateView, View } from '@storybook/react-native';
 const normalizedStories = [
   {
     titlePrefix: "",
-    directory: "./node_modules/@woosign/ui/src/components",
+    directory: "./node_modules/woosign-system/src/components",
     files: "**/*.native.stories.@(js|jsx|ts|tsx)",
     importPathMatcher: /^\.(?:(?:^|\/|(?:(?:(?!(?:^|\/)\.).)*?)\/)(?!\.)(?=.)[^/]*?\.native\.stories\.(js|jsx|ts|tsx))$/,
     // @ts-ignore
     req: require.context(
-      '../node_modules/@woosign/ui/src/components',
+      '../node_modules/woosign-system/src/components',
       true,
       /^\.(?:(?:^|\/|(?:(?:(?!(?:^|\/)\.).)*?)\/)(?!\.)(?=.)[^/]*?\.native\.stories\.(js|jsx|ts|tsx))$/
     ),
