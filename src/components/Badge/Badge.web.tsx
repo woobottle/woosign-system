@@ -32,7 +32,12 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeWebProps>(
     const badgeStyle = mergeStyles(
       containerStyles,
       textStyles,
-      { display: 'inline-flex', transition: 'all 150ms ease' },
+      {
+        display: 'inline-flex',
+        alignSelf: 'center',
+        width: 'fit-content',
+        transition: 'all 150ms ease',
+      },
       isHovered ? hoverStyles[variant] : undefined,
       style
     ) as React.CSSProperties;

@@ -3,11 +3,23 @@
  * shadcn/ui inspired variants
  */
 
-import type { ReactNode } from 'react';
-import type { ViewStyle } from 'react-native';
+import type {ReactNode} from 'react';
+import type {ViewStyle} from 'react-native';
 
-// Card variants
-export type CardVariant = 'default' | 'outline' | 'ghost';
+// Card variants — WooBottle surface set
+//   default  — white island on cream canvas with soft layered shadow
+//   outline  — transparent with hairline border (use sparingly)
+//   ghost    — no chrome at all
+//   warm     — cream-300 reward / premium highlight
+//   ceramic  — cream-200 section surface, no shadow
+//   inverse  — ink-900 feature-band surface
+export type CardVariant =
+  | 'default'
+  | 'outline'
+  | 'ghost'
+  | 'warm'
+  | 'ceramic'
+  | 'inverse';
 
 // Common props shared between web and native
 export interface CardBaseProps {

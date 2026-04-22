@@ -1,0 +1,37 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/README.md",
+      "sha1": "837849481fa0d7926f78f3401c53daf4ff62ccee"
+    },
+    {
+      "path": "src/assets/fonts/Woobottle-Regular.latin.woff2",
+      "sha1": "da38b913ceb44a563bd96f0fd7db200ec3f2c2d6"
+    },
+    {
+      "path": "src/assets/fonts/Woobottle-Regular.otf",
+      "sha1": "5fb114021b6c9a88dba86d32ed33bc80e41cbdd1"
+    },
+    {
+      "path": "src/assets/fonts/Woobottle-Regular.subset.woff2",
+      "sha1": "90b5f0e9060a82b7bd3ea9c47775ffeaab47c711"
+    },
+    {
+      "path": "src/assets/fonts/Woobottle-Regular.ttf",
+      "sha1": "4ae4f7acbe0ecdc8c6b03364f9bec9bbf742dc09"
+    },
+    {
+      "path": "src/assets/fonts/Woobottle-Regular.woff2",
+      "sha1": "df1e1135be50b6b3529fa060fec2e5392420ab4c"
+    },
+    {
+      "path": "src/assets/fonts/Woobottle-Signature.subset.woff2",
+      "sha1": "73ce4ade3ec2f80ec136243ea2788f897fd8441a"
+    },
+    {
+      "path": "src/assets/fonts/Woobottle-Signature.ttf",
+      "sha1": "f1ecb8d14c1251f87cf3db3b402406232c15a419"
+    }
+  ]
+}

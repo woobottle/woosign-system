@@ -1,13 +1,25 @@
 /**
- * Button styles using the variant system
- * shadcn/ui inspired design
+ * Button styles — WooBottle "Paper & Ink"
+ *
+ * Buttons are ALWAYS full-pill. Hierarchy comes from color role, not shape.
+ * Press state is a tactile squeeze (scale 0.95), 200ms calm ease.
  */
 
-import { createVariants } from '../../core/variants';
-import { colors, spacing, borderRadius, typography } from '../../core/theme/tokens';
+import {createVariants} from '../../core/variants';
+import {
+  colors,
+  spacing,
+  borderRadius,
+  typography,
+  shadowsCss,
+  whiteAlpha,
+} from '../../core/theme/tokens';
 
 /**
  * Button container variants
+ *
+ * Padding per spec: sm 8/16, default 10/18, lg 12/20.
+ * All variants share the same pill radius.
  */
 export const buttonVariants = createVariants({
   base: {
@@ -15,59 +27,67 @@ export const buttonVariants = createVariants({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: borderRadius.md,
-    borderWidth: 0,
+    borderRadius: borderRadius.pill,
+    borderWidth: 1,
+    borderColor: 'transparent',
     gap: spacing[2],
   },
   variants: {
     variant: {
       default: {
-        backgroundColor: colors.primary,
+        backgroundColor: colors.actionPrimary,
+        borderColor: colors.actionPrimary,
       },
       destructive: {
-        backgroundColor: colors.destructive,
+        backgroundColor: colors.actionDanger,
+        borderColor: colors.actionDanger,
       },
       outline: {
         backgroundColor: 'transparent',
-        borderWidth: 1,
-        borderColor: colors.input,
+        borderColor: colors.actionPrimary,
       },
       secondary: {
-        backgroundColor: colors.secondary,
+        backgroundColor: colors.card,
+        borderColor: colors.borderDefault,
       },
       ghost: {
         backgroundColor: 'transparent',
+        borderColor: 'transparent',
+      },
+      dark: {
+        backgroundColor: colors.actionDark,
+        borderColor: colors.actionDark,
+      },
+      inverse: {
+        backgroundColor: 'transparent',
+        borderColor: colors.borderInverse,
       },
       link: {
         backgroundColor: 'transparent',
+        borderColor: 'transparent',
       },
     },
     size: {
       default: {
         height: 40,
-        paddingLeft: spacing[4],
-        paddingRight: spacing[4],
-        paddingTop: spacing[2],
-        paddingBottom: spacing[2],
+        paddingLeft: 18,
+        paddingRight: 18,
       },
       sm: {
         height: 36,
-        paddingLeft: spacing[3],
-        paddingRight: spacing[3],
-        borderRadius: borderRadius.sm,
+        paddingLeft: 16,
+        paddingRight: 16,
       },
       lg: {
-        height: 44,
-        paddingLeft: spacing[8],
-        paddingRight: spacing[8],
+        height: 48,
+        paddingLeft: 20,
+        paddingRight: 20,
       },
       icon: {
         height: 40,
         width: 40,
         paddingLeft: 0,
         paddingRight: 0,
-        paddingTop: 0,
-        paddingBottom: 0,
       },
     },
   },
@@ -79,47 +99,57 @@ export const buttonVariants = createVariants({
 
 /**
  * Button text variants
+ *
+ * Semibold label, tight tracking, sentence case (casing is copy-side only).
  */
 export const buttonTextVariants = createVariants({
   base: {
-    fontWeight: typography.fontWeight.medium,
-    fontSize: typography.fontSize.sm.size,
+    fontWeight: typography.fontWeight.semibold,
+    fontSize: typography.fontSize.bodySm.size,
+    lineHeight: typography.fontSize.bodySm.lineHeight,
+    letterSpacing: typography.letterSpacing.tight,
     textAlign: 'center',
   },
   variants: {
     variant: {
       default: {
-        color: colors.primaryForeground,
+        color: colors.textInverse,
       },
       destructive: {
-        color: colors.destructiveForeground,
+        color: colors.textInverse,
       },
       outline: {
-        color: colors.foreground,
+        color: colors.actionPrimary,
       },
       secondary: {
-        color: colors.secondaryForeground,
+        color: colors.textPrimary,
       },
       ghost: {
-        color: colors.foreground,
+        color: colors.actionPrimary,
+      },
+      dark: {
+        color: colors.textInverse,
+      },
+      inverse: {
+        color: colors.textInverse,
       },
       link: {
-        color: colors.primary,
+        color: colors.actionPrimary,
         textDecorationLine: 'underline',
       },
     },
     size: {
       default: {
-        fontSize: typography.fontSize.sm.size,
+        fontSize: typography.fontSize.bodySm.size,
       },
       sm: {
-        fontSize: typography.fontSize.xs.size,
+        fontSize: typography.fontSize.caption.size,
       },
       lg: {
-        fontSize: typography.fontSize.base.size,
+        fontSize: typography.fontSize.bodyMd.size,
       },
       icon: {
-        fontSize: typography.fontSize.sm.size,
+        fontSize: typography.fontSize.bodySm.size,
       },
     },
   },
@@ -130,23 +160,28 @@ export const buttonTextVariants = createVariants({
 });
 
 /**
- * Hover styles for web (mapped by variant)
+ * Hover styles (web only). "Hover is for promise, not drama" — no lift or scale.
  */
 export const hoverStyles: Record<string, React.CSSProperties> = {
-  default: { opacity: 0.9 },
-  destructive: { opacity: 0.9 },
-  outline: { backgroundColor: colors.accent },
-  secondary: { opacity: 0.8 },
-  ghost: { backgroundColor: colors.accent },
-  link: { textDecoration: 'underline' },
+  default: {
+    backgroundColor: colors.actionPrimaryHover,
+    borderColor: colors.actionPrimaryHover,
+  },
+  destructive: {opacity: 0.9},
+  outline: {backgroundColor: colors.successTint},
+  secondary: {backgroundColor: colors.section},
+  ghost: {backgroundColor: colors.successTint},
+  dark: {backgroundColor: '#000000', borderColor: '#000000'},
+  inverse: {backgroundColor: whiteAlpha[10]},
+  link: {textDecoration: 'underline'},
 };
 
 /**
- * Focus ring style for web
+ * Focus ring — ember 22% glow (matches wb-input:focus in colors_and_type.css)
  */
 export const focusRingStyle: React.CSSProperties = {
   outline: 'none',
-  boxShadow: `0 0 0 2px ${colors.background}, 0 0 0 4px ${colors.ring}`,
+  boxShadow: shadowsCss.focusRing,
 };
 
 /**
@@ -157,9 +192,9 @@ export const disabledStyle = {
 };
 
 /**
- * Pressed style for native
+ * Pressed style for native — a tactile squeeze per spec.
  */
 export const pressedStyle = {
-  opacity: 0.9,
-  transform: [{ scale: 0.98 }],
+  opacity: 1,
+  transform: [{scale: 0.95}],
 };

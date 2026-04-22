@@ -3,11 +3,27 @@
  * shadcn/ui inspired variants
  */
 
-import type { ReactNode } from 'react';
-import type { ViewStyle, TextStyle } from 'react-native';
+import type {ReactNode} from 'react';
+import type {ViewStyle, TextStyle} from 'react-native';
 
-// Badge variants (shadcn/ui style)
-export type BadgeVariant = 'default' | 'secondary' | 'destructive' | 'outline';
+// Badge variants — WooBottle roles
+//   default      — ember primary, solid pill
+//   secondary    — cream section surface with ink label
+//   destructive  — error red
+//   outline      — hairline border, ink label
+//   brand        — ink800 solid (brand heading role)
+//   gold         — ceremonial gold (rewards / achievements only)
+//   success      — success tint
+//   reward       — cream-300 reward highlight
+export type BadgeVariant =
+  | 'default'
+  | 'secondary'
+  | 'destructive'
+  | 'outline'
+  | 'brand'
+  | 'gold'
+  | 'success'
+  | 'reward';
 
 // Common props shared between web and native
 export interface BadgeBaseProps {

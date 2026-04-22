@@ -9,6 +9,10 @@ const preview: Preview = {
         <div
           style={{
             padding: 24,
+            // Keep content to its natural size — prevents Storybook's root
+            // flex container from stretching children to fill the viewport.
+            alignSelf: 'flex-start',
+            display: 'block',
             fontFamily:
               '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
           }}
@@ -27,10 +31,12 @@ const preview: Preview = {
       },
     },
     backgrounds: {
-      default: 'light',
+      default: 'canvas',
       values: [
-        { name: 'light', value: '#FFFFFF' },
-        { name: 'dark', value: '#0F172A' },
+        { name: 'canvas', value: '#F4EFE6' },
+        { name: 'section', value: '#EAE4D8' },
+        { name: 'white', value: '#FFFFFF' },
+        { name: 'inverse', value: '#171513' },
       ],
     },
   },

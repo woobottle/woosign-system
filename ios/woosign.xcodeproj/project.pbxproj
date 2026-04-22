@@ -12,6 +12,14 @@
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		CF08C4A64B45BE9E32A89653 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
+		B1C5E618E58D4A61A5C85114 /* Woobottle-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F0F5094738784ABA93BE0C97 /* Woobottle-Regular.otf */; };
+		160C8041D4F7483CBF9B423F /* Woobottle-Signature.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 67C44A50F51346439178514E /* Woobottle-Signature.ttf */; };
+		D432FCDD4C4649258034C433 /* Woobottle-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91221640213B4CCA95870384 /* Woobottle-Regular.ttf */; };
+		4FAC6195DA1545DBA5532D75 /* Woobottle-Signature.subset.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 5CA936579E7847739F8118BC /* Woobottle-Signature.subset.woff2 */; };
+		750219DD414D4C938CCE131B /* Woobottle-Regular.latin.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = E24BC937E3D64B9AB4B5606D /* Woobottle-Regular.latin.woff2 */; };
+		09422E57D47140EB90D82384 /* Woobottle-Regular.subset.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 44BC71337DB94F97BB2A3694 /* Woobottle-Regular.subset.woff2 */; };
+		6187DE4C014E44709BA38B0B /* Woobottle-Regular.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 2BD03D98E80E44209AB4DDA5 /* Woobottle-Regular.woff2 */; };
+		53810F9D7D374BD08247CC15 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = ED69AE20F0044F448189547B /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +33,14 @@
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = woosign/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = woosign/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F0F5094738784ABA93BE0C97 /* Woobottle-Regular.otf */ = {isa = PBXFileReference; name = "Woobottle-Regular.otf"; path = "../src/assets/fonts/Woobottle-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		67C44A50F51346439178514E /* Woobottle-Signature.ttf */ = {isa = PBXFileReference; name = "Woobottle-Signature.ttf"; path = "../src/assets/fonts/Woobottle-Signature.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		91221640213B4CCA95870384 /* Woobottle-Regular.ttf */ = {isa = PBXFileReference; name = "Woobottle-Regular.ttf"; path = "../src/assets/fonts/Woobottle-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5CA936579E7847739F8118BC /* Woobottle-Signature.subset.woff2 */ = {isa = PBXFileReference; name = "Woobottle-Signature.subset.woff2"; path = "../src/assets/fonts/Woobottle-Signature.subset.woff2"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E24BC937E3D64B9AB4B5606D /* Woobottle-Regular.latin.woff2 */ = {isa = PBXFileReference; name = "Woobottle-Regular.latin.woff2"; path = "../src/assets/fonts/Woobottle-Regular.latin.woff2"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		44BC71337DB94F97BB2A3694 /* Woobottle-Regular.subset.woff2 */ = {isa = PBXFileReference; name = "Woobottle-Regular.subset.woff2"; path = "../src/assets/fonts/Woobottle-Regular.subset.woff2"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2BD03D98E80E44209AB4DDA5 /* Woobottle-Regular.woff2 */ = {isa = PBXFileReference; name = "Woobottle-Regular.woff2"; path = "../src/assets/fonts/Woobottle-Regular.woff2"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		ED69AE20F0044F448189547B /* README.md */ = {isa = PBXFileReference; name = "README.md"; path = "../src/assets/fonts/README.md"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +91,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				748FE009CC85435A983BFACE /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -97,6 +114,22 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		748FE009CC85435A983BFACE /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				F0F5094738784ABA93BE0C97 /* Woobottle-Regular.otf */,
+				67C44A50F51346439178514E /* Woobottle-Signature.ttf */,
+				91221640213B4CCA95870384 /* Woobottle-Regular.ttf */,
+				5CA936579E7847739F8118BC /* Woobottle-Signature.subset.woff2 */,
+				E24BC937E3D64B9AB4B5606D /* Woobottle-Regular.latin.woff2 */,
+				44BC71337DB94F97BB2A3694 /* Woobottle-Regular.subset.woff2 */,
+				2BD03D98E80E44209AB4DDA5 /* Woobottle-Regular.woff2 */,
+				ED69AE20F0044F448189547B /* README.md */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -161,6 +194,14 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				CF08C4A64B45BE9E32A89653 /* PrivacyInfo.xcprivacy in Resources */,
+				B1C5E618E58D4A61A5C85114 /* Woobottle-Regular.otf in Resources */,
+				160C8041D4F7483CBF9B423F /* Woobottle-Signature.ttf in Resources */,
+				D432FCDD4C4649258034C433 /* Woobottle-Regular.ttf in Resources */,
+				4FAC6195DA1545DBA5532D75 /* Woobottle-Signature.subset.woff2 in Resources */,
+				750219DD414D4C938CCE131B /* Woobottle-Regular.latin.woff2 in Resources */,
+				09422E57D47140EB90D82384 /* Woobottle-Regular.subset.woff2 in Resources */,
+				6187DE4C014E44709BA38B0B /* Woobottle-Regular.woff2 in Resources */,
+				53810F9D7D374BD08247CC15 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

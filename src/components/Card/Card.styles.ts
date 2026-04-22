@@ -1,39 +1,52 @@
 /**
- * Card styles using the variant system
- * shadcn/ui inspired design
+ * Card styles — WooBottle surfaces
+ *
+ * Cards are 12px-rounded white islands on the cream canvas with a soft,
+ * layered shadow. Borders are a last resort — prefer surface change + spacing
+ * before reaching for a line.
  */
 
-import { createVariants } from '../../core/variants';
-import { colors, spacing, borderRadius, shadows, typography } from '../../core/theme/tokens';
+import {createVariants} from '../../core/variants';
+import {
+  colors,
+  spacing,
+  borderRadius,
+  shadows,
+  typography,
+} from '../../core/theme/tokens';
 
 /**
  * Card container variants
  */
 export const cardVariants = createVariants({
   base: {
-    borderRadius: borderRadius.lg,
+    borderRadius: borderRadius.md,
     backgroundColor: colors.card,
-    ...shadows.DEFAULT,
   },
   variants: {
     variant: {
       default: {
         backgroundColor: colors.card,
-        borderWidth: 1,
-        borderColor: colors.border,
+        ...shadows.card,
       },
       outline: {
         backgroundColor: 'transparent',
         borderWidth: 1,
-        borderColor: colors.border,
-        shadowOpacity: 0,
-        elevation: 0,
+        borderColor: colors.borderDefault,
       },
       ghost: {
         backgroundColor: 'transparent',
-        borderWidth: 0,
-        shadowOpacity: 0,
-        elevation: 0,
+      },
+      warm: {
+        backgroundColor: colors.reward,
+        ...shadows.card,
+      },
+      ceramic: {
+        backgroundColor: colors.section,
+      },
+      inverse: {
+        backgroundColor: colors.inverse,
+        borderRadius: borderRadius.lg,
       },
     },
   },
@@ -49,34 +62,38 @@ export const cardHeaderStyle = {
   display: 'flex' as const,
   flexDirection: 'column' as const,
   gap: spacing[1.5],
-  padding: spacing[6],
+  padding: spacing[4],
   paddingBottom: 0,
 };
 
 /**
- * Card title styles
+ * Card title styles — WooBottle heading-md, brand ink
  */
 export const cardTitleStyle = {
-  fontSize: typography.fontSize['2xl'].size,
+  fontFamily: typography.fontFamily.sans,
+  fontSize: typography.fontSize.headingMd.size,
   fontWeight: typography.fontWeight.semibold,
-  lineHeight: typography.fontSize['2xl'].lineHeight,
-  color: colors.cardForeground,
+  lineHeight: typography.fontSize.headingMd.lineHeight,
+  letterSpacing: typography.letterSpacing.tight,
+  color: colors.textBrand,
 };
 
 /**
- * Card description styles
+ * Card description styles — secondary ink
  */
 export const cardDescriptionStyle = {
-  fontSize: typography.fontSize.sm.size,
-  lineHeight: typography.fontSize.sm.lineHeight,
-  color: colors.mutedForeground,
+  fontFamily: typography.fontFamily.sans,
+  fontSize: typography.fontSize.bodySm.size,
+  lineHeight: typography.fontSize.bodySm.lineHeight,
+  letterSpacing: typography.letterSpacing.tight,
+  color: colors.textSecondary,
 };
 
 /**
  * Card content styles
  */
 export const cardContentStyle = {
-  padding: spacing[6],
+  padding: spacing[4],
 };
 
 /**
@@ -86,7 +103,7 @@ export const cardFooterStyle = {
   display: 'flex' as const,
   flexDirection: 'row' as const,
   alignItems: 'center' as const,
-  padding: spacing[6],
+  padding: spacing[4],
   paddingTop: 0,
 };
 
@@ -98,11 +115,10 @@ export const hoverStyle: React.CSSProperties = {
 };
 
 /**
- * Pressed style for native
+ * Pressed style for native — tactile squeeze per spec
  */
 export const pressedStyle = {
-  opacity: 0.9,
-  transform: [{ scale: 0.99 }],
+  transform: [{scale: 0.99}],
 };
 
 /**

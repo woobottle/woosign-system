@@ -3,16 +3,26 @@
  * shadcn/ui inspired variants
  */
 
-import type { ReactNode } from 'react';
-import type { ViewStyle, TextStyle, PressableProps } from 'react-native';
+import type {ReactNode} from 'react';
+import type {ViewStyle, TextStyle, PressableProps} from 'react-native';
 
-// Button variants (shadcn/ui style)
+// Button variants — WooBottle set + shadcn-compat aliases
+//   default      — ember primary CTA (full pill)
+//   secondary    — white island with hairline border
+//   outline      — transparent ember border (ghost-style)
+//   ghost        — transparent, ember label
+//   dark         — ink900 fill for inverse-on-light emphasis
+//   inverse      — transparent with white border (for ink feature bands)
+//   destructive  — error red
+//   link         — label-only
 export type ButtonVariant =
   | 'default'
   | 'destructive'
   | 'outline'
   | 'secondary'
   | 'ghost'
+  | 'dark'
+  | 'inverse'
   | 'link';
 
 // Button sizes

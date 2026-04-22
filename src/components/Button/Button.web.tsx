@@ -3,8 +3,8 @@
  * Pure React + inline styles (no react-native-web)
  */
 
-import React, { forwardRef, useState, useCallback } from 'react';
-import type { ButtonWebProps } from './types';
+import React, {forwardRef, useState, useCallback} from 'react';
+import type {ButtonWebProps} from './types';
 import {
   buttonVariants,
   buttonTextVariants,
@@ -12,12 +12,13 @@ import {
   focusRingStyle,
   disabledStyle,
 } from './Button.styles';
-import { mergeStyles } from '../../core/variants';
+import {mergeStyles} from '../../core/variants';
+import {colors, duration, easing} from '../../core/theme/tokens';
 
 /**
  * Simple loading spinner for web
  */
-function LoadingSpinner({ color }: { color: string }) {
+function LoadingSpinner({color}: {color: string}) {
   return (
     <svg
       width="16"
@@ -28,8 +29,7 @@ function LoadingSpinner({ color }: { color: string }) {
       strokeWidth="2"
       style={{
         animation: 'wds-spin 1s linear infinite',
-      }}
-    >
+      }}>
       <path d="M21 12a9 9 0 1 1-6.219-8.56" />
       <style>
         {`
@@ -63,7 +63,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonWebProps>(
       style,
       testID,
     },
-    ref
+    ref,
   ) {
     const [isHovered, setIsHovered] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
@@ -76,24 +76,42 @@ export const Button = forwardRef<HTMLButtonElement, ButtonWebProps>(
     }, [disabled, loading, onPress]);
 
     // Get variant styles
-    const containerStyles = buttonVariants({ variant, size }) as React.CSSProperties;
-    const textStyles = buttonTextVariants({ variant, size }) as React.CSSProperties;
+    const containerStyles = buttonVariants({
+      variant,
+      size,
+    }) as React.CSSProperties;
+    const textStyles = buttonTextVariants({
+      variant,
+      size,
+    }) as React.CSSProperties;
 
-    // Determine spinner color
-    const spinnerColor = ['default', 'destructive'].includes(variant)
-      ? '#F8FAFC'
-      : '#0F172A';
+    // Determine spinner color — inverted variants use white, ghost/outline use ember
+    const spinnerColor = ['default', 'destructive', 'dark', 'inverse'].includes(
+      variant,
+    )
+      ? colors.textInverse
+      : variant === 'secondary'
+      ? colors.textPrimary
+      : colors.actionPrimary;
 
     // Compose final button styles
     const buttonStyle = mergeStyles(
       containerStyles,
-      fullWidth ? { width: '100%' } : undefined,
-      (disabled || loading) ? { ...disabledStyle, cursor: 'not-allowed' } : { cursor: 'pointer' },
+      // Web-only defaults: inline-flex + alignSelf center prevent the button
+      // from stretching to fill the cross-axis of a flex-row parent (Box).
+      {
+        display: 'inline-flex',
+        alignSelf: 'center',
+      } as React.CSSProperties,
+      fullWidth ? {width: '100%'} : undefined,
+      disabled || loading
+        ? {...disabledStyle, cursor: 'not-allowed'}
+        : {cursor: 'pointer'},
       isHovered && !disabled && !loading ? hoverStyles[variant] : undefined,
       isFocused && !disabled ? focusRingStyle : undefined,
-      isPressed && !disabled ? { transform: 'scale(0.98)' } : undefined,
-      { transition: 'all 150ms ease' },
-      style
+      isPressed && !disabled ? {transform: 'scale(0.95)'} : undefined,
+      {transition: `all ${duration.normal}ms ${easing.standard}`},
+      style,
     ) as React.CSSProperties;
 
     // Text style
@@ -120,8 +138,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonWebProps>(
         onMouseUp={() => setIsPressed(false)}
         className={className}
         style={buttonStyle}
-        data-testid={testID}
-      >
+        data-testid={testID}>
         {loading ? (
           <LoadingSpinner color={spinnerColor} />
         ) : (
@@ -133,7 +150,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonWebProps>(
         )}
       </button>
     );
-  }
+  },
 );
 
 Button.displayName = 'Button';

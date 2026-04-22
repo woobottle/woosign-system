@@ -1,10 +1,18 @@
 /**
- * Input styles using the variant system
- * shadcn/ui inspired design
+ * Input styles — WooBottle
+ *
+ * 12px rounded container on white, hairline border. Focus ring is an
+ * ember-tinted glow (matches wb-input:focus in the design system's CSS).
  */
 
-import { createVariants } from '../../core/variants';
-import { colors, spacing, borderRadius, typography } from '../../core/theme/tokens';
+import {createVariants} from '../../core/variants';
+import {
+  colors,
+  spacing,
+  borderRadius,
+  typography,
+  shadowsCss,
+} from '../../core/theme/tokens';
 
 /**
  * Input container variants
@@ -16,33 +24,34 @@ export const inputContainerVariants = createVariants({
     alignItems: 'center',
     borderRadius: borderRadius.md,
     borderWidth: 1,
-    borderColor: colors.input,
-    backgroundColor: colors.background,
+    borderColor: colors.borderDefault,
+    backgroundColor: colors.card,
     gap: spacing[2],
   },
   variants: {
     variant: {
       default: {
-        borderColor: colors.input,
+        borderColor: colors.borderDefault,
       },
       error: {
-        borderColor: colors.destructive,
+        borderColor: colors.actionDanger,
+        backgroundColor: colors.errorTint,
       },
     },
     size: {
       default: {
-        height: 40,
-        paddingLeft: spacing[3],
-        paddingRight: spacing[3],
+        height: 44,
+        paddingLeft: 14,
+        paddingRight: 14,
       },
       sm: {
         height: 36,
-        paddingLeft: spacing[2],
-        paddingRight: spacing[2],
+        paddingLeft: spacing[3],
+        paddingRight: spacing[3],
         borderRadius: borderRadius.sm,
       },
       lg: {
-        height: 44,
+        height: 52,
         paddingLeft: spacing[4],
         paddingRight: spacing[4],
       },
@@ -59,29 +68,31 @@ export const inputContainerVariants = createVariants({
  */
 export const inputTextVariants = createVariants({
   base: {
-    fontWeight: typography.fontWeight.normal,
-    fontSize: typography.fontSize.sm.size,
-    color: colors.foreground,
+    fontFamily: typography.fontFamily.sans,
+    fontWeight: typography.fontWeight.regular,
+    fontSize: typography.fontSize.bodyMd.size,
+    letterSpacing: typography.letterSpacing.tight,
+    color: colors.textPrimary,
     flex: 1,
   },
   variants: {
     variant: {
       default: {
-        color: colors.foreground,
+        color: colors.textPrimary,
       },
       error: {
-        color: colors.foreground,
+        color: colors.textPrimary,
       },
     },
     size: {
       default: {
-        fontSize: typography.fontSize.sm.size,
+        fontSize: typography.fontSize.bodyMd.size,
       },
       sm: {
-        fontSize: typography.fontSize.xs.size,
+        fontSize: typography.fontSize.bodySm.size,
       },
       lg: {
-        fontSize: typography.fontSize.base.size,
+        fontSize: typography.fontSize.bodyLg.size,
       },
     },
   },
@@ -92,17 +103,17 @@ export const inputTextVariants = createVariants({
 });
 
 /**
- * Placeholder color
+ * Placeholder color — secondary ink on light
  */
-export const placeholderColor = colors.mutedForeground;
+export const placeholderColor = colors.textTertiary;
 
 /**
- * Focus styles for web
+ * Focus styles for web — ember focus ring per design system
  */
 export const focusContainerStyle: React.CSSProperties = {
   outline: 'none',
-  borderColor: colors.ring,
-  boxShadow: `0 0 0 2px ${colors.background}, 0 0 0 4px ${colors.ring}`,
+  borderColor: colors.borderFocus,
+  boxShadow: shadowsCss.focusRing,
 };
 
 /**
@@ -110,7 +121,7 @@ export const focusContainerStyle: React.CSSProperties = {
  */
 export const disabledStyle = {
   opacity: 0.5,
-  backgroundColor: colors.muted,
+  backgroundColor: colors.section,
 };
 
 /**

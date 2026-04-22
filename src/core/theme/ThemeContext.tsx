@@ -5,15 +5,25 @@ import React, {
   useMemo,
   useCallback,
 } from 'react';
-import type { Theme, ThemeContextValue, ColorScheme, ThemeProviderProps } from './types';
+import type {
+  Theme,
+  ThemeContextValue,
+  ColorScheme,
+  ThemeProviderProps,
+} from './types';
 import {
   colors,
   darkColors,
   spacing,
+  wbSpace,
+  outerGutter,
   borderRadius,
   typography,
   shadows,
+  shadowsCss,
   duration,
+  easing,
+  containers,
   zIndex,
 } from './tokens';
 
@@ -28,7 +38,8 @@ export function ThemeProvider({
   children,
   defaultColorScheme = 'light',
 }: ThemeProviderProps): React.ReactElement {
-  const [colorScheme, setColorScheme] = useState<ColorScheme>(defaultColorScheme);
+  const [colorScheme, setColorScheme] =
+    useState<ColorScheme>(defaultColorScheme);
 
   const isDark = colorScheme === 'dark';
 
@@ -36,19 +47,24 @@ export function ThemeProvider({
     () => ({
       colors: isDark ? darkColors : colors,
       spacing,
+      wbSpace,
+      outerGutter,
       borderRadius,
       typography,
       shadows,
+      shadowsCss,
       duration,
+      easing,
+      containers,
       zIndex,
       colorScheme,
       isDark,
     }),
-    [colorScheme, isDark]
+    [colorScheme, isDark],
   );
 
   const toggleColorScheme = useCallback(() => {
-    setColorScheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+    setColorScheme(prev => (prev === 'light' ? 'dark' : 'light'));
   }, []);
 
   const value = useMemo<ThemeContextValue>(
@@ -57,7 +73,7 @@ export function ThemeProvider({
       setColorScheme,
       toggleColorScheme,
     }),
-    [theme, toggleColorScheme]
+    [theme, toggleColorScheme],
   );
 
   return (
@@ -79,4 +95,4 @@ export function useThemeContext(): ThemeContextValue {
   return context;
 }
 
-export { ThemeContext };
+export {ThemeContext};

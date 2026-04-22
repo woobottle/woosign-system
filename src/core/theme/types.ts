@@ -9,13 +9,24 @@ import type {
   shadows,
   duration,
   zIndex,
+  wbSpace,
+  outerGutter,
+  easing,
+  containers,
+  shadowsCss,
 } from './tokens';
 
 // Color scheme type
 export type ColorScheme = 'light' | 'dark' | 'system';
 
-// Color tokens type - use base structure for compatibility
+/**
+ * Color tokens type.
+ *
+ * Includes both shadcn-compat aliases (primary/secondary/muted/…) and the
+ * WooBottle semantic tokens (canvas/section/reward/ink/ember/gold/…).
+ */
 export type Colors = {
+  // Shadcn-compat surface + semantic aliases
   readonly background: string;
   readonly foreground: string;
   readonly card: string;
@@ -35,16 +46,55 @@ export type Colors = {
   readonly border: string;
   readonly input: string;
   readonly ring: string;
+
+  // WooBottle surface tokens
+  readonly canvas: string;
+  readonly section: string;
+  readonly reward: string;
+  readonly inverse: string;
+  readonly inverseForeground: string;
+  readonly inverseForegroundSecondary: string;
+
+  // Roles
+  readonly brand: string;
+  readonly actionPrimary: string;
+  readonly actionPrimaryHover: string;
+  readonly actionDark: string;
+  readonly actionDanger: string;
+
+  // Accents
+  readonly gold: string;
+  readonly successTint: string;
+  readonly errorTint: string;
+
+  // Text ladder
+  readonly textPrimary: string;
+  readonly textSecondary: string;
+  readonly textTertiary: string;
+  readonly textInverse: string;
+  readonly textInverseSecondary: string;
+  readonly textBrand: string;
+
+  // Borders
+  readonly borderDefault: string;
+  readonly borderStrong: string;
+  readonly borderInverse: string;
+  readonly borderFocus: string;
 };
 
 // Theme tokens interface
 export interface ThemeTokens {
   colors: Colors;
   spacing: typeof spacing;
+  wbSpace: typeof wbSpace;
+  outerGutter: typeof outerGutter;
   borderRadius: typeof borderRadius;
   typography: typeof typography;
   shadows: typeof shadows;
+  shadowsCss: typeof shadowsCss;
   duration: typeof duration;
+  easing: typeof easing;
+  containers: typeof containers;
   zIndex: typeof zIndex;
 }
 

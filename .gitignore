@@ -36,3 +36,6 @@ android/build/
 
 # Claude Code
 .claude/
+
+# Design handoff bundle (tokens already extracted into src/)
+.design-bundle/
