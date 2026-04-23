@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Read",
+      "Glob",
+      "Grep",
+
+      "Bash(pnpm *)",
+      "Bash(npm pack:*)",
+      "Bash(npm view:*)",
+      "Bash(npm whoami:*)",
+      "Bash(npm ls:*)",
+      "Bash(npm run:*)",
+      "Bash(node --version)",
+      "Bash(node -p:*)",
+      "Bash(node -e:*)",
+      "Bash(pnpm --version)",
+      "Bash(pnpm run:*)",
+
+      "Bash(git status:*)",
+      "Bash(git status --short)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git remote:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push origin main)",
+      "Bash(git push origin HEAD)",
+      "Bash(git push --follow-tags:*)",
+      "Bash(git fetch:*)",
+      "Bash(git pull:*)",
+      "Bash(git checkout:*)",
+      "Bash(git ls-remote:*)",
+      "Bash(git check-ignore:*)",
+      "Bash(git config --get:*)",
+
+      "Bash(ls:*)",
+      "Bash(ls -la:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Bash(file:*)",
+      "Bash(find:* -name:*)",
+      "Bash(mkdir -p:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(pwd)",
+      "Bash(jq:*)",
+      "Bash(awk:*)",
+      "Bash(sed:*)",
+      "Bash(tr:*)",
+      "Bash(sort:*)",
+      "Bash(uniq:*)",
+      "Bash(which:*)",
+
+      "Bash(gh pr:*)",
+      "Bash(gh issue:*)",
+      "Bash(gh api:*)",
+      "Bash(gh run:*)"
+    ],
+    "deny": [
+      "Bash(rm -rf /)",
+      "Bash(rm -rf /*)",
+      "Bash(rm -rf ~)",
+      "Bash(rm -rf ~/*)",
+      "Bash(rm -rf /Users/*)",
+      "Bash(rm -rf $HOME*)",
+      "Bash(sudo:*)",
+      "Bash(git push --force origin main)",
+      "Bash(git push --force origin main:*)",
+      "Bash(git push -f origin main)",
+      "Bash(git push -f origin main:*)",
+      "Bash(:(){ :|:& };:)",
+      "Bash(chmod -R 777:*)",
+      "Bash(chown -R:*)"
+    ],
+    "ask": [
+      "Bash(rm -rf *)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean -fd:*)",
+      "Bash(git clean -f:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git rebase:*)",
+      "Bash(git checkout -- *)",
+      "Bash(npm publish:*)",
+      "Bash(pnpm publish:*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_response.filePath // .tool_input.file_path' | { read -r f; case \"$f\" in */src/*.ts|*/src/*.tsx|*/src/*/*.ts|*/src/*/*.tsx|*/src/*/*/*.ts|*/src/*/*/*.tsx|*/src/*/*/*/*.ts|*/src/*/*/*/*.tsx) case \"$f\" in *.stories.ts|*.stories.tsx|*__tests__*|*/examples/*) exit 0 ;; esac; cd /Users/logan/Repository/wooBottle/externalProjects/woosign && pnpm typecheck ;; esac; } 2>&1",
+            "async": true,
+            "asyncRewake": true,
+            "rewakeSummary": "typecheck failed after edit",
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -34,8 +34,9 @@ android/build/
 *.apk
 *.aab
 
-# Claude Code
-.claude/
+# Claude Code — commit settings.json (team-wide harness), ignore everything else
+.claude/*
+!.claude/settings.json
 
 # Design handoff bundle (tokens already extracted into src/)
 .design-bundle/
