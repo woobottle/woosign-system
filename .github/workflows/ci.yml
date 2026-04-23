@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: typecheck · lint · test · build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Type check
+        run: pnpm typecheck
+
+      # Lint runs against core + components (skips the noisy stories/examples).
+      - name: Lint (core + components)
+        run: |
+          pnpm exec eslint \
+            "src/core/**/*.ts" \
+            "src/core/**/*.tsx" \
+            "src/components/**/!(*.stories).ts" \
+            "src/components/**/!(*.stories).tsx" \
+            --max-warnings 9999
+
+      - name: Smoke tests
+        run: pnpm test
+
+      - name: Build package
+        run: pnpm build
+
+      - name: Verify tarball contents are clean
+        shell: bash
+        run: |
+          pnpm pack
+          ls -la ./*.tgz
+          if tar -tzf ./*.tgz | grep -E "(\.stories\.|src/examples|lib/.+/assets/)" ; then
+            echo "::error::Tarball contains files that should be excluded"
+            exit 1
+          fi
+          echo "Tarball is clean ✓"

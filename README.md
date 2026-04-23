@@ -8,6 +8,7 @@ Warm cream canvas · deep-ink surfaces · ember CTAs · ceremonial gold.
 Cross-platform React Native + Web, hand-tuned to the WooBottle spec.
 
 ![status](https://img.shields.io/badge/status-alpha-F4EFE6?labelColor=171513&color=D35B1F&style=flat-square)
+![ci](https://img.shields.io/github/actions/workflow/status/woobottle/woosign-system/ci.yml?branch=main&style=flat-square&labelColor=171513&color=D35B1F)
 ![react](https://img.shields.io/badge/React-19-171513?style=flat-square)
 ![rn](https://img.shields.io/badge/React_Native-0.78-171513?style=flat-square)
 ![ts](https://img.shields.io/badge/TypeScript-strict-171513?style=flat-square)
@@ -173,7 +174,22 @@ pnpm storybook:native:ios     # or :android
 pnpm build        # build with react-native-builder-bob (cjs + esm + dts)
 pnpm typecheck    # tsc --noEmit
 pnpm lint         # eslint src/**
-pnpm test         # jest
+pnpm test         # jest smoke tests (tokens + resolveFontFamily)
+```
+
+## CI & release
+
+- **CI** — `.github/workflows/ci.yml` runs typecheck, lint (core + components),
+  smoke tests, build, and verifies the published tarball has no stories /
+  examples / duplicated font assets. Triggered on every push and PR.
+- **Release** — `.github/workflows/release.yml` publishes to npm with
+  provenance when a `v*.*.*` tag is pushed. Requires the `NPM_TOKEN` secret
+  and an `npm` GitHub environment (for approval gating if you want it).
+
+Cutting a release:
+```bash
+npm version patch   # bumps package.json + tags
+git push --follow-tags
 ```
 
 ## Project layout
