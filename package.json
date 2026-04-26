@@ -1,6 +1,6 @@
 {
   "name": "woosign-system",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "WooBottle 'Paper & Ink' design system — cross-platform React Native + Web components (cream canvas, ink surfaces, ember CTAs, ceremonial gold).",
   "keywords": [
     "react",

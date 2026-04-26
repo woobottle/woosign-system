@@ -1,3 +1,2 @@
-// Platform-specific resolution facade for TypeScript
-// Bundler resolves to .web.tsx or .native.tsx based on platform
-export { Button } from './Button.native';
+// Web-side facade fallback: Metro reads src/ directly and resolves .native via platform extensions.
+export { Button } from './Button.web';

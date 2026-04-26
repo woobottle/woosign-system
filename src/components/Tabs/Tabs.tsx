@@ -1,1 +1,2 @@
-export {Tabs} from './Tabs.native';
+// Web-side facade fallback: Metro reads src/ directly and resolves .native via platform extensions.
+export {Tabs} from './Tabs.web';

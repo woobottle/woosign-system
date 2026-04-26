@@ -1,1 +1,2 @@
-export {Divider} from './Divider.native';
+// Web-side facade fallback: Metro reads src/ directly and resolves .native via platform extensions.
+export {Divider} from './Divider.web';

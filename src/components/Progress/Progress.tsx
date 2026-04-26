@@ -1,1 +1,2 @@
-export {Progress} from './Progress.native';
+// Web-side facade fallback: Metro reads src/ directly and resolves .native via platform extensions.
+export {Progress} from './Progress.web';
