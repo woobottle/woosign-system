@@ -51,26 +51,41 @@ export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputWeb
       maxLength,
       multiline = false,
       numberOfLines,
+      inputProps,
     },
     ref
   ) {
     const [isFocused, setIsFocused] = useState(false);
 
-    const handleFocus = useCallback(() => {
-      setIsFocused(true);
-      onFocus?.();
-    }, [onFocus]);
+    const userOnChange = inputProps?.onChange;
+    const userOnKeyDown = inputProps?.onKeyDown;
+    const userOnFocus = inputProps?.onFocus;
+    const userOnBlur = inputProps?.onBlur;
 
-    const handleBlur = useCallback(() => {
-      setIsFocused(false);
-      onBlur?.();
-    }, [onBlur]);
+    const handleFocus = useCallback(
+      (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setIsFocused(true);
+        onFocus?.();
+        (userOnFocus as ((e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void) | undefined)?.(e);
+      },
+      [onFocus, userOnFocus]
+    );
+
+    const handleBlur = useCallback(
+      (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setIsFocused(false);
+        onBlur?.();
+        (userOnBlur as ((e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void) | undefined)?.(e);
+      },
+      [onBlur, userOnBlur]
+    );
 
     const handleChange = useCallback(
       (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         onChangeText?.(e.currentTarget.value);
+        (userOnChange as ((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void) | undefined)?.(e);
       },
-      [onChangeText]
+      [onChangeText, userOnChange]
     );
 
     const handleKeyDown = useCallback(
@@ -78,8 +93,9 @@ export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputWeb
         if (e.key === 'Enter' && !multiline && onSubmitEditing) {
           onSubmitEditing();
         }
+        (userOnKeyDown as ((e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => void) | undefined)?.(e);
       },
-      [multiline, onSubmitEditing]
+      [multiline, onSubmitEditing, userOnKeyDown]
     );
 
     // Get variant styles
@@ -117,8 +133,13 @@ export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputWeb
       color: placeholderColor,
     };
 
-    // Common props for input/textarea
+    // Common props for input/textarea.
+    // `inputProps` is spread first so user-provided pass-through props
+    // (onPaste, onCompositionStart, data-*, aria-*, ...) apply, then internal
+    // props/handlers override to keep variant behavior intact. The four
+    // chained handlers above already invoke the user-supplied versions.
     const commonProps = {
+      ...inputProps,
       placeholder,
       value,
       defaultValue,

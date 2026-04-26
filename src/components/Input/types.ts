@@ -84,6 +84,17 @@ export interface InputWebProps extends InputBaseProps {
   max?: number | string;
   /** Step value for number inputs */
   step?: number | string;
+  /**
+   * Pass-through props for the underlying <input>/<textarea>.
+   * Use this for handlers the component doesn't expose directly
+   * (onPaste, onCompositionStart, raw onChange/onKeyDown for OTP-style inputs, etc.).
+   * Internal handlers (focus tracking, onChangeText, onSubmitEditing) still run alongside.
+   */
+  inputProps?: Omit<
+    React.InputHTMLAttributes<HTMLInputElement> &
+      React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+    'value' | 'defaultValue' | 'placeholder' | 'disabled' | 'readOnly' | 'style' | 'ref'
+  >;
 }
 
 // Native-specific props
