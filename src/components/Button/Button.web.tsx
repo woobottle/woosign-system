@@ -87,7 +87,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonWebProps>(
     }) as React.CSSProperties;
 
     // Determine spinner color — inverted variants use white, ghost/outline use ember
-    const spinnerColor = ['default', 'destructive', 'dark', 'inverse'].includes(
+    const spinnerColor = ['default', 'destructive', 'dark', 'inverse', 'forest'].includes(
       variant,
     )
       ? colors.textInverse

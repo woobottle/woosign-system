@@ -34,6 +34,22 @@ export const cream = {
   300: '#F9F3E6', // Reward / premium highlight
 } as const;
 
+/**
+ * Forest — deep evergreen used for premium / nature / eco contexts.
+ * Pairs with cream and gold; stands in as a calm alternative to ember
+ * when the message is "earned" rather than "act now".
+ *
+ * Tonal anchors derived from `#1F4435` (HSL 155° 38% 16%):
+ *   700 — pressed / active state (slightly darker, deeper saturation)
+ *   500 — base surface, card variant, CTA fill
+ *   300 — soft tint for hover halos, badges, success backgrounds on light
+ */
+export const forest = {
+  700: '#163328',
+  500: '#1F4435',
+  300: '#B8CFC4',
+} as const;
+
 /** Ceremonial gold — rewards, loyalty, achievements only */
 export const goldAccent = '#C98A3C';
 export const errorRed = '#B02818';
@@ -105,6 +121,9 @@ export const colors = {
   actionPrimaryHover: ember[600],
   actionDark: ink[900],
   actionDanger: errorRed,
+  actionForest: forest[500],
+  actionForestHover: forest[700],
+  forestTint: forest[300],
 
   gold: goldAccent,
   successTint: 'hsla(30, 28%, 82%, 0.40)',
@@ -169,6 +188,10 @@ export const darkColors = {
   actionPrimaryHover: ember[600],
   actionDark: '#000000',
   actionDanger: errorRed,
+  // On dark surfaces, hover brightens (300 tint) instead of deepening (700).
+  actionForest: forest[500],
+  actionForestHover: forest[300],
+  forestTint: 'rgba(31, 68, 53, 0.30)',
 
   gold: goldAccent,
   successTint: 'hsla(30, 28%, 82%, 0.20)',

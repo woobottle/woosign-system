@@ -1,8 +1,8 @@
 import type {ReactNode} from 'react';
 import type {ViewStyle} from 'react-native';
 
-/** Feature band tone — inverse (ink900), ember gradient, or reward (cream-300). */
-export type FeatureBandTone = 'inverse' | 'ember' | 'reward';
+/** Feature band tone — inverse (ink900), ember (CTA orange), reward (cream-300), or forest (deep evergreen). */
+export type FeatureBandTone = 'inverse' | 'ember' | 'reward' | 'forest';
 
 export interface FeatureBandBaseProps {
   tone?: FeatureBandTone;

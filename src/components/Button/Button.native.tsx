@@ -27,6 +27,7 @@ function getSpinnerColor(variant: ButtonVariant): string {
     case 'destructive':
     case 'dark':
     case 'inverse':
+    case 'forest':
       return colors.textInverse;
     case 'secondary':
       return colors.textPrimary;

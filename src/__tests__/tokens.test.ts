@@ -38,6 +38,15 @@ describe('palette primitives', () => {
     expect(darkColors.actionPrimary).toBe(colors.actionPrimary);
     expect(darkColors.gold).toBe(colors.gold);
   });
+
+  it('exposes the forest ramp anchored at #1F4435 across light + dark themes', () => {
+    expect(colors.actionForest).toBe('#1F4435');
+    expect(colors.actionForestHover).toBe('#163328');
+    expect(colors.forestTint).toBe('#B8CFC4');
+    // Dark theme keeps the same base but flips hover to brighten on dark.
+    expect(darkColors.actionForest).toBe(colors.actionForest);
+    expect(darkColors.actionForestHover).toBe('#B8CFC4');
+  });
 });
 
 describe('radius ladder', () => {

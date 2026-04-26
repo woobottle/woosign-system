@@ -48,6 +48,10 @@ export const cardVariants = createVariants({
         backgroundColor: colors.inverse,
         borderRadius: borderRadius.lg,
       },
+      forest: {
+        backgroundColor: colors.actionForest,
+        borderRadius: borderRadius.lg,
+      },
     },
   },
   defaultVariants: {

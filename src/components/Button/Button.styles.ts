@@ -66,6 +66,10 @@ export const buttonVariants = createVariants({
         backgroundColor: 'transparent',
         borderColor: 'transparent',
       },
+      forest: {
+        backgroundColor: colors.actionForest,
+        borderColor: colors.actionForest,
+      },
     },
     size: {
       default: {
@@ -137,6 +141,9 @@ export const buttonTextVariants = createVariants({
         color: colors.actionPrimary,
         textDecorationLine: 'underline',
       },
+      forest: {
+        color: colors.textInverse,
+      },
     },
     size: {
       default: {
@@ -174,6 +181,10 @@ export const hoverStyles: Record<string, React.CSSProperties> = {
   dark: {backgroundColor: '#000000', borderColor: '#000000'},
   inverse: {backgroundColor: whiteAlpha[10]},
   link: {textDecoration: 'underline'},
+  forest: {
+    backgroundColor: colors.actionForestHover,
+    borderColor: colors.actionForestHover,
+  },
 };
 
 /**

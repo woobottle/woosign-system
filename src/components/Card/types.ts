@@ -13,13 +13,15 @@ import type {ViewStyle} from 'react-native';
 //   warm     — cream-300 reward / premium highlight
 //   ceramic  — cream-200 section surface, no shadow
 //   inverse  — ink-900 feature-band surface
+//   forest   — deep evergreen surface (premium / nature / eco contexts)
 export type CardVariant =
   | 'default'
   | 'outline'
   | 'ghost'
   | 'warm'
   | 'ceramic'
-  | 'inverse';
+  | 'inverse'
+  | 'forest';
 
 // Common props shared between web and native
 export interface CardBaseProps {

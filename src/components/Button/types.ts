@@ -15,6 +15,7 @@ import type {ViewStyle, TextStyle, PressableProps} from 'react-native';
 //   inverse      — transparent with white border (for ink feature bands)
 //   destructive  — error red
 //   link         — label-only
+//   forest       — deep evergreen CTA (premium / nature / eco contexts)
 export type ButtonVariant =
   | 'default'
   | 'destructive'
@@ -23,7 +24,8 @@ export type ButtonVariant =
   | 'ghost'
   | 'dark'
   | 'inverse'
-  | 'link';
+  | 'link'
+  | 'forest';
 
 // Button sizes
 export type ButtonSize = 'default' | 'sm' | 'lg' | 'icon';

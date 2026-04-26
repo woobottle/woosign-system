@@ -7,6 +7,8 @@ export function getFeatureBandStyle(tone: FeatureBandTone, rounded: boolean) {
       ? colors.actionPrimary
       : tone === 'reward'
       ? colors.reward
+      : tone === 'forest'
+      ? colors.actionForest
       : colors.inverse;
 
   return {
