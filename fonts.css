@@ -1,0 +1,32 @@
+/*
+ * WooBottle brand font @font-face registrations.
+ *
+ * Import once from a host web app entry (e.g. `import 'woosign-system/fonts.css'`
+ * in your root layout / app entry). The `url(...)` paths are resolved relative
+ * to this file inside the published package, so any modern bundler (Vite,
+ * Next.js, Webpack 5, Rspack, Parcel) will pick the assets up from
+ * `node_modules/woosign-system/src/assets/fonts/` automatically.
+ *
+ * Family names match the strings declared in `typography.fontFamily.display`
+ * and `typography.fontFamily.signature` in `core/theme/tokens.ts`.
+ */
+
+@font-face {
+  font-family: 'Woobottle';
+  src:
+    url('./src/assets/fonts/Woobottle-Regular.woff2') format('woff2'),
+    url('./src/assets/fonts/Woobottle-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Woobottle Signature';
+  src:
+    url('./src/assets/fonts/Woobottle-Signature.subset.woff2') format('woff2'),
+    url('./src/assets/fonts/Woobottle-Signature.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

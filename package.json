@@ -1,6 +1,6 @@
 {
   "name": "woosign-system",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "WooBottle 'Paper & Ink' design system — cross-platform React Native + Web components (cream canvas, ink surfaces, ember CTAs, ceremonial gold).",
   "keywords": [
     "react",
@@ -27,9 +27,21 @@
   "types": "lib/typescript/index.d.ts",
   "react-native": "src/index.ts",
   "source": "src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/typescript/index.d.ts",
+      "react-native": "./src/index.ts",
+      "import": "./lib/module/index.js",
+      "require": "./lib/commonjs/index.js"
+    },
+    "./fonts.css": "./fonts.css",
+    "./package.json": "./package.json",
+    "./*": "./*"
+  },
   "files": [
     "src",
     "lib",
+    "fonts.css",
     "react-native.config.js",
     "!**/__tests__",
     "!**/__fixtures__",
@@ -54,7 +66,10 @@
     "!lib/module/assets",
     "!lib/typescript/assets"
   ],
-  "sideEffects": false,
+  "sideEffects": [
+    "./fonts.css",
+    "**/*.css"
+  ],
   "scripts": {
     "prepare": "bob build",
     "build": "bob build",

@@ -7,6 +7,7 @@ import type { TextWebProps } from './types';
 import { textVariants, getDefaultElement } from './Text.styles';
 import { colors } from '../../core/theme/tokens';
 import { mergeStyles } from '../../core/variants';
+import { cssifyWebStyles } from '../../core/utils/cssifyWebStyles';
 
 /**
  * Text component for web
@@ -33,11 +34,13 @@ export const Text = forwardRef<HTMLElement, TextWebProps>(function Text(
   const variantStyles = textVariants({ variant, weight, align }) as React.CSSProperties;
 
   // Compose final styles
-  const textStyle = mergeStyles(
-    variantStyles,
-    muted ? { color: colors.mutedForeground } : undefined,
-    color ? { color } : undefined,
-    style
+  const textStyle = cssifyWebStyles(
+    mergeStyles(
+      variantStyles,
+      muted ? { color: colors.mutedForeground } : undefined,
+      color ? { color } : undefined,
+      style
+    )
   ) as React.CSSProperties;
 
   return React.createElement(

@@ -23,6 +23,7 @@ import {
   disabledStyle,
 } from './Card.styles';
 import { mergeStyles } from '../../core/variants';
+import { cssifyWebStyles } from '../../core/utils/cssifyWebStyles';
 
 /**
  * Card component for web
@@ -59,15 +60,17 @@ export const Card = forwardRef<HTMLDivElement, CardWebProps>(
       : {};
 
     // Compose final card styles
-    const cardStyle = mergeStyles(
-      containerStyles,
-      webShadow,
-      fullWidth ? { width: '100%' } : undefined,
-      disabled ? { ...disabledStyle, cursor: 'not-allowed' } : onPress ? { cursor: 'pointer' } : undefined,
-      isHovered && !disabled && onPress ? hoverStyle : undefined,
-      isPressed && !disabled && onPress ? { transform: 'scale(0.99)' } : undefined,
-      { transition: 'all 150ms ease' },
-      style
+    const cardStyle = cssifyWebStyles(
+      mergeStyles(
+        containerStyles,
+        webShadow,
+        fullWidth ? { width: '100%' } : undefined,
+        disabled ? { ...disabledStyle, cursor: 'not-allowed' } : onPress ? { cursor: 'pointer' } : undefined,
+        isHovered && !disabled && onPress ? hoverStyle : undefined,
+        isPressed && !disabled && onPress ? { transform: 'scale(0.99)' } : undefined,
+        { transition: 'all 150ms ease' },
+        style
+      )
     ) as React.CSSProperties;
 
     return (
@@ -105,7 +108,7 @@ Card.displayName = 'Card';
  * CardHeader component
  */
 export function CardHeader({ children, style, className }: CardHeaderProps) {
-  const headerStyle = mergeStyles(cardHeaderStyle, style) as React.CSSProperties;
+  const headerStyle = cssifyWebStyles(mergeStyles(cardHeaderStyle, style)) as React.CSSProperties;
   return (
     <div className={className} style={headerStyle}>
       {children}
@@ -119,7 +122,7 @@ CardHeader.displayName = 'CardHeader';
  * CardTitle component
  */
 export function CardTitle({ children, style, className }: CardTitleProps) {
-  const titleStyle = mergeStyles(cardTitleStyle, { margin: 0 }, style) as React.CSSProperties;
+  const titleStyle = cssifyWebStyles(mergeStyles(cardTitleStyle, { margin: 0 }, style)) as React.CSSProperties;
   return (
     <h3 className={className} style={titleStyle}>
       {children}
@@ -133,7 +136,7 @@ CardTitle.displayName = 'CardTitle';
  * CardDescription component
  */
 export function CardDescription({ children, style, className }: CardDescriptionProps) {
-  const descStyle = mergeStyles(cardDescriptionStyle, { margin: 0 }, style) as React.CSSProperties;
+  const descStyle = cssifyWebStyles(mergeStyles(cardDescriptionStyle, { margin: 0 }, style)) as React.CSSProperties;
   return (
     <p className={className} style={descStyle}>
       {children}
@@ -147,7 +150,7 @@ CardDescription.displayName = 'CardDescription';
  * CardContent component
  */
 export function CardContent({ children, style, className }: CardContentProps) {
-  const contentStyle = mergeStyles(cardContentStyle, style) as React.CSSProperties;
+  const contentStyle = cssifyWebStyles(mergeStyles(cardContentStyle, style)) as React.CSSProperties;
   return (
     <div className={className} style={contentStyle}>
       {children}
@@ -161,7 +164,7 @@ CardContent.displayName = 'CardContent';
  * CardFooter component
  */
 export function CardFooter({ children, style, className }: CardFooterProps) {
-  const footerStyle = mergeStyles(cardFooterStyle, style) as React.CSSProperties;
+  const footerStyle = cssifyWebStyles(mergeStyles(cardFooterStyle, style)) as React.CSSProperties;
   return (
     <div className={className} style={footerStyle}>
       {children}

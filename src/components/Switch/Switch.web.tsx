@@ -16,6 +16,7 @@ import {
   containerGap,
 } from './Switch.styles';
 import { mergeStyles } from '../../core/variants';
+import { cssifyWebStyles } from '../../core/utils/cssifyWebStyles';
 
 /**
  * Switch component for web
@@ -110,10 +111,10 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchWebProps>(
         </button>
         {label && (
           <span
-            style={{
+            style={cssifyWebStyles({
               ...labelStyles,
               cursor: disabled ? 'not-allowed' : 'pointer',
-            }}
+            }) as React.CSSProperties}
             onClick={disabled ? undefined : handleClick}
           >
             {label}

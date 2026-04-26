@@ -14,6 +14,7 @@ import {
 } from './Button.styles';
 import {mergeStyles} from '../../core/variants';
 import {colors, duration, easing} from '../../core/theme/tokens';
+import {cssifyWebStyles} from '../../core/utils/cssifyWebStyles';
 
 /**
  * Simple loading spinner for web
@@ -95,31 +96,33 @@ export const Button = forwardRef<HTMLButtonElement, ButtonWebProps>(
       : colors.actionPrimary;
 
     // Compose final button styles
-    const buttonStyle = mergeStyles(
-      containerStyles,
-      // Web-only defaults: inline-flex + alignSelf center prevent the button
-      // from stretching to fill the cross-axis of a flex-row parent (Box).
-      {
-        display: 'inline-flex',
-        alignSelf: 'center',
-      } as React.CSSProperties,
-      fullWidth ? {width: '100%'} : undefined,
-      disabled || loading
-        ? {...disabledStyle, cursor: 'not-allowed'}
-        : {cursor: 'pointer'},
-      isHovered && !disabled && !loading ? hoverStyles[variant] : undefined,
-      isFocused && !disabled ? focusRingStyle : undefined,
-      isPressed && !disabled ? {transform: 'scale(0.95)'} : undefined,
-      {transition: `all ${duration.normal}ms ${easing.standard}`},
-      style,
+    const buttonStyle = cssifyWebStyles(
+      mergeStyles(
+        containerStyles,
+        // Web-only defaults: inline-flex + alignSelf center prevent the button
+        // from stretching to fill the cross-axis of a flex-row parent (Box).
+        {
+          display: 'inline-flex',
+          alignSelf: 'center',
+        } as React.CSSProperties,
+        fullWidth ? {width: '100%'} : undefined,
+        disabled || loading
+          ? {...disabledStyle, cursor: 'not-allowed'}
+          : {cursor: 'pointer'},
+        isHovered && !disabled && !loading ? hoverStyles[variant] : undefined,
+        isFocused && !disabled ? focusRingStyle : undefined,
+        isPressed && !disabled ? {transform: 'scale(0.95)'} : undefined,
+        {transition: `all ${duration.normal}ms ${easing.standard}`},
+        style,
+      ),
     ) as React.CSSProperties;
 
     // Text style
-    const labelStyle: React.CSSProperties = {
+    const labelStyle: React.CSSProperties = cssifyWebStyles({
       ...textStyles,
       margin: 0,
       padding: 0,
-    };
+    }) as React.CSSProperties;
 
     return (
       <button
