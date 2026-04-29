@@ -3,7 +3,7 @@
  * shadcn/ui inspired toggle switch
  */
 
-import type { ViewStyle, PressableProps } from 'react-native';
+import type {ViewStyle, PressableProps} from 'react-native';
 
 // Switch sizes
 export type SwitchSize = 'default' | 'sm' | 'lg';

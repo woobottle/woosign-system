@@ -34,9 +34,7 @@ export const Toast = forwardRef<View, ToastNativeProps>(function Toast(
         )}
         {description ? (
           typeof description === 'string' ? (
-            <Text style={[s.description, descriptionStyle]}>
-              {description}
-            </Text>
+            <Text style={[s.description, descriptionStyle]}>{description}</Text>
           ) : (
             description
           )

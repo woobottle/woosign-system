@@ -3,17 +3,29 @@
  * Flexible layout container
  */
 
-import type { ReactNode } from 'react';
-import type { ViewStyle } from 'react-native';
+import type {ReactNode} from 'react';
+import type {ViewStyle} from 'react-native';
 
 // Border radius presets
-export type BorderRadiusPreset = 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
+export type BorderRadiusPreset =
+  | 'none'
+  | 'sm'
+  | 'md'
+  | 'lg'
+  | 'xl'
+  | '2xl'
+  | 'full';
 
 // Flex direction
 export type FlexDirection = 'row' | 'column' | 'row-reverse' | 'column-reverse';
 
 // Align items
-export type AlignItems = 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
+export type AlignItems =
+  | 'flex-start'
+  | 'center'
+  | 'flex-end'
+  | 'stretch'
+  | 'baseline';
 
 // Justify content
 export type JustifyContent =
@@ -116,7 +128,15 @@ export interface BoxWebProps extends BoxBaseProps {
   /** Custom inline styles */
   style?: React.CSSProperties;
   /** HTML element to render */
-  as?: 'div' | 'section' | 'article' | 'aside' | 'header' | 'footer' | 'main' | 'nav';
+  as?:
+    | 'div'
+    | 'section'
+    | 'article'
+    | 'aside'
+    | 'header'
+    | 'footer'
+    | 'main'
+    | 'nav';
 }
 
 // Native-specific props
@@ -129,5 +149,13 @@ export interface BoxNativeProps extends BoxBaseProps {
 export type BoxProps = BoxBaseProps & {
   style?: ViewStyle | React.CSSProperties;
   className?: string;
-  as?: 'div' | 'section' | 'article' | 'aside' | 'header' | 'footer' | 'main' | 'nav';
+  as?:
+    | 'div'
+    | 'section'
+    | 'article'
+    | 'aside'
+    | 'header'
+    | 'footer'
+    | 'main'
+    | 'nav';
 };

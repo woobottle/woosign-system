@@ -2,18 +2,22 @@
  * Box component - Web implementation
  */
 
-import React, { forwardRef } from 'react';
-import type { BoxWebProps, BorderRadiusPreset } from './types';
-import { borderRadius as radiusTokens } from '../../core/theme/tokens';
+import React, {forwardRef} from 'react';
+import type {BoxWebProps, BorderRadiusPreset} from './types';
+import {borderRadius as radiusTokens} from '../../core/theme/tokens';
 
 /**
  * Convert border radius preset to number
  */
 function resolveBorderRadius(
-  value: number | BorderRadiusPreset | undefined
+  value: number | BorderRadiusPreset | undefined,
 ): number | undefined {
-  if (value === undefined) return undefined;
-  if (typeof value === 'number') return value;
+  if (value === undefined) {
+    return undefined;
+  }
+  if (typeof value === 'number') {
+    return value;
+  }
 
   const presetMap: Record<BorderRadiusPreset, number> = {
     none: radiusTokens.none,
@@ -77,7 +81,7 @@ export const Box = forwardRef<HTMLDivElement, BoxWebProps>(function Box(
     as: Element = 'div',
     testID,
   },
-  ref
+  ref,
 ) {
   const boxStyle: React.CSSProperties = {
     // Flexbox defaults
@@ -128,7 +132,7 @@ export const Box = forwardRef<HTMLDivElement, BoxWebProps>(function Box(
 
   // Remove undefined values
   const cleanStyle = Object.fromEntries(
-    Object.entries(boxStyle).filter(([, v]) => v !== undefined)
+    Object.entries(boxStyle).filter(([, v]) => v !== undefined),
   ) as React.CSSProperties;
 
   return React.createElement(
@@ -139,7 +143,7 @@ export const Box = forwardRef<HTMLDivElement, BoxWebProps>(function Box(
       style: cleanStyle,
       'data-testid': testID,
     },
-    children
+    children,
   );
 });
 

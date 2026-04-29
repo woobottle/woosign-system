@@ -13,18 +13,20 @@ type Story = StoryObj<typeof Pill>;
 export const Default: Story = {};
 export const Active: Story = {args: {active: true}};
 
+const CategoryFilterDemo = () => {
+  const categories = ['All', 'Hot drinks', 'Cold drinks', 'Food'];
+  const [selected, setSelected] = useState('All');
+  return (
+    <div style={{display: 'flex', gap: 8}}>
+      {categories.map(c => (
+        <Pill key={c} active={selected === c} onPress={() => setSelected(c)}>
+          {c}
+        </Pill>
+      ))}
+    </div>
+  );
+};
+
 export const CategoryFilter: Story = {
-  render: () => {
-    const categories = ['All', 'Hot drinks', 'Cold drinks', 'Food'];
-    const [selected, setSelected] = useState('All');
-    return (
-      <div style={{display: 'flex', gap: 8}}>
-        {categories.map(c => (
-          <Pill key={c} active={selected === c} onPress={() => setSelected(c)}>
-            {c}
-          </Pill>
-        ))}
-      </div>
-    );
-  },
+  render: () => <CategoryFilterDemo />,
 };

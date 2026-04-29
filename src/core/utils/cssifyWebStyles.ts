@@ -29,8 +29,12 @@ function isPixelIntent(value: number): boolean {
   return Number.isFinite(value) && Math.abs(value) >= 4;
 }
 
-export function cssifyWebStyles<T extends Style | undefined | null>(style: T): T {
-  if (!style || typeof style !== 'object') return style;
+export function cssifyWebStyles<T extends Style | undefined | null>(
+  style: T,
+): T {
+  if (!style || typeof style !== 'object') {
+    return style;
+  }
 
   let mutated: Style | null = null;
   for (const key in style) {
@@ -40,7 +44,7 @@ export function cssifyWebStyles<T extends Style | undefined | null>(style: T): T
       typeof value === 'number' &&
       isPixelIntent(value)
     ) {
-      mutated = mutated ?? { ...(style as Style) };
+      mutated = mutated ?? {...(style as Style)};
       mutated[key] = `${value}px`;
     }
   }

@@ -23,7 +23,9 @@ export const Chip = forwardRef<HTMLElement, ChipWebProps>(function Chip(
   const interactive = Boolean(onPress);
 
   const handleClick = useCallback(() => {
-    if (!disabled && onPress) onPress();
+    if (!disabled && onPress) {
+      onPress();
+    }
   }, [disabled, onPress]);
 
   const composedStyle: React.CSSProperties = {

@@ -20,7 +20,9 @@ export const Chip = forwardRef<View, ChipNativeProps>(function Chip(
 ) {
   const {container, text} = getChipStyles(tone);
   const handlePress = useCallback(() => {
-    if (!disabled && onPress) onPress();
+    if (!disabled && onPress) {
+      onPress();
+    }
   }, [disabled, onPress]);
 
   const inner = (

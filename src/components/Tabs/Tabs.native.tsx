@@ -34,11 +34,7 @@ export const Tabs = forwardRef<View, TabsNativeProps>(function Tabs(
             ]}>
             {typeof item.label === 'string' ? (
               <Text
-                style={[
-                  s.label,
-                  active ? s.labelActive : null,
-                  labelStyle,
-                ]}>
+                style={[s.label, active ? s.labelActive : null, labelStyle]}>
                 {item.label}
               </Text>
             ) : (

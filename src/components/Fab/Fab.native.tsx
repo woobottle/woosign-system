@@ -19,7 +19,9 @@ export const Fab = forwardRef<View, FabNativeProps>(function Fab(
 ) {
   const base = getFabStyle(tone, size);
   const handlePress = useCallback(() => {
-    if (!disabled && onPress) onPress();
+    if (!disabled && onPress) {
+      onPress();
+    }
   }, [disabled, onPress]);
 
   return (

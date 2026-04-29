@@ -8,7 +8,7 @@
 export const isWeb = (): boolean => {
   return (
     typeof globalThis !== 'undefined' &&
-    typeof (globalThis as { document?: unknown }).document !== 'undefined'
+    typeof (globalThis as {document?: unknown}).document !== 'undefined'
   );
 };
 

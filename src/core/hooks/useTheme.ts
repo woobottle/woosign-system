@@ -1,5 +1,5 @@
-import { useThemeContext } from '../theme/ThemeContext';
-import type { Theme, ThemeContextValue } from '../theme/types';
+import {useThemeContext} from '../theme/ThemeContext';
+import type {Theme, ThemeContextValue} from '../theme/types';
 
 /**
  * useTheme hook
@@ -27,7 +27,7 @@ export function useTheme(): ThemeContextValue {
  * Shorthand to access only the color tokens
  */
 export function useColors(): Theme['colors'] {
-  const { theme } = useThemeContext();
+  const {theme} = useThemeContext();
   return theme.colors;
 }
 
@@ -36,7 +36,7 @@ export function useColors(): Theme['colors'] {
  * Shorthand to access only the spacing tokens
  */
 export function useSpacing(): Theme['spacing'] {
-  const { theme } = useThemeContext();
+  const {theme} = useThemeContext();
   return theme.spacing;
 }
 
@@ -45,6 +45,6 @@ export function useSpacing(): Theme['spacing'] {
  * Check if the current theme is dark mode
  */
 export function useIsDark(): boolean {
-  const { theme } = useThemeContext();
+  const {theme} = useThemeContext();
   return theme.isDark;
 }

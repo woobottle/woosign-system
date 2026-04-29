@@ -16,31 +16,35 @@ const ITEMS = [
   {key: 'featured', label: 'Featured'},
 ];
 
+const DefaultDemo = () => {
+  const [active, setActive] = useState('menu');
+  return (
+    <div style={{width: 480}}>
+      <Tabs items={ITEMS} value={active} onChange={setActive} />
+    </div>
+  );
+};
+
 export const Default: Story = {
-  render: () => {
-    const [active, setActive] = useState('menu');
-    return (
-      <div style={{width: 480}}>
-        <Tabs items={ITEMS} value={active} onChange={setActive} />
-      </div>
-    );
-  },
+  render: () => <DefaultDemo />,
+};
+
+const InverseDemo = () => {
+  const [active, setActive] = useState('menu');
+  return (
+    <div
+      style={{
+        background: '#171513',
+        color: '#FFFFFF',
+        padding: 24,
+        borderRadius: 16,
+        width: 480,
+      }}>
+      <Tabs items={ITEMS} value={active} onChange={setActive} inverse />
+    </div>
+  );
 };
 
 export const Inverse: Story = {
-  render: () => {
-    const [active, setActive] = useState('menu');
-    return (
-      <div
-        style={{
-          background: '#171513',
-          color: '#FFFFFF',
-          padding: 24,
-          borderRadius: 16,
-          width: 480,
-        }}>
-        <Tabs items={ITEMS} value={active} onChange={setActive} inverse />
-      </div>
-    );
-  },
+  render: () => <InverseDemo />,
 };

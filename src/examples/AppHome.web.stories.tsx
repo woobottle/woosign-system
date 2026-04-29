@@ -1,6 +1,6 @@
 /**
  * Mobile ordering app — Home screen composed from the library.
- * Illustrates Chip, Pill, Card, Badge, FeatureBand, Progress, Eyebrow,
+ * Illustrates Pill, Card, Badge, FeatureBand, Progress, Eyebrow,
  * StatusDot, and Fab working together inside a phone frame.
  */
 
@@ -9,7 +9,6 @@ import React, {useState} from 'react';
 import {Badge} from '../components/Badge';
 import {Button} from '../components/Button';
 import {Card} from '../components/Card';
-import {Chip} from '../components/Chip';
 import {Eyebrow} from '../components/Eyebrow';
 import {Fab} from '../components/Fab';
 import {FeatureBand} from '../components/FeatureBand';
@@ -84,8 +83,11 @@ const Home = () => {
           alignItems: 'center',
         }}>
         <div>
-          <div style={{fontSize: 14, color: colors.textSecondary}}>Good morning,</div>
-          <div style={{fontSize: 22, fontWeight: 600, letterSpacing: '-0.16px'}}>
+          <div style={{fontSize: 14, color: colors.textSecondary}}>
+            Good morning,
+          </div>
+          <div
+            style={{fontSize: 22, fontWeight: 600, letterSpacing: '-0.16px'}}>
             Jae.
           </div>
         </div>
@@ -121,7 +123,15 @@ const Home = () => {
 
       <div style={{padding: '20px 20px 0'}}>
         <Eyebrow>Pickup store</Eyebrow>
-        <Card style={{marginTop: 8, flexDirection: 'row', gap: 12, alignItems: 'center'} as React.CSSProperties}>
+        <Card
+          style={
+            {
+              marginTop: 8,
+              flexDirection: 'row',
+              gap: 12,
+              alignItems: 'center',
+            } as React.CSSProperties
+          }>
           <StatusDot tone="success" size="sm">
             ●
           </StatusDot>
@@ -154,17 +164,42 @@ const Home = () => {
         ))}
       </div>
 
-      <div style={{padding: '16px 20px 100px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12}}>
+      <div
+        style={{
+          padding: '16px 20px 100px',
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: 12,
+        }}>
         {[
-          {title: 'Brown sugar oat', meta: '4 min · $5.45', tint: 'linear-gradient(180deg,#C9B79B,#9B7F5C)'},
-          {title: 'Ink matcha', meta: '5 min · $5.25', tint: 'linear-gradient(180deg,#C9C2B2,#3F3A34)'},
-          {title: 'Citrus cold brew', meta: '3 min · $4.95', tint: 'linear-gradient(180deg,#E4C58A,#7A5A2E)'},
-          {title: 'Hazelnut latte', meta: '4 min · $5.15', tint: 'linear-gradient(180deg,#D9B98A,#7A5A3E)'},
+          {
+            title: 'Brown sugar oat',
+            meta: '4 min · $5.45',
+            tint: 'linear-gradient(180deg,#C9B79B,#9B7F5C)',
+          },
+          {
+            title: 'Ink matcha',
+            meta: '5 min · $5.25',
+            tint: 'linear-gradient(180deg,#C9C2B2,#3F3A34)',
+          },
+          {
+            title: 'Citrus cold brew',
+            meta: '3 min · $4.95',
+            tint: 'linear-gradient(180deg,#E4C58A,#7A5A2E)',
+          },
+          {
+            title: 'Hazelnut latte',
+            meta: '4 min · $5.15',
+            tint: 'linear-gradient(180deg,#D9B98A,#7A5A3E)',
+          },
         ].map(x => (
           <Card key={x.title}>
             <ProductBlob tint={x.tint} />
-            <div style={{fontSize: 14, fontWeight: 600, marginTop: 10}}>{x.title}</div>
-            <div style={{fontSize: 12, color: colors.textSecondary, marginTop: 2}}>
+            <div style={{fontSize: 14, fontWeight: 600, marginTop: 10}}>
+              {x.title}
+            </div>
+            <div
+              style={{fontSize: 12, color: colors.textSecondary, marginTop: 2}}>
               {x.meta}
             </div>
           </Card>
@@ -245,9 +280,21 @@ export const ToastStack: StoryObj = {
         gap: 10,
         width: 360,
       }}>
-      <Toast tone="success" title="Order placed" description="Ready in 5 min at Hongdae." />
-      <Toast tone="brand" title="+15 stars" description="You're 125 away from a free drink." />
-      <Toast tone="danger" title="Payment declined" description="Try a different card." />
+      <Toast
+        tone="success"
+        title="Order placed"
+        description="Ready in 5 min at Hongdae."
+      />
+      <Toast
+        tone="brand"
+        title="+15 stars"
+        description="You're 125 away from a free drink."
+      />
+      <Toast
+        tone="danger"
+        title="Payment declined"
+        description="Try a different card."
+      />
     </div>
   ),
 };

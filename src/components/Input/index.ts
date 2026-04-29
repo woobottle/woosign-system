@@ -18,4 +18,4 @@ export type {
 
 // Re-export component
 // Note: The bundler will resolve this to the correct platform-specific file
-export { Input } from './Input';
+export {Input} from './Input';

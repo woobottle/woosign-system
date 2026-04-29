@@ -3,12 +3,12 @@
  * shadcn/ui inspired design showcase
  */
 
-import type { Meta, StoryObj } from '@storybook/react';
-import React, { useState } from 'react';
-import { Switch } from './Switch';
-import { Box } from '../Box';
-import { Text } from '../Text';
-import type { SwitchSize } from './types';
+import type {Meta, StoryObj} from '@storybook/react';
+import React, {useState} from 'react';
+import {Switch} from './Switch';
+import {Box} from '../Box';
+import {Text} from '../Text';
+import type {SwitchSize} from './types';
 
 const meta: Meta<typeof Switch> = {
   title: 'Components/Switch',
@@ -19,7 +19,7 @@ const meta: Meta<typeof Switch> = {
       options: ['default', 'sm', 'lg'],
       description: 'The size of the switch',
       table: {
-        defaultValue: { summary: 'default' },
+        defaultValue: {summary: 'default'},
       },
     },
     checked: {
@@ -53,17 +53,19 @@ export const Default: Story = {
 };
 
 // Controlled example
+const ControlledDemo = () => {
+  const [checked, setChecked] = useState(false);
+  return (
+    <Switch
+      checked={checked}
+      onCheckedChange={setChecked}
+      label="Airplane Mode"
+    />
+  );
+};
+
 export const Controlled: Story = {
-  render: () => {
-    const [checked, setChecked] = useState(false);
-    return (
-      <Switch
-        checked={checked}
-        onCheckedChange={setChecked}
-        label="Airplane Mode"
-      />
-    );
-  },
+  render: () => <ControlledDemo />,
 };
 
 // Checked
@@ -81,7 +83,7 @@ export const AllSizes: Story = {
 
     return (
       <Box flexDirection="column" gap={16}>
-        {sizes.map((size) => (
+        {sizes.map(size => (
           <Switch key={size} size={size} checked label={size.toUpperCase()} />
         ))}
       </Box>
@@ -114,50 +116,65 @@ export const WithoutLabel: Story = {
 };
 
 // Common Patterns
-export const CommonPatterns: Story = {
-  render: () => {
-    const [notifications, setNotifications] = useState(true);
-    const [marketing, setMarketing] = useState(false);
-    const [darkMode, setDarkMode] = useState(false);
+const CommonPatternsDemo = () => {
+  const [notifications, setNotifications] = useState(true);
+  const [marketing, setMarketing] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
-    return (
-      <Box flexDirection="column" gap={24}>
-        <Box>
-          <Text variant="h4" style={{ marginBottom: 12 }}>Settings</Text>
-          <Box flexDirection="column" gap={16}>
-            <Box flexDirection="row" justifyContent="space-between" alignItems="center">
-              <Box>
-                <Text variant="p" style={{ fontWeight: '500' }}>Push Notifications</Text>
-                <Text variant="muted">Receive push notifications on your device</Text>
-              </Box>
-              <Switch
-                checked={notifications}
-                onCheckedChange={setNotifications}
-              />
+  return (
+    <Box flexDirection="column" gap={24}>
+      <Box>
+        <Text variant="h4" style={{marginBottom: 12}}>
+          Settings
+        </Text>
+        <Box flexDirection="column" gap={16}>
+          <Box
+            flexDirection="row"
+            justifyContent="space-between"
+            alignItems="center">
+            <Box>
+              <Text variant="p" style={{fontWeight: '500'}}>
+                Push Notifications
+              </Text>
+              <Text variant="muted">
+                Receive push notifications on your device
+              </Text>
             </Box>
-            <Box flexDirection="row" justifyContent="space-between" alignItems="center">
-              <Box>
-                <Text variant="p" style={{ fontWeight: '500' }}>Marketing Emails</Text>
-                <Text variant="muted">Receive marketing emails from us</Text>
-              </Box>
-              <Switch
-                checked={marketing}
-                onCheckedChange={setMarketing}
-              />
+            <Switch
+              checked={notifications}
+              onCheckedChange={setNotifications}
+            />
+          </Box>
+          <Box
+            flexDirection="row"
+            justifyContent="space-between"
+            alignItems="center">
+            <Box>
+              <Text variant="p" style={{fontWeight: '500'}}>
+                Marketing Emails
+              </Text>
+              <Text variant="muted">Receive marketing emails from us</Text>
             </Box>
-            <Box flexDirection="row" justifyContent="space-between" alignItems="center">
-              <Box>
-                <Text variant="p" style={{ fontWeight: '500' }}>Dark Mode</Text>
-                <Text variant="muted">Toggle dark theme</Text>
-              </Box>
-              <Switch
-                checked={darkMode}
-                onCheckedChange={setDarkMode}
-              />
+            <Switch checked={marketing} onCheckedChange={setMarketing} />
+          </Box>
+          <Box
+            flexDirection="row"
+            justifyContent="space-between"
+            alignItems="center">
+            <Box>
+              <Text variant="p" style={{fontWeight: '500'}}>
+                Dark Mode
+              </Text>
+              <Text variant="muted">Toggle dark theme</Text>
             </Box>
+            <Switch checked={darkMode} onCheckedChange={setDarkMode} />
           </Box>
         </Box>
       </Box>
-    );
-  },
+    </Box>
+  );
+};
+
+export const CommonPatterns: Story = {
+  render: () => <CommonPatternsDemo />,
 };

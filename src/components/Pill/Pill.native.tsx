@@ -18,7 +18,9 @@ export const Pill = forwardRef<View, PillNativeProps>(function Pill(
 ) {
   const {container, text} = getPillStyles(active);
   const handlePress = useCallback(() => {
-    if (!disabled && onPress) onPress();
+    if (!disabled && onPress) {
+      onPress();
+    }
   }, [disabled, onPress]);
 
   return (

@@ -12,4 +12,4 @@ export type {
   TextAlign,
 } from './types';
 
-export { Text } from './Text';
+export {Text} from './Text';

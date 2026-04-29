@@ -1,8 +1,8 @@
-import {forwardRef} from 'react';
+import React from 'react';
 import type {StatusDotWebProps} from './types';
 import {getStatusDotStyle} from './StatusDot.styles';
 
-export const StatusDot = forwardRef<HTMLSpanElement, StatusDotWebProps>(
+export const StatusDot = React.forwardRef<HTMLSpanElement, StatusDotWebProps>(
   function StatusDot(
     {tone = 'neutral', size = 'default', children, className, style, testID},
     ref,

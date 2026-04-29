@@ -19,7 +19,12 @@ const PlusIcon = () => (
 const meta: Meta<typeof Fab> = {
   title: 'Components/Fab',
   component: Fab,
-  args: {tone: 'ember', size: 'default', disabled: false, accessibilityLabel: 'Add'},
+  args: {
+    tone: 'ember',
+    size: 'default',
+    disabled: false,
+    accessibilityLabel: 'Add',
+  },
   argTypes: {
     tone: {control: 'select', options: ['ember', 'ink', 'gold']},
     size: {control: 'select', options: ['default', 'lg']},

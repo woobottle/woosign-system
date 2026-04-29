@@ -1,4 +1,9 @@
-import {colors, borderRadius, typography, shadows} from '../../core/theme/tokens';
+import {
+  colors,
+  borderRadius,
+  typography,
+  shadows,
+} from '../../core/theme/tokens';
 import type {ToastTone} from './types';
 
 const DEFAULT_GLYPH: Record<ToastTone, string> = {

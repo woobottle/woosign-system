@@ -136,9 +136,21 @@ const Hero = () => (
 
 const MenuStrip = () => {
   const items = [
-    {title: 'Iced brown sugar oat', meta: 'Cold · 4 min · $5.45', tint: 'linear-gradient(180deg,#C9B79B,#9B7F5C)'},
-    {title: 'Ink matcha latte', meta: 'Hot · 5 min · $5.25', tint: 'linear-gradient(180deg,#C9C2B2,#3F3A34)'},
-    {title: 'Citrus cold brew', meta: 'Cold · 3 min · $4.95', tint: 'linear-gradient(180deg,#E4C58A,#7A5A2E)'},
+    {
+      title: 'Iced brown sugar oat',
+      meta: 'Cold · 4 min · $5.45',
+      tint: 'linear-gradient(180deg,#C9B79B,#9B7F5C)',
+    },
+    {
+      title: 'Ink matcha latte',
+      meta: 'Hot · 5 min · $5.25',
+      tint: 'linear-gradient(180deg,#C9C2B2,#3F3A34)',
+    },
+    {
+      title: 'Citrus cold brew',
+      meta: 'Cold · 3 min · $4.95',
+      tint: 'linear-gradient(180deg,#E4C58A,#7A5A2E)',
+    },
   ];
   return (
     <section style={{padding: '40px 40px 64px'}}>
@@ -172,7 +184,12 @@ const MenuStrip = () => {
           See full menu →
         </span>
       </div>
-      <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16}}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: 16,
+        }}>
         {items.map(x => (
           <Card key={x.title}>
             <div
@@ -184,7 +201,8 @@ const MenuStrip = () => {
               }}
             />
             <div style={{fontSize: 18, fontWeight: 600}}>{x.title}</div>
-            <div style={{fontSize: 13, color: colors.textSecondary, marginTop: 4}}>
+            <div
+              style={{fontSize: 13, color: colors.textSecondary, marginTop: 4}}>
               {x.meta}
             </div>
           </Card>
@@ -197,7 +215,13 @@ const MenuStrip = () => {
 const Rewards = () => (
   <section style={{padding: '0 40px'}}>
     <FeatureBand>
-      <div style={{display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 40, alignItems: 'center'}}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1.1fr 0.9fr',
+          gap: 40,
+          alignItems: 'center',
+        }}>
         <div>
           <Eyebrow tone="gold">★ Members</Eyebrow>
           <h2
@@ -219,8 +243,8 @@ const Rewards = () => (
               maxWidth: 420,
               color: colors.textInverseSecondary,
             }}>
-            Earn stars on every order. 125 stars unlock a free handcrafted
-            drink — yours in about a week.
+            Earn stars on every order. 125 stars unlock a free handcrafted drink
+            — yours in about a week.
           </p>
           <div style={{display: 'flex', gap: 12, marginTop: 32}}>
             <Button size="lg">Join rewards</Button>
@@ -236,11 +260,26 @@ const Rewards = () => (
             borderRadius: 12,
             padding: 32,
           }}>
-          <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: 14}}>
-            <span style={{fontSize: 14, color: colors.textInverseSecondary}}>Your stars</span>
-            <span style={{fontSize: 14, color: colors.gold, fontWeight: 600}}>125 to reward</span>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              marginBottom: 14,
+            }}>
+            <span style={{fontSize: 14, color: colors.textInverseSecondary}}>
+              Your stars
+            </span>
+            <span style={{fontSize: 14, color: colors.gold, fontWeight: 600}}>
+              125 to reward
+            </span>
           </div>
-          <div style={{fontSize: 56, fontWeight: 600, letterSpacing: '-0.16px', lineHeight: 1}}>
+          <div
+            style={{
+              fontSize: 56,
+              fontWeight: 600,
+              letterSpacing: '-0.16px',
+              lineHeight: 1,
+            }}>
             125{' '}
             <span
               style={{
@@ -254,7 +293,12 @@ const Rewards = () => (
           <div style={{marginTop: 20}}>
             <Progress value={0.5} tone="gold" surface="inverse" />
           </div>
-          <div style={{marginTop: 20, fontSize: 14, color: colors.textInverseSecondary}}>
+          <div
+            style={{
+              marginTop: 20,
+              fontSize: 14,
+              color: colors.textInverseSecondary,
+            }}>
             Next reward: Any handcrafted drink.
           </div>
         </div>
@@ -271,10 +315,21 @@ const Footer = () => (
       padding: '56px 40px 32px',
       marginTop: 40,
     }}>
-    <div style={{display: 'grid', gridTemplateColumns: '1.4fr repeat(3, 1fr)', gap: 40}}>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1.4fr repeat(3, 1fr)',
+        gap: 40,
+      }}>
       <div>
         <WordMark inverse />
-        <div style={{marginTop: 16, fontSize: 16, maxWidth: 280, lineHeight: 1.75}}>
+        <div
+          style={{
+            marginTop: 16,
+            fontSize: 16,
+            maxWidth: 280,
+            lineHeight: 1.75,
+          }}>
           A warmer kind of morning, made to order.
         </div>
       </div>
@@ -285,9 +340,17 @@ const Footer = () => (
       ].map(([h, items]) => (
         <div key={h as string}>
           <Eyebrow tone="inverse">{h as string}</Eyebrow>
-          <div style={{marginTop: 14, display: 'flex', flexDirection: 'column', gap: 10}}>
+          <div
+            style={{
+              marginTop: 14,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 10,
+            }}>
             {(items as string[]).map(i => (
-              <span key={i} style={{color: 'inherit', fontSize: 16, cursor: 'pointer'}}>
+              <span
+                key={i}
+                style={{color: 'inherit', fontSize: 16, cursor: 'pointer'}}>
                 {i}
               </span>
             ))}
@@ -296,7 +359,13 @@ const Footer = () => (
       ))}
     </div>
     <Divider tone="inverse" style={{marginTop: 40}} />
-    <div style={{marginTop: 16, display: 'flex', justifyContent: 'space-between', fontSize: 13}}>
+    <div
+      style={{
+        marginTop: 16,
+        display: 'flex',
+        justifyContent: 'space-between',
+        fontSize: 13,
+      }}>
       <span>© 2026 WooBottle Coffee</span>
       <span>Seoul · Tokyo · Brooklyn</span>
     </div>

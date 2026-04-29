@@ -2,12 +2,12 @@
  * Text component - Web implementation
  */
 
-import React, { forwardRef } from 'react';
-import type { TextWebProps } from './types';
-import { textVariants, getDefaultElement } from './Text.styles';
-import { colors } from '../../core/theme/tokens';
-import { mergeStyles } from '../../core/variants';
-import { cssifyWebStyles } from '../../core/utils/cssifyWebStyles';
+import React, {forwardRef} from 'react';
+import type {TextWebProps} from './types';
+import {textVariants, getDefaultElement} from './Text.styles';
+import {colors} from '../../core/theme/tokens';
+import {mergeStyles} from '../../core/variants';
+import {cssifyWebStyles} from '../../core/utils/cssifyWebStyles';
 
 /**
  * Text component for web
@@ -25,22 +25,26 @@ export const Text = forwardRef<HTMLElement, TextWebProps>(function Text(
     style,
     testID,
   },
-  ref
+  ref,
 ) {
   // Determine the HTML element to render
   const Element = as || getDefaultElement(variant);
 
   // Get variant styles
-  const variantStyles = textVariants({ variant, weight, align }) as React.CSSProperties;
+  const variantStyles = textVariants({
+    variant,
+    weight,
+    align,
+  }) as React.CSSProperties;
 
   // Compose final styles
   const textStyle = cssifyWebStyles(
     mergeStyles(
       variantStyles,
-      muted ? { color: colors.mutedForeground } : undefined,
-      color ? { color } : undefined,
-      style
-    )
+      muted ? {color: colors.mutedForeground} : undefined,
+      color ? {color} : undefined,
+      style,
+    ),
   ) as React.CSSProperties;
 
   return React.createElement(
@@ -51,7 +55,7 @@ export const Text = forwardRef<HTMLElement, TextWebProps>(function Text(
       style: textStyle,
       'data-testid': testID,
     },
-    children
+    children,
   );
 });
 

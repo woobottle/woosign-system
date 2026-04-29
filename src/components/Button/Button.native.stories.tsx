@@ -3,12 +3,12 @@
  * shadcn/ui inspired design showcase
  */
 
-import type { Meta, StoryObj } from '@storybook/react-native';
-import React from 'react';  
-import { Button } from './Button';
-import { Box } from '../Box';
-import { Text } from '../Text';
-import type { ButtonVariant, ButtonSize } from './types';
+import type {Meta, StoryObj} from '@storybook/react-native';
+import React from 'react';
+import {Button} from './Button';
+import {Box} from '../Box';
+import {Text} from '../Text';
+import type {ButtonVariant, ButtonSize} from './types';
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
@@ -17,10 +17,17 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'],
+      options: [
+        'default',
+        'destructive',
+        'outline',
+        'secondary',
+        'ghost',
+        'link',
+      ],
       description: 'The visual style variant of the button',
       table: {
-        defaultValue: { summary: 'default' },
+        defaultValue: {summary: 'default'},
       },
     },
     size: {
@@ -28,7 +35,7 @@ const meta: Meta<typeof Button> = {
       options: ['default', 'sm', 'lg', 'icon'],
       description: 'The size of the button',
       table: {
-        defaultValue: { summary: 'default' },
+        defaultValue: {summary: 'default'},
       },
     },
     disabled: {
@@ -82,7 +89,7 @@ export const AllVariants: Story = {
 
     return (
       <Box flexDirection="row" flexWrap="wrap" gap={16}>
-        {variants.map((variant) => (
+        {variants.map(variant => (
           <Button key={variant} variant={variant}>
             {variant.charAt(0).toUpperCase() + variant.slice(1)}
           </Button>
@@ -99,7 +106,7 @@ export const AllSizes: Story = {
 
     return (
       <Box flexDirection="row" alignItems="center" gap={16}>
-        {sizes.map((size) => (
+        {sizes.map(size => (
           <Button key={size} size={size}>
             {size.toUpperCase()}
           </Button>
@@ -214,14 +221,18 @@ export const CommonPatterns: Story = {
   render: () => (
     <Box flexDirection="column" gap={24}>
       <Box>
-        <Text variant="h4" style={{ marginBottom: 12 }}>Action Buttons</Text>
+        <Text variant="h4" style={{marginBottom: 12}}>
+          Action Buttons
+        </Text>
         <Box flexDirection="row" gap={12}>
           <Button variant="outline">Cancel</Button>
           <Button>Continue</Button>
         </Box>
       </Box>
       <Box>
-        <Text variant="h4" style={{ marginBottom: 12 }}>Destructive Action</Text>
+        <Text variant="h4" style={{marginBottom: 12}}>
+          Destructive Action
+        </Text>
         <Box flexDirection="row" gap={12}>
           <Button variant="outline">Cancel</Button>
           <Button variant="destructive">Delete</Button>

@@ -3,19 +3,19 @@
  * Layout container showcase
  */
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type {Meta, StoryObj} from '@storybook/react';
 import React from 'react';
-import { Box } from './Box';
-import { Text } from '../Text/Text';
-import { colors } from '../../core/theme/tokens';
+import {Box} from './Box';
+import {Text} from '../Text/Text';
+import {colors} from '../../core/theme/tokens';
 
 const meta: Meta<typeof Box> = {
   title: 'Components/Box',
   component: Box,
   argTypes: {
-    padding: { control: 'number' },
-    margin: { control: 'number' },
-    gap: { control: 'number' },
+    padding: {control: 'number'},
+    margin: {control: 'number'},
+    gap: {control: 'number'},
     flexDirection: {
       control: 'select',
       options: ['row', 'column', 'row-reverse', 'column-reverse'],
@@ -26,9 +26,16 @@ const meta: Meta<typeof Box> = {
     },
     justifyContent: {
       control: 'select',
-      options: ['flex-start', 'center', 'flex-end', 'space-between', 'space-around', 'space-evenly'],
+      options: [
+        'flex-start',
+        'center',
+        'flex-end',
+        'space-between',
+        'space-around',
+        'space-evenly',
+      ],
     },
-    backgroundColor: { control: 'color' },
+    backgroundColor: {control: 'color'},
     borderRadius: {
       control: 'select',
       options: ['none', 'sm', 'md', 'lg', 'xl', '2xl', 'full'],
@@ -52,8 +59,7 @@ const DemoBox = ({
     backgroundColor={color}
     borderRadius="md"
     alignItems="center"
-    justifyContent="center"
-  >
+    justifyContent="center">
     <Text color={colors.primaryForeground} weight="medium">
       {children || 'Box'}
     </Text>
@@ -97,7 +103,7 @@ export const Alignment: Story = {
   render: () => (
     <Box flexDirection="column" gap={24}>
       <Box>
-        <Text variant="small" muted style={{ marginBottom: 8 }}>
+        <Text variant="small" muted style={{marginBottom: 8}}>
           alignItems: flex-start
         </Text>
         <Box
@@ -106,15 +112,14 @@ export const Alignment: Story = {
           gap={8}
           padding={16}
           backgroundColor={colors.secondary}
-          height={100}
-        >
+          height={100}>
           <DemoBox>A</DemoBox>
           <DemoBox>B</DemoBox>
         </Box>
       </Box>
 
       <Box>
-        <Text variant="small" muted style={{ marginBottom: 8 }}>
+        <Text variant="small" muted style={{marginBottom: 8}}>
           alignItems: center
         </Text>
         <Box
@@ -123,15 +128,14 @@ export const Alignment: Story = {
           gap={8}
           padding={16}
           backgroundColor={colors.secondary}
-          height={100}
-        >
+          height={100}>
           <DemoBox>A</DemoBox>
           <DemoBox>B</DemoBox>
         </Box>
       </Box>
 
       <Box>
-        <Text variant="small" muted style={{ marginBottom: 8 }}>
+        <Text variant="small" muted style={{marginBottom: 8}}>
           alignItems: flex-end
         </Text>
         <Box
@@ -140,8 +144,7 @@ export const Alignment: Story = {
           gap={8}
           padding={16}
           backgroundColor={colors.secondary}
-          height={100}
-        >
+          height={100}>
           <DemoBox>A</DemoBox>
           <DemoBox>B</DemoBox>
         </Box>
@@ -154,25 +157,30 @@ export const Alignment: Story = {
 export const JustifyContent: Story = {
   render: () => (
     <Box flexDirection="column" gap={24}>
-      {(['flex-start', 'center', 'flex-end', 'space-between', 'space-around'] as const).map(
-        (justify) => (
-          <Box key={justify}>
-            <Text variant="small" muted style={{ marginBottom: 8 }}>
-              justifyContent: {justify}
-            </Text>
-            <Box
-              flexDirection="row"
-              justifyContent={justify}
-              padding={16}
-              backgroundColor={colors.secondary}
-            >
-              <DemoBox>A</DemoBox>
-              <DemoBox>B</DemoBox>
-              <DemoBox>C</DemoBox>
-            </Box>
+      {(
+        [
+          'flex-start',
+          'center',
+          'flex-end',
+          'space-between',
+          'space-around',
+        ] as const
+      ).map(justify => (
+        <Box key={justify}>
+          <Text variant="small" muted style={{marginBottom: 8}}>
+            justifyContent: {justify}
+          </Text>
+          <Box
+            flexDirection="row"
+            justifyContent={justify}
+            padding={16}
+            backgroundColor={colors.secondary}>
+            <DemoBox>A</DemoBox>
+            <DemoBox>B</DemoBox>
+            <DemoBox>C</DemoBox>
           </Box>
-        )
-      )}
+        </Box>
+      ))}
     </Box>
   ),
 };
@@ -181,22 +189,23 @@ export const JustifyContent: Story = {
 export const BorderRadius: Story = {
   render: () => (
     <Box flexDirection="row" flexWrap="wrap" gap={16}>
-      {(['none', 'sm', 'md', 'lg', 'xl', '2xl', 'full'] as const).map((radius) => (
-        <Box key={radius} alignItems="center" gap={8}>
-          <Box
-            width={80}
-            height={80}
-            backgroundColor={colors.primary}
-            borderRadius={radius}
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Text color={colors.primaryForeground} variant="small">
-              {radius}
-            </Text>
+      {(['none', 'sm', 'md', 'lg', 'xl', '2xl', 'full'] as const).map(
+        radius => (
+          <Box key={radius} alignItems="center" gap={8}>
+            <Box
+              width={80}
+              height={80}
+              backgroundColor={colors.primary}
+              borderRadius={radius}
+              alignItems="center"
+              justifyContent="center">
+              <Text color={colors.primaryForeground} variant="small">
+                {radius}
+              </Text>
+            </Box>
           </Box>
-        </Box>
-      ))}
+        ),
+      )}
     </Box>
   ),
 };
@@ -208,8 +217,7 @@ export const NestedBoxes: Story = {
       padding={24}
       backgroundColor={colors.secondary}
       borderRadius="lg"
-      gap={16}
-    >
+      gap={16}>
       <Text variant="h4">Card Title</Text>
       <Text muted>This is a card description with nested content.</Text>
 
@@ -220,8 +228,7 @@ export const NestedBoxes: Story = {
           backgroundColor={colors.background}
           borderRadius="md"
           borderWidth={1}
-          borderColor={colors.border}
-        >
+          borderColor={colors.border}>
           <Text variant="small" weight="medium">
             Item 1
           </Text>
@@ -233,8 +240,7 @@ export const NestedBoxes: Story = {
           backgroundColor={colors.background}
           borderRadius="md"
           borderWidth={1}
-          borderColor={colors.border}
-        >
+          borderColor={colors.border}>
           <Text variant="small" weight="medium">
             Item 2
           </Text>

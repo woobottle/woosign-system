@@ -3,14 +3,19 @@
  * shadcn/ui inspired design
  */
 
-import { createVariants } from '../../core/variants';
-import { colors, spacing, borderRadius, typography } from '../../core/theme/tokens';
+import {createVariants} from '../../core/variants';
+import {
+  colors,
+  spacing,
+  borderRadius,
+  typography,
+} from '../../core/theme/tokens';
 
 // Track dimensions by size
 export const trackDimensions = {
-  sm: { width: 36, height: 20, thumbSize: 16, thumbOffset: 2 },
-  default: { width: 44, height: 24, thumbSize: 20, thumbOffset: 2 },
-  lg: { width: 52, height: 28, thumbSize: 24, thumbOffset: 2 },
+  sm: {width: 36, height: 20, thumbSize: 16, thumbOffset: 2},
+  default: {width: 44, height: 24, thumbSize: 20, thumbOffset: 2},
+  lg: {width: 52, height: 28, thumbSize: 24, thumbOffset: 2},
 } as const;
 
 /**

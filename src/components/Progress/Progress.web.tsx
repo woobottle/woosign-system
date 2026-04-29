@@ -1,8 +1,8 @@
-import {forwardRef} from 'react';
+import React from 'react';
 import type {ProgressWebProps} from './types';
 import {getProgressStyles, normalizeProgress} from './Progress.styles';
 
-export const Progress = forwardRef<HTMLDivElement, ProgressWebProps>(
+export const Progress = React.forwardRef<HTMLDivElement, ProgressWebProps>(
   function Progress(
     {
       value,

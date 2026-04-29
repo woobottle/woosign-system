@@ -2,19 +2,23 @@
  * Box component - React Native implementation
  */
 
-import { forwardRef } from 'react';
-import { View, StyleSheet } from 'react-native';
-import type { BoxNativeProps, BorderRadiusPreset } from './types';
-import { borderRadius as radiusTokens } from '../../core/theme/tokens';
+import {forwardRef} from 'react';
+import {View, StyleSheet} from 'react-native';
+import type {BoxNativeProps, BorderRadiusPreset} from './types';
+import {borderRadius as radiusTokens} from '../../core/theme/tokens';
 
 /**
  * Convert border radius preset to number
  */
 function resolveBorderRadius(
-  value: number | BorderRadiusPreset | undefined
+  value: number | BorderRadiusPreset | undefined,
 ): number | undefined {
-  if (value === undefined) return undefined;
-  if (typeof value === 'number') return value;
+  if (value === undefined) {
+    return undefined;
+  }
+  if (typeof value === 'number') {
+    return value;
+  }
 
   const presetMap: Record<BorderRadiusPreset, number> = {
     none: radiusTokens.none,
@@ -76,7 +80,7 @@ export const Box = forwardRef<View, BoxNativeProps>(function Box(
     style,
     testID,
   },
-  ref
+  ref,
 ) {
   const boxStyle = StyleSheet.flatten([
     styles.base,

@@ -3,8 +3,8 @@
  * shadcn/ui inspired variants
  */
 
-import type { ReactNode } from 'react';
-import type { ViewStyle, TextStyle, TextInputProps } from 'react-native';
+import type {ReactNode} from 'react';
+import type {ViewStyle, TextStyle, TextInputProps} from 'react-native';
 
 // Input variants (shadcn/ui style)
 export type InputVariant = 'default' | 'error';
@@ -53,7 +53,13 @@ export interface InputBaseProps {
   /** Auto-focus on mount */
   autoFocus?: boolean;
   /** Keyboard type */
-  keyboardType?: 'default' | 'email-address' | 'numeric' | 'phone-pad' | 'decimal-pad' | 'url';
+  keyboardType?:
+    | 'default'
+    | 'email-address'
+    | 'numeric'
+    | 'phone-pad'
+    | 'decimal-pad'
+    | 'url';
   /** Return key type */
   returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send';
   /** Maximum length */
@@ -93,7 +99,13 @@ export interface InputWebProps extends InputBaseProps {
   inputProps?: Omit<
     React.InputHTMLAttributes<HTMLInputElement> &
       React.TextareaHTMLAttributes<HTMLTextAreaElement>,
-    'value' | 'defaultValue' | 'placeholder' | 'disabled' | 'readOnly' | 'style' | 'ref'
+    | 'value'
+    | 'defaultValue'
+    | 'placeholder'
+    | 'disabled'
+    | 'readOnly'
+    | 'style'
+    | 'ref'
   >;
 }
 

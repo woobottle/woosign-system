@@ -1,8 +1,8 @@
-import {forwardRef} from 'react';
+import React from 'react';
 import type {DividerWebProps} from './types';
 import {getDividerStyle} from './Divider.styles';
 
-export const Divider = forwardRef<HTMLDivElement, DividerWebProps>(
+export const Divider = React.forwardRef<HTMLDivElement, DividerWebProps>(
   function Divider(
     {tone = 'default', orientation = 'horizontal', className, style, testID},
     ref,

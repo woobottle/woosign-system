@@ -3,8 +3,8 @@
  * Pure React + inline styles (no react-native-web)
  */
 
-import React, { forwardRef, useState, useCallback } from 'react';
-import type { SwitchWebProps } from './types';
+import React, {forwardRef, useState, useCallback} from 'react';
+import type {SwitchWebProps} from './types';
 import {
   switchTrackVariants,
   switchThumbVariants,
@@ -15,8 +15,8 @@ import {
   focusRingStyle,
   containerGap,
 } from './Switch.styles';
-import { mergeStyles } from '../../core/variants';
-import { cssifyWebStyles } from '../../core/utils/cssifyWebStyles';
+import {mergeStyles} from '../../core/variants';
+import {cssifyWebStyles} from '../../core/utils/cssifyWebStyles';
 
 /**
  * Switch component for web
@@ -33,7 +33,7 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchWebProps>(
       style,
       testID,
     },
-    ref
+    ref,
   ) {
     const [isFocused, setIsFocused] = useState(false);
 
@@ -44,9 +44,9 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchWebProps>(
     }, [disabled, checked, onCheckedChange]);
 
     // Get variant styles
-    const trackStyles = switchTrackVariants({ size }) as React.CSSProperties;
-    const thumbStyles = switchThumbVariants({ size }) as React.CSSProperties;
-    const labelStyles = switchLabelVariants({ size }) as React.CSSProperties;
+    const trackStyles = switchTrackVariants({size}) as React.CSSProperties;
+    const thumbStyles = switchThumbVariants({size}) as React.CSSProperties;
+    const labelStyles = switchLabelVariants({size}) as React.CSSProperties;
 
     const dims = trackDimensions[size];
     const thumbTranslateX = checked
@@ -72,16 +72,13 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchWebProps>(
     ) as React.CSSProperties;
 
     // Compose thumb style
-    const thumbStyle = mergeStyles(
-      thumbStyles,
-      {
-        position: 'absolute' as const,
-        left: 0,
-        transform: `translateX(${thumbTranslateX}px)`,
-        transition: 'transform 150ms ease',
-        pointerEvents: 'none' as const,
-      },
-    ) as React.CSSProperties;
+    const thumbStyle = mergeStyles(thumbStyles, {
+      position: 'absolute' as const,
+      left: 0,
+      transform: `translateX(${thumbTranslateX}px)`,
+      transition: 'transform 150ms ease',
+      pointerEvents: 'none' as const,
+    }) as React.CSSProperties;
 
     // Container style
     const containerStyle = mergeStyles(
@@ -105,24 +102,24 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchWebProps>(
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           style={trackStyle}
-          data-testid={testID}
-        >
+          data-testid={testID}>
           <span style={thumbStyle} />
         </button>
         {label && (
           <span
-            style={cssifyWebStyles({
-              ...labelStyles,
-              cursor: disabled ? 'not-allowed' : 'pointer',
-            }) as React.CSSProperties}
-            onClick={disabled ? undefined : handleClick}
-          >
+            style={
+              cssifyWebStyles({
+                ...labelStyles,
+                cursor: disabled ? 'not-allowed' : 'pointer',
+              }) as React.CSSProperties
+            }
+            onClick={disabled ? undefined : handleClick}>
             {label}
           </span>
         )}
       </div>
     );
-  }
+  },
 );
 
 Switch.displayName = 'Switch';

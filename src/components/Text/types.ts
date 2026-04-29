@@ -3,8 +3,8 @@
  * shadcn/ui Typography inspired
  */
 
-import type { ReactNode } from 'react';
-import type { TextStyle } from 'react-native';
+import type {ReactNode} from 'react';
+import type {TextStyle} from 'react-native';
 
 // Text variants (shadcn/ui typography style)
 export type TextVariant =

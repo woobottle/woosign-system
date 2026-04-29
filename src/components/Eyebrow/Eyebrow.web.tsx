@@ -4,7 +4,14 @@ import {getEyebrowStyle} from './Eyebrow.styles';
 
 export const Eyebrow = forwardRef<HTMLElement, EyebrowWebProps>(
   function Eyebrow(
-    {tone = 'default', children, className, style, testID, as: Element = 'span'},
+    {
+      tone = 'default',
+      children,
+      className,
+      style,
+      testID,
+      as: Element = 'span',
+    },
     ref,
   ) {
     const base = getEyebrowStyle(tone);

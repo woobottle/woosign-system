@@ -17,4 +17,4 @@ export type {
 
 // Re-export component
 // Note: The bundler will resolve this to the correct platform-specific file
-export { Badge } from './Badge';
+export {Badge} from './Badge';

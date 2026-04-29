@@ -7,7 +7,10 @@ const meta: Meta<typeof StatusDot> = {
   component: StatusDot,
   args: {tone: 'success', size: 'default', children: '✓'},
   argTypes: {
-    tone: {control: 'select', options: ['success', 'danger', 'brand', 'neutral']},
+    tone: {
+      control: 'select',
+      options: ['success', 'danger', 'brand', 'neutral'],
+    },
     size: {control: 'select', options: ['sm', 'default', 'lg']},
   },
 };

@@ -14,4 +14,4 @@ export type {
   FlexWrap,
 } from './types';
 
-export { Box } from './Box';
+export {Box} from './Box';

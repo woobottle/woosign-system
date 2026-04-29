@@ -17,4 +17,4 @@ export type {
 
 // Re-export component
 // Note: The bundler will resolve this to the correct platform-specific file
-export { Switch } from './Switch';
+export {Switch} from './Switch';

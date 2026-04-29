@@ -3,12 +3,12 @@
  * shadcn/ui inspired design showcase
  */
 
-import type { Meta, StoryObj } from '@storybook/react-native';
+import type {Meta, StoryObj} from '@storybook/react-native';
 import React from 'react';
-import { Badge } from './Badge';
-import { Box } from '../Box';
-import { Text } from '../Text';
-import type { BadgeVariant } from './types';
+import {Badge} from './Badge';
+import {Box} from '../Box';
+import {Text} from '../Text';
+import type {BadgeVariant} from './types';
 
 const meta: Meta<typeof Badge> = {
   title: 'Components/Badge',
@@ -20,7 +20,7 @@ const meta: Meta<typeof Badge> = {
       options: ['default', 'secondary', 'destructive', 'outline'],
       description: 'The visual style variant of the badge',
       table: {
-        defaultValue: { summary: 'default' },
+        defaultValue: {summary: 'default'},
       },
     },
   },
@@ -52,7 +52,7 @@ export const AllVariants: Story = {
 
     return (
       <Box flexDirection="row" flexWrap="wrap" gap={8}>
-        {variants.map((variant) => (
+        {variants.map(variant => (
           <Badge key={variant} variant={variant}>
             {variant.charAt(0).toUpperCase() + variant.slice(1)}
           </Badge>
@@ -98,7 +98,9 @@ export const StatusExamples: Story = {
   render: () => (
     <Box flexDirection="column" gap={16}>
       <Box>
-        <Text variant="h4" style={{ marginBottom: 8 }}>Status Indicators</Text>
+        <Text variant="h4" style={{marginBottom: 8}}>
+          Status Indicators
+        </Text>
         <Box flexDirection="row" gap={8}>
           <Badge>Active</Badge>
           <Badge variant="secondary">Pending</Badge>
@@ -107,14 +109,18 @@ export const StatusExamples: Story = {
         </Box>
       </Box>
       <Box>
-        <Text variant="h4" style={{ marginBottom: 8 }}>Notification Counts</Text>
+        <Text variant="h4" style={{marginBottom: 8}}>
+          Notification Counts
+        </Text>
         <Box flexDirection="row" gap={8}>
           <Badge>3</Badge>
           <Badge variant="destructive">99+</Badge>
         </Box>
       </Box>
       <Box>
-        <Text variant="h4" style={{ marginBottom: 8 }}>Labels</Text>
+        <Text variant="h4" style={{marginBottom: 8}}>
+          Labels
+        </Text>
         <Box flexDirection="row" gap={8}>
           <Badge variant="outline">v1.0.0</Badge>
           <Badge variant="secondary">Beta</Badge>
@@ -126,7 +132,8 @@ export const StatusExamples: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Common use cases for badges: status indicators, notification counts, and labels',
+        story:
+          'Common use cases for badges: status indicators, notification counts, and labels',
       },
     },
   },

@@ -27,7 +27,9 @@ export const lightenColor = (hex: string, percent: number): string => {
   const newG = lighten(g);
   const newB = lighten(b);
 
-  return `#${newR.toString(16).padStart(2, '0')}${newG.toString(16).padStart(2, '0')}${newB.toString(16).padStart(2, '0')}`;
+  return `#${newR.toString(16).padStart(2, '0')}${newG
+    .toString(16)
+    .padStart(2, '0')}${newB.toString(16).padStart(2, '0')}`;
 };
 
 /**
@@ -45,5 +47,7 @@ export const darkenColor = (hex: string, percent: number): string => {
   const newG = darken(g);
   const newB = darken(b);
 
-  return `#${newR.toString(16).padStart(2, '0')}${newG.toString(16).padStart(2, '0')}${newB.toString(16).padStart(2, '0')}`;
+  return `#${newR.toString(16).padStart(2, '0')}${newG
+    .toString(16)
+    .padStart(2, '0')}${newB.toString(16).padStart(2, '0')}`;
 };

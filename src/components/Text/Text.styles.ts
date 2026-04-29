@@ -3,8 +3,8 @@
  * shadcn/ui Typography inspired
  */
 
-import { createVariants } from '../../core/variants';
-import { colors, typography } from '../../core/theme/tokens';
+import {createVariants} from '../../core/variants';
+import {colors, typography} from '../../core/theme/tokens';
 
 /**
  * Text variants
@@ -68,15 +68,15 @@ export const textVariants = createVariants({
       },
     },
     weight: {
-      normal: { fontWeight: typography.fontWeight.normal },
-      medium: { fontWeight: typography.fontWeight.medium },
-      semibold: { fontWeight: typography.fontWeight.semibold },
-      bold: { fontWeight: typography.fontWeight.bold },
+      normal: {fontWeight: typography.fontWeight.normal},
+      medium: {fontWeight: typography.fontWeight.medium},
+      semibold: {fontWeight: typography.fontWeight.semibold},
+      bold: {fontWeight: typography.fontWeight.bold},
     },
     align: {
-      left: { textAlign: 'left' },
-      center: { textAlign: 'center' },
-      right: { textAlign: 'right' },
+      left: {textAlign: 'left'},
+      center: {textAlign: 'center'},
+      right: {textAlign: 'right'},
     },
   },
   defaultVariants: {
@@ -88,7 +88,7 @@ export const textVariants = createVariants({
  * Get default HTML element for variant
  */
 export function getDefaultElement(
-  variant: string
+  variant: string,
 ): 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' {
   switch (variant) {
     case 'h1':

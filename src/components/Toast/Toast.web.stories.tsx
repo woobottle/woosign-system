@@ -11,7 +11,10 @@ const meta: Meta<typeof Toast> = {
     description: 'Ready in 5 min at Hongdae.',
   },
   argTypes: {
-    tone: {control: 'select', options: ['success', 'danger', 'brand', 'neutral']},
+    tone: {
+      control: 'select',
+      options: ['success', 'danger', 'brand', 'neutral'],
+    },
   },
 };
 export default meta;
@@ -29,14 +32,23 @@ export const Danger: Story = {
 
 export const Stack: Story = {
   render: () => (
-    <div style={{display: 'flex', flexDirection: 'column', gap: 10, width: 360}}>
-      <Toast tone="success" title="Order placed" description="Ready in 5 min." />
+    <div
+      style={{display: 'flex', flexDirection: 'column', gap: 10, width: 360}}>
+      <Toast
+        tone="success"
+        title="Order placed"
+        description="Ready in 5 min."
+      />
       <Toast
         tone="danger"
         title="Payment declined"
         description="Try a different card."
       />
-      <Toast tone="brand" title="Star earned" description="+15 toward your next drink." />
+      <Toast
+        tone="brand"
+        title="Star earned"
+        description="+15 toward your next drink."
+      />
     </div>
   ),
 };

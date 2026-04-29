@@ -57,10 +57,15 @@ import type {
 export function createVariants<
   TVariants extends Record<string, Record<string, StyleObject>>,
 >(config: VariantConfig<TVariants>): VariantFunction<TVariants> {
-  const { base = {}, variants, defaultVariants = {}, compoundVariants = [] } = config;
+  const {
+    base = {},
+    variants,
+    defaultVariants = {},
+    compoundVariants = [],
+  } = config;
 
   return function getVariantStyles(
-    props?: VariantProps<TVariants>
+    props?: VariantProps<TVariants>,
   ): StyleObject {
     // Merge default variants with provided props
     const resolvedVariants = {
@@ -69,29 +74,29 @@ export function createVariants<
     } as Record<string, string | undefined>;
 
     // Start with base styles
-    let result: StyleObject = { ...base };
+    let result: StyleObject = {...base};
 
     // Apply variant styles
     for (const [variantKey, variantValue] of Object.entries(resolvedVariants)) {
       if (variantValue !== undefined) {
         const variantStyles = variants[variantKey]?.[variantValue];
         if (variantStyles) {
-          result = { ...result, ...variantStyles };
+          result = {...result, ...variantStyles};
         }
       }
     }
 
     // Apply compound variants
     for (const compound of compoundVariants) {
-      const { style, ...conditions } = compound;
+      const {style, ...conditions} = compound;
 
       // Check if all conditions match
       const matches = Object.entries(conditions).every(
-        ([key, value]) => resolvedVariants[key] === value
+        ([key, value]) => resolvedVariants[key] === value,
       );
 
       if (matches && style) {
-        result = { ...result, ...style };
+        result = {...result, ...style};
       }
     }
 
@@ -104,9 +109,7 @@ export function createVariants<
  * Accepts any object type for flexibility with CSSProperties, ViewStyle, TextStyle, etc.
  */
 export function mergeStyles(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ...styles: (any | undefined | null | false)[]
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): any {
   return Object.assign({}, ...styles.filter(Boolean));
 }
