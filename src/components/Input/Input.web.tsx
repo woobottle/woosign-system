@@ -3,7 +3,13 @@
  * Pure React + inline styles (no react-native-web)
  */
 
-import React, {forwardRef, useState, useCallback} from 'react';
+import React, {
+  forwardRef,
+  useState,
+  useCallback,
+  useRef,
+  useEffect,
+} from 'react';
 import type {InputWebProps} from './types';
 import {
   inputContainerVariants,
@@ -13,6 +19,8 @@ import {
   disabledStyle,
 } from './Input.styles';
 import {mergeStyles} from '../../core/variants';
+import {spacing, zIndex} from '../../core/theme/tokens';
+import {Calendar} from './Calendar.web';
 
 /**
  * Input component for web
@@ -58,6 +66,33 @@ export const Input = forwardRef<
   ref,
 ) {
   const [isFocused, setIsFocused] = useState(false);
+  const isDateType = type === 'date';
+  const [isPickerOpen, setIsPickerOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isDateType || !isPickerOpen) {
+      return;
+    }
+    const handleOutside = (e: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
+        setIsPickerOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutside);
+    return () => document.removeEventListener('mousedown', handleOutside);
+  }, [isDateType, isPickerOpen]);
+
+  const handleCalendarChange = useCallback(
+    (newValue: string) => {
+      onChangeText?.(newValue);
+      setIsPickerOpen(false);
+    },
+    [onChangeText],
+  );
 
   const userOnChange = inputProps?.onChange;
   const userOnKeyDown = inputProps?.onKeyDown;
@@ -67,6 +102,9 @@ export const Input = forwardRef<
   const handleFocus = useCallback(
     (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setIsFocused(true);
+      if (isDateType) {
+        setIsPickerOpen(true);
+      }
       onFocus?.();
       (
         userOnFocus as
@@ -76,7 +114,7 @@ export const Input = forwardRef<
           | undefined
       )?.(e);
     },
-    [onFocus, userOnFocus],
+    [isDateType, onFocus, userOnFocus],
   );
 
   const handleBlur = useCallback(
@@ -138,6 +176,7 @@ export const Input = forwardRef<
     disabled || readOnly ? disabledStyle : undefined,
     isFocused && !disabled ? focusContainerStyle : undefined,
     {transition: 'all 150ms ease'},
+    isDateType ? {position: 'relative'} : undefined,
     style,
   ) as React.CSSProperties;
 
@@ -190,7 +229,7 @@ export const Input = forwardRef<
   };
 
   return (
-    <div className={className} style={containerStyle}>
+    <div ref={containerRef} className={className} style={containerStyle}>
       {leftIcon && <span style={iconStyle}>{leftIcon}</span>}
       {multiline ? (
         <textarea
@@ -201,15 +240,32 @@ export const Input = forwardRef<
       ) : (
         <input
           ref={ref as React.Ref<HTMLInputElement>}
-          type={type}
+          type={isDateType ? 'text' : type}
           pattern={pattern}
-          min={min}
-          max={max}
+          min={isDateType ? undefined : min}
+          max={isDateType ? undefined : max}
           step={step}
           {...commonProps}
         />
       )}
       {rightIcon && <span style={iconStyle}>{rightIcon}</span>}
+      {isDateType && isPickerOpen && (
+        <div
+          style={{
+            position: 'absolute',
+            top: '100%',
+            left: 0,
+            marginTop: spacing[1],
+            zIndex: zIndex.popover,
+          }}>
+          <Calendar
+            value={typeof value === 'string' ? value : undefined}
+            onChange={handleCalendarChange}
+            min={typeof min === 'string' ? min : undefined}
+            max={typeof max === 'string' ? max : undefined}
+          />
+        </div>
+      )}
     </div>
   );
 });

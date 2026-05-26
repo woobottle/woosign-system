@@ -45,7 +45,7 @@ export interface InputBaseProps {
   /** Test ID for testing */
   testID?: string;
   /** Input type (text, password, email, etc.) */
-  type?: 'text' | 'password' | 'email' | 'number' | 'tel' | 'url';
+  type?: 'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'date';
   /** Auto-capitalize behavior */
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
   /** Auto-correct behavior */

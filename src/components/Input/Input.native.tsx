@@ -131,6 +131,7 @@ function getKeyboardType(
     case 'email':
       return 'email-address';
     case 'number':
+    case 'date':
       return 'numeric';
     case 'tel':
       return 'phone-pad';
