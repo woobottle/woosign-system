@@ -3,6 +3,7 @@ export * from './Badge';
 export * from './Box';
 export * from './Button';
 export * from './Card';
+export * from './Dialog';
 export * from './Chip';
 export * from './Divider';
 export * from './Eyebrow';
