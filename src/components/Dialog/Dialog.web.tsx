@@ -5,7 +5,14 @@
  * context를 탈출한다. scrim 클릭/Esc로 onClose를 호출하며, 표면 클릭은
  * stopPropagation으로 scrim까지 전파되지 않는다.
  */
-import React, {useContext, useEffect, useId, useRef, useState} from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import {createPortal} from 'react-dom';
 import type {
   DialogWebProps,
@@ -21,6 +28,8 @@ import {zIndex, shadowsCss} from '../../core/theme/tokens';
 import {mergeStyles} from '../../core/variants';
 import {cssifyWebStyles} from '../../core/utils/cssifyWebStyles';
 
+const dialogStyles = getDialogStyles();
+
 function DialogBase({
   open,
   onClose,
@@ -34,6 +43,19 @@ function DialogBase({
 }: DialogWebProps) {
   const titleId = useId();
   const descriptionId = useId();
+
+  const [hasTitle, setHasTitle] = useState(false);
+  const [hasDescription, setHasDescription] = useState(false);
+
+  const contextValue = useMemo(
+    () => ({
+      titleId,
+      descriptionId,
+      registerTitle: setHasTitle,
+      registerDescription: setHasDescription,
+    }),
+    [titleId, descriptionId],
+  );
 
   // onClose ref — always holds the latest callback so the Esc listener
   // doesn't need to re-register every time the consumer passes a new inline fn
@@ -60,10 +82,8 @@ function DialogBase({
 
   if (!open || !mounted || typeof document === 'undefined') return null;
 
-  const s = getDialogStyles();
-
   return createPortal(
-    <DialogContext.Provider value={{titleId, descriptionId}}>
+    <DialogContext.Provider value={contextValue}>
       <div
         data-testid={testID ? `${testID}-scrim` : 'dialog-scrim'}
         onClick={closeOnScrimClick ? onClose : undefined}
@@ -81,13 +101,13 @@ function DialogBase({
         <div
           role="dialog"
           aria-modal="true"
-          aria-labelledby={titleId}
-          aria-describedby={descriptionId}
+          aria-labelledby={hasTitle ? titleId : undefined}
+          aria-describedby={hasDescription ? descriptionId : undefined}
           className={className}
           data-testid={testID}
           onClick={e => e.stopPropagation()}
           style={{
-            ...s.surface,
+            ...dialogStyles.surface,
             maxWidth: SIZE_MAX_WIDTH[size],
             boxShadow: shadowsCss.modal,
             animation: 'wbDialogSurfaceIn 180ms ease-out',
@@ -112,9 +132,8 @@ function DialogBase({
 }
 
 export function DialogHeader({children, style, className}: DialogHeaderProps) {
-  const s = getDialogStyles();
   const css = cssifyWebStyles(
-    mergeStyles(s.header, style),
+    mergeStyles(dialogStyles.header, style),
   ) as React.CSSProperties;
   return (
     <div className={className} style={css}>
@@ -126,9 +145,13 @@ DialogHeader.displayName = 'DialogHeader';
 
 export function DialogTitle({children, style, className}: DialogTitleProps) {
   const ctx = useContext(DialogContext);
-  const s = getDialogStyles();
+  const register = ctx?.registerTitle;
+  useEffect(() => {
+    register?.(true);
+    return () => register?.(false);
+  }, [register]);
   const css = cssifyWebStyles(
-    mergeStyles(s.title, {margin: 0}, style),
+    mergeStyles(dialogStyles.title, {margin: 0}, style),
   ) as React.CSSProperties;
   return (
     <h2 id={ctx?.titleId} className={className} style={css}>
@@ -144,9 +167,13 @@ export function DialogDescription({
   className,
 }: DialogDescriptionProps) {
   const ctx = useContext(DialogContext);
-  const s = getDialogStyles();
+  const register = ctx?.registerDescription;
+  useEffect(() => {
+    register?.(true);
+    return () => register?.(false);
+  }, [register]);
   const css = cssifyWebStyles(
-    mergeStyles(s.description, {margin: 0}, style),
+    mergeStyles(dialogStyles.description, {margin: 0}, style),
   ) as React.CSSProperties;
   return (
     <p id={ctx?.descriptionId} className={className} style={css}>
@@ -157,8 +184,9 @@ export function DialogDescription({
 DialogDescription.displayName = 'DialogDescription';
 
 export function DialogBody({children, style, className}: DialogBodyProps) {
-  const s = getDialogStyles();
-  const css = cssifyWebStyles(mergeStyles(s.body, style)) as React.CSSProperties;
+  const css = cssifyWebStyles(
+    mergeStyles(dialogStyles.body, style),
+  ) as React.CSSProperties;
   return (
     <div className={className} style={css}>
       {children}
@@ -168,9 +196,8 @@ export function DialogBody({children, style, className}: DialogBodyProps) {
 DialogBody.displayName = 'DialogBody';
 
 export function DialogFooter({children, style, className}: DialogFooterProps) {
-  const s = getDialogStyles();
   const css = cssifyWebStyles(
-    mergeStyles(s.footer, style),
+    mergeStyles(dialogStyles.footer, style),
   ) as React.CSSProperties;
   return (
     <div className={className} style={css}>

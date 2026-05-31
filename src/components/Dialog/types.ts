@@ -51,4 +51,8 @@ export type DialogFooterProps = DialogSectionProps;
 export interface DialogContextValue {
   titleId: string;
   descriptionId: string;
+  /** DialogTitle가 마운트되면 true로 등록 (aria-labelledby 연결용). */
+  registerTitle: (present: boolean) => void;
+  /** DialogDescription가 마운트되면 true로 등록 (aria-describedby 연결용). */
+  registerDescription: (present: boolean) => void;
 }

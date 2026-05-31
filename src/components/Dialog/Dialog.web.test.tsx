@@ -98,9 +98,25 @@ describe('Dialog (web)', () => {
     const labelledBy = surface.getAttribute('aria-labelledby');
     const title = screen.getByText('제목');
     expect(title).toHaveAttribute('id', labelledBy);
-    expect(screen.getByText('설명')).toBeInTheDocument();
+    const describedBy = surface.getAttribute('aria-describedby');
+    const description = screen.getByText('설명');
+    expect(description).toHaveAttribute('id', describedBy);
     expect(screen.getByText('본문')).toBeInTheDocument();
     expect(screen.getByRole('button', {name: '확인'})).toBeInTheDocument();
+  });
+
+  it('omits aria-describedby when no Description is rendered', () => {
+    render(
+      <Dialog open onClose={() => {}}>
+        <Dialog.Header>
+          <Dialog.Title>제목만</Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Body>본문</Dialog.Body>
+      </Dialog>,
+    );
+    const surface = screen.getByRole('dialog');
+    expect(surface).not.toHaveAttribute('aria-describedby');
+    expect(surface).toHaveAttribute('aria-labelledby');
   });
 
   it('exposes subcomponents as standalone named exports', () => {
