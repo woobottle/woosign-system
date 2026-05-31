@@ -5,7 +5,7 @@
  * context를 탈출한다. scrim 클릭/Esc로 onClose를 호출하며, 표면 클릭은
  * stopPropagation으로 scrim까지 전파되지 않는다.
  */
-import {useEffect, useId, useState} from 'react';
+import {useEffect, useId, useRef, useState} from 'react';
 import {createPortal} from 'react-dom';
 import type {DialogWebProps} from './types';
 import {DialogContext} from './DialogContext';
@@ -26,6 +26,13 @@ export function Dialog({
   const titleId = useId();
   const descriptionId = useId();
 
+  // onClose ref — always holds the latest callback so the Esc listener
+  // doesn't need to re-register every time the consumer passes a new inline fn
+  const onCloseRef = useRef(onClose);
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  });
+
   // SSR / hydration gate — createPortal requires document.body
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
@@ -36,11 +43,11 @@ export function Dialog({
   useEffect(() => {
     if (!open || !closeOnEsc) return;
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') onCloseRef.current();
     };
     document.addEventListener('keydown', onKeyDown);
     return () => document.removeEventListener('keydown', onKeyDown);
-  }, [open, closeOnEsc, onClose]);
+  }, [open, closeOnEsc]);
 
   if (!open || !mounted || typeof document === 'undefined') return null;
 
