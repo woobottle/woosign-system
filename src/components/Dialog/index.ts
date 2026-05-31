@@ -10,7 +10,6 @@ export type {
   DialogDescriptionProps,
   DialogBodyProps,
   DialogFooterProps,
-  DialogContextValue,
 } from './types';
 export {
   Dialog,
