@@ -8,7 +8,6 @@
 import React, {
   useContext,
   useEffect,
-  useId,
   useMemo,
   useRef,
   useState,
@@ -30,6 +29,11 @@ import {cssifyWebStyles} from '../../core/utils/cssifyWebStyles';
 
 const dialogStyles = getDialogStyles();
 
+// Per-instance id source. `useId` would be cleaner but is React 18+, while the
+// library's peer range is `react >=17`. The dialog surface only renders behind
+// the client-only `mounted` gate, so there is no SSR output to mismatch on.
+let dialogIdCounter = 0;
+
 function DialogBase({
   open,
   onClose,
@@ -41,8 +45,13 @@ function DialogBase({
   style,
   testID,
 }: DialogWebProps) {
-  const titleId = useId();
-  const descriptionId = useId();
+  const [{titleId, descriptionId}] = useState(() => {
+    dialogIdCounter += 1;
+    return {
+      titleId: `wb-dialog-title-${dialogIdCounter}`,
+      descriptionId: `wb-dialog-desc-${dialogIdCounter}`,
+    };
+  });
 
   const [hasTitle, setHasTitle] = useState(false);
   const [hasDescription, setHasDescription] = useState(false);
