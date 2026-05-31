@@ -5,14 +5,23 @@
  * context를 탈출한다. scrim 클릭/Esc로 onClose를 호출하며, 표면 클릭은
  * stopPropagation으로 scrim까지 전파되지 않는다.
  */
-import {useEffect, useId, useRef, useState} from 'react';
+import React, {useContext, useEffect, useId, useRef, useState} from 'react';
 import {createPortal} from 'react-dom';
-import type {DialogWebProps} from './types';
+import type {
+  DialogWebProps,
+  DialogHeaderProps,
+  DialogTitleProps,
+  DialogDescriptionProps,
+  DialogBodyProps,
+  DialogFooterProps,
+} from './types';
 import {DialogContext} from './DialogContext';
 import {getDialogStyles, SIZE_MAX_WIDTH, SCRIM_COLOR} from './Dialog.styles';
 import {zIndex, shadowsCss} from '../../core/theme/tokens';
+import {mergeStyles} from '../../core/variants';
+import {cssifyWebStyles} from '../../core/utils/cssifyWebStyles';
 
-export function Dialog({
+function DialogBase({
   open,
   onClose,
   size = 'md',
@@ -102,4 +111,91 @@ export function Dialog({
   );
 }
 
+export function DialogHeader({children, style, className}: DialogHeaderProps) {
+  const s = getDialogStyles();
+  const css = cssifyWebStyles(
+    mergeStyles(s.header, style),
+  ) as React.CSSProperties;
+  return (
+    <div className={className} style={css}>
+      {children}
+    </div>
+  );
+}
+DialogHeader.displayName = 'DialogHeader';
+
+export function DialogTitle({children, style, className}: DialogTitleProps) {
+  const ctx = useContext(DialogContext);
+  const s = getDialogStyles();
+  const css = cssifyWebStyles(
+    mergeStyles(s.title, {margin: 0}, style),
+  ) as React.CSSProperties;
+  return (
+    <h2 id={ctx?.titleId} className={className} style={css}>
+      {children}
+    </h2>
+  );
+}
+DialogTitle.displayName = 'DialogTitle';
+
+export function DialogDescription({
+  children,
+  style,
+  className,
+}: DialogDescriptionProps) {
+  const ctx = useContext(DialogContext);
+  const s = getDialogStyles();
+  const css = cssifyWebStyles(
+    mergeStyles(s.description, {margin: 0}, style),
+  ) as React.CSSProperties;
+  return (
+    <p id={ctx?.descriptionId} className={className} style={css}>
+      {children}
+    </p>
+  );
+}
+DialogDescription.displayName = 'DialogDescription';
+
+export function DialogBody({children, style, className}: DialogBodyProps) {
+  const s = getDialogStyles();
+  const css = cssifyWebStyles(mergeStyles(s.body, style)) as React.CSSProperties;
+  return (
+    <div className={className} style={css}>
+      {children}
+    </div>
+  );
+}
+DialogBody.displayName = 'DialogBody';
+
+export function DialogFooter({children, style, className}: DialogFooterProps) {
+  const s = getDialogStyles();
+  const css = cssifyWebStyles(
+    mergeStyles(s.footer, style),
+  ) as React.CSSProperties;
+  return (
+    <div className={className} style={css}>
+      {children}
+    </div>
+  );
+}
+DialogFooter.displayName = 'DialogFooter';
+
+interface DialogComponent {
+  (props: DialogWebProps): React.ReactElement | null;
+  displayName?: string;
+  Header: typeof DialogHeader;
+  Title: typeof DialogTitle;
+  Description: typeof DialogDescription;
+  Body: typeof DialogBody;
+  Footer: typeof DialogFooter;
+}
+
+const Dialog = DialogBase as unknown as DialogComponent;
 Dialog.displayName = 'Dialog';
+Dialog.Header = DialogHeader;
+Dialog.Title = DialogTitle;
+Dialog.Description = DialogDescription;
+Dialog.Body = DialogBody;
+Dialog.Footer = DialogFooter;
+
+export {Dialog};

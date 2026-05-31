@@ -80,4 +80,36 @@ describe('Dialog (web)', () => {
     await userEvent.keyboard('{Escape}');
     expect(onClose).not.toHaveBeenCalled();
   });
+
+  it('renders subcomponents and wires aria-labelledby to the title', () => {
+    render(
+      <Dialog open onClose={() => {}}>
+        <Dialog.Header>
+          <Dialog.Title>제목</Dialog.Title>
+          <Dialog.Description>설명</Dialog.Description>
+        </Dialog.Header>
+        <Dialog.Body>본문</Dialog.Body>
+        <Dialog.Footer>
+          <button>확인</button>
+        </Dialog.Footer>
+      </Dialog>,
+    );
+    const surface = screen.getByRole('dialog');
+    const labelledBy = surface.getAttribute('aria-labelledby');
+    const title = screen.getByText('제목');
+    expect(title).toHaveAttribute('id', labelledBy);
+    expect(screen.getByText('설명')).toBeInTheDocument();
+    expect(screen.getByText('본문')).toBeInTheDocument();
+    expect(screen.getByRole('button', {name: '확인'})).toBeInTheDocument();
+  });
+
+  it('exposes subcomponents as standalone named exports', () => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const mod = require('./Dialog');
+    expect(typeof mod.DialogHeader).toBe('function');
+    expect(typeof mod.DialogTitle).toBe('function');
+    expect(typeof mod.DialogDescription).toBe('function');
+    expect(typeof mod.DialogBody).toBe('function');
+    expect(typeof mod.DialogFooter).toBe('function');
+  });
 });
