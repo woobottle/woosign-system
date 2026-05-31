@@ -43,7 +43,7 @@ function DialogBase({
       visible={open}
       transparent
       animationType="fade"
-      onRequestClose={closeOnEsc ? onClose : undefined}>
+      onRequestClose={closeOnEsc ? onClose : () => {}}>
       <Pressable
         testID={testID ? `${testID}-scrim` : 'dialog-scrim'}
         onPress={closeOnScrimClick ? onClose : undefined}
