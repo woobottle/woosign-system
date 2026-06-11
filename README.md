@@ -103,6 +103,13 @@ The same code renders on web and native — platform extensions
 | **Eyebrow** | Tracked, uppercased label — `default` / `brand` / `gold` / `inverse` |
 | **Divider** | Hairline separator, horizontal or vertical, light or inverse |
 
+### Overlays
+
+| | Purpose |
+|---|---|
+| **Dialog** | Controlled modal — portal scrim (web) / RN Modal (native), Esc & Android back, `Header/Title/Description/Body/Footer` |
+| **BottomSheet** | Controlled bottom sheet — drag-to-dismiss grabber handle, content-based height with `maxHeightRatio` cap, same subcomponent API |
+
 All components expose the same `ButtonProps`/`CardProps`/etc. on both
 platforms — TypeScript is the contract.
 
