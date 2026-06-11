@@ -5,13 +5,7 @@
  * context를 탈출한다. scrim 클릭/Esc로 onClose를 호출하며, 표면 클릭은
  * stopPropagation으로 scrim까지 전파되지 않는다.
  */
-import React, {
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, {useContext, useEffect, useMemo, useRef, useState} from 'react';
 import {createPortal} from 'react-dom';
 import type {
   DialogWebProps,
@@ -81,15 +75,21 @@ function DialogBase({
 
   // Esc 리스너는 열려 있고 closeOnEsc일 때만 등록
   useEffect(() => {
-    if (!open || !closeOnEsc) return;
+    if (!open || !closeOnEsc) {
+      return;
+    }
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onCloseRef.current();
+      if (e.key === 'Escape') {
+        onCloseRef.current();
+      }
     };
     document.addEventListener('keydown', onKeyDown);
     return () => document.removeEventListener('keydown', onKeyDown);
   }, [open, closeOnEsc]);
 
-  if (!open || !mounted || typeof document === 'undefined') return null;
+  if (!open || !mounted || typeof document === 'undefined') {
+    return null;
+  }
 
   return createPortal(
     <DialogContext.Provider value={contextValue}>
