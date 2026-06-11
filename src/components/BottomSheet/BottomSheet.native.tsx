@@ -11,7 +11,6 @@ import type {ReactElement} from 'react';
 import {useEffect, useRef} from 'react';
 import {
   Animated,
-  Dimensions,
   Modal,
   PanResponder,
   Pressable,
@@ -20,6 +19,7 @@ import {
   StyleSheet,
   Text,
   View,
+  useWindowDimensions,
   type ViewStyle,
   type TextStyle,
 } from 'react-native';
@@ -52,6 +52,7 @@ function BottomSheetBase({
   style,
   testID,
 }: BottomSheetNativeProps) {
+  const {height: windowHeight} = useWindowDimensions();
   const onCloseRef = useRef(onClose);
   useEffect(() => {
     onCloseRef.current = onClose;
@@ -95,7 +96,7 @@ function BottomSheetBase({
     }),
   ).current;
 
-  const maxHeight = Dimensions.get('window').height * maxHeightRatio;
+  const maxHeight = windowHeight * maxHeightRatio;
 
   return (
     <Modal
@@ -224,5 +225,6 @@ const styles = StyleSheet.create({
   },
   bodyScroll: {
     flexGrow: 0,
+    flexShrink: 1,
   },
 });
