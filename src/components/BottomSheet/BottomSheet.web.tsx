@@ -277,11 +277,12 @@ export function BottomSheetBody({
   style,
   className,
 }: BottomSheetBodyProps) {
+  // overflowY는 기본값 — 소비자 style이 마지막에 병합되므로 덮어쓸 수 있다
   const css = cssifyWebStyles(
-    mergeStyles(sheetStyles.body, style),
+    mergeStyles({overflowY: 'auto'}, sheetStyles.body, style),
   ) as React.CSSProperties;
   return (
-    <div className={className} style={{...css, overflowY: 'auto'}}>
+    <div className={className} style={css}>
       {children}
     </div>
   );

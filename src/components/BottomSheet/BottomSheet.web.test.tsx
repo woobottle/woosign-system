@@ -183,6 +183,15 @@ describe('BottomSheet (web)', () => {
     expect(surface).toHaveAttribute('aria-labelledby');
   });
 
+  it('lets consumer style override the Body scroll default', () => {
+    render(
+      <BottomSheet open onClose={() => {}}>
+        <BottomSheet.Body style={{overflowY: 'hidden'}}>본문</BottomSheet.Body>
+      </BottomSheet>,
+    );
+    expect(screen.getByText('본문')).toHaveStyle({overflowY: 'hidden'});
+  });
+
   it('exposes subcomponents as standalone named exports', () => {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const mod = require('./BottomSheet');
