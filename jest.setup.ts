@@ -1,2 +1,38 @@
 // Extends expect() with DOM matchers (toBeInTheDocument, toHaveStyle, etc.)
 import '@testing-library/jest-dom';
+
+// jsdom does not implement PointerEvent. Polyfill it so fireEvent.pointerDown/
+// Move/Up work correctly in the web test project.
+if (typeof window !== 'undefined' && !window.PointerEvent) {
+  class PointerEvent extends MouseEvent {
+    readonly pointerId: number;
+    readonly width: number;
+    readonly height: number;
+    readonly pressure: number;
+    readonly tangentialPressure: number;
+    readonly tiltX: number;
+    readonly tiltY: number;
+    readonly twist: number;
+    readonly pointerType: string;
+    readonly isPrimary: boolean;
+
+    constructor(type: string, params: PointerEventInit = {}) {
+      super(type, params);
+      this.pointerId = params.pointerId ?? 0;
+      this.width = params.width ?? 1;
+      this.height = params.height ?? 1;
+      this.pressure = params.pressure ?? 0;
+      this.tangentialPressure = params.tangentialPressure ?? 0;
+      this.tiltX = params.tiltX ?? 0;
+      this.tiltY = params.tiltY ?? 0;
+      this.twist = params.twist ?? 0;
+      this.pointerType = params.pointerType ?? 'mouse';
+      this.isPrimary = params.isPrimary ?? true;
+    }
+  }
+  (window as unknown as Record<string, unknown>).PointerEvent = PointerEvent;
+  (window.Element.prototype as unknown as Record<string, unknown>).setPointerCapture =
+    window.Element.prototype.setPointerCapture ?? (() => {});
+  (window.Element.prototype as unknown as Record<string, unknown>).releasePointerCapture =
+    window.Element.prototype.releasePointerCapture ?? (() => {});
+}
