@@ -3,7 +3,7 @@
  */
 import {render, screen, fireEvent} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {BottomSheet} from './BottomSheet.web';
+import {BottomSheet} from './BottomSheet';
 
 describe('BottomSheet (web)', () => {
   it('does not render content when closed', () => {
@@ -143,5 +143,53 @@ describe('BottomSheet (web)', () => {
     fireEvent.pointerCancel(handle, {pointerId: 1, clientY: 500});
     // 긴 드래그였더라도 취소 시엔 디스미스하지 않고 복귀만 한다
     expect(onClose).not.toHaveBeenCalled();
+  });
+
+  it('renders subcomponents and wires aria-labelledby to the title', () => {
+    render(
+      <BottomSheet open onClose={() => {}}>
+        <BottomSheet.Header>
+          <BottomSheet.Title>제목</BottomSheet.Title>
+          <BottomSheet.Description>설명</BottomSheet.Description>
+        </BottomSheet.Header>
+        <BottomSheet.Body>본문</BottomSheet.Body>
+        <BottomSheet.Footer>
+          <button>확인</button>
+        </BottomSheet.Footer>
+      </BottomSheet>,
+    );
+    const surface = screen.getByRole('dialog');
+    const labelledBy = surface.getAttribute('aria-labelledby');
+    const title = screen.getByText('제목');
+    expect(title).toHaveAttribute('id', labelledBy);
+    const describedBy = surface.getAttribute('aria-describedby');
+    const description = screen.getByText('설명');
+    expect(description).toHaveAttribute('id', describedBy);
+    expect(screen.getByText('본문')).toBeInTheDocument();
+    expect(screen.getByRole('button', {name: '확인'})).toBeInTheDocument();
+  });
+
+  it('omits aria-describedby when no Description is rendered', () => {
+    render(
+      <BottomSheet open onClose={() => {}}>
+        <BottomSheet.Header>
+          <BottomSheet.Title>제목만</BottomSheet.Title>
+        </BottomSheet.Header>
+        <BottomSheet.Body>본문</BottomSheet.Body>
+      </BottomSheet>,
+    );
+    const surface = screen.getByRole('dialog');
+    expect(surface).not.toHaveAttribute('aria-describedby');
+    expect(surface).toHaveAttribute('aria-labelledby');
+  });
+
+  it('exposes subcomponents as standalone named exports', () => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const mod = require('./BottomSheet');
+    expect(typeof mod.BottomSheetHeader).toBe('function');
+    expect(typeof mod.BottomSheetTitle).toBe('function');
+    expect(typeof mod.BottomSheetDescription).toBe('function');
+    expect(typeof mod.BottomSheetBody).toBe('function');
+    expect(typeof mod.BottomSheetFooter).toBe('function');
   });
 });

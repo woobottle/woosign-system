@@ -6,9 +6,16 @@
  * 핸들 영역 Pointer Events 드래그로 디스미스한다(판정: shouldDismiss 공유 함수).
  * 표면 클릭은 stopPropagation으로 scrim까지 전파되지 않는다.
  */
-import React, {useEffect, useMemo, useRef, useState} from 'react';
+import React, {useContext, useEffect, useMemo, useRef, useState} from 'react';
 import {createPortal} from 'react-dom';
-import type {BottomSheetWebProps} from './types';
+import type {
+  BottomSheetWebProps,
+  BottomSheetHeaderProps,
+  BottomSheetTitleProps,
+  BottomSheetDescriptionProps,
+  BottomSheetBodyProps,
+  BottomSheetFooterProps,
+} from './types';
 import {BottomSheetContext} from './BottomSheetContext';
 import {
   getBottomSheetStyles,
@@ -205,4 +212,114 @@ function BottomSheetBase({
   );
 }
 
-export {BottomSheetBase as BottomSheet};
+export function BottomSheetHeader({
+  children,
+  style,
+  className,
+}: BottomSheetHeaderProps) {
+  const css = cssifyWebStyles(
+    mergeStyles(sheetStyles.header, style),
+  ) as React.CSSProperties;
+  return (
+    <div className={className} style={css}>
+      {children}
+    </div>
+  );
+}
+BottomSheetHeader.displayName = 'BottomSheetHeader';
+
+export function BottomSheetTitle({
+  children,
+  style,
+  className,
+}: BottomSheetTitleProps) {
+  const ctx = useContext(BottomSheetContext);
+  const register = ctx?.registerTitle;
+  useEffect(() => {
+    register?.(true);
+    return () => register?.(false);
+  }, [register]);
+  const css = cssifyWebStyles(
+    mergeStyles(sheetStyles.title, {margin: 0}, style),
+  ) as React.CSSProperties;
+  return (
+    <h2 id={ctx?.titleId} className={className} style={css}>
+      {children}
+    </h2>
+  );
+}
+BottomSheetTitle.displayName = 'BottomSheetTitle';
+
+export function BottomSheetDescription({
+  children,
+  style,
+  className,
+}: BottomSheetDescriptionProps) {
+  const ctx = useContext(BottomSheetContext);
+  const register = ctx?.registerDescription;
+  useEffect(() => {
+    register?.(true);
+    return () => register?.(false);
+  }, [register]);
+  const css = cssifyWebStyles(
+    mergeStyles(sheetStyles.description, {margin: 0}, style),
+  ) as React.CSSProperties;
+  return (
+    <p id={ctx?.descriptionId} className={className} style={css}>
+      {children}
+    </p>
+  );
+}
+BottomSheetDescription.displayName = 'BottomSheetDescription';
+
+export function BottomSheetBody({
+  children,
+  style,
+  className,
+}: BottomSheetBodyProps) {
+  const css = cssifyWebStyles(
+    mergeStyles(sheetStyles.body, style),
+  ) as React.CSSProperties;
+  return (
+    <div className={className} style={{...css, overflowY: 'auto'}}>
+      {children}
+    </div>
+  );
+}
+BottomSheetBody.displayName = 'BottomSheetBody';
+
+export function BottomSheetFooter({
+  children,
+  style,
+  className,
+}: BottomSheetFooterProps) {
+  const css = cssifyWebStyles(
+    mergeStyles(sheetStyles.footer, style),
+  ) as React.CSSProperties;
+  return (
+    <div className={className} style={css}>
+      {children}
+    </div>
+  );
+}
+BottomSheetFooter.displayName = 'BottomSheetFooter';
+
+interface BottomSheetComponent {
+  (props: BottomSheetWebProps): React.ReactElement | null;
+  displayName?: string;
+  Header: typeof BottomSheetHeader;
+  Title: typeof BottomSheetTitle;
+  Description: typeof BottomSheetDescription;
+  Body: typeof BottomSheetBody;
+  Footer: typeof BottomSheetFooter;
+}
+
+const BottomSheet = BottomSheetBase as unknown as BottomSheetComponent;
+BottomSheet.displayName = 'BottomSheet';
+BottomSheet.Header = BottomSheetHeader;
+BottomSheet.Title = BottomSheetTitle;
+BottomSheet.Description = BottomSheetDescription;
+BottomSheet.Body = BottomSheetBody;
+BottomSheet.Footer = BottomSheetFooter;
+
+export {BottomSheet};
