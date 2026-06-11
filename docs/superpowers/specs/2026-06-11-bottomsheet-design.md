@@ -147,7 +147,7 @@ export function shouldDismiss(dy: number, vy: number, sheetHeight: number): bool
 - 그림자: web `shadowsCss.modal`, native `shadows.modal`.
 - scrim: `rgba(0, 0, 0, 0.5)` (Dialog와 동일 상수 값, BottomSheet.styles.ts에 자체 보유).
 - z-index: web `zIndex.modal` (1400).
-- 핸들 색: `colors.borderStrong` 계열(blackAlpha 중간 단계) — 기존 토큰에서 선택.
+- 핸들 색: `blackAlpha['24']` — grabber로 충분히 보이되 과하지 않은 중간 단계.
 - 텍스트: Title `colors.textPrimary`, Description `colors.textSecondary`.
 - 패딩/간격: `spacing` 토큰. Header/Body/Footer 패딩은 Dialog.styles와 동일 값.
 - 모션: `duration`, `easing` 토큰.

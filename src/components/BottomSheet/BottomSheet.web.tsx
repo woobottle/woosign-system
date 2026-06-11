@@ -33,6 +33,13 @@ const sheetStyles = getBottomSheetStyles();
 // 표면은 client-only `mounted` 게이트 뒤에서만 렌더되므로 SSR 불일치 없음.
 let sheetIdCounter = 0;
 
+// 모바일 브라우저 URL 바를 고려해 dvh를 우선 사용, 미지원이면 vh로 폴백.
+// 인라인 스타일은 같은 속성의 폴백 선언을 못 가지므로 한 번만 판별해 둔다.
+const VIEWPORT_UNIT =
+  typeof CSS !== 'undefined' && CSS.supports?.('height', '100dvh')
+    ? 'dvh'
+    : 'vh';
+
 function BottomSheetBase({
   open,
   onClose,
@@ -168,13 +175,13 @@ function BottomSheetBase({
             ...sheetStyles.surface,
             display: 'flex',
             flexDirection: 'column',
-            maxHeight: `${maxHeightRatio * 100}vh`,
+            maxHeight: `${maxHeightRatio * 100}${VIEWPORT_UNIT}`,
             boxShadow: shadowsCss.modal,
             transform: `translateY(${dragY}px)`,
             transition: snapping
               ? `transform ${duration.normal}ms ${easing.out}`
               : undefined,
-            animation: `wbSheetSurfaceIn 220ms ${easing.out}`,
+            animation: `wbSheetSurfaceIn ${duration.normal}ms ${easing.out}`,
             ...style,
           }}>
           {dragToClose && (
