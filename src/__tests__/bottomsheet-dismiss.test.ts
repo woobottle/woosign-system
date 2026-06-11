@@ -22,6 +22,10 @@ describe('shouldDismiss', () => {
     expect(shouldDismiss(30, 0.3, 400)).toBe(false);
   });
 
+  it('stays open at the exact velocity threshold (strict comparison)', () => {
+    expect(shouldDismiss(30, 0.5, 400)).toBe(false);
+  });
+
   it('falls back to an absolute distance when height is unmeasured', () => {
     expect(shouldDismiss(121, 0, 0)).toBe(true);
     expect(shouldDismiss(119, 0, 0)).toBe(false);
