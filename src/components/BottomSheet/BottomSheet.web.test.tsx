@@ -129,4 +129,19 @@ describe('BottomSheet (web)', () => {
     // dy=10 → 거리 임계 미달, 플릭 최소 거리(24px)도 미달
     expect(onClose).not.toHaveBeenCalled();
   });
+
+  it('does not call onClose when the drag is cancelled (pointercancel)', () => {
+    const onClose = jest.fn();
+    render(
+      <BottomSheet open onClose={onClose} testID="sheet">
+        <div>본문</div>
+      </BottomSheet>,
+    );
+    const handle = screen.getByTestId('sheet-handle');
+    fireEvent.pointerDown(handle, {pointerId: 1, clientY: 300});
+    fireEvent.pointerMove(handle, {pointerId: 1, clientY: 500});
+    fireEvent.pointerCancel(handle, {pointerId: 1, clientY: 500});
+    // 긴 드래그였더라도 취소 시엔 디스미스하지 않고 복귀만 한다
+    expect(onClose).not.toHaveBeenCalled();
+  });
 });

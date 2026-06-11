@@ -116,6 +116,14 @@ function BottomSheetBase({
     }
   };
 
+  // 제스처가 OS에 뺏기는 등 pointerup 없이 끝나면 디스미스 판정 없이 복귀만 한다
+  const onHandlePointerCancel = () => {
+    if (!dragRef.current.active) return;
+    dragRef.current.active = false;
+    setSnapping(true);
+    setDragY(0);
+  };
+
   const handleAreaCss = {
     ...(cssifyWebStyles(
       mergeStyles(sheetStyles.handleArea),
@@ -168,6 +176,7 @@ function BottomSheetBase({
               onPointerDown={onHandlePointerDown}
               onPointerMove={onHandlePointerMove}
               onPointerUp={onHandlePointerUp}
+              onPointerCancel={onHandlePointerCancel}
               style={handleAreaCss}>
               <div
                 style={
