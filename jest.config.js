@@ -1,13 +1,15 @@
 /**
- * Jest harness — two projects sharing the same transformer.
+ * Jest harness — three projects.
  *
- * - "tokens" : node env, covers the shared core (tokens, variants,
+ * - "tokens" : node env (ts-jest), covers the shared core (tokens, variants,
  *              resolveFontFamily). Fast, no DOM.
- * - "web"    : jsdom env, resolves .web.tsx ahead of .tsx so web
- *              components render in isolation with
- *              @testing-library/react + jest-dom matchers.
- *
- * Host apps still own end-to-end RN testing (jest-RN preset + Detox).
+ * - "web"    : jsdom env (ts-jest), resolves .web.tsx ahead of .tsx so web
+ *              components render with @testing-library/react + jest-dom.
+ * - "native" : react-native preset (babel-jest), resolves .native.tsx ahead
+ *              of .tsx so RN components render with
+ *              @testing-library/react-native. Modal/ScrollView are mocked by
+ *              the preset (children render through), so these tests cover
+ *              behavior — not real scroll/layout.
  */
 const tsJest = [
   'ts-jest',
@@ -40,6 +42,21 @@ module.exports = {
       ],
       transform: {'^.+\\.tsx?$': tsJest},
       setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+    },
+    {
+      displayName: 'native',
+      preset: 'react-native',
+      roots: ['<rootDir>/src'],
+      testMatch: ['<rootDir>/src/**/*.native.test.tsx'],
+      moduleFileExtensions: [
+        'native.tsx',
+        'native.ts',
+        'tsx',
+        'ts',
+        'jsx',
+        'js',
+        'json',
+      ],
     },
   ],
 };
