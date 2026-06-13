@@ -85,7 +85,10 @@ describe('BottomSheet (native)', () => {
     expect(screen.queryByTestId('sheet-handle')).toBeNull();
   });
 
-  it('does not call onClose when the surface is pressed (no propagation)', () => {
+  // 표면 Pressable 자체의 onPress가 no-op임을 확인한다. 주의: fireEvent.press는
+  // 네이티브 터치 버블링을 재현하지 않으므로 "표면 탭이 scrim까지 전파되지
+  // 않는다"는 런타임 동작 자체는 검증하지 못한다 — 표면 핸들러가 닫지 않음만 확인.
+  it('surface press handler is a no-op (does not call onClose itself)', () => {
     const onClose = jest.fn();
     render(
       <BottomSheet open onClose={onClose} testID="sheet">
