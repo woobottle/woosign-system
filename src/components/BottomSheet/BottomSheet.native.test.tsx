@@ -6,6 +6,8 @@
 import {Modal, ScrollView, StyleSheet, Text} from 'react-native';
 import {render, screen, fireEvent} from '@testing-library/react-native';
 import {BottomSheet} from './BottomSheet.native';
+import {ThemeProvider} from '../../core/theme/ThemeContext';
+import {darkColors} from '../../core/theme/tokens';
 
 describe('BottomSheet (native)', () => {
   it('does not render content when closed', () => {
@@ -126,5 +128,17 @@ describe('BottomSheet (native)', () => {
       screen.UNSAFE_getByType(ScrollView).props.style,
     );
     expect(flat.flexShrink).toBe(1);
+  });
+
+  it('uses the dark surface token inside a dark ThemeProvider', () => {
+    render(
+      <ThemeProvider defaultColorScheme="dark">
+        <BottomSheet open onClose={() => {}} testID="sheet">
+          <Text>본문</Text>
+        </BottomSheet>
+      </ThemeProvider>,
+    );
+    const flat = StyleSheet.flatten(screen.getByTestId('sheet').props.style);
+    expect(flat.backgroundColor).toBe(darkColors.card);
   });
 });

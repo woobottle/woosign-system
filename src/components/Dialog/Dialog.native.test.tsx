@@ -3,9 +3,11 @@
  * 구현을 사용한다. Modal은 프리셋이 목킹하므로 이 테스트는 동작만 검증한다.
  * (aria 관련은 web 전용이라 제외 — native는 aria 미사용.)
  */
-import {Modal, Text} from 'react-native';
+import {Modal, StyleSheet, Text} from 'react-native';
 import {render, screen, fireEvent} from '@testing-library/react-native';
 import {Dialog} from './Dialog.native';
+import {ThemeProvider} from '../../core/theme/ThemeContext';
+import {darkColors} from '../../core/theme/tokens';
 
 describe('Dialog (native)', () => {
   it('does not render content when closed', () => {
@@ -112,5 +114,17 @@ describe('Dialog (native)', () => {
     expect(typeof mod.DialogDescription).toBe('function');
     expect(typeof mod.DialogBody).toBe('function');
     expect(typeof mod.DialogFooter).toBe('function');
+  });
+
+  it('uses the dark surface token inside a dark ThemeProvider', () => {
+    render(
+      <ThemeProvider defaultColorScheme="dark">
+        <Dialog open onClose={() => {}} testID="dlg">
+          <Text>본문</Text>
+        </Dialog>
+      </ThemeProvider>,
+    );
+    const flat = StyleSheet.flatten(screen.getByTestId('dlg').props.style);
+    expect(flat.backgroundColor).toBe(darkColors.card);
   });
 });

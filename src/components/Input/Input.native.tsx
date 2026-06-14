@@ -72,6 +72,11 @@ export const Input = forwardRef<TextInput, InputNativeProps>(function Input(
   );
   const placeholderColor = useMemo(() => getPlaceholderColor(colors), [colors]);
   const disabledStyle = useMemo(() => getDisabledStyle(colors), [colors]);
+  // 포커스 보더는 테마 토큰을 따른다(web Input의 borderFocus와 정합).
+  const focusedStyle = useMemo(
+    () => ({borderColor: colors.borderFocus}),
+    [colors],
+  );
 
   // Get variant styles
   const containerStyles = inputContainerVariants({variant, size});
@@ -90,7 +95,7 @@ export const Input = forwardRef<TextInput, InputNativeProps>(function Input(
         containerStyles,
         fullWidth && styles.fullWidth,
         (disabled || readOnly) && disabledStyle,
-        isFocused && styles.focused,
+        isFocused && focusedStyle,
         style,
       ]}>
       {leftIcon && <View style={styles.iconContainer}>{leftIcon}</View>}
@@ -162,9 +167,6 @@ const styles = StyleSheet.create({
   },
   fullWidth: {
     width: '100%',
-  },
-  focused: {
-    borderColor: '#0F172A',
   },
   input: {
     flex: 1,
