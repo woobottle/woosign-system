@@ -193,7 +193,6 @@ describe('BottomSheet (web)', () => {
   });
 
   it('exposes subcomponents as standalone named exports', () => {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const mod = require('./BottomSheet');
     expect(typeof mod.BottomSheetHeader).toBe('function');
     expect(typeof mod.BottomSheetTitle).toBe('function');
