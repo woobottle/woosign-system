@@ -1,13 +1,14 @@
-import {colors, borderRadius, typography} from '../../core/theme/tokens';
+import {borderRadius, typography} from '../../core/theme/tokens';
+import type {Colors} from '../../core/theme/types';
 import type {ChipTone} from './types';
 
-export function getChipStyles(tone: ChipTone) {
+export function getChipStyles(c: Colors, tone: ChipTone) {
   const [bg, fg, border] =
     tone === 'solid'
-      ? [colors.inverse, colors.textInverse, colors.inverse]
+      ? [c.inverse, c.textInverse, c.inverse]
       : tone === 'outline'
-      ? ['transparent', colors.actionPrimary, colors.actionPrimary]
-      : [colors.card, colors.textPrimary, colors.borderDefault];
+      ? ['transparent', c.actionPrimary, c.actionPrimary]
+      : [c.card, c.textPrimary, c.borderDefault];
 
   return {
     container: {

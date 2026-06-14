@@ -2,6 +2,7 @@ import React, {useState, useCallback} from 'react';
 import type {PillWebProps} from './types';
 import {getPillStyles} from './Pill.styles';
 import {duration, easing} from '../../core/theme/tokens';
+import {useResolvedColors} from '../../core/hooks';
 
 export const Pill = React.forwardRef<HTMLButtonElement, PillWebProps>(
   function Pill(
@@ -18,7 +19,8 @@ export const Pill = React.forwardRef<HTMLButtonElement, PillWebProps>(
     ref,
   ) {
     const [pressed, setPressed] = useState(false);
-    const {container, text} = getPillStyles(active);
+    const colors = useResolvedColors();
+    const {container, text} = getPillStyles(colors, active);
 
     const handleClick = useCallback(() => {
       if (!disabled && onPress) {

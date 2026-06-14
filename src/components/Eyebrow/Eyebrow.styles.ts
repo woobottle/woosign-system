@@ -1,15 +1,16 @@
-import {colors, typography} from '../../core/theme/tokens';
+import {typography} from '../../core/theme/tokens';
+import type {Colors} from '../../core/theme/types';
 import type {EyebrowTone} from './types';
 
-export function getEyebrowStyle(tone: EyebrowTone) {
+export function getEyebrowStyle(c: Colors, tone: EyebrowTone) {
   const toneColor =
     tone === 'brand'
-      ? colors.actionPrimary
+      ? c.actionPrimary
       : tone === 'gold'
-      ? colors.gold
+      ? c.gold
       : tone === 'inverse'
-      ? colors.textInverseSecondary
-      : colors.textSecondary;
+      ? c.textInverseSecondary
+      : c.textSecondary;
 
   return {
     fontFamily: typography.fontFamily.sans,

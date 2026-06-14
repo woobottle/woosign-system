@@ -2,6 +2,7 @@ import React, {forwardRef, useState, useCallback} from 'react';
 import type {ChipWebProps} from './types';
 import {getChipStyles} from './Chip.styles';
 import {duration, easing} from '../../core/theme/tokens';
+import {useResolvedColors} from '../../core/hooks';
 
 export const Chip = forwardRef<HTMLElement, ChipWebProps>(function Chip(
   {
@@ -19,7 +20,8 @@ export const Chip = forwardRef<HTMLElement, ChipWebProps>(function Chip(
   ref,
 ) {
   const [pressed, setPressed] = useState(false);
-  const {container, text} = getChipStyles(tone);
+  const colors = useResolvedColors();
+  const {container, text} = getChipStyles(colors, tone);
   const interactive = Boolean(onPress);
 
   const handleClick = useCallback(() => {

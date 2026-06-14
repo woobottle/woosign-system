@@ -1,6 +1,7 @@
-import {colors, borderRadius, typography} from '../../core/theme/tokens';
+import {borderRadius, typography} from '../../core/theme/tokens';
+import type {Colors} from '../../core/theme/types';
 
-export function getPillStyles(active: boolean) {
+export function getPillStyles(c: Colors, active: boolean) {
   return {
     container: {
       paddingLeft: 14,
@@ -9,8 +10,8 @@ export function getPillStyles(active: boolean) {
       paddingBottom: 8,
       borderRadius: borderRadius.pill,
       borderWidth: 1,
-      backgroundColor: active ? colors.actionPrimary : colors.card,
-      borderColor: active ? colors.actionPrimary : colors.borderDefault,
+      backgroundColor: active ? c.actionPrimary : c.card,
+      borderColor: active ? c.actionPrimary : c.borderDefault,
       flexDirection: 'row' as const,
       alignItems: 'center' as const,
       justifyContent: 'center' as const,
@@ -22,7 +23,7 @@ export function getPillStyles(active: boolean) {
       fontWeight: (active
         ? typography.fontWeight.semibold
         : typography.fontWeight.medium) as '500' | '600',
-      color: active ? colors.textInverse : colors.textPrimary,
+      color: active ? c.textInverse : c.textPrimary,
       letterSpacing: typography.letterSpacing.tight,
     },
   };

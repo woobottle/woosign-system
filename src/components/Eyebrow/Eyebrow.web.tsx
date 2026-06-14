@@ -1,6 +1,7 @@
 import React, {forwardRef} from 'react';
 import type {EyebrowWebProps} from './types';
 import {getEyebrowStyle} from './Eyebrow.styles';
+import {useResolvedColors} from '../../core/hooks';
 
 export const Eyebrow = forwardRef<HTMLElement, EyebrowWebProps>(
   function Eyebrow(
@@ -14,7 +15,8 @@ export const Eyebrow = forwardRef<HTMLElement, EyebrowWebProps>(
     },
     ref,
   ) {
-    const base = getEyebrowStyle(tone);
+    const colors = useResolvedColors();
+    const base = getEyebrowStyle(colors, tone);
     // Web uses `em`-based tracking for crisper kerning at any size
     const webStyle: React.CSSProperties = {
       ...base,

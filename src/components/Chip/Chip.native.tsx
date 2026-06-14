@@ -2,6 +2,7 @@ import {forwardRef, useCallback} from 'react';
 import {Pressable, Text, View} from 'react-native';
 import type {ChipNativeProps} from './types';
 import {getChipStyles} from './Chip.styles';
+import {useResolvedColors} from '../../core/hooks';
 
 export const Chip = forwardRef<View, ChipNativeProps>(function Chip(
   {
@@ -18,7 +19,8 @@ export const Chip = forwardRef<View, ChipNativeProps>(function Chip(
   },
   ref,
 ) {
-  const {container, text} = getChipStyles(tone);
+  const colors = useResolvedColors();
+  const {container, text} = getChipStyles(colors, tone);
   const handlePress = useCallback(() => {
     if (!disabled && onPress) {
       onPress();

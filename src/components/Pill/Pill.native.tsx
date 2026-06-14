@@ -2,6 +2,7 @@ import {forwardRef, useCallback} from 'react';
 import {Pressable, Text, View} from 'react-native';
 import type {PillNativeProps} from './types';
 import {getPillStyles} from './Pill.styles';
+import {useResolvedColors} from '../../core/hooks';
 
 export const Pill = forwardRef<View, PillNativeProps>(function Pill(
   {
@@ -16,7 +17,8 @@ export const Pill = forwardRef<View, PillNativeProps>(function Pill(
   },
   ref,
 ) {
-  const {container, text} = getPillStyles(active);
+  const colors = useResolvedColors();
+  const {container, text} = getPillStyles(colors, active);
   const handlePress = useCallback(() => {
     if (!disabled && onPress) {
       onPress();
