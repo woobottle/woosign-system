@@ -56,3 +56,50 @@ export interface DialogContextValue {
   /** DialogDescription가 마운트되면 true로 등록 (aria-describedby 연결용). */
   registerDescription: (present: boolean) => void;
 }
+
+/** useDialog().confirm(...) 옵션. */
+export interface ConfirmOptions {
+  title: ReactNode;
+  description?: ReactNode;
+  /** 확인 버튼 라벨. 기본 '확인'. */
+  confirmText?: string;
+  /** 취소 버튼 라벨. 기본 '취소'. */
+  cancelText?: string;
+  /** 'destructive'면 확인 버튼이 destructive variant. 기본 'default'. */
+  tone?: 'default' | 'destructive';
+}
+
+/** useDialog().alert(...) 옵션. */
+export interface AlertOptions {
+  title: ReactNode;
+  description?: ReactNode;
+  /** 확인 버튼 라벨. 기본 '확인'. */
+  confirmText?: string;
+}
+
+/** useDialog()가 반환하는 임퍼러티브 API. */
+export interface DialogApi {
+  /** 확인=true, 취소/scrim/Esc=false. */
+  confirm(options: ConfirmOptions): Promise<boolean>;
+  /** 닫히면 resolve. */
+  alert(options: AlertOptions): Promise<void>;
+}
+
+/** 내부 큐 엔트리 — id/resolve는 상태머신이 부여. */
+export type DialogEntry =
+  | {
+      id: string;
+      kind: 'confirm';
+      options: ConfirmOptions;
+      resolve: (value: boolean) => void;
+    }
+  | {
+      id: string;
+      kind: 'alert';
+      options: AlertOptions;
+      resolve: () => void;
+    };
+
+export interface DialogProviderProps {
+  children?: ReactNode;
+}
