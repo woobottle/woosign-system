@@ -18,7 +18,9 @@ export function DialogProvider({children}: DialogProviderProps) {
     <DialogImperativeContext.Provider value={api}>
       {children}
       {current && (
-        <Dialog open onClose={cancelCurrent}>
+        // key로 큐 head마다 새 Dialog 인스턴스를 만들어 aria id·진입 애니메이션을
+        // 다이얼로그 간에 깨끗이 리셋한다(큐잉 시 이전 항목 상태 잔존 방지).
+        <Dialog key={current.id} open onClose={cancelCurrent}>
           <Dialog.Header>
             <Dialog.Title>{current.options.title}</Dialog.Title>
             {current.options.description != null && (
