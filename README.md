@@ -108,6 +108,7 @@ The same code renders on web and native — platform extensions
 | | Purpose |
 |---|---|
 | **Dialog** | Controlled modal — portal scrim (web) / RN Modal (native), Esc & Android back, `Header/Title/Description/Body/Footer` |
+| **DialogProvider / useDialog** | Imperative layer over Dialog — `await useDialog().confirm({...})` → `Promise<boolean>`, `.alert({...})` → `Promise<void>`, queued one-at-a-time |
 | **BottomSheet** | Controlled bottom sheet — drag-to-dismiss grabber handle, content-based height with `maxHeightRatio` cap, same subcomponent API |
 
 All components expose the same `ButtonProps`/`CardProps`/etc. on both
