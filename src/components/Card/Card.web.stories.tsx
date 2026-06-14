@@ -1,6 +1,13 @@
 import type {Meta, StoryObj} from '@storybook/react';
 import React from 'react';
-import {Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter} from './Card';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from './Card';
 import {Button} from '../Button';
 import {Text} from '../Text';
 import type {CardVariant} from './types';
@@ -43,7 +50,8 @@ export const Default: Story = {
 
 export const AllVariants: Story = {
   render: () => (
-    <div style={{display: 'flex', flexDirection: 'column', gap: 16, width: 320}}>
+    <div
+      style={{display: 'flex', flexDirection: 'column', gap: 16, width: 320}}>
       {VARIANTS.map(v => (
         <Card key={v} variant={v} style={{padding: 16}}>
           <Text>{v}</Text>
@@ -55,7 +63,10 @@ export const AllVariants: Story = {
 
 export const Interactive: Story = {
   render: () => (
-    <Card variant="default" onPress={() => undefined} style={{width: 320, padding: 16}}>
+    <Card
+      variant="default"
+      onPress={() => undefined}
+      style={{width: 320, padding: 16}}>
       <Text>탭 가능한 카드 (role=button)</Text>
     </Card>
   ),
@@ -63,7 +74,11 @@ export const Interactive: Story = {
 
 export const Disabled: Story = {
   render: () => (
-    <Card variant="default" onPress={() => undefined} disabled style={{width: 320, padding: 16}}>
+    <Card
+      variant="default"
+      onPress={() => undefined}
+      disabled
+      style={{width: 320, padding: 16}}>
       <Text>비활성 카드</Text>
     </Card>
   ),
