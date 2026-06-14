@@ -2,6 +2,7 @@ import {forwardRef, useCallback} from 'react';
 import {Pressable, View} from 'react-native';
 import type {FabNativeProps} from './types';
 import {getFabStyle} from './Fab.styles';
+import {useResolvedColors} from '../../core/hooks';
 
 export const Fab = forwardRef<View, FabNativeProps>(function Fab(
   {
@@ -17,7 +18,8 @@ export const Fab = forwardRef<View, FabNativeProps>(function Fab(
   },
   ref,
 ) {
-  const base = getFabStyle(tone, size);
+  const colors = useResolvedColors();
+  const base = getFabStyle(colors, tone, size);
   const handlePress = useCallback(() => {
     if (!disabled && onPress) {
       onPress();

@@ -2,6 +2,7 @@ import React, {useState, useCallback} from 'react';
 import type {FabWebProps} from './types';
 import {getFabStyle} from './Fab.styles';
 import {shadowsCss, duration, easing} from '../../core/theme/tokens';
+import {useResolvedColors} from '../../core/hooks';
 
 export const Fab = React.forwardRef<HTMLButtonElement, FabWebProps>(
   function Fab(
@@ -19,7 +20,8 @@ export const Fab = React.forwardRef<HTMLButtonElement, FabWebProps>(
     ref,
   ) {
     const [pressed, setPressed] = useState(false);
-    const base = getFabStyle(tone, size);
+    const colors = useResolvedColors();
+    const base = getFabStyle(colors, tone, size);
     const handleClick = useCallback(() => {
       if (!disabled && onPress) {
         onPress();

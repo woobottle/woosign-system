@@ -1,7 +1,7 @@
 import React from 'react';
 import type {FeatureBandWebProps} from './types';
 import {getFeatureBandStyle} from './FeatureBand.styles';
-import {colors} from '../../core/theme/tokens';
+import {useResolvedColors} from '../../core/hooks';
 
 export const FeatureBand = React.forwardRef<
   HTMLDivElement,
@@ -10,7 +10,8 @@ export const FeatureBand = React.forwardRef<
   {tone = 'inverse', rounded = true, children, className, style, testID},
   ref,
 ) {
-  const base = getFeatureBandStyle(tone, rounded);
+  const colors = useResolvedColors();
+  const base = getFeatureBandStyle(colors, tone, rounded);
   // Ember tone uses the CSS gradient for a richer surface on web
   const gradient =
     tone === 'ember'

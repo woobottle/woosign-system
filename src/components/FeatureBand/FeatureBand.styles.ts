@@ -1,15 +1,20 @@
-import {colors, borderRadius, wbSpace} from '../../core/theme/tokens';
+import {borderRadius, wbSpace} from '../../core/theme/tokens';
+import type {Colors} from '../../core/theme/types';
 import type {FeatureBandTone} from './types';
 
-export function getFeatureBandStyle(tone: FeatureBandTone, rounded: boolean) {
+export function getFeatureBandStyle(
+  c: Colors,
+  tone: FeatureBandTone,
+  rounded: boolean,
+) {
   const bg =
     tone === 'ember'
-      ? colors.actionPrimary
+      ? c.actionPrimary
       : tone === 'reward'
-      ? colors.reward
+      ? c.reward
       : tone === 'forest'
-      ? colors.actionForest
-      : colors.inverse;
+      ? c.actionForest
+      : c.inverse;
 
   return {
     backgroundColor: bg,
