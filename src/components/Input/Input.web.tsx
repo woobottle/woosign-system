@@ -9,18 +9,20 @@ import React, {
   useCallback,
   useRef,
   useEffect,
+  useMemo,
 } from 'react';
 import type {InputWebProps} from './types';
 import {
-  inputContainerVariants,
-  inputTextVariants,
-  placeholderColor,
-  focusContainerStyle,
-  disabledStyle,
+  getInputContainerVariants,
+  getInputTextVariants,
+  getPlaceholderColor,
+  getFocusContainerStyle,
+  getDisabledStyle,
 } from './Input.styles';
 import {mergeStyles} from '../../core/variants';
 import {spacing, zIndex} from '../../core/theme/tokens';
 import {Calendar} from './Calendar.web';
+import {useResolvedColors} from '../../core/hooks';
 
 /**
  * Input component for web
@@ -69,6 +71,22 @@ export const Input = forwardRef<
   const isDateType = type === 'date';
   const [isPickerOpen, setIsPickerOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const colors = useResolvedColors();
+  const inputContainerVariants = useMemo(
+    () => getInputContainerVariants(colors),
+    [colors],
+  );
+  const inputTextVariants = useMemo(
+    () => getInputTextVariants(colors),
+    [colors],
+  );
+  const placeholderColor = useMemo(() => getPlaceholderColor(colors), [colors]);
+  const focusContainerStyle = useMemo(
+    () => getFocusContainerStyle(colors),
+    [colors],
+  );
+  const disabledStyle = useMemo(() => getDisabledStyle(colors), [colors]);
 
   useEffect(() => {
     if (!isDateType || !isPickerOpen) {

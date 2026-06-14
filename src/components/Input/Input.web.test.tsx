@@ -4,7 +4,8 @@
  */
 import {render, screen, fireEvent} from '@testing-library/react';
 import {Input} from './Input';
-import {colors} from '../../core/theme/tokens';
+import {colors, darkColors} from '../../core/theme/tokens';
+import {ThemeProvider} from '../../core/theme/ThemeContext';
 
 describe('Input (web)', () => {
   it('renders the placeholder', () => {
@@ -53,5 +54,15 @@ describe('Input (web)', () => {
     );
     expect(screen.getByText('L')).toBeInTheDocument();
     expect(screen.getByText('R')).toBeInTheDocument();
+  });
+
+  it('uses the dark card surface on the container in dark mode', () => {
+    render(
+      <ThemeProvider defaultColorScheme="dark">
+        <Input testID="name" />
+      </ThemeProvider>,
+    );
+    const container = screen.getByTestId('name').parentElement as HTMLElement;
+    expect(container).toHaveStyle({backgroundColor: darkColors.card});
   });
 });

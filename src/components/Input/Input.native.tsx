@@ -2,15 +2,16 @@
  * Input component - React Native implementation
  */
 
-import {forwardRef, useState, useCallback} from 'react';
+import {forwardRef, useState, useCallback, useMemo} from 'react';
 import {View, TextInput, StyleSheet} from 'react-native';
 import type {InputNativeProps} from './types';
 import {
-  inputContainerVariants,
-  inputTextVariants,
-  placeholderColor,
-  disabledStyle,
+  getInputContainerVariants,
+  getInputTextVariants,
+  getPlaceholderColor,
+  getDisabledStyle,
 } from './Input.styles';
+import {useResolvedColors} from '../../core/hooks';
 
 /**
  * Input component for React Native
@@ -59,6 +60,18 @@ export const Input = forwardRef<TextInput, InputNativeProps>(function Input(
     setIsFocused(false);
     onBlur?.();
   }, [onBlur]);
+
+  const colors = useResolvedColors();
+  const inputContainerVariants = useMemo(
+    () => getInputContainerVariants(colors),
+    [colors],
+  );
+  const inputTextVariants = useMemo(
+    () => getInputTextVariants(colors),
+    [colors],
+  );
+  const placeholderColor = useMemo(() => getPlaceholderColor(colors), [colors]);
+  const disabledStyle = useMemo(() => getDisabledStyle(colors), [colors]);
 
   // Get variant styles
   const containerStyles = inputContainerVariants({variant, size});

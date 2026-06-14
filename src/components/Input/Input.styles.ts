@@ -7,122 +7,124 @@
 
 import {createVariants} from '../../core/variants';
 import {
-  colors,
   spacing,
   borderRadius,
   typography,
   shadowsCss,
 } from '../../core/theme/tokens';
+import type {Colors} from '../../core/theme/types';
 
 /**
  * Input container variants
  */
-export const inputContainerVariants = createVariants({
-  base: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderRadius: borderRadius.md,
-    borderWidth: 1,
-    borderColor: colors.borderDefault,
-    backgroundColor: colors.card,
-    gap: spacing[2],
-  },
-  variants: {
-    variant: {
-      default: {
-        borderColor: colors.borderDefault,
+export const getInputContainerVariants = (c: Colors) =>
+  createVariants({
+    base: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      borderRadius: borderRadius.md,
+      borderWidth: 1,
+      borderColor: c.borderDefault,
+      backgroundColor: c.card,
+      gap: spacing[2],
+    },
+    variants: {
+      variant: {
+        default: {
+          borderColor: c.borderDefault,
+        },
+        error: {
+          borderColor: c.actionDanger,
+          backgroundColor: c.errorTint,
+        },
       },
-      error: {
-        borderColor: colors.actionDanger,
-        backgroundColor: colors.errorTint,
+      size: {
+        default: {
+          height: 44,
+          paddingLeft: 14,
+          paddingRight: 14,
+        },
+        sm: {
+          height: 36,
+          paddingLeft: spacing[3],
+          paddingRight: spacing[3],
+          borderRadius: borderRadius.sm,
+        },
+        lg: {
+          height: 52,
+          paddingLeft: spacing[4],
+          paddingRight: spacing[4],
+        },
       },
     },
-    size: {
-      default: {
-        height: 44,
-        paddingLeft: 14,
-        paddingRight: 14,
-      },
-      sm: {
-        height: 36,
-        paddingLeft: spacing[3],
-        paddingRight: spacing[3],
-        borderRadius: borderRadius.sm,
-      },
-      lg: {
-        height: 52,
-        paddingLeft: spacing[4],
-        paddingRight: spacing[4],
-      },
+    defaultVariants: {
+      variant: 'default',
+      size: 'default',
     },
-  },
-  defaultVariants: {
-    variant: 'default',
-    size: 'default',
-  },
-});
+  });
 
 /**
  * Input text variants
  */
-export const inputTextVariants = createVariants({
-  base: {
-    fontFamily: typography.fontFamily.sans,
-    fontWeight: typography.fontWeight.regular,
-    fontSize: typography.fontSize.bodyMd.size,
-    letterSpacing: typography.letterSpacing.tight,
-    color: colors.textPrimary,
-    flex: 1,
-  },
-  variants: {
-    variant: {
-      default: {
-        color: colors.textPrimary,
+export const getInputTextVariants = (c: Colors) =>
+  createVariants({
+    base: {
+      fontFamily: typography.fontFamily.sans,
+      fontWeight: typography.fontWeight.regular,
+      fontSize: typography.fontSize.bodyMd.size,
+      letterSpacing: typography.letterSpacing.tight,
+      color: c.textPrimary,
+      flex: 1,
+    },
+    variants: {
+      variant: {
+        default: {
+          color: c.textPrimary,
+        },
+        error: {
+          color: c.textPrimary,
+        },
       },
-      error: {
-        color: colors.textPrimary,
+      size: {
+        default: {
+          fontSize: typography.fontSize.bodyMd.size,
+        },
+        sm: {
+          fontSize: typography.fontSize.bodySm.size,
+        },
+        lg: {
+          fontSize: typography.fontSize.bodyLg.size,
+        },
       },
     },
-    size: {
-      default: {
-        fontSize: typography.fontSize.bodyMd.size,
-      },
-      sm: {
-        fontSize: typography.fontSize.bodySm.size,
-      },
-      lg: {
-        fontSize: typography.fontSize.bodyLg.size,
-      },
+    defaultVariants: {
+      variant: 'default',
+      size: 'default',
     },
-  },
-  defaultVariants: {
-    variant: 'default',
-    size: 'default',
-  },
-});
+  });
 
 /**
  * Placeholder color — secondary ink on light
  */
-export const placeholderColor = colors.textTertiary;
+export const getPlaceholderColor = (c: Colors) => c.textTertiary;
 
 /**
  * Focus styles for web — ember focus ring per design system
  */
-export const focusContainerStyle: React.CSSProperties = {
+export const getFocusContainerStyle = (c: Colors): React.CSSProperties => ({
   outline: 'none',
-  borderColor: colors.borderFocus,
+  borderColor: c.borderFocus,
   boxShadow: shadowsCss.focusRing,
-};
+});
 
 /**
  * Disabled style
  */
-export const disabledStyle = {
+export const getDisabledStyle = (c: Colors) => ({
   opacity: 0.5,
-  backgroundColor: colors.section,
-};
+  backgroundColor: c.section,
+});
 
 /**
  * Icon container style
