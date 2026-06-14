@@ -3,17 +3,18 @@
  * Pure React + inline styles (no react-native-web)
  */
 
-import React, {forwardRef, useState, useCallback} from 'react';
+import React, {forwardRef, useState, useCallback, useMemo} from 'react';
 import type {ButtonWebProps} from './types';
 import {
-  buttonVariants,
-  buttonTextVariants,
-  hoverStyles,
+  getButtonVariants,
+  getButtonTextVariants,
+  getHoverStyles,
   focusRingStyle,
   disabledStyle,
 } from './Button.styles';
 import {mergeStyles} from '../../core/variants';
-import {colors, duration, easing} from '../../core/theme/tokens';
+import {duration, easing} from '../../core/theme/tokens';
+import {useResolvedColors} from '../../core/hooks';
 import {cssifyWebStyles} from '../../core/utils/cssifyWebStyles';
 
 /**
@@ -75,6 +76,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonWebProps>(
         onPress();
       }
     }, [disabled, loading, onPress]);
+
+    const colors = useResolvedColors();
+    const buttonVariants = useMemo(() => getButtonVariants(colors), [colors]);
+    const buttonTextVariants = useMemo(
+      () => getButtonTextVariants(colors),
+      [colors],
+    );
+    const hoverStyles = useMemo(() => getHoverStyles(colors), [colors]);
 
     // Get variant styles
     const containerStyles = buttonVariants({

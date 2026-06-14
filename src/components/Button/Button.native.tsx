@@ -2,7 +2,7 @@
  * Button component - React Native implementation
  */
 
-import {forwardRef, useCallback} from 'react';
+import {forwardRef, useCallback, useMemo} from 'react';
 import {
   Pressable,
   Text,
@@ -12,27 +12,30 @@ import {
 } from 'react-native';
 import type {ButtonNativeProps, ButtonVariant} from './types';
 import {
-  buttonVariants,
-  buttonTextVariants,
+  getButtonVariants,
+  getButtonTextVariants,
   disabledStyle,
 } from './Button.styles';
-import {colors} from '../../core/theme/tokens';
+import {useResolvedColors} from '../../core/hooks';
 
 /**
  * Get spinner color based on variant
  */
-function getSpinnerColor(variant: ButtonVariant): string {
+function getSpinnerColor(
+  variant: ButtonVariant,
+  c: ReturnType<typeof useResolvedColors>,
+): string {
   switch (variant) {
     case 'default':
     case 'destructive':
     case 'dark':
     case 'inverse':
     case 'forest':
-      return colors.textInverse;
+      return c.textInverse;
     case 'secondary':
-      return colors.textPrimary;
+      return c.textPrimary;
     default:
-      return colors.actionPrimary;
+      return c.actionPrimary;
   }
 }
 
@@ -63,10 +66,17 @@ export const Button = forwardRef<View, ButtonNativeProps>(function Button(
     }
   }, [disabled, loading, onPress]);
 
+  const colors = useResolvedColors();
+  const buttonVariants = useMemo(() => getButtonVariants(colors), [colors]);
+  const buttonTextVariants = useMemo(
+    () => getButtonTextVariants(colors),
+    [colors],
+  );
+
   // Get variant styles
   const containerStyles = buttonVariants({variant, size});
   const labelStyles = buttonTextVariants({variant, size});
-  const spinnerColor = getSpinnerColor(variant);
+  const spinnerColor = getSpinnerColor(variant, colors);
 
   return (
     <Pressable

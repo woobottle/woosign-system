@@ -6,7 +6,8 @@
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {Button} from './Button';
-import {colors, borderRadius} from '../../core/theme/tokens';
+import {colors, borderRadius, darkColors} from '../../core/theme/tokens';
+import {ThemeProvider} from '../../core/theme/ThemeContext';
 
 describe('Button (web)', () => {
   it('renders the label', () => {
@@ -57,6 +58,17 @@ describe('Button (web)', () => {
     render(<Button variant="dark">See benefits</Button>);
     expect(screen.getByRole('button')).toHaveStyle({
       backgroundColor: colors.actionDark,
+    });
+  });
+
+  it('uses the dark card surface for the secondary variant in dark mode', () => {
+    render(
+      <ThemeProvider defaultColorScheme="dark">
+        <Button variant="secondary">See benefits</Button>
+      </ThemeProvider>,
+    );
+    expect(screen.getByRole('button')).toHaveStyle({
+      backgroundColor: darkColors.card,
     });
   });
 });
