@@ -1,10 +1,10 @@
 import {
-  colors,
   borderRadius,
   typography,
   spacing,
   blackAlpha,
 } from '../../core/theme/tokens';
+import type {Colors} from '../../core/theme/types';
 
 /** scrim(배경 dimmer) 색 — Dialog와 동일 값. */
 export const SCRIM_COLOR = 'rgba(0, 0, 0, 0.5)';
@@ -18,10 +18,10 @@ export const DEFAULT_MAX_HEIGHT_RATIO = 0.9;
  * web/native가 공유하는 표면·핸들·섹션 스타일. 숫자/문자 값만 담아
  * web(cssify)·native(StyleSheet) 양쪽에서 그대로 쓴다.
  */
-export function getBottomSheetStyles() {
+export function getBottomSheetStyles(c: Colors) {
   return {
     surface: {
-      backgroundColor: colors.card,
+      backgroundColor: c.card,
       borderTopLeftRadius: borderRadius.lg,
       borderTopRightRadius: borderRadius.lg,
       overflow: 'hidden' as const,
@@ -50,13 +50,13 @@ export function getBottomSheetStyles() {
       lineHeight: typography.fontSize.xl.lineHeight,
       fontWeight: typography.fontWeight.semibold as '600',
       letterSpacing: typography.letterSpacing.tight,
-      color: colors.textPrimary,
+      color: c.textPrimary,
     },
     description: {
       fontFamily: typography.fontFamily.sans,
       fontSize: typography.fontSize.bodySm.size,
       lineHeight: typography.fontSize.bodySm.lineHeight,
-      color: colors.textSecondary,
+      color: c.textSecondary,
       letterSpacing: typography.letterSpacing.tight,
       marginTop: spacing[2],
     },

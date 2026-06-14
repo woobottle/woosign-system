@@ -8,7 +8,7 @@
  * 클릭으로 onClose, 표면 Pressable이 터치 전파를 차단한다.
  */
 import type {ReactElement} from 'react';
-import {useEffect, useRef} from 'react';
+import {useEffect, useMemo, useRef} from 'react';
 import {
   Animated,
   Modal,
@@ -38,8 +38,7 @@ import {
 } from './BottomSheet.styles';
 import {shouldDismiss} from './dismiss';
 import {shadows} from '../../core/theme/tokens';
-
-const sheetStyles = getBottomSheetStyles();
+import {useResolvedColors} from '../../core/hooks';
 
 function BottomSheetBase({
   open,
@@ -52,6 +51,9 @@ function BottomSheetBase({
   style,
   testID,
 }: BottomSheetNativeProps) {
+  const colors = useResolvedColors();
+  const sheetStyles = useMemo(() => getBottomSheetStyles(colors), [colors]);
+
   const {height: windowHeight} = useWindowDimensions();
   const onCloseRef = useRef(onClose);
   useEffect(() => {
@@ -139,6 +141,8 @@ function BottomSheetBase({
 }
 
 export function BottomSheetHeader({children, style}: BottomSheetHeaderProps) {
+  const colors = useResolvedColors();
+  const sheetStyles = useMemo(() => getBottomSheetStyles(colors), [colors]);
   return (
     <View style={[sheetStyles.header as ViewStyle, style as ViewStyle]}>
       {children}
@@ -148,6 +152,8 @@ export function BottomSheetHeader({children, style}: BottomSheetHeaderProps) {
 BottomSheetHeader.displayName = 'BottomSheetHeader';
 
 export function BottomSheetTitle({children, style}: BottomSheetTitleProps) {
+  const colors = useResolvedColors();
+  const sheetStyles = useMemo(() => getBottomSheetStyles(colors), [colors]);
   return (
     <Text style={[sheetStyles.title as TextStyle, style as TextStyle]}>
       {children}
@@ -160,6 +166,8 @@ export function BottomSheetDescription({
   children,
   style,
 }: BottomSheetDescriptionProps) {
+  const colors = useResolvedColors();
+  const sheetStyles = useMemo(() => getBottomSheetStyles(colors), [colors]);
   return (
     <Text style={[sheetStyles.description as TextStyle, style as TextStyle]}>
       {children}
@@ -169,6 +177,8 @@ export function BottomSheetDescription({
 BottomSheetDescription.displayName = 'BottomSheetDescription';
 
 export function BottomSheetBody({children, style}: BottomSheetBodyProps) {
+  const colors = useResolvedColors();
+  const sheetStyles = useMemo(() => getBottomSheetStyles(colors), [colors]);
   return (
     <ScrollView
       style={styles.bodyScroll}
@@ -183,6 +193,8 @@ export function BottomSheetBody({children, style}: BottomSheetBodyProps) {
 BottomSheetBody.displayName = 'BottomSheetBody';
 
 export function BottomSheetFooter({children, style}: BottomSheetFooterProps) {
+  const colors = useResolvedColors();
+  const sheetStyles = useMemo(() => getBottomSheetStyles(colors), [colors]);
   return (
     <View style={[sheetStyles.footer as ViewStyle, style as ViewStyle]}>
       {children}

@@ -26,8 +26,7 @@ import {shouldDismiss} from './dismiss';
 import {zIndex, shadowsCss, duration, easing} from '../../core/theme/tokens';
 import {mergeStyles} from '../../core/variants';
 import {cssifyWebStyles} from '../../core/utils/cssifyWebStyles';
-
-const sheetStyles = getBottomSheetStyles();
+import {useResolvedColors} from '../../core/hooks';
 
 // Per-instance id source. `useId`는 React 18+라 peer range(react >=17)에서 금지.
 // 표면은 client-only `mounted` 게이트 뒤에서만 렌더되므로 SSR 불일치 없음.
@@ -52,6 +51,9 @@ function BottomSheetBase({
   style,
   testID,
 }: BottomSheetWebProps) {
+  const colors = useResolvedColors();
+  const sheetStyles = useMemo(() => getBottomSheetStyles(colors), [colors]);
+
   const [{titleId, descriptionId}] = useState(() => {
     sheetIdCounter += 1;
     return {
@@ -224,6 +226,8 @@ export function BottomSheetHeader({
   style,
   className,
 }: BottomSheetHeaderProps) {
+  const colors = useResolvedColors();
+  const sheetStyles = useMemo(() => getBottomSheetStyles(colors), [colors]);
   const css = cssifyWebStyles(
     mergeStyles(sheetStyles.header, style),
   ) as React.CSSProperties;
@@ -240,6 +244,8 @@ export function BottomSheetTitle({
   style,
   className,
 }: BottomSheetTitleProps) {
+  const colors = useResolvedColors();
+  const sheetStyles = useMemo(() => getBottomSheetStyles(colors), [colors]);
   const ctx = useContext(BottomSheetContext);
   const register = ctx?.registerTitle;
   useEffect(() => {
@@ -262,6 +268,8 @@ export function BottomSheetDescription({
   style,
   className,
 }: BottomSheetDescriptionProps) {
+  const colors = useResolvedColors();
+  const sheetStyles = useMemo(() => getBottomSheetStyles(colors), [colors]);
   const ctx = useContext(BottomSheetContext);
   const register = ctx?.registerDescription;
   useEffect(() => {
@@ -284,6 +292,8 @@ export function BottomSheetBody({
   style,
   className,
 }: BottomSheetBodyProps) {
+  const colors = useResolvedColors();
+  const sheetStyles = useMemo(() => getBottomSheetStyles(colors), [colors]);
   // overflowY는 기본값 — 소비자 style이 마지막에 병합되므로 덮어쓸 수 있다
   const css = cssifyWebStyles(
     mergeStyles({overflowY: 'auto'}, sheetStyles.body, style),
@@ -301,6 +311,8 @@ export function BottomSheetFooter({
   style,
   className,
 }: BottomSheetFooterProps) {
+  const colors = useResolvedColors();
+  const sheetStyles = useMemo(() => getBottomSheetStyles(colors), [colors]);
   const css = cssifyWebStyles(
     mergeStyles(sheetStyles.footer, style),
   ) as React.CSSProperties;

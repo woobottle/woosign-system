@@ -4,6 +4,8 @@
 import {render, screen, fireEvent} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {BottomSheet} from './BottomSheet';
+import {ThemeProvider} from '../../core/theme/ThemeContext';
+import {darkColors} from '../../core/theme/tokens';
 
 describe('BottomSheet (web)', () => {
   it('does not render content when closed', () => {
@@ -190,6 +192,19 @@ describe('BottomSheet (web)', () => {
       </BottomSheet>,
     );
     expect(screen.getByText('본문')).toHaveStyle({overflowY: 'hidden'});
+  });
+
+  it('uses the dark surface token inside a dark ThemeProvider', () => {
+    render(
+      <ThemeProvider defaultColorScheme="dark">
+        <BottomSheet open onClose={() => {}} testID="sheet">
+          <div>본문</div>
+        </BottomSheet>
+      </ThemeProvider>,
+    );
+    expect(screen.getByTestId('sheet')).toHaveStyle({
+      backgroundColor: darkColors.card,
+    });
   });
 
   it('exposes subcomponents as standalone named exports', () => {
