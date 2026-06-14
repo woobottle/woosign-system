@@ -120,7 +120,6 @@ describe('Dialog (web)', () => {
   });
 
   it('exposes subcomponents as standalone named exports', () => {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const mod = require('./Dialog');
     expect(typeof mod.DialogHeader).toBe('function');
     expect(typeof mod.DialogTitle).toBe('function');

@@ -40,7 +40,11 @@ describe('BottomSheet (native)', () => {
   it('does not call onClose on scrim press when closeOnScrimClick=false', () => {
     const onClose = jest.fn();
     render(
-      <BottomSheet open onClose={onClose} closeOnScrimClick={false} testID="sheet">
+      <BottomSheet
+        open
+        onClose={onClose}
+        closeOnScrimClick={false}
+        testID="sheet">
         <Text>본문</Text>
       </BottomSheet>,
     );

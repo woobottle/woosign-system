@@ -106,7 +106,6 @@ describe('Dialog (native)', () => {
   });
 
   it('exposes subcomponents as standalone named exports', () => {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const mod = require('./Dialog.native');
     expect(typeof mod.DialogHeader).toBe('function');
     expect(typeof mod.DialogTitle).toBe('function');
