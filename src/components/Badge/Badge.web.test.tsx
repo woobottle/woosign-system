@@ -4,7 +4,8 @@
 
 import {render, screen} from '@testing-library/react';
 import {Badge} from './Badge';
-import {colors} from '../../core/theme/tokens';
+import {colors, darkColors} from '../../core/theme/tokens';
+import {ThemeProvider} from '../../core/theme/ThemeContext';
 
 describe('Badge (web)', () => {
   it('renders its label', () => {
@@ -30,6 +31,17 @@ describe('Badge (web)', () => {
     render(<Badge variant="outline">Beta</Badge>);
     expect(screen.getByText('Beta')).toHaveStyle({
       borderColor: colors.borderDefault,
+    });
+  });
+
+  it('uses the dark default border for the outline variant in dark mode', () => {
+    render(
+      <ThemeProvider defaultColorScheme="dark">
+        <Badge variant="outline">Beta</Badge>
+      </ThemeProvider>,
+    );
+    expect(screen.getByText('Beta')).toHaveStyle({
+      borderColor: darkColors.borderDefault,
     });
   });
 });

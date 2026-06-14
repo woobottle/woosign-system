@@ -3,11 +3,16 @@
  * Pure React + inline styles (no react-native-web)
  */
 
-import React, {forwardRef, useState} from 'react';
+import React, {forwardRef, useState, useMemo} from 'react';
 import type {BadgeWebProps} from './types';
-import {badgeVariants, badgeTextVariants, hoverStyles} from './Badge.styles';
+import {
+  getBadgeVariants,
+  getBadgeTextVariants,
+  getHoverStyles,
+} from './Badge.styles';
 import {mergeStyles} from '../../core/variants';
 import {cssifyWebStyles} from '../../core/utils/cssifyWebStyles';
+import {useResolvedColors} from '../../core/hooks';
 
 /**
  * Badge component for web
@@ -17,6 +22,14 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeWebProps>(function Badge(
   ref,
 ) {
   const [isHovered, setIsHovered] = useState(false);
+
+  const colors = useResolvedColors();
+  const badgeVariants = useMemo(() => getBadgeVariants(colors), [colors]);
+  const badgeTextVariants = useMemo(
+    () => getBadgeTextVariants(colors),
+    [colors],
+  );
+  const hoverStyles = useMemo(() => getHoverStyles(colors), [colors]);
 
   // Get variant styles
   const containerStyles = badgeVariants({variant}) as React.CSSProperties;
