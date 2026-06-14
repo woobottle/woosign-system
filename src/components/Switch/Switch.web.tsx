@@ -3,20 +3,21 @@
  * Pure React + inline styles (no react-native-web)
  */
 
-import React, {forwardRef, useState, useCallback} from 'react';
+import React, {forwardRef, useState, useCallback, useMemo} from 'react';
 import type {SwitchWebProps} from './types';
 import {
   switchTrackVariants,
-  switchThumbVariants,
-  switchLabelVariants,
-  trackColors,
+  getSwitchThumbVariants,
+  getSwitchLabelVariants,
+  getTrackColors,
   trackDimensions,
   disabledStyle,
-  focusRingStyle,
+  getFocusRingStyle,
   containerGap,
 } from './Switch.styles';
 import {mergeStyles} from '../../core/variants';
 import {cssifyWebStyles} from '../../core/utils/cssifyWebStyles';
+import {useResolvedColors} from '../../core/hooks';
 
 /**
  * Switch component for web
@@ -42,6 +43,18 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchWebProps>(
         onCheckedChange(!checked);
       }
     }, [disabled, checked, onCheckedChange]);
+
+    const colors = useResolvedColors();
+    const switchThumbVariants = useMemo(
+      () => getSwitchThumbVariants(colors),
+      [colors],
+    );
+    const switchLabelVariants = useMemo(
+      () => getSwitchLabelVariants(colors),
+      [colors],
+    );
+    const trackColors = useMemo(() => getTrackColors(colors), [colors]);
+    const focusRingStyle = useMemo(() => getFocusRingStyle(colors), [colors]);
 
     // Get variant styles
     const trackStyles = switchTrackVariants({size}) as React.CSSProperties;

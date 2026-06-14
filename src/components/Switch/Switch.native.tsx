@@ -2,18 +2,19 @@
  * Switch component - React Native implementation
  */
 
-import {forwardRef, useCallback, useEffect, useRef} from 'react';
+import {forwardRef, useCallback, useEffect, useMemo, useRef} from 'react';
 import {Pressable, Text, View, StyleSheet, Animated} from 'react-native';
 import type {SwitchNativeProps, SwitchSize} from './types';
 import {
   switchTrackVariants,
-  switchThumbVariants,
-  switchLabelVariants,
-  trackColors,
+  getSwitchThumbVariants,
+  getSwitchLabelVariants,
+  getTrackColors,
   trackDimensions,
   disabledStyle,
   containerGap,
 } from './Switch.styles';
+import {useResolvedColors} from '../../core/hooks';
 
 /**
  * Get thumb translate X range based on size
@@ -56,6 +57,17 @@ export const Switch = forwardRef<View, SwitchNativeProps>(function Switch(
       onCheckedChange(!checked);
     }
   }, [disabled, checked, onCheckedChange]);
+
+  const colors = useResolvedColors();
+  const switchThumbVariants = useMemo(
+    () => getSwitchThumbVariants(colors),
+    [colors],
+  );
+  const switchLabelVariants = useMemo(
+    () => getSwitchLabelVariants(colors),
+    [colors],
+  );
+  const trackColors = useMemo(() => getTrackColors(colors), [colors]);
 
   const {start, end} = getThumbTranslateRange(size);
 

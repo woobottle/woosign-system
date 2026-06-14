@@ -4,12 +4,8 @@
  */
 
 import {createVariants} from '../../core/variants';
-import {
-  colors,
-  spacing,
-  borderRadius,
-  typography,
-} from '../../core/theme/tokens';
+import {spacing, borderRadius, typography} from '../../core/theme/tokens';
+import type {Colors} from '../../core/theme/types';
 
 // Track dimensions by size
 export const trackDimensions = {
@@ -19,7 +15,8 @@ export const trackDimensions = {
 } as const;
 
 /**
- * Switch track variants (the oval container)
+ * Switch track variants (the oval container) — 색 무관(치수/모양만), 정적 유지.
+ * 실제 트랙 색은 getTrackColors(checked/unchecked)로 별도 적용된다.
  */
 export const switchTrackVariants = createVariants({
   base: {
@@ -52,68 +49,70 @@ export const switchTrackVariants = createVariants({
 /**
  * Switch thumb variants (the sliding circle)
  */
-export const switchThumbVariants = createVariants({
-  base: {
-    borderRadius: borderRadius.full,
-    backgroundColor: colors.background,
-  },
-  variants: {
-    size: {
-      sm: {
-        width: trackDimensions.sm.thumbSize,
-        height: trackDimensions.sm.thumbSize,
-      },
-      default: {
-        width: trackDimensions.default.thumbSize,
-        height: trackDimensions.default.thumbSize,
-      },
-      lg: {
-        width: trackDimensions.lg.thumbSize,
-        height: trackDimensions.lg.thumbSize,
+export const getSwitchThumbVariants = (c: Colors) =>
+  createVariants({
+    base: {
+      borderRadius: borderRadius.full,
+      backgroundColor: c.background,
+    },
+    variants: {
+      size: {
+        sm: {
+          width: trackDimensions.sm.thumbSize,
+          height: trackDimensions.sm.thumbSize,
+        },
+        default: {
+          width: trackDimensions.default.thumbSize,
+          height: trackDimensions.default.thumbSize,
+        },
+        lg: {
+          width: trackDimensions.lg.thumbSize,
+          height: trackDimensions.lg.thumbSize,
+        },
       },
     },
-  },
-  defaultVariants: {
-    size: 'default',
-  },
-});
+    defaultVariants: {
+      size: 'default',
+    },
+  });
 
 /**
  * Track colors
  */
-export const trackColors = {
-  checked: colors.primary,
-  unchecked: colors.input,
-} as const;
+export const getTrackColors = (c: Colors) => ({
+  checked: c.primary,
+  unchecked: c.input,
+});
 
 /**
  * Label variants
  */
-export const switchLabelVariants = createVariants({
-  base: {
-    fontWeight: typography.fontWeight.medium,
-    color: colors.foreground,
-  },
-  variants: {
-    size: {
-      sm: {
-        fontSize: typography.fontSize.sm.size,
-        lineHeight: typography.fontSize.sm.lineHeight,
-      },
-      default: {
-        fontSize: typography.fontSize.sm.size,
-        lineHeight: typography.fontSize.sm.lineHeight,
-      },
-      lg: {
-        fontSize: typography.fontSize.base.size,
-        lineHeight: typography.fontSize.base.lineHeight,
+export const getSwitchLabelVariants = (c: Colors) =>
+  createVariants({
+    base: {
+      fontWeight: typography.fontWeight.medium,
+      color: c.foreground,
+    },
+    variants: {
+      size: {
+        sm: {
+          fontSize: typography.fontSize.sm.size,
+          lineHeight: typography.fontSize.sm.lineHeight,
+        },
+        default: {
+          fontSize: typography.fontSize.sm.size,
+          lineHeight: typography.fontSize.sm.lineHeight,
+        },
+        lg: {
+          fontSize: typography.fontSize.base.size,
+          lineHeight: typography.fontSize.base.lineHeight,
+        },
       },
     },
-  },
-  defaultVariants: {
-    size: 'default',
-  },
-});
+    defaultVariants: {
+      size: 'default',
+    },
+  });
 
 /**
  * Disabled style
@@ -125,10 +124,10 @@ export const disabledStyle = {
 /**
  * Focus ring style for web
  */
-export const focusRingStyle: React.CSSProperties = {
+export const getFocusRingStyle = (c: Colors): React.CSSProperties => ({
   outline: 'none',
-  boxShadow: `0 0 0 2px ${colors.background}, 0 0 0 4px ${colors.ring}`,
-};
+  boxShadow: `0 0 0 2px ${c.background}, 0 0 0 4px ${c.ring}`,
+});
 
 /**
  * Container gap between switch and label
