@@ -1,9 +1,5 @@
-import {
-  colors,
-  borderRadius,
-  typography,
-  shadows,
-} from '../../core/theme/tokens';
+import {borderRadius, typography, shadows} from '../../core/theme/tokens';
+import type {Colors} from '../../core/theme/types';
 import type {ToastTone} from './types';
 
 const DEFAULT_GLYPH: Record<ToastTone, string> = {
@@ -13,10 +9,10 @@ const DEFAULT_GLYPH: Record<ToastTone, string> = {
   neutral: '·',
 };
 
-export function getToastStyles() {
+export function getToastStyles(c: Colors) {
   return {
     container: {
-      backgroundColor: colors.card,
+      backgroundColor: c.card,
       borderRadius: borderRadius.md,
       paddingTop: 14,
       paddingBottom: 14,
@@ -32,12 +28,12 @@ export function getToastStyles() {
       fontSize: typography.fontSize.bodySm.size,
       fontWeight: typography.fontWeight.semibold as '600',
       letterSpacing: typography.letterSpacing.tight,
-      color: colors.textPrimary,
+      color: c.textPrimary,
     },
     description: {
       fontFamily: typography.fontFamily.sans,
       fontSize: typography.fontSize.caption.size,
-      color: colors.textSecondary,
+      color: c.textSecondary,
       letterSpacing: typography.letterSpacing.tight,
       marginTop: 2,
     },

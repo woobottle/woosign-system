@@ -1,8 +1,9 @@
-import {forwardRef} from 'react';
+import {forwardRef, useMemo} from 'react';
 import {View, Text} from 'react-native';
 import type {ToastNativeProps} from './types';
 import {getToastStyles, getDefaultGlyph} from './Toast.styles';
 import {StatusDot} from '../StatusDot';
+import {useResolvedColors} from '../../core/hooks';
 
 export const Toast = forwardRef<View, ToastNativeProps>(function Toast(
   {
@@ -18,7 +19,8 @@ export const Toast = forwardRef<View, ToastNativeProps>(function Toast(
   },
   ref,
 ) {
-  const s = getToastStyles();
+  const colors = useResolvedColors();
+  const s = useMemo(() => getToastStyles(colors), [colors]);
   return (
     <View ref={ref} testID={testID} style={[s.container, style]}>
       {!hideIcon ? (

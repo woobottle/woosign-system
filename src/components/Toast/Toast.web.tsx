@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import type {ToastWebProps} from './types';
 import {getToastStyles, getDefaultGlyph} from './Toast.styles';
 import {StatusDot} from '../StatusDot';
 import {shadowsCss} from '../../core/theme/tokens';
+import {useResolvedColors} from '../../core/hooks';
 
 export const Toast = React.forwardRef<HTMLDivElement, ToastWebProps>(
   function Toast(
@@ -18,7 +19,8 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastWebProps>(
     },
     ref,
   ) {
-    const s = getToastStyles();
+    const colors = useResolvedColors();
+    const s = useMemo(() => getToastStyles(colors), [colors]);
     return (
       <div
         ref={ref}
