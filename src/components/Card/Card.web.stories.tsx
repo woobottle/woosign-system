@@ -9,14 +9,6 @@ const meta: Meta<typeof Card> = {
   title: 'Components/Card',
   component: Card,
   parameters: {layout: 'centered'},
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: ['default', 'outline', 'ghost', 'warm', 'ceramic', 'inverse', 'forest'],
-    },
-    fullWidth: {control: 'boolean'},
-    disabled: {control: 'boolean'},
-  },
 };
 export default meta;
 

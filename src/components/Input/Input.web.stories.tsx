@@ -9,12 +9,6 @@ const meta: Meta<typeof Input> = {
   title: 'Components/Input',
   component: Input,
   parameters: {layout: 'centered'},
-  argTypes: {
-    variant: {control: 'select', options: ['default', 'error']},
-    size: {control: 'select', options: ['sm', 'default', 'lg']},
-    disabled: {control: 'boolean'},
-    readOnly: {control: 'boolean'},
-  },
 };
 export default meta;
 
