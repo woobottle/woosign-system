@@ -10,6 +10,10 @@ export type {
   DialogDescriptionProps,
   DialogBodyProps,
   DialogFooterProps,
+  DialogApi,
+  ConfirmOptions,
+  AlertOptions,
+  DialogProviderProps,
 } from './types';
 export {
   Dialog,
@@ -19,3 +23,5 @@ export {
   DialogBody,
   DialogFooter,
 } from './Dialog';
+export {DialogProvider} from './DialogProvider';
+export {useDialog} from './useDialog';

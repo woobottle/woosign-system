@@ -33,9 +33,7 @@ function AlertHarness({
   onPromise: (p: Promise<void>) => void;
 }) {
   const dialog = useDialog();
-  return (
-    <button onClick={() => onPromise(dialog.alert(options))}>open</button>
-  );
+  return <button onClick={() => onPromise(dialog.alert(options))}>open</button>;
 }
 
 describe('DialogProvider (web)', () => {
@@ -120,7 +118,9 @@ describe('DialogProvider (web)', () => {
     );
     await userEvent.click(screen.getByText('open'));
     expect(screen.getByText('저장됐어요')).toBeInTheDocument();
-    expect(screen.queryByRole('button', {name: '취소'})).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', {name: '취소'}),
+    ).not.toBeInTheDocument();
     await userEvent.click(screen.getByRole('button', {name: '확인'}));
     await expect(promise).resolves.toBeUndefined();
   });
@@ -129,7 +129,11 @@ describe('DialogProvider (web)', () => {
     render(
       <DialogProvider>
         <ConfirmHarness
-          options={{title: '삭제할까요?', tone: 'destructive', confirmText: '삭제'}}
+          options={{
+            title: '삭제할까요?',
+            tone: 'destructive',
+            confirmText: '삭제',
+          }}
           onPromise={() => {}}
         />
       </DialogProvider>,
