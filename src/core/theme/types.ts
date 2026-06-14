@@ -61,6 +61,9 @@ export type Colors = {
   readonly actionPrimaryHover: string;
   readonly actionDark: string;
   readonly actionDanger: string;
+  readonly actionForest: string;
+  readonly actionForestHover: string;
+  readonly forestTint: string;
 
   // Accents
   readonly gold: string;

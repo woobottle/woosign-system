@@ -2,7 +2,7 @@
  * Card component - React Native implementation
  */
 
-import {forwardRef, useCallback} from 'react';
+import {forwardRef, useCallback, useMemo} from 'react';
 import {View, Pressable, Text, StyleSheet} from 'react-native';
 import type {ViewStyle, TextStyle} from 'react-native';
 import type {
@@ -14,15 +14,16 @@ import type {
   CardFooterProps,
 } from './types';
 import {
-  cardVariants,
+  getCardVariants,
   cardHeaderStyle,
-  cardTitleStyle,
-  cardDescriptionStyle,
+  getCardTitleStyle,
+  getCardDescriptionStyle,
   cardContentStyle,
   cardFooterStyle,
   pressedStyle,
   disabledStyle,
 } from './Card.styles';
+import {useResolvedColors} from '../../core/hooks';
 
 /**
  * Card component for React Native
@@ -44,6 +45,9 @@ export const Card = forwardRef<View, CardNativeProps>(function Card(
       onPress();
     }
   }, [disabled, onPress]);
+
+  const colors = useResolvedColors();
+  const cardVariants = useMemo(() => getCardVariants(colors), [colors]);
 
   // Get variant styles
   const containerStyles = cardVariants({variant});
@@ -98,6 +102,8 @@ CardHeader.displayName = 'CardHeader';
  * CardTitle component
  */
 export function CardTitle({children, style}: CardTitleProps) {
+  const colors = useResolvedColors();
+  const cardTitleStyle = useMemo(() => getCardTitleStyle(colors), [colors]);
   return <Text style={[cardTitleStyle, style as TextStyle]}>{children}</Text>;
 }
 
@@ -107,6 +113,11 @@ CardTitle.displayName = 'CardTitle';
  * CardDescription component
  */
 export function CardDescription({children, style}: CardDescriptionProps) {
+  const colors = useResolvedColors();
+  const cardDescriptionStyle = useMemo(
+    () => getCardDescriptionStyle(colors),
+    [colors],
+  );
   return (
     <Text style={[cardDescriptionStyle, style as TextStyle]}>{children}</Text>
   );

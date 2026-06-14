@@ -4,7 +4,8 @@
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {Card} from './Card';
-import {colors} from '../../core/theme/tokens';
+import {colors, darkColors} from '../../core/theme/tokens';
+import {ThemeProvider} from '../../core/theme/ThemeContext';
 
 describe('Card (web)', () => {
   it('renders its children', () => {
@@ -76,5 +77,18 @@ describe('Card (web)', () => {
       </Card>,
     );
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
+  });
+
+  it('uses dark surface token inside a dark ThemeProvider', () => {
+    render(
+      <ThemeProvider defaultColorScheme="dark">
+        <Card testID="card">
+          <span>본문</span>
+        </Card>
+      </ThemeProvider>,
+    );
+    expect(screen.getByTestId('card')).toHaveStyle({
+      backgroundColor: darkColors.card,
+    });
   });
 });

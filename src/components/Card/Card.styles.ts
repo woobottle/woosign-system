@@ -8,56 +8,39 @@
 
 import {createVariants} from '../../core/variants';
 import {
-  colors,
   spacing,
   borderRadius,
   shadows,
   typography,
 } from '../../core/theme/tokens';
+import type {Colors} from '../../core/theme/types';
 
 /**
  * Card container variants
  */
-export const cardVariants = createVariants({
-  base: {
-    borderRadius: borderRadius.md,
-    backgroundColor: colors.card,
-  },
-  variants: {
-    variant: {
-      default: {
-        backgroundColor: colors.card,
-        ...shadows.card,
-      },
-      outline: {
-        backgroundColor: 'transparent',
-        borderWidth: 1,
-        borderColor: colors.borderDefault,
-      },
-      ghost: {
-        backgroundColor: 'transparent',
-      },
-      warm: {
-        backgroundColor: colors.reward,
-        ...shadows.card,
-      },
-      ceramic: {
-        backgroundColor: colors.section,
-      },
-      inverse: {
-        backgroundColor: colors.inverse,
-        borderRadius: borderRadius.lg,
-      },
-      forest: {
-        backgroundColor: colors.actionForest,
-        borderRadius: borderRadius.lg,
+export const getCardVariants = (c: Colors) =>
+  createVariants({
+    base: {borderRadius: borderRadius.md, backgroundColor: c.card},
+    variants: {
+      variant: {
+        default: {backgroundColor: c.card, ...shadows.card},
+        outline: {
+          backgroundColor: 'transparent',
+          borderWidth: 1,
+          borderColor: c.borderDefault,
+        },
+        ghost: {backgroundColor: 'transparent'},
+        warm: {backgroundColor: c.reward, ...shadows.card},
+        ceramic: {backgroundColor: c.section},
+        inverse: {backgroundColor: c.inverse, borderRadius: borderRadius.lg},
+        forest: {
+          backgroundColor: c.actionForest,
+          borderRadius: borderRadius.lg,
+        },
       },
     },
-  },
-  defaultVariants: {
-    variant: 'default',
-  },
-});
+    defaultVariants: {variant: 'default'},
+  });
 
 /**
  * Card header styles
@@ -73,25 +56,25 @@ export const cardHeaderStyle = {
 /**
  * Card title styles — WooBottle heading-md, brand ink
  */
-export const cardTitleStyle = {
+export const getCardTitleStyle = (c: Colors) => ({
   fontFamily: typography.fontFamily.sans,
   fontSize: typography.fontSize.headingMd.size,
   fontWeight: typography.fontWeight.semibold,
   lineHeight: typography.fontSize.headingMd.lineHeight,
   letterSpacing: typography.letterSpacing.tight,
-  color: colors.textBrand,
-};
+  color: c.textBrand,
+});
 
 /**
  * Card description styles — secondary ink
  */
-export const cardDescriptionStyle = {
+export const getCardDescriptionStyle = (c: Colors) => ({
   fontFamily: typography.fontFamily.sans,
   fontSize: typography.fontSize.bodySm.size,
   lineHeight: typography.fontSize.bodySm.lineHeight,
   letterSpacing: typography.letterSpacing.tight,
-  color: colors.textSecondary,
-};
+  color: c.textSecondary,
+});
 
 /**
  * Card content styles

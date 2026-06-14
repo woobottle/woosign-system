@@ -3,7 +3,7 @@
  * Pure React + inline styles (no react-native-web)
  */
 
-import React, {forwardRef, useState, useCallback} from 'react';
+import React, {forwardRef, useState, useCallback, useMemo} from 'react';
 import type {
   CardWebProps,
   CardHeaderProps,
@@ -13,10 +13,10 @@ import type {
   CardFooterProps,
 } from './types';
 import {
-  cardVariants,
+  getCardVariants,
   cardHeaderStyle,
-  cardTitleStyle,
-  cardDescriptionStyle,
+  getCardTitleStyle,
+  getCardDescriptionStyle,
   cardContentStyle,
   cardFooterStyle,
   hoverStyle,
@@ -24,6 +24,7 @@ import {
 } from './Card.styles';
 import {mergeStyles} from '../../core/variants';
 import {cssifyWebStyles} from '../../core/utils/cssifyWebStyles';
+import {useResolvedColors} from '../../core/hooks';
 
 /**
  * Card component for web
@@ -49,6 +50,9 @@ export const Card = forwardRef<HTMLDivElement, CardWebProps>(function Card(
       onPress();
     }
   }, [disabled, onPress]);
+
+  const colors = useResolvedColors();
+  const cardVariants = useMemo(() => getCardVariants(colors), [colors]);
 
   // Get variant styles
   const containerStyles = cardVariants({variant}) as React.CSSProperties;
@@ -135,6 +139,8 @@ CardHeader.displayName = 'CardHeader';
  * CardTitle component
  */
 export function CardTitle({children, style, className}: CardTitleProps) {
+  const colors = useResolvedColors();
+  const cardTitleStyle = useMemo(() => getCardTitleStyle(colors), [colors]);
   const titleStyle = cssifyWebStyles(
     mergeStyles(cardTitleStyle, {margin: 0}, style),
   ) as React.CSSProperties;
@@ -155,6 +161,11 @@ export function CardDescription({
   style,
   className,
 }: CardDescriptionProps) {
+  const colors = useResolvedColors();
+  const cardDescriptionStyle = useMemo(
+    () => getCardDescriptionStyle(colors),
+    [colors],
+  );
   const descStyle = cssifyWebStyles(
     mergeStyles(cardDescriptionStyle, {margin: 0}, style),
   ) as React.CSSProperties;
