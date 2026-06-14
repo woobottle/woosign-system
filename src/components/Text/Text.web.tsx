@@ -2,12 +2,12 @@
  * Text component - Web implementation
  */
 
-import React, {forwardRef} from 'react';
+import React, {forwardRef, useMemo} from 'react';
 import type {TextWebProps} from './types';
-import {textVariants, getDefaultElement} from './Text.styles';
-import {colors} from '../../core/theme/tokens';
+import {getTextVariants, getDefaultElement} from './Text.styles';
 import {mergeStyles} from '../../core/variants';
 import {cssifyWebStyles} from '../../core/utils/cssifyWebStyles';
+import {useResolvedColors} from '../../core/hooks';
 
 /**
  * Text component for web
@@ -29,6 +29,9 @@ export const Text = forwardRef<HTMLElement, TextWebProps>(function Text(
 ) {
   // Determine the HTML element to render
   const Element = as || getDefaultElement(variant);
+
+  const colors = useResolvedColors();
+  const textVariants = useMemo(() => getTextVariants(colors), [colors]);
 
   // Get variant styles
   const variantStyles = textVariants({
