@@ -4,7 +4,7 @@
  * 트리거는 RN core Pressable+Text(@woosign Button 비의존)로 만든다.
  */
 import {Modal, Pressable, Text} from 'react-native';
-import {render, screen, fireEvent} from '@testing-library/react-native';
+import {render, screen, fireEvent, act} from '@testing-library/react-native';
 import {DialogProvider} from './DialogProvider.native';
 import {useDialog} from './useDialog';
 import type {ConfirmOptions, AlertOptions} from './types';
@@ -88,7 +88,10 @@ describe('DialogProvider (native)', () => {
       </DialogProvider>,
     );
     fireEvent.press(screen.getByText('open'));
-    screen.UNSAFE_getByType(Modal).props.onRequestClose();
+    // onRequestClose는 setQueue(state update)를 유발하므로 act로 감싼다.
+    act(() => {
+      screen.UNSAFE_getByType(Modal).props.onRequestClose();
+    });
     await expect(promise).resolves.toBe(false);
   });
 
