@@ -20,8 +20,7 @@ import {getDialogStyles, SIZE_MAX_WIDTH, SCRIM_COLOR} from './Dialog.styles';
 import {zIndex, shadowsCss} from '../../core/theme/tokens';
 import {mergeStyles} from '../../core/variants';
 import {cssifyWebStyles} from '../../core/utils/cssifyWebStyles';
-
-const dialogStyles = getDialogStyles();
+import {useResolvedColors} from '../../core/hooks';
 
 // Per-instance id source. `useId` would be cleaner but is React 18+, while the
 // library's peer range is `react >=17`. The dialog surface only renders behind
@@ -39,6 +38,9 @@ function DialogBase({
   style,
   testID,
 }: DialogWebProps) {
+  const colors = useResolvedColors();
+  const dialogStyles = useMemo(() => getDialogStyles(colors), [colors]);
+
   const [{titleId, descriptionId}] = useState(() => {
     dialogIdCounter += 1;
     return {
@@ -141,6 +143,8 @@ function DialogBase({
 }
 
 export function DialogHeader({children, style, className}: DialogHeaderProps) {
+  const colors = useResolvedColors();
+  const dialogStyles = useMemo(() => getDialogStyles(colors), [colors]);
   const css = cssifyWebStyles(
     mergeStyles(dialogStyles.header, style),
   ) as React.CSSProperties;
@@ -153,6 +157,8 @@ export function DialogHeader({children, style, className}: DialogHeaderProps) {
 DialogHeader.displayName = 'DialogHeader';
 
 export function DialogTitle({children, style, className}: DialogTitleProps) {
+  const colors = useResolvedColors();
+  const dialogStyles = useMemo(() => getDialogStyles(colors), [colors]);
   const ctx = useContext(DialogContext);
   const register = ctx?.registerTitle;
   useEffect(() => {
@@ -175,6 +181,8 @@ export function DialogDescription({
   style,
   className,
 }: DialogDescriptionProps) {
+  const colors = useResolvedColors();
+  const dialogStyles = useMemo(() => getDialogStyles(colors), [colors]);
   const ctx = useContext(DialogContext);
   const register = ctx?.registerDescription;
   useEffect(() => {
@@ -193,6 +201,8 @@ export function DialogDescription({
 DialogDescription.displayName = 'DialogDescription';
 
 export function DialogBody({children, style, className}: DialogBodyProps) {
+  const colors = useResolvedColors();
+  const dialogStyles = useMemo(() => getDialogStyles(colors), [colors]);
   const css = cssifyWebStyles(
     mergeStyles(dialogStyles.body, style),
   ) as React.CSSProperties;
@@ -205,6 +215,8 @@ export function DialogBody({children, style, className}: DialogBodyProps) {
 DialogBody.displayName = 'DialogBody';
 
 export function DialogFooter({children, style, className}: DialogFooterProps) {
+  const colors = useResolvedColors();
+  const dialogStyles = useMemo(() => getDialogStyles(colors), [colors]);
   const css = cssifyWebStyles(
     mergeStyles(dialogStyles.footer, style),
   ) as React.CSSProperties;

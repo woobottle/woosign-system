@@ -4,6 +4,8 @@
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {Dialog} from './Dialog';
+import {ThemeProvider} from '../../core/theme/ThemeContext';
+import {darkColors} from '../../core/theme/tokens';
 
 describe('Dialog (web)', () => {
   it('does not render content when closed', () => {
@@ -126,5 +128,18 @@ describe('Dialog (web)', () => {
     expect(typeof mod.DialogDescription).toBe('function');
     expect(typeof mod.DialogBody).toBe('function');
     expect(typeof mod.DialogFooter).toBe('function');
+  });
+
+  it('uses the dark surface token inside a dark ThemeProvider', () => {
+    render(
+      <ThemeProvider defaultColorScheme="dark">
+        <Dialog open onClose={() => {}}>
+          <div>본문</div>
+        </Dialog>
+      </ThemeProvider>,
+    );
+    expect(screen.getByRole('dialog')).toHaveStyle({
+      backgroundColor: darkColors.card,
+    });
   });
 });

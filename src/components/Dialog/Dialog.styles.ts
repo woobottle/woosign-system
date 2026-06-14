@@ -1,9 +1,5 @@
-import {
-  colors,
-  borderRadius,
-  typography,
-  spacing,
-} from '../../core/theme/tokens';
+import {borderRadius, typography, spacing} from '../../core/theme/tokens';
+import type {Colors} from '../../core/theme/types';
 import type {DialogSize} from './types';
 
 /** size → 표면 maxWidth(px). */
@@ -20,10 +16,10 @@ export const SCRIM_COLOR = 'rgba(0, 0, 0, 0.5)';
  * web/native가 공유하는 표면·섹션 스타일. 숫자/문자 값만 담아
  * web(cssify)·native(StyleSheet) 양쪽에서 그대로 쓴다.
  */
-export function getDialogStyles() {
+export function getDialogStyles(c: Colors) {
   return {
     surface: {
-      backgroundColor: colors.card,
+      backgroundColor: c.card,
       borderRadius: borderRadius.lg,
       overflow: 'hidden' as const,
       width: '100%' as const,
@@ -40,13 +36,13 @@ export function getDialogStyles() {
       lineHeight: typography.fontSize.xl.lineHeight,
       fontWeight: typography.fontWeight.semibold as '600',
       letterSpacing: typography.letterSpacing.tight,
-      color: colors.textPrimary,
+      color: c.textPrimary,
     },
     description: {
       fontFamily: typography.fontFamily.sans,
       fontSize: typography.fontSize.bodySm.size,
       lineHeight: typography.fontSize.bodySm.lineHeight,
-      color: colors.textSecondary,
+      color: c.textSecondary,
       letterSpacing: typography.letterSpacing.tight,
       marginTop: spacing[2],
     },

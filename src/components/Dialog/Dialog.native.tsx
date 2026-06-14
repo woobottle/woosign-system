@@ -6,6 +6,7 @@
  * 터치 전파를 차단한다. closeOnEsc는 native에서 Android back 처리에 매핑된다.
  */
 import type {ReactElement} from 'react';
+import {useMemo} from 'react';
 import {
   Modal,
   Pressable,
@@ -25,8 +26,7 @@ import type {
 } from './types';
 import {getDialogStyles, SIZE_MAX_WIDTH, SCRIM_COLOR} from './Dialog.styles';
 import {shadows} from '../../core/theme/tokens';
-
-const dialogStyles = getDialogStyles();
+import {useResolvedColors} from '../../core/hooks';
 
 function DialogBase({
   open,
@@ -38,6 +38,9 @@ function DialogBase({
   style,
   testID,
 }: DialogNativeProps) {
+  const colors = useResolvedColors();
+  const dialogStyles = useMemo(() => getDialogStyles(colors), [colors]);
+
   return (
     <Modal
       visible={open}
@@ -66,6 +69,8 @@ function DialogBase({
 }
 
 export function DialogHeader({children, style}: DialogHeaderProps) {
+  const colors = useResolvedColors();
+  const dialogStyles = useMemo(() => getDialogStyles(colors), [colors]);
   return (
     <View style={[dialogStyles.header as ViewStyle, style as ViewStyle]}>
       {children}
@@ -75,6 +80,8 @@ export function DialogHeader({children, style}: DialogHeaderProps) {
 DialogHeader.displayName = 'DialogHeader';
 
 export function DialogTitle({children, style}: DialogTitleProps) {
+  const colors = useResolvedColors();
+  const dialogStyles = useMemo(() => getDialogStyles(colors), [colors]);
   return (
     <Text style={[dialogStyles.title as TextStyle, style as TextStyle]}>
       {children}
@@ -84,6 +91,8 @@ export function DialogTitle({children, style}: DialogTitleProps) {
 DialogTitle.displayName = 'DialogTitle';
 
 export function DialogDescription({children, style}: DialogDescriptionProps) {
+  const colors = useResolvedColors();
+  const dialogStyles = useMemo(() => getDialogStyles(colors), [colors]);
   return (
     <Text style={[dialogStyles.description as TextStyle, style as TextStyle]}>
       {children}
@@ -93,6 +102,8 @@ export function DialogDescription({children, style}: DialogDescriptionProps) {
 DialogDescription.displayName = 'DialogDescription';
 
 export function DialogBody({children, style}: DialogBodyProps) {
+  const colors = useResolvedColors();
+  const dialogStyles = useMemo(() => getDialogStyles(colors), [colors]);
   return (
     <View style={[dialogStyles.body as ViewStyle, style as ViewStyle]}>
       {children}
@@ -102,6 +113,8 @@ export function DialogBody({children, style}: DialogBodyProps) {
 DialogBody.displayName = 'DialogBody';
 
 export function DialogFooter({children, style}: DialogFooterProps) {
+  const colors = useResolvedColors();
+  const dialogStyles = useMemo(() => getDialogStyles(colors), [colors]);
   return (
     <View style={[dialogStyles.footer as ViewStyle, style as ViewStyle]}>
       {children}
