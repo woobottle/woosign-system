@@ -1,9 +1,10 @@
-import {colors} from '../../core/theme/tokens';
+import type {Colors} from '../../core/theme/types';
 import type {ProgressTone, ProgressSurface, ProgressSize} from './types';
 
 const HEIGHT = {sm: 6, default: 8, lg: 12} as const;
 
 export function getProgressStyles(
+  c: Colors,
   tone: ProgressTone,
   surface: ProgressSurface,
   size: ProgressSize,
@@ -12,11 +13,7 @@ export function getProgressStyles(
     surface === 'inverse' ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.08)';
 
   const fillBg =
-    tone === 'ember'
-      ? colors.actionPrimary
-      : tone === 'ink'
-      ? colors.inverse
-      : colors.gold;
+    tone === 'ember' ? c.actionPrimary : tone === 'ink' ? c.inverse : c.gold;
 
   const height = HEIGHT[size];
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import type {ProgressWebProps} from './types';
 import {getProgressStyles, normalizeProgress} from './Progress.styles';
+import {useResolvedColors} from '../../core/hooks';
 
 export const Progress = React.forwardRef<HTMLDivElement, ProgressWebProps>(
   function Progress(
@@ -16,8 +17,9 @@ export const Progress = React.forwardRef<HTMLDivElement, ProgressWebProps>(
     },
     ref,
   ) {
+    const colors = useResolvedColors();
     const pct = normalizeProgress(value, max);
-    const {rail, fill} = getProgressStyles(tone, surface, size);
+    const {rail, fill} = getProgressStyles(colors, tone, surface, size);
     return (
       <div
         ref={ref}

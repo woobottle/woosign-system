@@ -1,11 +1,10 @@
-import {colors, typography} from '../../core/theme/tokens';
+import {typography} from '../../core/theme/tokens';
+import type {Colors} from '../../core/theme/types';
 
-export function getTabsStyles(inverse: boolean) {
+export function getTabsStyles(c: Colors, inverse: boolean) {
   const underline = inverse ? 'rgba(255,255,255,0.14)' : 'rgba(0,0,0,0.08)';
-  const inactiveColor = inverse
-    ? colors.textInverseSecondary
-    : colors.textSecondary;
-  const activeColor = inverse ? colors.textInverse : colors.textBrand;
+  const inactiveColor = inverse ? c.textInverseSecondary : c.textSecondary;
+  const activeColor = inverse ? c.textInverse : c.textBrand;
 
   return {
     rail: {

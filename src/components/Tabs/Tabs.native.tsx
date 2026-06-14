@@ -2,6 +2,7 @@ import {forwardRef} from 'react';
 import {Pressable, Text, View} from 'react-native';
 import type {TabsNativeProps} from './types';
 import {getTabsStyles} from './Tabs.styles';
+import {useResolvedColors} from '../../core/hooks';
 
 export const Tabs = forwardRef<View, TabsNativeProps>(function Tabs(
   {
@@ -16,7 +17,8 @@ export const Tabs = forwardRef<View, TabsNativeProps>(function Tabs(
   },
   ref,
 ) {
-  const s = getTabsStyles(inverse);
+  const colors = useResolvedColors();
+  const s = getTabsStyles(colors, inverse);
   return (
     <View ref={ref} testID={testID} style={[s.rail, style]}>
       {items.map(item => {

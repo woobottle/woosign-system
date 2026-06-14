@@ -1,13 +1,15 @@
 import React from 'react';
 import type {TabsWebProps} from './types';
 import {getTabsStyles} from './Tabs.styles';
+import {useResolvedColors} from '../../core/hooks';
 
 export const Tabs = React.forwardRef<HTMLDivElement, TabsWebProps>(
   function Tabs(
     {items, value, onChange, inverse = false, className, style, testID},
     ref,
   ) {
-    const s = getTabsStyles(inverse);
+    const colors = useResolvedColors();
+    const s = getTabsStyles(colors, inverse);
     return (
       <div
         ref={ref}

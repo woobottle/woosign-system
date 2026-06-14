@@ -1,4 +1,4 @@
-import {colors} from '../../core/theme/tokens';
+import type {Colors} from '../../core/theme/types';
 import type {StatusDotTone, StatusDotSize} from './types';
 
 const SIZE_MAP = {
@@ -7,17 +7,21 @@ const SIZE_MAP = {
   lg: 36,
 } as const;
 
-export function getStatusDotStyle(tone: StatusDotTone, size: StatusDotSize) {
+export function getStatusDotStyle(
+  c: Colors,
+  tone: StatusDotTone,
+  size: StatusDotSize,
+) {
   const dim = SIZE_MAP[size];
 
   const [bg, fg] =
     tone === 'success'
-      ? [colors.successTint, colors.actionPrimary]
+      ? [c.successTint, c.actionPrimary]
       : tone === 'danger'
-      ? [colors.errorTint, colors.actionDanger]
+      ? [c.errorTint, c.actionDanger]
       : tone === 'brand'
-      ? [colors.section, colors.brand]
-      : [colors.section, colors.textSecondary];
+      ? [c.section, c.brand]
+      : [c.section, c.textSecondary];
 
   return {
     container: {
