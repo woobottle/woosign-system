@@ -147,9 +147,8 @@ import { ThemeProvider, useResolvedColors } from 'woosign-system';
 Without a `ThemeProvider`, components render the light palette exactly as before —
 fully backward compatible. Component styles read theme colors via the
 `useResolvedColors()` hook (theme colors under a provider, static light fallback
-otherwise). Converted so far: **Card, Button, Badge, Text, Input** (remaining
-components follow the same pattern in later rounds). Storybook has a Light/Dark
-toolbar toggle.
+otherwise). **All components consume theme colors**, so wrapping any subtree in
+`<ThemeProvider>` switches it to dark. Storybook has a Light/Dark toolbar toggle.
 
 ## Fonts
 
