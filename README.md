@@ -131,6 +131,26 @@ shadows.card              // layered low-alpha card elevation
 Shadcn-compat aliases (`primary`, `secondary`, `muted`, `ring`, …) are
 preserved so existing integrations keep working.
 
+### Dark mode
+
+Wrap your app (or a subtree) in `<ThemeProvider>` and the converted components
+follow the active scheme:
+
+```tsx
+import { ThemeProvider, useResolvedColors } from 'woosign-system';
+
+<ThemeProvider defaultColorScheme="dark">
+  <App />
+</ThemeProvider>
+```
+
+Without a `ThemeProvider`, components render the light palette exactly as before —
+fully backward compatible. Component styles read theme colors via the
+`useResolvedColors()` hook (theme colors under a provider, static light fallback
+otherwise). Converted so far: **Card, Button, Badge, Text, Input** (remaining
+components follow the same pattern in later rounds). Storybook has a Light/Dark
+toolbar toggle.
+
 ## Fonts
 
 **Web** — drop an `@font-face` rule pointing at `woosign-system/src/assets/fonts`:
