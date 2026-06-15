@@ -7,7 +7,7 @@ import {Modal, Pressable, Text} from 'react-native';
 import {render, screen, fireEvent, act} from '@testing-library/react-native';
 import {DialogProvider} from './DialogProvider.native';
 import {useDialog} from './useDialog';
-import type {ConfirmOptions, AlertOptions} from './types';
+import type {ConfirmOptions, AlertOptions, PromptOptions} from './types';
 
 function ConfirmHarness({
   options,
@@ -34,6 +34,21 @@ function AlertHarness({
   const dialog = useDialog();
   return (
     <Pressable onPress={() => onPromise(dialog.alert(options))}>
+      <Text>open</Text>
+    </Pressable>
+  );
+}
+
+function PromptHarness({
+  options,
+  onPromise,
+}: {
+  options: PromptOptions;
+  onPromise: (p: Promise<string | null>) => void;
+}) {
+  const dialog = useDialog();
+  return (
+    <Pressable onPress={() => onPromise(dialog.prompt(options))}>
       <Text>open</Text>
     </Pressable>
   );
@@ -93,6 +108,41 @@ describe('DialogProvider (native)', () => {
       screen.UNSAFE_getByType(Modal).props.onRequestClose();
     });
     await expect(promise).resolves.toBe(false);
+  });
+
+  it('prompt() renders an input and resolves the typed value on confirm', async () => {
+    let promise!: Promise<string | null>;
+    render(
+      <DialogProvider>
+        <PromptHarness
+          options={{title: '이름', placeholder: '이름'}}
+          onPromise={p => {
+            promise = p;
+          }}
+        />
+      </DialogProvider>,
+    );
+    fireEvent.press(screen.getByText('open'));
+    fireEvent.changeText(screen.getByPlaceholderText('이름'), '커피');
+    fireEvent.press(screen.getByText('확인'));
+    await expect(promise).resolves.toBe('커피');
+  });
+
+  it('prompt() resolves null when cancelled', async () => {
+    let promise!: Promise<string | null>;
+    render(
+      <DialogProvider>
+        <PromptHarness
+          options={{title: '이름', placeholder: '이름'}}
+          onPromise={p => {
+            promise = p;
+          }}
+        />
+      </DialogProvider>,
+    );
+    fireEvent.press(screen.getByText('open'));
+    fireEvent.press(screen.getByText('취소'));
+    await expect(promise).resolves.toBeNull();
   });
 
   it('alert() resolves when the confirm button is pressed', async () => {
