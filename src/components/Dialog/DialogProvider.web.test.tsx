@@ -8,7 +8,7 @@ import userEvent from '@testing-library/user-event';
 import {DialogProvider} from './DialogProvider';
 import {useDialog} from './useDialog';
 import {colors} from '../../core/theme/tokens';
-import type {ConfirmOptions, AlertOptions} from './types';
+import type {ConfirmOptions, AlertOptions, PromptOptions} from './types';
 
 /** confirm()을 호출하고 그 Promise를 콜백으로 넘기는 소비자. */
 function ConfirmHarness({
@@ -34,6 +34,20 @@ function AlertHarness({
 }) {
   const dialog = useDialog();
   return <button onClick={() => onPromise(dialog.alert(options))}>open</button>;
+}
+
+/** prompt()을 호출하는 소비자. */
+function PromptHarness({
+  options,
+  onPromise,
+}: {
+  options: PromptOptions;
+  onPromise: (p: Promise<string | null>) => void;
+}) {
+  const dialog = useDialog();
+  return (
+    <button onClick={() => onPromise(dialog.prompt(options))}>open</button>
+  );
 }
 
 describe('DialogProvider (web)', () => {
@@ -142,6 +156,88 @@ describe('DialogProvider (web)', () => {
     expect(screen.getByRole('button', {name: '삭제'})).toHaveStyle({
       backgroundColor: colors.actionDanger,
     });
+  });
+
+  it('prompt() renders an input and resolves the typed value on confirm', async () => {
+    let promise!: Promise<string | null>;
+    render(
+      <DialogProvider>
+        <PromptHarness
+          options={{title: '이름을 입력하세요', placeholder: '이름'}}
+          onPromise={p => {
+            promise = p;
+          }}
+        />
+      </DialogProvider>,
+    );
+    await userEvent.click(screen.getByText('open'));
+    await userEvent.type(screen.getByPlaceholderText('이름'), '커피');
+    await userEvent.click(screen.getByRole('button', {name: '확인'}));
+    await expect(promise).resolves.toBe('커피');
+  });
+
+  it('prompt() resolves an empty string when confirmed with no input', async () => {
+    let promise!: Promise<string | null>;
+    render(
+      <DialogProvider>
+        <PromptHarness
+          options={{title: '이름', placeholder: '이름'}}
+          onPromise={p => {
+            promise = p;
+          }}
+        />
+      </DialogProvider>,
+    );
+    await userEvent.click(screen.getByText('open'));
+    await userEvent.click(screen.getByRole('button', {name: '확인'}));
+    await expect(promise).resolves.toBe('');
+  });
+
+  it('prompt() resolves null when the cancel button is clicked', async () => {
+    let promise!: Promise<string | null>;
+    render(
+      <DialogProvider>
+        <PromptHarness
+          options={{title: '이름', placeholder: '이름'}}
+          onPromise={p => {
+            promise = p;
+          }}
+        />
+      </DialogProvider>,
+    );
+    await userEvent.click(screen.getByText('open'));
+    await userEvent.click(screen.getByRole('button', {name: '취소'}));
+    await expect(promise).resolves.toBeNull();
+  });
+
+  it('prompt() resolves null when the scrim is clicked', async () => {
+    let promise!: Promise<string | null>;
+    render(
+      <DialogProvider>
+        <PromptHarness
+          options={{title: '이름', placeholder: '이름'}}
+          onPromise={p => {
+            promise = p;
+          }}
+        />
+      </DialogProvider>,
+    );
+    await userEvent.click(screen.getByText('open'));
+    await userEvent.click(screen.getByTestId('dialog-scrim'));
+    await expect(promise).resolves.toBeNull();
+  });
+
+  it('prompt() shows the provided defaultValue in the input', async () => {
+    render(
+      <DialogProvider>
+        <PromptHarness
+          options={{title: '이름', placeholder: '이름', defaultValue: '기존값'}}
+          onPromise={() => {}}
+        />
+      </DialogProvider>,
+    );
+    await userEvent.click(screen.getByText('open'));
+    expect(screen.getByPlaceholderText('이름')).toHaveValue('기존값');
   });
 
   it('queues dialogs: the second confirm shows only after the first is answered', async () => {

@@ -77,12 +77,28 @@ export interface AlertOptions {
   confirmText?: string;
 }
 
+/** useDialog().prompt(...) 옵션. */
+export interface PromptOptions {
+  title: ReactNode;
+  description?: ReactNode;
+  /** Input placeholder. */
+  placeholder?: string;
+  /** Input 초기값. 기본 ''. */
+  defaultValue?: string;
+  /** 확인 버튼 라벨. 기본 '확인'. */
+  confirmText?: string;
+  /** 취소 버튼 라벨. 기본 '취소'. */
+  cancelText?: string;
+}
+
 /** useDialog()가 반환하는 임퍼러티브 API. */
 export interface DialogApi {
   /** 확인=true, 취소/scrim/Esc=false. */
   confirm(options: ConfirmOptions): Promise<boolean>;
   /** 닫히면 resolve. */
   alert(options: AlertOptions): Promise<void>;
+  /** 확인=입력 문자열(빈 값이면 ''), 취소/scrim/Esc=null. */
+  prompt(options: PromptOptions): Promise<string | null>;
 }
 
 /** 내부 큐 엔트리 — id/resolve는 상태머신이 부여. */
@@ -98,6 +114,12 @@ export type DialogEntry =
       kind: 'alert';
       options: AlertOptions;
       resolve: () => void;
+    }
+  | {
+      id: string;
+      kind: 'prompt';
+      options: PromptOptions;
+      resolve: (value: string | null) => void;
     };
 
 export interface DialogProviderProps {

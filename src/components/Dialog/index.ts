@@ -13,6 +13,7 @@ export type {
   DialogApi,
   ConfirmOptions,
   AlertOptions,
+  PromptOptions,
   DialogProviderProps,
 } from './types';
 export {
