@@ -52,6 +52,18 @@ function Demo() {
         }}>
         alert 열기
       </Button>
+      <Button
+        variant="secondary"
+        onPress={async () => {
+          const name = await dialog.prompt({
+            title: '닉네임을 입력하세요',
+            description: '주문 화면에 표시됩니다.',
+            placeholder: '닉네임',
+          });
+          setResult(name === null ? 'prompt 취소됨' : `prompt → ${name}`);
+        }}>
+        prompt 열기
+      </Button>
       <Text>결과: {result}</Text>
     </Box>
   );
