@@ -9,6 +9,7 @@ import type {DialogApi} from './types';
  * const dialog = useDialog();
  * const ok = await dialog.confirm({title: '삭제할까요?', tone: 'destructive'});
  * await dialog.alert({title: '저장됐어요'});
+ * const name = await dialog.prompt({title: '닉네임', placeholder: '닉네임'});
  * ```
  */
 export function useDialog(): DialogApi {
