@@ -7,6 +7,7 @@ export * from './Card';
 export * from './Chip';
 export * from './Dialog';
 export * from './Divider';
+export * from './Drawer';
 export * from './Eyebrow';
 export * from './Fab';
 export * from './FeatureBand';
