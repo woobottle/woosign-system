@@ -142,4 +142,41 @@ describe('Dialog (web)', () => {
       backgroundColor: darkColors.card,
     });
   });
+
+  it('moves focus into the surface on open and restores it on close', () => {
+    function Wrap({open}: {open: boolean}) {
+      return (
+        <>
+          <button>트리거</button>
+          <Dialog open={open} onClose={() => {}}>
+            <Dialog.Footer>
+              <button>확인</button>
+            </Dialog.Footer>
+          </Dialog>
+        </>
+      );
+    }
+    const {rerender} = render(<Wrap open={false} />);
+    const trigger = screen.getByText('트리거');
+    trigger.focus();
+    rerender(<Wrap open />);
+    expect(screen.getByRole('button', {name: '확인'})).toHaveFocus();
+    rerender(<Wrap open={false} />);
+    expect(trigger).toHaveFocus();
+  });
+
+  it('traps Tab within the dialog surface', async () => {
+    render(
+      <Dialog open onClose={() => {}}>
+        <Dialog.Footer>
+          <button>취소</button>
+          <button>확인</button>
+        </Dialog.Footer>
+      </Dialog>,
+    );
+    expect(screen.getByRole('button', {name: '취소'})).toHaveFocus();
+    screen.getByRole('button', {name: '확인'}).focus();
+    await userEvent.tab();
+    expect(screen.getByRole('button', {name: '취소'})).toHaveFocus();
+  });
 });

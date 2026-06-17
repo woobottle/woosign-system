@@ -21,6 +21,7 @@ import {zIndex, shadowsCss} from '../../core/theme/tokens';
 import {mergeStyles} from '../../core/variants';
 import {cssifyWebStyles} from '../../core/utils/cssifyWebStyles';
 import {useResolvedColors} from '../../core/hooks';
+import {useFocusTrap} from '../../core/hooks/useFocusTrap';
 
 // Per-instance id source. `useId` would be cleaner but is React 18+, while the
 // library's peer range is `react >=17`. The dialog surface only renders behind
@@ -89,6 +90,12 @@ function DialogBase({
     return () => document.removeEventListener('keydown', onKeyDown);
   }, [open, closeOnEsc]);
 
+  // 열려 있는 동안 surface로 포커스를 가둔다(닫히면 직전 요소로 복원).
+  // mounted 게이트 후 surface가 그려지므로 open && mounted를 트랩 활성 신호로 쓴다
+  // — 그래야 직접 open 마운트에서도 container가 준비된 뒤 이펙트가 돈다.
+  const surfaceRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(surfaceRef, open && mounted);
+
   if (!open || !mounted || typeof document === 'undefined') {
     return null;
   }
@@ -110,6 +117,7 @@ function DialogBase({
           animation: 'wbDialogScrimIn 180ms ease-out',
         }}>
         <div
+          ref={surfaceRef}
           role="dialog"
           aria-modal="true"
           aria-labelledby={hasTitle ? titleId : undefined}
