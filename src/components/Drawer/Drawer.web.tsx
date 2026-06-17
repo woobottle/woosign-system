@@ -22,6 +22,7 @@ import {zIndex, shadowsCss, duration, easing} from '../../core/theme/tokens';
 import {mergeStyles} from '../../core/variants';
 import {cssifyWebStyles} from '../../core/utils/cssifyWebStyles';
 import {useResolvedColors} from '../../core/hooks';
+import {useFocusTrap} from '../../core/hooks/useFocusTrap';
 
 // Per-instance id source. useId는 react>=17 peer range에서 금지.
 let drawerIdCounter = 0;
@@ -80,6 +81,11 @@ function DrawerBase({
     return () => document.removeEventListener('keydown', onKeyDown);
   }, [open, closeOnEsc]);
 
+  // 열려 있는 동안 panel로 포커스를 가둔다(닫히면 직전 요소로 복원).
+  // mounted 게이트 후 panel이 그려지므로 open && mounted를 트랩 활성 신호로 쓴다.
+  const surfaceRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(surfaceRef, open && mounted);
+
   if (!open || !mounted || typeof document === 'undefined') return null;
 
   return createPortal(
@@ -98,6 +104,7 @@ function DrawerBase({
           animation: `wbDrawerScrimIn ${duration.normal}ms ease-out`,
         }}>
         <div
+          ref={surfaceRef}
           role="dialog"
           aria-modal="true"
           aria-labelledby={hasTitle ? titleId : undefined}

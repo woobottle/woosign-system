@@ -151,4 +151,26 @@ describe('Drawer (web)', () => {
     expect(typeof mod.DrawerBody).toBe('function');
     expect(typeof mod.DrawerFooter).toBe('function');
   });
+
+  it('moves focus into the panel on open and restores it on close', () => {
+    function Wrap({open}: {open: boolean}) {
+      return (
+        <>
+          <button>트리거</button>
+          <Drawer open={open} onClose={() => {}}>
+            <Drawer.Footer>
+              <button>닫기</button>
+            </Drawer.Footer>
+          </Drawer>
+        </>
+      );
+    }
+    const {rerender} = render(<Wrap open={false} />);
+    const trigger = screen.getByText('트리거');
+    trigger.focus();
+    rerender(<Wrap open />);
+    expect(screen.getByRole('button', {name: '닫기'})).toHaveFocus();
+    rerender(<Wrap open={false} />);
+    expect(trigger).toHaveFocus();
+  });
 });
