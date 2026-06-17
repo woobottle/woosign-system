@@ -52,7 +52,9 @@ select:not([disabled]), textarea:not([disabled]),
 
 ## 배선
 
-각 web 오버레이의 surface `<div>`에 `ref={surfaceRef}`(Dialog/Drawer는 신규 ref, BottomSheet는 기존 `surfaceRef` 재사용)를 달고, 컴포넌트 본문에서 `useFocusTrap(surfaceRef, open)` 호출. scrim 클릭/Esc/aria/슬라이드 등 기존 로직은 전부 무변경. 초기 포커스는 **첫 포커서블(폴백 컨테이너)**.
+각 web 오버레이의 surface `<div>`에 `ref={surfaceRef}`(Dialog/Drawer는 신규 ref, BottomSheet는 기존 `surfaceRef` 재사용)를 달고, 컴포넌트 본문에서 `useFocusTrap(surfaceRef, open && mounted)` 호출. scrim 클릭/Esc/aria/슬라이드 등 기존 로직은 전부 무변경. 초기 포커스는 **첫 포커서블(폴백 컨테이너)**.
+
+> 구현 정정: 활성 신호는 `open`이 아니라 **`open && mounted`**다. 세 오버레이는 SSR/portal용 `mounted` 게이트가 있어 surface가 한 렌더 늦게 그려진다. `open`만 쓰면 직접 `open` 마운트 시 훅 이펙트가 처음 돌 때 `containerRef.current`가 아직 null이고, deps가 안 바뀌어 재실행되지 않아 트랩이 안 걸린다. `open && mounted`로 하면 mounted 확정(surface 존재) 후 활성 전이가 일어나 정상 동작한다(훅 자체는 무변경).
 
 ## 테스트 (jsdom, `@testing-library/react` + `userEvent`)
 
