@@ -215,4 +215,26 @@ describe('BottomSheet (web)', () => {
     expect(typeof mod.BottomSheetBody).toBe('function');
     expect(typeof mod.BottomSheetFooter).toBe('function');
   });
+
+  it('moves focus into the sheet on open and restores it on close', () => {
+    function Wrap({open}: {open: boolean}) {
+      return (
+        <>
+          <button>트리거</button>
+          <BottomSheet open={open} onClose={() => {}}>
+            <BottomSheet.Footer>
+              <button>확인</button>
+            </BottomSheet.Footer>
+          </BottomSheet>
+        </>
+      );
+    }
+    const {rerender} = render(<Wrap open={false} />);
+    const trigger = screen.getByText('트리거');
+    trigger.focus();
+    rerender(<Wrap open />);
+    expect(screen.getByRole('button', {name: '확인'})).toHaveFocus();
+    rerender(<Wrap open={false} />);
+    expect(trigger).toHaveFocus();
+  });
 });

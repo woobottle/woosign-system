@@ -27,6 +27,7 @@ import {zIndex, shadowsCss, duration, easing} from '../../core/theme/tokens';
 import {mergeStyles} from '../../core/variants';
 import {cssifyWebStyles} from '../../core/utils/cssifyWebStyles';
 import {useResolvedColors} from '../../core/hooks';
+import {useFocusTrap} from '../../core/hooks/useFocusTrap';
 
 // Per-instance id source. `useId`는 React 18+라 peer range(react >=17)에서 금지.
 // 표면은 client-only `mounted` 게이트 뒤에서만 렌더되므로 SSR 불일치 없음.
@@ -102,6 +103,10 @@ function BottomSheetBase({
   const dragRef = useRef({active: false, startY: 0, startTime: 0});
   const [dragY, setDragY] = useState(0);
   const [snapping, setSnapping] = useState(false);
+
+  // 열려 있는 동안 surface로 포커스를 가둔다(닫히면 직전 요소로 복원).
+  // mounted 게이트 후 surface가 그려지므로 open && mounted를 트랩 활성 신호로 쓴다.
+  useFocusTrap(surfaceRef, open && mounted);
 
   if (!open || !mounted || typeof document === 'undefined') return null;
 
