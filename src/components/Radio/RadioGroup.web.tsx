@@ -21,7 +21,11 @@ export function RadioGroup({
   );
   return (
     <RadioContext.Provider value={ctx}>
-      <div role="radiogroup" className={className} style={style} data-testid={testID}>
+      <div
+        role="radiogroup"
+        className={className}
+        style={style}
+        data-testid={testID}>
         {children}
       </div>
     </RadioContext.Provider>

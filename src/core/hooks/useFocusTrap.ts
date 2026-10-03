@@ -29,9 +29,13 @@ export function useFocusTrap(
   const previousRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    if (!active) return;
+    if (!active) {
+      return;
+    }
     const container = containerRef.current;
-    if (!container) return;
+    if (!container) {
+      return;
+    }
 
     previousRef.current = document.activeElement as HTMLElement | null;
 
@@ -44,7 +48,9 @@ export function useFocusTrap(
     }
 
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key !== 'Tab') return;
+      if (e.key !== 'Tab') {
+        return;
+      }
       const els = getFocusable(container);
       if (els.length === 0) {
         e.preventDefault();

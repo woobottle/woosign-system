@@ -30,9 +30,9 @@ describe('Checkbox (native)', () => {
   it('renders the dash glyph and mixed a11y state when indeterminate', () => {
     render(<Checkbox indeterminate testID="cb" />);
     expect(screen.getByText('–')).toBeTruthy();
-    expect(
-      screen.getByTestId('cb').props.accessibilityState.checked,
-    ).toBe('mixed');
+    expect(screen.getByTestId('cb').props.accessibilityState.checked).toBe(
+      'mixed',
+    );
   });
 
   it('uses the dark actionPrimary fill when checked in dark mode', () => {

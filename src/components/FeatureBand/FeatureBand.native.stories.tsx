@@ -12,7 +12,10 @@ const meta: Meta<typeof FeatureBand> = {
   component: FeatureBand,
   tags: ['autodocs'],
   argTypes: {
-    tone: {control: 'select', options: ['inverse', 'ember', 'reward', 'forest']},
+    tone: {
+      control: 'select',
+      options: ['inverse', 'ember', 'reward', 'forest'],
+    },
     rounded: {control: 'boolean'},
   },
   args: {tone: 'inverse', rounded: true},
@@ -24,11 +27,19 @@ export const Members: Story = {
   render: args => (
     <FeatureBand {...args}>
       <Eyebrow tone="gold">Members</Eyebrow>
-      <Text style={{fontSize: 28, fontWeight: '600', color: '#FFFFFF', marginTop: 8}}>
+      <Text
+        style={{
+          fontSize: 28,
+          fontWeight: '600',
+          color: '#FFFFFF',
+          marginTop: 8,
+        }}>
         Warmer mornings, on us.
       </Text>
-      <Text style={{fontSize: 14, color: 'rgba(255,255,255,0.70)', marginTop: 8}}>
-        Earn stars on every order. Unlock your next drink before the week is out.
+      <Text
+        style={{fontSize: 14, color: 'rgba(255,255,255,0.70)', marginTop: 8}}>
+        Earn stars on every order. Unlock your next drink before the week is
+        out.
       </Text>
       <Box marginTop={16}>
         <Progress value={0.5} tone="gold" surface="inverse" />
@@ -46,7 +57,13 @@ export const Ember: Story = {
   render: args => (
     <FeatureBand {...args}>
       <Eyebrow tone="gold">Today only</Eyebrow>
-      <Text style={{fontSize: 28, fontWeight: '600', color: '#FFFFFF', marginTop: 8}}>
+      <Text
+        style={{
+          fontSize: 28,
+          fontWeight: '600',
+          color: '#FFFFFF',
+          marginTop: 8,
+        }}>
         Double stars on breakfast.
       </Text>
     </FeatureBand>

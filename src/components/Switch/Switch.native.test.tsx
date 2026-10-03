@@ -4,15 +4,18 @@
  * 불가능하다 — 다크 배선은 web Switch 다크 테스트 + 공유 getTrackColors(colors)
  * 팩토리로 커버된다. 여기서는 네이티브 렌더가 깨지지 않는지만 본다.
  */
-import {render, screen} from '@testing-library/react-native';
+import {render, screen, act} from '@testing-library/react-native';
 import {Switch} from './Switch.native';
 import {ThemeProvider} from '../../core/theme/ThemeContext';
 
 describe('Switch (native)', () => {
+  beforeEach(() => jest.useFakeTimers());
+  afterEach(() => {
+    act(() => jest.runOnlyPendingTimers());
+    jest.useRealTimers();
+  });
   it('renders with a label (light smoke)', () => {
-    render(
-      <Switch checked={false} onCheckedChange={() => {}} label="알림" />,
-    );
+    render(<Switch checked={false} onCheckedChange={() => {}} label="알림" />);
     expect(screen.getByText('알림')).toBeTruthy();
   });
 

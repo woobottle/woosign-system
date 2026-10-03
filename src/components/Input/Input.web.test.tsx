@@ -66,3 +66,26 @@ describe('Input (web)', () => {
     expect(container).toHaveStyle({backgroundColor: darkColors.card});
   });
 });
+
+it('grows the container for multiline inputs', () => {
+  render(<Input multiline numberOfLines={4} testID="memo" />);
+  expect(screen.getByTestId('memo').parentElement).toHaveStyle({
+    height: 'auto',
+    minHeight: '116px',
+  });
+});
+
+it('updates an uncontrolled date input from the calendar and closes on Escape', () => {
+  render(<Input type="date" defaultValue="2026-10-10" testID="date" />);
+  fireEvent.focus(screen.getByTestId('date'));
+  fireEvent.click(screen.getByRole('button', {name: '2026-10-11'}));
+  expect(screen.getByTestId('date')).toHaveValue('2026-10-11');
+  fireEvent.focus(screen.getByTestId('date'));
+  fireEvent.keyDown(screen.getByTestId('date'), {key: 'Escape'});
+  expect(screen.queryByRole('grid')).toBeNull();
+});
+it('does not open a read-only date picker', () => {
+  render(<Input type="date" readOnly testID="date" />);
+  fireEvent.focus(screen.getByTestId('date'));
+  expect(screen.queryByRole('grid')).toBeNull();
+});

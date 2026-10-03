@@ -13,7 +13,15 @@ const meta: Meta<typeof Card> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'outline', 'ghost', 'warm', 'ceramic', 'inverse', 'forest'],
+      options: [
+        'default',
+        'outline',
+        'ghost',
+        'warm',
+        'ceramic',
+        'inverse',
+        'forest',
+      ],
     },
     fullWidth: {control: 'boolean'},
     disabled: {control: 'boolean'},
@@ -68,7 +76,9 @@ export const Interactive: Story = {
     <Card onPress={() => {}}>
       <Card.Header>
         <Card.Title>눌러보세요</Card.Title>
-        <Card.Description>onPress가 있는 인터랙티브 카드입니다.</Card.Description>
+        <Card.Description>
+          onPress가 있는 인터랙티브 카드입니다.
+        </Card.Description>
       </Card.Header>
     </Card>
   ),

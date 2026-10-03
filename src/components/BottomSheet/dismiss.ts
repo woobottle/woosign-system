@@ -26,6 +26,8 @@ export function shouldDismiss(
     sheetHeight > 0
       ? sheetHeight * DISMISS_DISTANCE_RATIO
       : DISMISS_FALLBACK_DISTANCE;
-  if (dy > distanceThreshold) return true;
+  if (dy > distanceThreshold) {
+    return true;
+  }
   return vy > DISMISS_VELOCITY && dy >= FLICK_MIN_DISTANCE;
 }

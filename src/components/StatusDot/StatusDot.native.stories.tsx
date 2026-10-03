@@ -8,7 +8,10 @@ const meta: Meta<typeof StatusDot> = {
   component: StatusDot,
   tags: ['autodocs'],
   argTypes: {
-    tone: {control: 'select', options: ['success', 'danger', 'brand', 'neutral']},
+    tone: {
+      control: 'select',
+      options: ['success', 'danger', 'brand', 'neutral'],
+    },
     size: {control: 'select', options: ['sm', 'default', 'lg']},
   },
   args: {tone: 'success', children: '✓'},

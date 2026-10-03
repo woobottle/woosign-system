@@ -29,7 +29,9 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxWebProps>(
     ref,
   ) {
     const handleClick = useCallback(() => {
-      if (!disabled) onCheckedChange?.(!checked);
+      if (!disabled) {
+        onCheckedChange?.(!checked);
+      }
     }, [disabled, checked, onCheckedChange]);
 
     const colors = useResolvedColors();

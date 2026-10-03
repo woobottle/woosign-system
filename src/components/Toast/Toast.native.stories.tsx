@@ -8,7 +8,10 @@ const meta: Meta<typeof Toast> = {
   component: Toast,
   tags: ['autodocs'],
   argTypes: {
-    tone: {control: 'select', options: ['success', 'danger', 'brand', 'neutral']},
+    tone: {
+      control: 'select',
+      options: ['success', 'danger', 'brand', 'neutral'],
+    },
     hideIcon: {control: 'boolean'},
   },
   args: {tone: 'success', title: 'Order placed'},
@@ -35,8 +38,16 @@ export const Danger: Story = {
 export const Stack: Story = {
   render: () => (
     <Box flexDirection="column" gap={12}>
-      <Toast tone="success" title="Order placed" description="Ready in 5 min." />
-      <Toast tone="danger" title="Payment declined" description="Try another card." />
+      <Toast
+        tone="success"
+        title="Order placed"
+        description="Ready in 5 min."
+      />
+      <Toast
+        tone="danger"
+        title="Payment declined"
+        description="Try another card."
+      />
       <Toast tone="brand" title="Stars earned" description="+12 stars added." />
     </Box>
   ),

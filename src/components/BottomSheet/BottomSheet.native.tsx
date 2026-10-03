@@ -107,6 +107,7 @@ function BottomSheetBase({
       animationType="slide"
       onRequestClose={closeOnEsc ? onClose : () => {}}>
       <Pressable
+        accessible={false}
         testID={testID ? `${testID}-scrim` : 'bottomsheet-scrim'}
         onPress={closeOnScrimClick ? onClose : undefined}
         style={styles.scrim}>
@@ -116,6 +117,9 @@ function BottomSheetBase({
             sheetHeightRef.current = e.nativeEvent.layout.height;
           }}>
           <Pressable
+            accessible={false}
+            accessibilityViewIsModal
+            onAccessibilityEscape={closeOnEsc ? onClose : undefined}
             testID={testID}
             onPress={() => {}}
             style={[

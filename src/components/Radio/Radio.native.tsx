@@ -21,7 +21,14 @@ import {
 import {useResolvedColors} from '../../core/hooks';
 
 export const Radio = forwardRef<View, RadioNativeProps>(function Radio(
-  {value, label, disabled: itemDisabled = false, size = 'default', style, testID},
+  {
+    value,
+    label,
+    disabled: itemDisabled = false,
+    size = 'default',
+    style,
+    testID,
+  },
   ref,
 ) {
   const ctx = useContext(RadioContext);
@@ -29,7 +36,9 @@ export const Radio = forwardRef<View, RadioNativeProps>(function Radio(
   const disabled = itemDisabled || !!ctx?.disabled;
 
   const handlePress = useCallback(() => {
-    if (!disabled) ctx?.onValueChange?.(value);
+    if (!disabled) {
+      ctx?.onValueChange?.(value);
+    }
   }, [disabled, ctx, value]);
 
   const colors = useResolvedColors();

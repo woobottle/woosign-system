@@ -90,9 +90,13 @@ function BottomSheetBase({
 
   // Esc 리스너는 열려 있고 closeOnEsc일 때만 등록
   useEffect(() => {
-    if (!open || !closeOnEsc) return;
+    if (!open || !closeOnEsc) {
+      return;
+    }
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onCloseRef.current();
+      if (e.key === 'Escape') {
+        onCloseRef.current();
+      }
     };
     document.addEventListener('keydown', onKeyDown);
     return () => document.removeEventListener('keydown', onKeyDown);
@@ -108,7 +112,9 @@ function BottomSheetBase({
   // mounted 게이트 후 surface가 그려지므로 open && mounted를 트랩 활성 신호로 쓴다.
   useFocusTrap(surfaceRef, open && mounted);
 
-  if (!open || !mounted || typeof document === 'undefined') return null;
+  if (!open || !mounted || typeof document === 'undefined') {
+    return null;
+  }
 
   const onHandlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     dragRef.current = {active: true, startY: e.clientY, startTime: Date.now()};
@@ -118,12 +124,16 @@ function BottomSheetBase({
   };
 
   const onHandlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!dragRef.current.active) return;
+    if (!dragRef.current.active) {
+      return;
+    }
     setDragY(Math.max(0, e.clientY - dragRef.current.startY));
   };
 
   const onHandlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!dragRef.current.active) return;
+    if (!dragRef.current.active) {
+      return;
+    }
     dragRef.current.active = false;
     const dy = Math.max(0, e.clientY - dragRef.current.startY);
     const elapsed = Math.max(1, Date.now() - dragRef.current.startTime);
@@ -139,7 +149,9 @@ function BottomSheetBase({
 
   // 제스처가 OS에 뺏기는 등 pointerup 없이 끝나면 디스미스 판정 없이 복귀만 한다
   const onHandlePointerCancel = () => {
-    if (!dragRef.current.active) return;
+    if (!dragRef.current.active) {
+      return;
+    }
     dragRef.current.active = false;
     setSnapping(true);
     setDragY(0);

@@ -73,9 +73,13 @@ function DrawerBase({
   }, []);
 
   useEffect(() => {
-    if (!open || !closeOnEsc) return;
+    if (!open || !closeOnEsc) {
+      return;
+    }
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onCloseRef.current();
+      if (e.key === 'Escape') {
+        onCloseRef.current();
+      }
     };
     document.addEventListener('keydown', onKeyDown);
     return () => document.removeEventListener('keydown', onKeyDown);
@@ -86,7 +90,9 @@ function DrawerBase({
   const surfaceRef = useRef<HTMLDivElement>(null);
   useFocusTrap(surfaceRef, open && mounted);
 
-  if (!open || !mounted || typeof document === 'undefined') return null;
+  if (!open || !mounted || typeof document === 'undefined') {
+    return null;
+  }
 
   return createPortal(
     <DrawerContext.Provider value={contextValue}>

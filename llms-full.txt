@@ -487,3 +487,812 @@ pnpm build
 ```bash
 pnpm typecheck
 ```
+
+## Extended component contracts
+
+Stateful inputs support controlled/uncontrolled values. Dates are local YYYY-MM-DD.
+Native overlays reuse BottomSheet. Web interactions include keyboard navigation.
+
+### Avatar
+
+Source: src/components/Avatar/types.ts
+
+```ts
+import type {ReactNode, CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+
+export interface AvatarBaseProps {
+  src?: string;
+  name?: string;
+  fallback?: ReactNode;
+  size?: number;
+  testID?: string;
+}
+export interface AvatarWebProps extends AvatarBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface AvatarNativeProps extends AvatarBaseProps {
+  style?: ViewStyle;
+}
+export type AvatarProps = AvatarBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### AvatarGroup
+
+Source: src/components/AvatarGroup/types.ts
+
+```ts
+import type {CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+
+export interface AvatarGroupBaseProps {
+  items: readonly {src?: string; name: string}[];
+  max?: number;
+  size?: number;
+  testID?: string;
+}
+export interface AvatarGroupWebProps extends AvatarGroupBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface AvatarGroupNativeProps extends AvatarGroupBaseProps {
+  style?: ViewStyle;
+}
+export type AvatarGroupProps = AvatarGroupBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### Skeleton
+
+Source: src/components/Skeleton/types.ts
+
+```ts
+import type {CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+
+export interface SkeletonBaseProps {
+  width?: number;
+  height?: number;
+  circle?: boolean;
+  testID?: string;
+}
+export interface SkeletonWebProps extends SkeletonBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface SkeletonNativeProps extends SkeletonBaseProps {
+  style?: ViewStyle;
+}
+export type SkeletonProps = SkeletonBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### Spinner
+
+Source: src/components/Spinner/types.ts
+
+```ts
+import type {CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+
+export interface SpinnerBaseProps {
+  size?: number;
+  label?: string;
+  testID?: string;
+}
+export interface SpinnerWebProps extends SpinnerBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface SpinnerNativeProps extends SpinnerBaseProps {
+  style?: ViewStyle;
+}
+export type SpinnerProps = SpinnerBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### Alert
+
+Source: src/components/Alert/types.ts
+
+```ts
+import type {ReactNode, CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+
+export interface AlertBaseProps {
+  title?: string;
+  children?: ReactNode;
+  tone?: 'info' | 'success' | 'danger';
+  onClose?: () => void;
+  testID?: string;
+}
+export interface AlertWebProps extends AlertBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface AlertNativeProps extends AlertBaseProps {
+  style?: ViewStyle;
+}
+export type AlertProps = AlertBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### EmptyState
+
+Source: src/components/EmptyState/types.ts
+
+```ts
+import type {ReactNode, CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+
+export interface EmptyStateBaseProps {
+  title: string;
+  description?: string;
+  icon?: ReactNode;
+  action?: ReactNode;
+  testID?: string;
+}
+export interface EmptyStateWebProps extends EmptyStateBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface EmptyStateNativeProps extends EmptyStateBaseProps {
+  style?: ViewStyle;
+}
+export type EmptyStateProps = EmptyStateBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### Label
+
+Source: src/components/Label/types.ts
+
+```ts
+import type {ReactNode, CSSProperties} from 'react';
+import type {TextStyle} from 'react-native';
+
+export interface LabelBaseProps {
+  children?: ReactNode;
+  htmlFor?: string;
+  required?: boolean;
+  disabled?: boolean;
+  testID?: string;
+}
+export interface LabelWebProps extends LabelBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface LabelNativeProps extends LabelBaseProps {
+  style?: TextStyle;
+}
+export type LabelProps = LabelBaseProps & {
+  style?: CSSProperties | TextStyle;
+  className?: string;
+};
+```
+
+### FormField
+
+Source: src/components/FormField/types.ts
+
+```ts
+import type {ReactNode, CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+export interface FormFieldInputProps {
+  id: string;
+  required?: boolean;
+  disabled?: boolean;
+  'aria-invalid': boolean;
+  'aria-describedby'?: string;
+  accessibilityLabel: string;
+  accessibilityHint?: string;
+}
+
+export interface FormFieldBaseProps {
+  /** Stable id for input/label/help associations. */
+  id: string;
+  label: string;
+  description?: string;
+  error?: string;
+  required?: boolean;
+  disabled?: boolean;
+  /** Render input using the provided accessibility attributes. */
+  children: (props: FormFieldInputProps) => ReactNode;
+  testID?: string;
+}
+export interface FormFieldWebProps extends FormFieldBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface FormFieldNativeProps extends FormFieldBaseProps {
+  style?: ViewStyle;
+}
+export type FormFieldProps = FormFieldBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### Accordion
+
+Source: src/components/Accordion/types.ts
+
+```ts
+import type {ReactNode, CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+export interface AccordionItem {
+  value: string;
+  title: string;
+  content: ReactNode;
+  disabled?: boolean;
+}
+
+export interface AccordionBaseProps {
+  id: string;
+  items: readonly AccordionItem[];
+  value?: readonly string[];
+  defaultValue?: readonly string[];
+  onValueChange?: (value: readonly string[]) => void;
+  multiple?: boolean;
+  disabled?: boolean;
+  testID?: string;
+}
+export interface AccordionWebProps extends AccordionBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface AccordionNativeProps extends AccordionBaseProps {
+  style?: ViewStyle;
+}
+export type AccordionProps = AccordionBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### Collapsible
+
+Source: src/components/Collapsible/types.ts
+
+```ts
+import type {ReactNode, CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+
+export interface CollapsibleBaseProps {
+  id: string;
+  title: string;
+  children?: ReactNode;
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  disabled?: boolean;
+  testID?: string;
+}
+export interface CollapsibleWebProps extends CollapsibleBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface CollapsibleNativeProps extends CollapsibleBaseProps {
+  style?: ViewStyle;
+}
+export type CollapsibleProps = CollapsibleBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### ListItem
+
+Source: src/components/ListItem/types.ts
+
+```ts
+import type {ReactNode, CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+
+export interface ListItemBaseProps {
+  title: string;
+  description?: string;
+  leading?: ReactNode;
+  trailing?: ReactNode;
+  onPress?: () => void;
+  disabled?: boolean;
+  testID?: string;
+}
+export interface ListItemWebProps extends ListItemBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface ListItemNativeProps extends ListItemBaseProps {
+  style?: ViewStyle;
+}
+export type ListItemProps = ListItemBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### AspectRatio
+
+Source: src/components/AspectRatio/types.ts
+
+```ts
+import type {ReactNode, CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+
+export interface AspectRatioBaseProps {
+  ratio?: number;
+  children?: ReactNode;
+  testID?: string;
+}
+export interface AspectRatioWebProps extends AspectRatioBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface AspectRatioNativeProps extends AspectRatioBaseProps {
+  style?: ViewStyle;
+}
+export type AspectRatioProps = AspectRatioBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### ScrollArea
+
+Source: src/components/ScrollArea/types.ts
+
+```ts
+import type {ReactNode, CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+
+export interface ScrollAreaBaseProps {
+  children?: ReactNode;
+  horizontal?: boolean;
+  maxHeight?: number;
+  label?: string;
+  testID?: string;
+}
+export interface ScrollAreaWebProps extends ScrollAreaBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface ScrollAreaNativeProps extends ScrollAreaBaseProps {
+  style?: ViewStyle;
+}
+export type ScrollAreaProps = ScrollAreaBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### Breadcrumb
+
+Source: src/components/Breadcrumb/types.ts
+
+```ts
+import type {CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+  onPress?: () => void;
+}
+
+export interface BreadcrumbBaseProps {
+  items: readonly BreadcrumbItem[];
+  label?: string;
+  testID?: string;
+}
+export interface BreadcrumbWebProps extends BreadcrumbBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface BreadcrumbNativeProps extends BreadcrumbBaseProps {
+  style?: ViewStyle;
+}
+export type BreadcrumbProps = BreadcrumbBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### Pagination
+
+Source: src/components/Pagination/types.ts
+
+```ts
+import type {CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+
+export interface PaginationBaseProps {
+  totalPages: number;
+  page?: number;
+  defaultPage?: number;
+  onPageChange?: (page: number) => void;
+  disabled?: boolean;
+  label?: string;
+  testID?: string;
+}
+export interface PaginationWebProps extends PaginationBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface PaginationNativeProps extends PaginationBaseProps {
+  style?: ViewStyle;
+}
+export type PaginationProps = PaginationBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### SegmentedControl
+
+Source: src/components/SegmentedControl/types.ts
+
+```ts
+import type {CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+
+export interface SegmentedControlBaseProps {
+  items: readonly {value: string; label: string; disabled?: boolean}[];
+  value?: string;
+  defaultValue?: string;
+  onValueChange?: (value: string) => void;
+  disabled?: boolean;
+  label: string;
+  testID?: string;
+}
+export interface SegmentedControlWebProps extends SegmentedControlBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface SegmentedControlNativeProps extends SegmentedControlBaseProps {
+  style?: ViewStyle;
+}
+export type SegmentedControlProps = SegmentedControlBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### Toggle
+
+Source: src/components/Toggle/types.ts
+
+```ts
+import type {ReactNode, CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+
+export interface ToggleBaseProps {
+  children?: ReactNode;
+  label: string;
+  pressed?: boolean;
+  defaultPressed?: boolean;
+  onPressedChange?: (pressed: boolean) => void;
+  disabled?: boolean;
+  testID?: string;
+}
+export interface ToggleWebProps extends ToggleBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface ToggleNativeProps extends ToggleBaseProps {
+  style?: ViewStyle;
+}
+export type ToggleProps = ToggleBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### ToggleGroup
+
+Source: src/components/ToggleGroup/types.ts
+
+```ts
+import type {CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+
+export interface ToggleGroupBaseProps {
+  items: readonly {value: string; label: string; disabled?: boolean}[];
+  value?: readonly string[];
+  defaultValue?: readonly string[];
+  onValueChange?: (value: readonly string[]) => void;
+  multiple?: boolean;
+  disabled?: boolean;
+  label: string;
+  testID?: string;
+}
+export interface ToggleGroupWebProps extends ToggleGroupBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface ToggleGroupNativeProps extends ToggleGroupBaseProps {
+  style?: ViewStyle;
+}
+export type ToggleGroupProps = ToggleGroupBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### Slider
+
+Source: src/components/Slider/types.ts
+
+```ts
+import type {CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+
+export interface SliderBaseProps {
+  value?: number;
+  defaultValue?: number;
+  onValueChange?: (value: number) => void;
+  onValueCommit?: (value: number) => void;
+  min?: number;
+  max?: number;
+  step?: number;
+  disabled?: boolean;
+  label: string;
+  testID?: string;
+}
+export interface SliderWebProps extends SliderBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface SliderNativeProps extends SliderBaseProps {
+  style?: ViewStyle;
+}
+export type SliderProps = SliderBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### InputOTP
+
+Source: src/components/InputOTP/types.ts
+
+```ts
+import type {CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+
+export interface InputOTPBaseProps {
+  value?: string;
+  defaultValue?: string;
+  onChangeText?: (value: string) => void;
+  onComplete?: (value: string) => void;
+  length?: number;
+  disabled?: boolean;
+  label?: string;
+  error?: boolean;
+  testID?: string;
+}
+export interface InputOTPWebProps extends InputOTPBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface InputOTPNativeProps extends InputOTPBaseProps {
+  style?: ViewStyle;
+}
+export type InputOTPProps = InputOTPBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### Combobox
+
+Source: src/components/Combobox/types.ts
+
+```ts
+import type {CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+
+export interface ComboboxBaseProps {
+  id: string;
+  options: readonly {value: string; label: string; disabled?: boolean}[];
+  value?: string;
+  defaultValue?: string;
+  onValueChange?: (value: string) => void;
+  label: string;
+  placeholder?: string;
+  searchPlaceholder?: string;
+  emptyMessage?: string;
+  disabled?: boolean;
+  error?: boolean;
+  name?: string;
+  testID?: string;
+}
+export interface ComboboxWebProps extends ComboboxBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface ComboboxNativeProps extends ComboboxBaseProps {
+  style?: ViewStyle;
+}
+export type ComboboxProps = ComboboxBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### Calendar
+
+Source: src/components/Calendar/types.ts
+
+```ts
+import type {CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+
+export interface CalendarBaseProps {
+  value?: string;
+  defaultValue?: string;
+  onValueChange?: (value: string) => void;
+  defaultMonth?: string;
+  min?: string;
+  max?: string;
+  disabled?: boolean;
+  isDateDisabled?: (date: string) => boolean;
+  locale?: 'ko' | 'en';
+  testID?: string;
+}
+export interface CalendarWebProps extends CalendarBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface CalendarNativeProps extends CalendarBaseProps {
+  style?: ViewStyle;
+}
+export type CalendarProps = CalendarBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### DatePicker
+
+Source: src/components/DatePicker/types.ts
+
+```ts
+import type {CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+
+export interface DatePickerBaseProps {
+  value?: string;
+  defaultValue?: string;
+  onValueChange?: (value: string) => void;
+  min?: string;
+  max?: string;
+  isDateDisabled?: (date: string) => boolean;
+  locale?: 'ko' | 'en';
+  disabled?: boolean;
+  label: string;
+  placeholder?: string;
+  name?: string;
+  testID?: string;
+}
+export interface DatePickerWebProps extends DatePickerBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface DatePickerNativeProps extends DatePickerBaseProps {
+  style?: ViewStyle;
+}
+export type DatePickerProps = DatePickerBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### Tooltip
+
+Source: src/components/Tooltip/types.ts
+
+```ts
+import type {ReactNode, CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+
+export interface TooltipBaseProps {
+  id: string;
+  trigger: ReactNode;
+  content: string;
+  disabled?: boolean;
+  testID?: string;
+}
+export interface TooltipWebProps extends TooltipBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface TooltipNativeProps extends TooltipBaseProps {
+  style?: ViewStyle;
+}
+export type TooltipProps = TooltipBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### Popover
+
+Source: src/components/Popover/types.ts
+
+```ts
+import type {ReactNode, CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+
+export interface PopoverBaseProps {
+  trigger: ReactNode;
+  label: string;
+  children?: ReactNode;
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  disabled?: boolean;
+  testID?: string;
+}
+export interface PopoverWebProps extends PopoverBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface PopoverNativeProps extends PopoverBaseProps {
+  style?: ViewStyle;
+}
+export type PopoverProps = PopoverBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```
+
+### DropdownMenu
+
+Source: src/components/DropdownMenu/types.ts
+
+```ts
+import type {ReactNode, CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+export interface DropdownMenuItem {
+  value: string;
+  label: string;
+  onSelect?: () => void;
+  disabled?: boolean;
+  destructive?: boolean;
+}
+
+export interface DropdownMenuBaseProps {
+  trigger: ReactNode;
+  label: string;
+  items: readonly DropdownMenuItem[];
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  disabled?: boolean;
+  testID?: string;
+}
+export interface DropdownMenuWebProps extends DropdownMenuBaseProps {
+  style?: CSSProperties;
+  className?: string;
+}
+export interface DropdownMenuNativeProps extends DropdownMenuBaseProps {
+  style?: ViewStyle;
+}
+export type DropdownMenuProps = DropdownMenuBaseProps & {
+  style?: CSSProperties | ViewStyle;
+  className?: string;
+};
+```

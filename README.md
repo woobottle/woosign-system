@@ -84,6 +84,10 @@ The same code renders on web and native — platform extensions
 | **Card**   | `default` (white island), `outline`, `ghost`, `warm`, `ceramic`, `inverse` |
 | **Badge**  | `default`, `secondary`, `brand`, `gold`, `success`, `reward`, `outline`, `destructive` |
 | **Input**  | `default`, `error` · `sm / default / lg` |
+| **Textarea** | Multiline input · `default`, `error` · `sm / default / lg` |
+| **Select** | Single selection · HTML select (web), BottomSheet choices (native) |
+| **Checkbox** | Checked / unchecked / indeterminate |
+| **RadioGroup / Radio** | Single-choice groups |
 | **Switch** | `default` · `sm / default / lg` |
 | **Text**   | `h1–h4`, `p`, `lead`, `large`, `small`, `muted` |
 | **Box**    | Flex-first layout primitive with padding/margin/gap/radius tokens |
@@ -110,6 +114,10 @@ The same code renders on web and native — platform extensions
 | **Dialog** | Controlled modal — portal scrim (web) / RN Modal (native), Esc & Android back, `Header/Title/Description/Body/Footer` |
 | **DialogProvider / useDialog** | Imperative layer over Dialog — `await useDialog().confirm({...})` → `Promise<boolean>`, `.alert({...})` → `Promise<void>`, queued one-at-a-time |
 | **BottomSheet** | Controlled bottom sheet — drag-to-dismiss grabber handle, content-based height with `maxHeightRatio` cap, same subcomponent API |
+
+| **Drawer** | Controlled side panel, shared overlay sections |
+
+`useDialog().prompt({...})` resolves to the submitted text or `null` on cancel.
 
 All components expose the same `ButtonProps`/`CardProps`/etc. on both
 platforms — TypeScript is the contract.
@@ -201,7 +209,7 @@ pnpm storybook:native:ios     # or :android
 pnpm build        # build with react-native-builder-bob (cjs + esm + dts)
 pnpm typecheck    # tsc --noEmit
 pnpm lint         # eslint src/**
-pnpm test         # jest smoke tests (tokens + resolveFontFamily)
+pnpm test         # Jest behavior tests (web + native + shared utilities)
 ```
 
 ## CI & release
@@ -211,7 +219,7 @@ pnpm test         # jest smoke tests (tokens + resolveFontFamily)
   examples / duplicated font assets. Triggered on every push and PR.
 - **Release** — `.github/workflows/release.yml` publishes to npm with
   provenance when a `v*.*.*` tag is pushed. Requires the `NPM_TOKEN` secret
-  and an `npm` GitHub environment (for approval gating if you want it).
+  or npm trusted publishing configured for `woobottle/woosign-system`, workflow `release.yml`, environment `npm`. The release job uses Node 22 and npm 11 for OIDC support.
 
 Cutting a release:
 ```bash
@@ -258,3 +266,88 @@ Each component ships:
 <div align="center">
 <sub>Made by <a href="https://github.com/wooBottle">wooBottle</a> · Paper &amp; Ink, always.</sub>
 </div>
+
+## Form controls
+
+```tsx
+import {Select, Textarea} from 'woosign-system';
+
+<Select
+  label="Drink"
+  options={[{value: 'coffee', label: 'Coffee'}, {value: 'tea', label: 'Tea'}]}
+  value={drink}
+  onValueChange={setDrink}
+/>
+<Textarea placeholder="Notes" numberOfLines={4} value={notes} onChangeText={setNotes} />
+```
+
+Select supports `defaultValue` for uncontrolled usage and disabled options. Web also
+accepts `name`, `id`, and `required` for forms. Native opens a scrollable BottomSheet;
+dismissing it keeps the current value. Textarea shares Input props except input type
+and multiline toggles, defaults to three rows, and forwards its input ref. Both
+controls support size, error, disabled, fullWidth, and theme colors.
+
+## Extended components
+
+The following components have Web and React Native implementations, theme-aware
+colors, public TypeScript contracts, Storybook examples and behavior tests.
+
+| Area | Components | Purpose |
+|---|---|---|
+| 프로필 | Avatar · AvatarGroup | 이미지 실패 시 fallback, 그룹 초과 인원 표시 |
+| 상태 | Skeleton · Spinner · Alert · EmptyState | 로딩·진행·인라인 알림·빈 화면 |
+| 폼 | Label · FormField | 라벨·설명·오류·필수 표시와 접근성 연결 |
+| 콘텐츠 | Accordion · Collapsible · ListItem · AspectRatio · ScrollArea | 접기·펼치기, 목록 행, 비율과 스크롤 |
+| 탐색·선택 | Breadcrumb · Pagination · SegmentedControl · Toggle · ToggleGroup | 경로, 페이지, 단일·복수 선택 |
+| 입력 | Slider · InputOTP · Combobox | 범위 값, 숫자 인증 코드, 검색 선택 |
+| 날짜 | Calendar · DatePicker | YYYY-MM-DD 날짜와 선택 제한 |
+| 보조 UI | Tooltip · Popover · DropdownMenu | 도움말·보조 콘텐츠·액션 메뉴 |
+
+Stateful controls support controlled and uncontrolled usage. `Accordion` and
+`ToggleGroup` use arrays of values and support `multiple`; `SegmentedControl`
+uses a single string. Supply stable, unique `id` values to Accordion, Collapsible,
+Combobox, Tooltip and FormField for accessible relationships across SSR and hydration.
+
+Calendar / DatePicker values and bounds are strict local `YYYY-MM-DD` dates.
+`isDateDisabled(date)` can block individual dates. Slider supports `min`, `max`,
+`step`, change and commit callbacks; native supports dragging and accessibility
+increment/decrement actions. InputOTP accepts digits, sanitizes pasted codes,
+supports 1–12 slots and calls `onComplete` when a changed code reaches the length.
+Skeleton is a static decorative placeholder. Spinner provides a named loading status.
+
+Popover, DropdownMenu, Combobox and DatePicker use existing BottomSheet on native.
+Web Popover / DropdownMenu / Tooltip are anchored portals; Escape and outside
+click dismiss them. Web menus support arrows, Home/End and typeahead. Tooltip opens
+on hover/focus/click on web and by touch on native. Native overlays inherit the
+BottomSheet's Android back and scrim dismissal behavior.
+
+```tsx
+import {Accordion, Combobox, DatePicker, FormField, Input, ToggleGroup} from 'woosign-system';
+
+<Accordion id="faq" items={[
+  {value: 'delivery', title: 'When will it arrive?', content: 'Within 2–3 days.'},
+]} />
+<Combobox id="drink-search" label="Drink" options={[
+  {value: 'coffee', label: 'Coffee'}, {value: 'tea', label: 'Tea'},
+]} />
+<DatePicker label="Visit date" min="2026-10-01" max="2026-12-31" />
+<ToggleGroup label="Filters" multiple items={[
+  {value: 'coffee', label: 'Coffee'}, {value: 'tea', label: 'Tea'},
+]} />
+```
+
+FormField uses a render callback instead of modifying children. On web, pass its
+`id`, `required`, `disabled` and ARIA props to the input. On native, pass
+`accessibilityLabel` / `accessibilityHint` through `textInputProps`:
+
+```tsx
+<FormField id="email" label="Email" error={error}>
+  {field => <Input id={field.id} inputProps={{
+    'aria-invalid': field['aria-invalid'],
+    'aria-describedby': field['aria-describedby'],
+  }} />}
+</FormField>
+```
+
+Platform implementations expose `ComponentWebProps` / `ComponentNativeProps` for
+platform-specific styles. See each `src/components/<Name>/types.ts` for the full API.

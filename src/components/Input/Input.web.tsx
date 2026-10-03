@@ -69,6 +69,7 @@ export const Input = forwardRef<
 ) {
   const [isFocused, setIsFocused] = useState(false);
   const isDateType = type === 'date';
+  const [dateValue, setDateValue] = useState(defaultValue ?? '');
   const [isPickerOpen, setIsPickerOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -106,10 +107,13 @@ export const Input = forwardRef<
 
   const handleCalendarChange = useCallback(
     (newValue: string) => {
+      if (value === undefined) {
+        setDateValue(newValue);
+      }
       onChangeText?.(newValue);
       setIsPickerOpen(false);
     },
-    [onChangeText],
+    [onChangeText, value],
   );
 
   const userOnChange = inputProps?.onChange;
@@ -120,7 +124,7 @@ export const Input = forwardRef<
   const handleFocus = useCallback(
     (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setIsFocused(true);
-      if (isDateType) {
+      if (isDateType && !disabled && !readOnly) {
         setIsPickerOpen(true);
       }
       onFocus?.();
@@ -132,7 +136,7 @@ export const Input = forwardRef<
           | undefined
       )?.(e);
     },
-    [isDateType, onFocus, userOnFocus],
+    [isDateType, disabled, readOnly, onFocus, userOnFocus],
   );
 
   const handleBlur = useCallback(
@@ -152,6 +156,9 @@ export const Input = forwardRef<
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      if (isDateType && value === undefined) {
+        setDateValue(e.currentTarget.value);
+      }
       onChangeText?.(e.currentTarget.value);
       (
         userOnChange as
@@ -161,7 +168,7 @@ export const Input = forwardRef<
           | undefined
       )?.(e);
     },
-    [onChangeText, userOnChange],
+    [onChangeText, userOnChange, isDateType, value],
   );
 
   const handleKeyDown = useCallback(
@@ -190,6 +197,15 @@ export const Input = forwardRef<
   // Compose container styles
   const containerStyle = mergeStyles(
     containerStyles,
+    multiline
+      ? {
+          height: 'auto',
+          minHeight: (numberOfLines ?? 3) * 24 + 20,
+          paddingTop: 10,
+          paddingBottom: 10,
+          alignItems: 'flex-start',
+        }
+      : undefined,
     fullWidth ? {width: '100%'} : undefined,
     disabled || readOnly ? disabledStyle : undefined,
     isFocused && !disabled ? focusContainerStyle : undefined,
@@ -209,6 +225,13 @@ export const Input = forwardRef<
     margin: 0,
     width: '100%',
     fontFamily: 'inherit',
+    ...(multiline
+      ? {
+          minHeight: (numberOfLines ?? 3) * 24,
+          lineHeight: '24px',
+          resize: 'vertical' as const,
+        }
+      : {}),
   };
 
   // Icon container styles
@@ -227,8 +250,8 @@ export const Input = forwardRef<
   const commonProps = {
     ...inputProps,
     placeholder,
-    value,
-    defaultValue,
+    value: isDateType ? value ?? dateValue : value,
+    defaultValue: isDateType ? undefined : defaultValue,
     disabled,
     readOnly,
     onChange: handleChange,
@@ -247,7 +270,15 @@ export const Input = forwardRef<
   };
 
   return (
-    <div ref={containerRef} className={className} style={containerStyle}>
+    <div
+      ref={containerRef}
+      className={className}
+      style={containerStyle}
+      onKeyDown={event => {
+        if (event.key === 'Escape') {
+          setIsPickerOpen(false);
+        }
+      }}>
       {leftIcon && <span style={iconStyle}>{leftIcon}</span>}
       {multiline ? (
         <textarea
@@ -277,7 +308,7 @@ export const Input = forwardRef<
             zIndex: zIndex.popover,
           }}>
           <Calendar
-            value={typeof value === 'string' ? value : undefined}
+            value={value ?? dateValue}
             onChange={handleCalendarChange}
             min={typeof min === 'string' ? min : undefined}
             max={typeof max === 'string' ? max : undefined}

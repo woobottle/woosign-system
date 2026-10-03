@@ -34,7 +34,9 @@ export const Checkbox = forwardRef<View, CheckboxNativeProps>(function Checkbox(
   ref,
 ) {
   const handlePress = useCallback(() => {
-    if (!disabled) onCheckedChange?.(!checked);
+    if (!disabled) {
+      onCheckedChange?.(!checked);
+    }
   }, [disabled, checked, onCheckedChange]);
 
   const colors = useResolvedColors();

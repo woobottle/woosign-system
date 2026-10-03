@@ -142,3 +142,17 @@ describe('BottomSheet (native)', () => {
     expect(flat.backgroundColor).toBe(darkColors.card);
   });
 });
+
+it('exposes a modal accessibility surface and handles screen reader escape', () => {
+  const onClose = jest.fn();
+  render(
+    <BottomSheet open testID="sheet" onClose={onClose}>
+      <Text>본문</Text>
+    </BottomSheet>,
+  );
+  const surface = screen.getByTestId('sheet');
+  expect(surface.props.accessibilityViewIsModal).toBe(true);
+  expect(surface.props.accessible).toBe(false);
+  fireEvent(surface, 'accessibilityEscape');
+  expect(onClose).toHaveBeenCalledTimes(1);
+});

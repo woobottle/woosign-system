@@ -30,3 +30,11 @@ describe('Input (native)', () => {
     expect(containerStyle().borderColor).toBe(colors.borderFocus);
   });
 });
+
+it('grows the container for multiline inputs', () => {
+  render(<Input multiline numberOfLines={4} testID="memo" />);
+  expect(containerStyle()).toMatchObject({
+    minHeight: 116,
+    alignItems: 'flex-start',
+  });
+});

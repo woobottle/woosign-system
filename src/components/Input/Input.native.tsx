@@ -93,6 +93,13 @@ export const Input = forwardRef<TextInput, InputNativeProps>(function Input(
       style={[
         styles.container,
         containerStyles,
+        multiline && {
+          height: undefined,
+          minHeight: (numberOfLines ?? 3) * 24 + 20,
+          paddingTop: 10,
+          paddingBottom: 10,
+          alignItems: 'flex-start',
+        },
         fullWidth && styles.fullWidth,
         (disabled || readOnly) && disabledStyle,
         isFocused && focusedStyle,
@@ -101,7 +108,16 @@ export const Input = forwardRef<TextInput, InputNativeProps>(function Input(
       {leftIcon && <View style={styles.iconContainer}>{leftIcon}</View>}
       <TextInput
         ref={ref}
-        style={[styles.input, textStyles, inputStyle]}
+        style={[
+          styles.input,
+          textStyles,
+          multiline && {
+            minHeight: (numberOfLines ?? 3) * 24,
+            lineHeight: 24,
+            textAlignVertical: 'top',
+          },
+          inputStyle,
+        ]}
         placeholder={placeholder}
         placeholderTextColor={placeholderColor}
         value={value}
