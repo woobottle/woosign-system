@@ -34,4 +34,4 @@ node site/scripts/install-into-labs.cjs /path/to/woobottle-labs
 
 홈, 컴포넌트 갤러리, 50개 상세, React Native 가이드, 디자인 토큰, 시작하기, 시각적 사이트맵을 제공합니다. 총 56개 HTML과 sitemap.xml을 빌드 시 생성합니다. 페이지별 title, description, canonical, Open Graph, JSON-LD를 포함합니다. WooBottle의 루트 robots.txt에는 `Sitemap: https://woo-bottle.com/woosign/sitemap.xml`을 등록합니다.
 
-홈은 WooBottle Labs에서 사용하는 기존 Higgsfield 영상을 재사용합니다. 새 미디어 생성은 없습니다. 재생 제어, 미디어 오류 시 정적 배경, prefers-reduced-motion 대응을 포함합니다.
+홈 미디어는 WooSign을 위해 Higgsfield에서 새로 제작했습니다. Paper & Ink 재질의 웹·모바일 화면을 같은 컴포넌트로 연결하는 구도입니다. GPT Image 2.5 기준 이미지와 Kling 3.0 표준 모드의 8초 무음 영상을 `public/media/`에서 직접 제공합니다. 재생 제어, 미디어 오류 시 새 기준 이미지 표시, prefers-reduced-motion 대응을 포함합니다. 제작 기록은 `media-provenance.json`에 남깁니다.

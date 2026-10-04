@@ -1,0 +1,49 @@
+{
+  "createdAt": "2026-10-04",
+  "purpose": "Original WooSign Paper & Ink web and React Native hero; no reused WooBottle media.",
+  "image": {
+    "jobId": "d53a6801-ab4f-4eef-8574-a607ae1d2511",
+    "model": "gpt_image_2_5",
+    "estimatedCredits": 2.75,
+    "params": {
+      "model": "gpt_image_2_5",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "quality": "high",
+      "resolution": "2k",
+      "background": "opaque",
+      "prompt": "Create a premium cinematic architectural still life for WooSign, a Paper & Ink design system shared by React web and React Native. Wide landscape composition. Left 45 percent is quiet deep charcoal ink negative space for white website headline overlay, no text rendered anywhere. On the right, two elegant tangible interface canvases float above a charcoal stage: one wide landscape web panel and one tall portrait mobile panel. Both built from the exact same modular warm ivory paper cards, rounded pill controls, small switches and circular indicators. Rich natural fibrous paper texture, matte ceramic edges, precise geometry, ember orange accent connector ribbon and tiny warm gold highlights. Sophisticated warm side lighting, soft shadows, subtle volumetric atmosphere, editorial product photography, believable material detail. Restrained balanced scene, strong silhouettes clear on mobile crops, no people, no logos, no letters, no fake readable UI, no neon cyberpunk, no busy decoration. Panels occupy right half, all hero details contained within frame."
+    }
+  },
+  "video": {
+    "jobId": "16c24af4-4868-483c-9c44-177c026abf2f",
+    "model": "kling3_0",
+    "estimatedCredits": 12,
+    "params": {
+      "model": "kling3_0",
+      "mode": "std",
+      "sound": "off",
+      "aspect_ratio": "16:9",
+      "duration": 8,
+      "count": 1,
+      "prompt": "Animate this exact Paper & Ink product composition as a premium silent website background. Preserve the ivory paper web canvas and portrait mobile canvas and their identical modular interface pieces, charcoal stage and ember orange accents. Subtle slow floating movement and gentle warm light sweep across fibrous surfaces. An elegant minimal camera arc gives depth; keep left 45 percent quiet dark negative space for headline overlay at all times. Stable geometry, no deformation, no new objects, no words or logos, no cuts. The shared modules subtly breathe together, expressing one design language for web and React Native. Return to the original composition and motion phase by the final frame for a smooth seamless eight-second loop. Calm luxury product cinematography.",
+      "medias": [
+        {
+          "role": "start_image",
+          "value": "d53a6801-ab4f-4eef-8574-a607ae1d2511"
+        },
+        {
+          "role": "end_image",
+          "value": "d53a6801-ab4f-4eef-8574-a607ae1d2511"
+        }
+      ]
+    },
+    "output": {
+      "width": 1276,
+      "height": 720,
+      "durationSeconds": 8.041667,
+      "audio": false,
+      "processing": "Lossless MP4 faststart remux for progressive playback"
+    }
+  }
+}

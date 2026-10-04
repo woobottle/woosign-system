@@ -1398,7 +1398,7 @@ td:last-child {
   }
 }
 
-/* Cinematic entrance: the same Higgsfield film used by WooBottle Labs. */
+/* Custom Paper & Ink film generated for WooSign in Higgsfield. */
 .site-header-cinema {
   position: absolute;
   inset: 0 0 auto;
@@ -1435,8 +1435,9 @@ td:last-child {
   pointer-events: none;
 }
 .cinema-atmosphere {
-  background: radial-gradient(ellipse at 75% 25%, #614735 0%, transparent 55%),
-    radial-gradient(ellipse at 10% 70%, #244438 0%, #171513 70%);
+  background-color: #171513;
+  background-size: cover;
+  background-position: center;
 }
 .cinema-video {
   object-fit: cover;
