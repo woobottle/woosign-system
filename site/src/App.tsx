@@ -76,8 +76,7 @@ function Directory({selected}: {selected?: string}) {
 function Home() {
   const [done, setDone] = useState(false);
   return (
-    <>
-      <CinematicHero />
+    <CinematicHero>
       <section className="hero shared-api" id="shared-api">
         <div className="shared-api-copy">
           <div className="platform-badges native-badges">
@@ -261,7 +260,7 @@ function Home() {
           설치하고 시작하기 ↗
         </a>
       </section>
-    </>
+    </CinematicHero>
   );
 }
 function Gallery() {
@@ -893,7 +892,10 @@ export function App({initialRoute}: {initialRoute?: string} = {}) {
           </section>
         )}
       </div>
-      <footer className="site-footer">
+      <footer
+        className={`site-footer${
+          page === 'home' ? ' site-footer-cinema' : ''
+        }`}>
         <a className="brand footer-brand" href="/woosign/">
           woosign
           <span className="ember-dot" />
