@@ -40,3 +40,7 @@ android/build/
 
 # Design handoff bundle (tokens already extracted into src/)
 .design-bundle/
+
+# Showcase site
+/site/dist/
+/site/coverage/

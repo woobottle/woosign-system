@@ -1,0 +1,2160 @@
+{
+  "snippets": {
+    "Button": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const toast = W.useToast();\n  return (\n    <W.Button\n      variant=\"default\"\n      disabled={false}\n      onPress={() =>\n        toast.success({\n          title: '잘했어요! 다음 단계로 이동할 준비가 됐어요.',\n        })\n      }\n    >\n      시작하기 ↗\n    </W.Button>\n  );\n}\n",
+    "Text": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  return (\n    <div>\n      <W.Text variant=\"h2\">Make room for good things.</W.Text>\n      <W.Text variant=\"muted\">작은 디테일이 좋은 경험을 만듭니다.</W.Text>\n    </div>\n  );\n}\n",
+    "Badge": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  return (\n    <div className=\"demo-row\">\n      <W.Badge>New</W.Badge>\n      <W.Badge variant=\"gold\">Member</W.Badge>\n      <W.Badge variant=\"outline\">v0.6.0</W.Badge>\n    </div>\n  );\n}\n",
+    "Chip": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [checked, setChecked] = useState(false);\n  return (\n    <W.Chip\n      disabled={false}\n      onPress={() => setChecked(!checked)}\n      tone={checked ? 'solid' : 'outline'}\n    >\n      {checked ? '선택됨 ✓' : '디자인'}\n    </W.Chip>\n  );\n}\n",
+    "Pill": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [checked, setChecked] = useState(false);\n  return (\n    <W.Pill\n      active={checked}\n      disabled={false}\n      onPress={() => setChecked(!checked)}\n    >\n      이번 주\n    </W.Pill>\n  );\n}\n",
+    "Eyebrow": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  return <W.Eyebrow tone=\"brand\">A LITTLE EVERY DAY</W.Eyebrow>;\n}\n",
+    "StatusDot": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  return (\n    <div className=\"demo-row\">\n      <W.StatusDot tone=\"success\" /> 모든 시스템 정상\n    </div>\n  );\n}\n",
+    "Divider": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  return (\n    <div className=\"demo-stack\">\n      위의 이야기\n      <W.Divider />\n      아래의 이야기\n    </div>\n  );\n}\n",
+    "Fab": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const toast = W.useToast();\n  return (\n    <W.Fab\n      accessibilityLabel=\"새 항목 추가\"\n      disabled={false}\n      onPress={() => toast.success({ title: '새 항목을 추가했어요.' })}\n    >\n      ＋\n    </W.Fab>\n  );\n}\n",
+    "Box": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  return (\n    <W.Box padding={24} gap={12}>\n      <W.Badge>16px gap</W.Badge>\n      <W.Text>여백에도 규칙이 있습니다.</W.Text>\n    </W.Box>\n  );\n}\n",
+    "Card": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [number, setNumber] = useState(40);\n  return (\n    <W.Card variant=\"warm\">\n      <W.CardHeader>\n        <W.CardTitle>오늘의 작은 목표</W.CardTitle>\n        <W.CardDescription>꾸준함을 위한 한 걸음</W.CardDescription>\n      </W.CardHeader>\n      <W.CardContent>\n        <W.Progress value={number} />\n      </W.CardContent>\n      <W.CardFooter>\n        <W.Button onPress={() => setNumber(Math.min(100, number + 20))}>\n          한 걸음 더\n        </W.Button>\n      </W.CardFooter>\n    </W.Card>\n  );\n}\n",
+    "FeatureBand": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  return (\n    <W.FeatureBand tone=\"forest\">\n      <W.Text color=\"#FFFFFF\" variant=\"h3\">\n        Good things take time.\n      </W.Text>\n      <W.Text color=\"#FFFFFF\">당신의 속도로 만들어 가세요.</W.Text>\n    </W.FeatureBand>\n  );\n}\n",
+    "AspectRatio": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  return (\n    <W.AspectRatio ratio={16 / 9}>\n      <div className=\"ratio-art\">\n        16 / 9<span>Paper & Ink</span>\n      </div>\n    </W.AspectRatio>\n  );\n}\n",
+    "ScrollArea": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  return (\n    <W.ScrollArea maxHeight={150} label=\"읽기 목록\">\n      <div className=\"demo-stack\">\n        {Array.from({ length: 8 }, (_, i) => (\n          <W.ListItem\n            key={i}\n            title={`좋은 아이디어 ${i + 1}`}\n            description=\"조금씩 모아가는 영감\"\n          />\n        ))}\n      </div>\n    </W.ScrollArea>\n  );\n}\n",
+    "ListItem": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const toast = W.useToast();\n  return (\n    <W.ListItem\n      leading={<W.Avatar name=\"Woo\" />}\n      title=\"WooBottle\"\n      description=\"좋은 경험을 함께 만듭니다\"\n      trailing=\"↗\"\n      onPress={() => toast.success({ title: '프로필을 선택했어요.' })}\n    />\n  );\n}\n",
+    "Input": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [input, setInput] = useState('');\n  return (\n    <W.Input\n      value={input}\n      onChangeText={setInput}\n      placeholder=\"당신의 이름\"\n      disabled={false}\n      inputProps={{ 'aria-label': '이름' }}\n    />\n  );\n}\n",
+    "Textarea": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [input, setInput] = useState('');\n  return (\n    <W.Textarea\n      value={input}\n      onChangeText={setInput}\n      placeholder=\"오늘의 생각을 적어보세요.\"\n      disabled={false}\n      inputProps={{ 'aria-label': '오늘의 생각' }}\n    />\n  );\n}\n",
+    "Select": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [value, setValue] = useState('paper');\n  const options = [\n    { value: 'paper', label: 'Paper' },\n    { value: 'ink', label: 'Ink' },\n    { value: 'ember', label: 'Ember' },\n  ];\n  return (\n    <W.Select\n      options={options}\n      value={value}\n      onValueChange={setValue}\n      label=\"팔레트\"\n      disabled={false}\n    />\n  );\n}\n",
+    "Checkbox": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [checked, setChecked] = useState(false);\n  return (\n    <W.Checkbox\n      checked={checked}\n      onCheckedChange={setChecked}\n      label=\"오늘의 목표를 완료했어요\"\n      disabled={false}\n    />\n  );\n}\n",
+    "Radio": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [value, setValue] = useState('paper');\n  return (\n    <W.RadioGroup value={value} onValueChange={setValue} disabled={false}>\n      <W.Radio value=\"paper\" label=\"Paper\" />\n      <W.Radio value=\"ink\" label=\"Ink\" />\n    </W.RadioGroup>\n  );\n}\n",
+    "Switch": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [checked, setChecked] = useState(false);\n  return (\n    <W.Switch\n      checked={checked}\n      onCheckedChange={setChecked}\n      label=\"알림 받기\"\n      disabled={false}\n    />\n  );\n}\n",
+    "Label": "import { useId } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const id = useId();\n  return (\n    <div className=\"demo-stack\">\n      <W.Label htmlFor={id} required>\n        이메일\n      </W.Label>\n      <W.Input id={id} placeholder=\"hello@example.com\" />\n    </div>\n  );\n}\n",
+    "FormField": "import { useId } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const id = useId();\n  return (\n    <W.FormField\n      id={id}\n      label=\"이메일\"\n      description=\"업데이트를 보내드릴게요.\"\n      required\n    >\n      {(props) => (\n        <W.Input\n          id={props.id}\n          required={props.required}\n          placeholder=\"hello@example.com\"\n          inputProps={{ 'aria-describedby': props['aria-describedby'] }}\n        />\n      )}\n    </W.FormField>\n  );\n}\n",
+    "Slider": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [number, setNumber] = useState(40);\n  return (\n    <div className=\"demo-stack\">\n      <W.Slider\n        label=\"볼륨\"\n        value={number}\n        onValueChange={setNumber}\n        disabled={false}\n      />\n      <span>볼륨 {number}%</span>\n    </div>\n  );\n}\n",
+    "InputOTP": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [input, setInput] = useState('');\n  return (\n    <W.InputOTP\n      value={input}\n      onChangeText={setInput}\n      length={4}\n      label=\"인증 코드\"\n      disabled={false}\n    />\n  );\n}\n",
+    "Combobox": "import { useId, useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const id = useId();\n  const [value, setValue] = useState('paper');\n  const options = [\n    { value: 'paper', label: 'Paper' },\n    { value: 'ink', label: 'Ink' },\n    { value: 'ember', label: 'Ember' },\n  ];\n  return (\n    <W.Combobox\n      id={id}\n      label=\"팔레트 검색\"\n      options={options}\n      value={value}\n      onValueChange={setValue}\n      disabled={false}\n    />\n  );\n}\n",
+    "Calendar": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [date, setDate] = useState('');\n  return (\n    <W.Calendar\n      value={date}\n      onValueChange={setDate}\n      locale=\"ko\"\n      disabled={false}\n    />\n  );\n}\n",
+    "DatePicker": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [date, setDate] = useState('');\n  return (\n    <W.DatePicker\n      label=\"시작 날짜\"\n      value={date}\n      onValueChange={setDate}\n      locale=\"ko\"\n      disabled={false}\n    />\n  );\n}\n",
+    "Tabs": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [value, setValue] = useState('paper');\n  const options = [\n    { value: 'paper', label: 'Paper' },\n    { value: 'ink', label: 'Ink' },\n    { value: 'ember', label: 'Ember' },\n  ];\n  return (\n    <div className=\"demo-stack\">\n      <W.Tabs\n        items={options.map((o) => ({ key: o.value, label: o.label }))}\n        value={value}\n        onChange={setValue}\n      />\n      <W.Text>{value}의 이야기</W.Text>\n    </div>\n  );\n}\n",
+    "Breadcrumb": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  return (\n    <W.Breadcrumb\n      items={[\n        { label: '홈', href: '#/' },\n        { label: '컴포넌트', href: '#/components' },\n        { label: 'Breadcrumb' },\n      ]}\n    />\n  );\n}\n",
+    "Pagination": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [number, setNumber] = useState(1);\n  return (\n    <W.Pagination\n      totalPages={5}\n      page={Math.min(number, 5)}\n      onPageChange={setNumber}\n      disabled={false}\n    />\n  );\n}\n",
+    "SegmentedControl": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [value, setValue] = useState('paper');\n  const options = [\n    { value: 'paper', label: 'Paper' },\n    { value: 'ink', label: 'Ink' },\n    { value: 'ember', label: 'Ember' },\n  ];\n  return (\n    <W.SegmentedControl\n      label=\"팔레트 선택\"\n      items={options}\n      value={value}\n      onValueChange={setValue}\n      disabled={false}\n    />\n  );\n}\n",
+    "Toggle": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [checked, setChecked] = useState(false);\n  return (\n    <W.Toggle\n      label=\"즐겨찾기\"\n      pressed={checked}\n      onPressedChange={setChecked}\n      disabled={false}\n    >\n      ★\n    </W.Toggle>\n  );\n}\n",
+    "ToggleGroup": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [many, setMany] = useState<readonly string[]>([]);\n  return (\n    <W.ToggleGroup\n      label=\"텍스트 스타일\"\n      items={[\n        { value: 'bold', label: '굵게' },\n        { value: 'italic', label: '기울임' },\n      ]}\n      value={many}\n      onValueChange={setMany}\n      multiple\n      disabled={false}\n    />\n  );\n}\n",
+    "Avatar": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  return (\n    <div className=\"demo-row\">\n      <W.Avatar name=\"Woo Bottle\" />\n      <W.Avatar name=\"Paper Ink\" size={56} />\n    </div>\n  );\n}\n",
+    "AvatarGroup": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  return (\n    <W.AvatarGroup\n      items={['Woo', 'Paper', 'Ink', 'Ember', 'Forest'].map((name) => ({\n        name,\n      }))}\n      max={3}\n    />\n  );\n}\n",
+    "Skeleton": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  return (\n    <div className=\"demo-stack\">\n      <W.Skeleton width={48} height={48} circle />\n      <W.Skeleton width={200} height={16} />\n      <W.Skeleton width={140} height={16} />\n    </div>\n  );\n}\n",
+    "Spinner": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  return <W.Spinner label=\"불러오는 중\" />;\n}\n",
+    "Progress": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [number, setNumber] = useState(40);\n  return (\n    <div className=\"demo-stack\">\n      <W.Progress value={number} />\n      <W.Button\n        variant=\"outline\"\n        size=\"sm\"\n        onPress={() => setNumber((number + 20) % 120)}\n      >\n        진행률 {number}% · 변경\n      </W.Button>\n    </div>\n  );\n}\n",
+    "Alert": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  return (\n    <W.Alert title=\"모두 준비됐어요\" tone=\"success\">\n      이제 새로운 이야기를 시작하세요.\n    </W.Alert>\n  );\n}\n",
+    "EmptyState": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const toast = W.useToast();\n  return (\n    <W.EmptyState\n      title=\"아직 기록이 없어요\"\n      description=\"오늘의 첫 번째 기록을 남겨보세요.\"\n      icon=\"✦\"\n      action={\n        <W.Button\n          onPress={() => toast.success({ title: '첫 기록을 시작해요.' })}\n        >\n          기록 시작\n        </W.Button>\n      }\n    />\n  );\n}\n",
+    "Toast": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const toast = W.useToast();\n  return (\n    <div className=\"demo-stack\">\n      <W.Toast\n        title=\"저장했어요\"\n        description=\"변경 내용이 반영됐습니다.\"\n        tone=\"success\"\n      />\n      <W.Button\n        variant=\"outline\"\n        onPress={() => toast.success({ title: '저장했어요' })}\n      >\n        알림 띄우기\n      </W.Button>\n    </div>\n  );\n}\n",
+    "Dialog": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [open, setOpen] = useState(false);\n  return (\n    <>\n      <W.Button onPress={() => setOpen(true)}>다이얼로그 열기</W.Button>\n      <W.Dialog open={open} onClose={() => setOpen(false)}>\n        <W.Dialog.Header>\n          <W.Dialog.Title>새롭게 시작할까요?</W.Dialog.Title>\n          <W.Dialog.Description>\n            당신의 다음 이야기를 기다립니다.\n          </W.Dialog.Description>\n        </W.Dialog.Header>\n        <W.Dialog.Body>계속 진행하면 새로운 기록을 시작합니다.</W.Dialog.Body>\n        <W.Dialog.Footer>\n          <W.Button onPress={() => setOpen(false)}>확인</W.Button>\n        </W.Dialog.Footer>\n      </W.Dialog>\n    </>\n  );\n}\n",
+    "BottomSheet": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [open, setOpen] = useState(false);\n  return (\n    <>\n      <W.Button onPress={() => setOpen(true)}>시트 열기</W.Button>\n      <W.BottomSheet open={open} onClose={() => setOpen(false)}>\n        <W.BottomSheet.Header>\n          <W.BottomSheet.Title>가까이 있는 선택</W.BottomSheet.Title>\n        </W.BottomSheet.Header>\n        <W.BottomSheet.Body>편안하게 내용을 확인하세요.</W.BottomSheet.Body>\n        <W.BottomSheet.Footer>\n          <W.Button onPress={() => setOpen(false)}>완료</W.Button>\n        </W.BottomSheet.Footer>\n      </W.BottomSheet>\n    </>\n  );\n}\n",
+    "Drawer": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [open, setOpen] = useState(false);\n  return (\n    <>\n      <W.Button onPress={() => setOpen(true)}>드로어 열기</W.Button>\n      <W.Drawer open={open} onClose={() => setOpen(false)}>\n        <W.Drawer.Header>\n          <W.Drawer.Title>당신의 공간</W.Drawer.Title>\n        </W.Drawer.Header>\n        <W.Drawer.Body>추가 정보와 설정을 한곳에.</W.Drawer.Body>\n        <W.Drawer.Footer>\n          <W.Button onPress={() => setOpen(false)}>닫기</W.Button>\n        </W.Drawer.Footer>\n      </W.Drawer>\n    </>\n  );\n}\n",
+    "Tooltip": "import { useId } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const id = useId();\n  return (\n    <W.Tooltip\n      id={id}\n      trigger=\"마우스를 올려보세요\"\n      content=\"키보드 포커스로도 볼 수 있어요.\"\n    />\n  );\n}\n",
+    "Popover": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  return (\n    <W.Popover label=\"추가 안내\" trigger=\"더 알아보기\">\n      <W.Text>작은 디테일을 위한 추가 설명입니다.</W.Text>\n    </W.Popover>\n  );\n}\n",
+    "DropdownMenu": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const toast = W.useToast();\n  return (\n    <W.DropdownMenu\n      label=\"기록 메뉴\"\n      trigger=\"기록 관리 ↓\"\n      items={[\n        {\n          value: 'edit',\n          label: '편집',\n          onSelect: () => toast.success({ title: '편집을 선택했어요' }),\n        },\n        {\n          value: 'copy',\n          label: '복사',\n          onSelect: () => toast.success({ title: '복사를 선택했어요' }),\n        },\n      ]}\n    />\n  );\n}\n",
+    "Accordion": "import { useId } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const id = useId();\n  return (\n    <W.Accordion\n      id={id}\n      items={[\n        {\n          value: 'web',\n          title: 'Web에서도 사용할 수 있나요?',\n          content: 'React와 React Native에서 같은 API를 사용합니다.',\n        },\n        {\n          value: 'theme',\n          title: '다크 모드를 지원하나요?',\n          content: 'ThemeProvider로 라이트와 다크 테마를 전환하세요.',\n        },\n      ]}\n    />\n  );\n}\n",
+    "Collapsible": "import { useId } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const id = useId();\n  return (\n    <W.Collapsible id={id} title=\"조금 더 알아보기\">\n      하나의 디자인 언어로 여러 화면을 연결합니다.\n    </W.Collapsible>\n  );\n}\n"
+  },
+  "props": {
+    "Button": [
+      {
+        "name": "variant",
+        "type": "ButtonVariant",
+        "required": false,
+        "description": "Button visual style variant"
+      },
+      {
+        "name": "size",
+        "type": "ButtonSize",
+        "required": false,
+        "description": "Button size"
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "description": "Button content"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": "Disabled state"
+      },
+      {
+        "name": "loading",
+        "type": "boolean",
+        "required": false,
+        "description": "Loading state - shows spinner"
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "description": "Press handler (RN-friendly naming per PRD)"
+      },
+      {
+        "name": "fullWidth",
+        "type": "boolean",
+        "required": false,
+        "description": "Full width button"
+      },
+      {
+        "name": "leftIcon",
+        "type": "ReactNode",
+        "required": false,
+        "description": "Icon to show on the left side"
+      },
+      {
+        "name": "rightIcon",
+        "type": "ReactNode",
+        "required": false,
+        "description": "Icon to show on the right side"
+      }
+    ],
+    "Text": [
+      {
+        "name": "variant",
+        "type": "TextVariant",
+        "required": false,
+        "description": "Typography variant"
+      },
+      {
+        "name": "weight",
+        "type": "TextWeight",
+        "required": false,
+        "description": "Font weight override"
+      },
+      {
+        "name": "align",
+        "type": "TextAlign",
+        "required": false,
+        "description": "Text alignment"
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "required": false,
+        "description": "Custom text color"
+      },
+      {
+        "name": "muted",
+        "type": "boolean",
+        "required": false,
+        "description": "Apply muted foreground color"
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "description": "Text content"
+      }
+    ],
+    "Badge": [
+      {
+        "name": "variant",
+        "type": "BadgeVariant",
+        "required": false,
+        "description": "Badge visual style variant"
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "description": "Badge content"
+      }
+    ],
+    "Chip": [
+      {
+        "name": "tone",
+        "type": "ChipTone",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "leftAdornment",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "rightAdornment",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "Pill": [
+      {
+        "name": "active",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "Eyebrow": [
+      {
+        "name": "tone",
+        "type": "EyebrowTone",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "StatusDot": [
+      {
+        "name": "tone",
+        "type": "StatusDotTone",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "size",
+        "type": "StatusDotSize",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "description": "Glyph / icon rendered inside the circle (e.g. '✓', '!', Lucide icon)"
+      }
+    ],
+    "Divider": [
+      {
+        "name": "tone",
+        "type": "DividerTone",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "orientation",
+        "type": "'horizontal' | 'vertical'",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "Fab": [
+      {
+        "name": "tone",
+        "type": "FabTone",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "size",
+        "type": "FabSize",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "accessibilityLabel",
+        "type": "string",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "Box": [
+      {
+        "name": "padding",
+        "type": "number",
+        "required": false,
+        "description": "Padding on all sides"
+      },
+      {
+        "name": "paddingX",
+        "type": "number",
+        "required": false,
+        "description": "Horizontal padding (left and right)"
+      },
+      {
+        "name": "paddingY",
+        "type": "number",
+        "required": false,
+        "description": "Vertical padding (top and bottom)"
+      },
+      {
+        "name": "paddingTop",
+        "type": "number",
+        "required": false,
+        "description": "Padding top"
+      },
+      {
+        "name": "paddingRight",
+        "type": "number",
+        "required": false,
+        "description": "Padding right"
+      },
+      {
+        "name": "paddingBottom",
+        "type": "number",
+        "required": false,
+        "description": "Padding bottom"
+      },
+      {
+        "name": "paddingLeft",
+        "type": "number",
+        "required": false,
+        "description": "Padding left"
+      },
+      {
+        "name": "margin",
+        "type": "number",
+        "required": false,
+        "description": "Margin on all sides"
+      },
+      {
+        "name": "marginX",
+        "type": "number",
+        "required": false,
+        "description": "Horizontal margin (left and right)"
+      },
+      {
+        "name": "marginY",
+        "type": "number",
+        "required": false,
+        "description": "Vertical margin (top and bottom)"
+      },
+      {
+        "name": "marginTop",
+        "type": "number",
+        "required": false,
+        "description": "Margin top"
+      },
+      {
+        "name": "marginRight",
+        "type": "number",
+        "required": false,
+        "description": "Margin right"
+      },
+      {
+        "name": "marginBottom",
+        "type": "number",
+        "required": false,
+        "description": "Margin bottom"
+      },
+      {
+        "name": "marginLeft",
+        "type": "number",
+        "required": false,
+        "description": "Margin left"
+      },
+      {
+        "name": "flex",
+        "type": "number",
+        "required": false,
+        "description": "Flex grow/shrink factor"
+      },
+      {
+        "name": "flexDirection",
+        "type": "FlexDirection",
+        "required": false,
+        "description": "Flex direction"
+      },
+      {
+        "name": "alignItems",
+        "type": "AlignItems",
+        "required": false,
+        "description": "Align items on cross axis"
+      },
+      {
+        "name": "justifyContent",
+        "type": "JustifyContent",
+        "required": false,
+        "description": "Justify content on main axis"
+      },
+      {
+        "name": "flexWrap",
+        "type": "FlexWrap",
+        "required": false,
+        "description": "Flex wrap"
+      },
+      {
+        "name": "gap",
+        "type": "number",
+        "required": false,
+        "description": "Gap between children"
+      },
+      {
+        "name": "rowGap",
+        "type": "number",
+        "required": false,
+        "description": "Row gap"
+      },
+      {
+        "name": "columnGap",
+        "type": "number",
+        "required": false,
+        "description": "Column gap"
+      },
+      {
+        "name": "backgroundColor",
+        "type": "string",
+        "required": false,
+        "description": "Background color"
+      },
+      {
+        "name": "borderRadius",
+        "type": "number | BorderRadiusPreset",
+        "required": false,
+        "description": "Border radius (number or preset)"
+      },
+      {
+        "name": "borderWidth",
+        "type": "number",
+        "required": false,
+        "description": "Border width"
+      },
+      {
+        "name": "borderColor",
+        "type": "string",
+        "required": false,
+        "description": "Border color"
+      },
+      {
+        "name": "width",
+        "type": "number | string",
+        "required": false,
+        "description": "Width"
+      },
+      {
+        "name": "height",
+        "type": "number | string",
+        "required": false,
+        "description": "Height"
+      },
+      {
+        "name": "minWidth",
+        "type": "number | string",
+        "required": false,
+        "description": "Min width"
+      },
+      {
+        "name": "minHeight",
+        "type": "number | string",
+        "required": false,
+        "description": "Min height"
+      },
+      {
+        "name": "maxWidth",
+        "type": "number | string",
+        "required": false,
+        "description": "Max width"
+      },
+      {
+        "name": "maxHeight",
+        "type": "number | string",
+        "required": false,
+        "description": "Max height"
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "description": "Children"
+      }
+    ],
+    "Card": [
+      {
+        "name": "variant",
+        "type": "CardVariant",
+        "required": false,
+        "description": "Card visual style variant"
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "description": "Card content"
+      },
+      {
+        "name": "fullWidth",
+        "type": "boolean",
+        "required": false,
+        "description": "Full width card"
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "description": "Press handler (makes card interactive)"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": "Disabled state"
+      }
+    ],
+    "FeatureBand": [
+      {
+        "name": "tone",
+        "type": "FeatureBandTone",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "rounded",
+        "type": "boolean",
+        "required": false,
+        "description": "Large radius for hero-style bands; defaults to `lg` (16px)."
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "AspectRatio": [
+      {
+        "name": "ratio",
+        "type": "number",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "ScrollArea": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "horizontal",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "maxHeight",
+        "type": "number",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "ListItem": [
+      {
+        "name": "title",
+        "type": "string",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "leading",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "trailing",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "onPress",
+        "type": "() => void",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "Input": [
+      {
+        "name": "variant",
+        "type": "InputVariant",
+        "required": false,
+        "description": "Input visual style variant"
+      },
+      {
+        "name": "size",
+        "type": "InputSize",
+        "required": false,
+        "description": "Input size"
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "description": "Placeholder text"
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "description": "Current value"
+      },
+      {
+        "name": "defaultValue",
+        "type": "string",
+        "required": false,
+        "description": "Default value (uncontrolled)"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": "Disabled state"
+      },
+      {
+        "name": "readOnly",
+        "type": "boolean",
+        "required": false,
+        "description": "Read-only state"
+      },
+      {
+        "name": "onChangeText",
+        "type": "(text: string) => void",
+        "required": false,
+        "description": "Value change handler"
+      },
+      {
+        "name": "onFocus",
+        "type": "() => void",
+        "required": false,
+        "description": "Focus handler"
+      },
+      {
+        "name": "onBlur",
+        "type": "() => void",
+        "required": false,
+        "description": "Blur handler"
+      },
+      {
+        "name": "onSubmitEditing",
+        "type": "() => void",
+        "required": false,
+        "description": "Submit handler (for keyboard submit)"
+      },
+      {
+        "name": "fullWidth",
+        "type": "boolean",
+        "required": false,
+        "description": "Full width input"
+      },
+      {
+        "name": "leftIcon",
+        "type": "ReactNode",
+        "required": false,
+        "description": "Left icon/element"
+      },
+      {
+        "name": "rightIcon",
+        "type": "ReactNode",
+        "required": false,
+        "description": "Right icon/element"
+      },
+      {
+        "name": "type",
+        "type": "'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'date'",
+        "required": false,
+        "description": "Input type (text, password, email, etc.)"
+      },
+      {
+        "name": "autoCapitalize",
+        "type": "'none' | 'sentences' | 'words' | 'characters'",
+        "required": false,
+        "description": "Auto-capitalize behavior"
+      },
+      {
+        "name": "autoCorrect",
+        "type": "boolean",
+        "required": false,
+        "description": "Auto-correct behavior"
+      },
+      {
+        "name": "autoFocus",
+        "type": "boolean",
+        "required": false,
+        "description": "Auto-focus on mount"
+      },
+      {
+        "name": "keyboardType",
+        "type": "| 'default'\n    | 'email-address'\n    | 'numeric'\n    | 'phone-pad'\n    | 'decimal-pad'\n    | 'url'",
+        "required": false,
+        "description": "Keyboard type"
+      },
+      {
+        "name": "returnKeyType",
+        "type": "'done' | 'go' | 'next' | 'search' | 'send'",
+        "required": false,
+        "description": "Return key type"
+      },
+      {
+        "name": "maxLength",
+        "type": "number",
+        "required": false,
+        "description": "Maximum length"
+      },
+      {
+        "name": "multiline",
+        "type": "boolean",
+        "required": false,
+        "description": "Multiline input (textarea)"
+      },
+      {
+        "name": "numberOfLines",
+        "type": "number",
+        "required": false,
+        "description": "Number of lines for multiline"
+      }
+    ],
+    "Textarea": [
+      {
+        "name": "variant",
+        "type": "InputVariant",
+        "required": false,
+        "description": "Input visual style variant"
+      },
+      {
+        "name": "size",
+        "type": "InputSize",
+        "required": false,
+        "description": "Input size"
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "description": "Placeholder text"
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "description": "Current value"
+      },
+      {
+        "name": "defaultValue",
+        "type": "string",
+        "required": false,
+        "description": "Default value (uncontrolled)"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": "Disabled state"
+      },
+      {
+        "name": "readOnly",
+        "type": "boolean",
+        "required": false,
+        "description": "Read-only state"
+      },
+      {
+        "name": "onChangeText",
+        "type": "(text: string) => void",
+        "required": false,
+        "description": "Value change handler"
+      },
+      {
+        "name": "onFocus",
+        "type": "() => void",
+        "required": false,
+        "description": "Focus handler"
+      },
+      {
+        "name": "onBlur",
+        "type": "() => void",
+        "required": false,
+        "description": "Blur handler"
+      },
+      {
+        "name": "onSubmitEditing",
+        "type": "() => void",
+        "required": false,
+        "description": "Submit handler (for keyboard submit)"
+      },
+      {
+        "name": "fullWidth",
+        "type": "boolean",
+        "required": false,
+        "description": "Full width input"
+      },
+      {
+        "name": "leftIcon",
+        "type": "ReactNode",
+        "required": false,
+        "description": "Left icon/element"
+      },
+      {
+        "name": "rightIcon",
+        "type": "ReactNode",
+        "required": false,
+        "description": "Right icon/element"
+      },
+      {
+        "name": "autoCapitalize",
+        "type": "'none' | 'sentences' | 'words' | 'characters'",
+        "required": false,
+        "description": "Auto-capitalize behavior"
+      },
+      {
+        "name": "autoCorrect",
+        "type": "boolean",
+        "required": false,
+        "description": "Auto-correct behavior"
+      },
+      {
+        "name": "autoFocus",
+        "type": "boolean",
+        "required": false,
+        "description": "Auto-focus on mount"
+      },
+      {
+        "name": "keyboardType",
+        "type": "| 'default'\n    | 'email-address'\n    | 'numeric'\n    | 'phone-pad'\n    | 'decimal-pad'\n    | 'url'",
+        "required": false,
+        "description": "Keyboard type"
+      },
+      {
+        "name": "returnKeyType",
+        "type": "'done' | 'go' | 'next' | 'search' | 'send'",
+        "required": false,
+        "description": "Return key type"
+      },
+      {
+        "name": "maxLength",
+        "type": "number",
+        "required": false,
+        "description": "Maximum length"
+      },
+      {
+        "name": "numberOfLines",
+        "type": "number",
+        "required": false,
+        "description": "Number of lines for multiline"
+      }
+    ],
+    "Select": [
+      {
+        "name": "options",
+        "type": "readonly SelectOption[]",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "defaultValue",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value: string) => void",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "description": "Visible label and accessible name."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "variant",
+        "type": "InputVariant",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "size",
+        "type": "InputSize",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "fullWidth",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "Checkbox": [
+      {
+        "name": "checked",
+        "type": "boolean",
+        "required": false,
+        "description": "체크 여부 (controlled)."
+      },
+      {
+        "name": "indeterminate",
+        "type": "boolean",
+        "required": false,
+        "description": "중간 상태 — 체크 대신 대시(–). checked보다 우선해 시각/aria에 반영."
+      },
+      {
+        "name": "onCheckedChange",
+        "type": "(checked: boolean) => void",
+        "required": false,
+        "description": "누르면 onCheckedChange(!checked) 호출."
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "label",
+        "type": "ReactNode",
+        "required": false,
+        "description": "우측 라벨."
+      },
+      {
+        "name": "size",
+        "type": "CheckboxSize",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "Radio": [
+      {
+        "name": "value",
+        "type": "string",
+        "required": true,
+        "description": "이 라디오의 값(필수)."
+      },
+      {
+        "name": "label",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": "개별 비활성(그룹 disabled와 OR)."
+      },
+      {
+        "name": "size",
+        "type": "RadioSize",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "Switch": [
+      {
+        "name": "checked",
+        "type": "boolean",
+        "required": false,
+        "description": "Whether the switch is on"
+      },
+      {
+        "name": "onCheckedChange",
+        "type": "(checked: boolean) => void",
+        "required": false,
+        "description": "Called when the value changes"
+      },
+      {
+        "name": "size",
+        "type": "SwitchSize",
+        "required": false,
+        "description": "Switch size"
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": "Disabled state"
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "description": "Label text displayed next to the switch"
+      }
+    ],
+    "Label": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "htmlFor",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "FormField": [
+      {
+        "name": "id",
+        "type": "string",
+        "required": true,
+        "description": "Stable id for input/label/help associations."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "required",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "(props: FormFieldInputProps) => ReactNode",
+        "required": true,
+        "description": "Render input using the provided accessibility attributes."
+      }
+    ],
+    "Slider": [
+      {
+        "name": "value",
+        "type": "number",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "defaultValue",
+        "type": "number",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value: number) => void",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "onValueCommit",
+        "type": "(value: number) => void",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "min",
+        "type": "number",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "step",
+        "type": "number",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "description": ""
+      }
+    ],
+    "InputOTP": [
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "defaultValue",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "onChangeText",
+        "type": "(value: string) => void",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "onComplete",
+        "type": "(value: string) => void",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "length",
+        "type": "number",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "error",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "Combobox": [
+      {
+        "name": "id",
+        "type": "string",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "options",
+        "type": "readonly {value: string; label: string; disabled?: boolean}[]",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "defaultValue",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value: string) => void",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "searchPlaceholder",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "emptyMessage",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "error",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "Calendar": [
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "defaultValue",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value: string) => void",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "defaultMonth",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "min",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "max",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "isDateDisabled",
+        "type": "(date: string) => boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "locale",
+        "type": "'ko' | 'en'",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "DatePicker": [
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "defaultValue",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value: string) => void",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "min",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "max",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "isDateDisabled",
+        "type": "(date: string) => boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "locale",
+        "type": "'ko' | 'en'",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "Tabs": [
+      {
+        "name": "items",
+        "type": "TabItem[]",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "onChange",
+        "type": "(key: string) => void",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "inverse",
+        "type": "boolean",
+        "required": false,
+        "description": "Inverse surface (for deep-ink feature bands)."
+      }
+    ],
+    "Breadcrumb": [
+      {
+        "name": "items",
+        "type": "readonly BreadcrumbItem[]",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "Pagination": [
+      {
+        "name": "totalPages",
+        "type": "number",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "page",
+        "type": "number",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "defaultPage",
+        "type": "number",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "onPageChange",
+        "type": "(page: number) => void",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "SegmentedControl": [
+      {
+        "name": "items",
+        "type": "readonly {value: string; label: string; disabled?: boolean}[]",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "defaultValue",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value: string) => void",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "description": ""
+      }
+    ],
+    "Toggle": [
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "pressed",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "defaultPressed",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "onPressedChange",
+        "type": "(pressed: boolean) => void",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "ToggleGroup": [
+      {
+        "name": "items",
+        "type": "readonly {value: string; label: string; disabled?: boolean}[]",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "value",
+        "type": "readonly string[]",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "defaultValue",
+        "type": "readonly string[]",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value: readonly string[]) => void",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "description": ""
+      }
+    ],
+    "Avatar": [
+      {
+        "name": "src",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "fallback",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "size",
+        "type": "number",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "AvatarGroup": [
+      {
+        "name": "items",
+        "type": "readonly {src?: string; name: string}[]",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "size",
+        "type": "number",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "Skeleton": [
+      {
+        "name": "width",
+        "type": "number",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "height",
+        "type": "number",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "circle",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "Spinner": [
+      {
+        "name": "size",
+        "type": "number",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "Progress": [
+      {
+        "name": "value",
+        "type": "number",
+        "required": true,
+        "description": "Fill value (0-1 or 0-100, inferred from range)."
+      },
+      {
+        "name": "max",
+        "type": "number",
+        "required": false,
+        "description": "Maximum value (default 1 if value ≤ 1, else 100)."
+      },
+      {
+        "name": "tone",
+        "type": "ProgressTone",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "surface",
+        "type": "ProgressSurface",
+        "required": false,
+        "description": "Rail surface — on light canvas or on inverse ink band."
+      },
+      {
+        "name": "size",
+        "type": "ProgressSize",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "Alert": [
+      {
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "tone",
+        "type": "'info' | 'success' | 'danger'",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "onClose",
+        "type": "() => void",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "EmptyState": [
+      {
+        "name": "title",
+        "type": "string",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "icon",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "action",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "Toast": [
+      {
+        "name": "tone",
+        "type": "ToastTone",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "title",
+        "type": "ReactNode",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "description",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "glyph",
+        "type": "ReactNode",
+        "required": false,
+        "description": "Optional custom glyph for the leading status dot."
+      },
+      {
+        "name": "hideIcon",
+        "type": "boolean",
+        "required": false,
+        "description": "Hide the leading status dot."
+      }
+    ],
+    "Dialog": [
+      {
+        "name": "open",
+        "type": "boolean",
+        "required": true,
+        "description": "표시 여부 (controlled)."
+      },
+      {
+        "name": "onClose",
+        "type": "() => void",
+        "required": true,
+        "description": "scrim 클릭 / Esc / Android back 시 호출."
+      },
+      {
+        "name": "size",
+        "type": "DialogSize",
+        "required": false,
+        "description": "표면 폭 프리셋. 기본 'md'."
+      },
+      {
+        "name": "closeOnScrimClick",
+        "type": "boolean",
+        "required": false,
+        "description": "scrim 클릭으로 닫을지. 기본 true."
+      },
+      {
+        "name": "closeOnEsc",
+        "type": "boolean",
+        "required": false,
+        "description": "Esc(web) / Android back(native)로 닫을지. 기본 true."
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "BottomSheet": [
+      {
+        "name": "open",
+        "type": "boolean",
+        "required": true,
+        "description": "표시 여부 (controlled)."
+      },
+      {
+        "name": "onClose",
+        "type": "() => void",
+        "required": true,
+        "description": "scrim 클릭 / Esc / Android back / 드래그 디스미스 시 호출."
+      },
+      {
+        "name": "closeOnScrimClick",
+        "type": "boolean",
+        "required": false,
+        "description": "scrim 클릭으로 닫을지. 기본 true."
+      },
+      {
+        "name": "closeOnEsc",
+        "type": "boolean",
+        "required": false,
+        "description": "Esc(web) / Android back(native)로 닫을지. 기본 true."
+      },
+      {
+        "name": "dragToClose",
+        "type": "boolean",
+        "required": false,
+        "description": "핸들 드래그로 닫을지. true면 grabber 핸들을 자동 렌더. 기본 true."
+      },
+      {
+        "name": "maxHeightRatio",
+        "type": "number",
+        "required": false,
+        "description": "화면 높이 대비 시트 최대 높이 비율(0~1). 기본 0.9."
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "Drawer": [
+      {
+        "name": "open",
+        "type": "boolean",
+        "required": true,
+        "description": "표시 여부 (controlled)."
+      },
+      {
+        "name": "onClose",
+        "type": "() => void",
+        "required": true,
+        "description": "scrim 클릭 / Esc / Android back 시 호출."
+      },
+      {
+        "name": "width",
+        "type": "number",
+        "required": false,
+        "description": "패널 폭(px). 기본 320. 화면폭보다 크면 화면폭으로 클램프(native)."
+      },
+      {
+        "name": "closeOnScrimClick",
+        "type": "boolean",
+        "required": false,
+        "description": "scrim 클릭으로 닫을지. 기본 true."
+      },
+      {
+        "name": "closeOnEsc",
+        "type": "boolean",
+        "required": false,
+        "description": "Esc(web) / Android back(native)로 닫을지. 기본 true."
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "Tooltip": [
+      {
+        "name": "id",
+        "type": "string",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "trigger",
+        "type": "ReactNode",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "Popover": [
+      {
+        "name": "trigger",
+        "type": "ReactNode",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "defaultOpen",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open: boolean) => void",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "DropdownMenu": [
+      {
+        "name": "trigger",
+        "type": "ReactNode",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "items",
+        "type": "readonly DropdownMenuItem[]",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "defaultOpen",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open: boolean) => void",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "Accordion": [
+      {
+        "name": "id",
+        "type": "string",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "items",
+        "type": "readonly AccordionItem[]",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "value",
+        "type": "readonly string[]",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "defaultValue",
+        "type": "readonly string[]",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "onValueChange",
+        "type": "(value: readonly string[]) => void",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "multiple",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      }
+    ],
+    "Collapsible": [
+      {
+        "name": "id",
+        "type": "string",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "children",
+        "type": "ReactNode",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "open",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "defaultOpen",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open: boolean) => void",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "disabled",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      }
+    ]
+  }
+}
