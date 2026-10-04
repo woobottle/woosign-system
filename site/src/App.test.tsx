@@ -116,6 +116,20 @@ it('does not load the film when reduced motion is requested', () => {
   });
   const {container} = mount(<App />);
   expect(container.querySelector('video')).not.toBeInTheDocument();
+  expect(container.querySelector('.cinema-atmosphere')).toHaveStyle({
+    backgroundImage: 'url(/woosign/media/woosign-paper-ink-poster.png)',
+  });
+});
+it('keeps the custom poster visible when video loading fails', () => {
+  const {container} = mount(<App />);
+  const video = container.querySelector('video')!;
+  expect(video).toHaveAttribute('src', '/woosign/media/woosign-paper-ink-hero.mp4');
+  expect(video).toHaveAttribute('poster', '/woosign/media/woosign-paper-ink-poster.png');
+  fireEvent.error(video);
+  expect(container.querySelector('video')).not.toBeInTheDocument();
+  expect(container.querySelector('.cinema-atmosphere')).toHaveStyle({
+    backgroundImage: 'url(/woosign/media/woosign-paper-ink-poster.png)',
+  });
 });
 it('updates route when browser back navigation fires', () => {
   mount(<App />);

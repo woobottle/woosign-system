@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from 'react';
 import {pagePath} from './routes';
-const videoUrl =
-  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_094145_4a271a6c-3869-4f1c-8aa7-aeb0cb227994.mp4';
+const videoUrl = '/woosign/media/woosign-paper-ink-hero.mp4';
+const posterUrl = '/woosign/media/woosign-paper-ink-poster.png';
 export function CinematicHero() {
   const [playing, setPlaying] = useState(false);
   const [allowed, setAllowed] = useState(false);
@@ -36,12 +36,17 @@ export function CinematicHero() {
   }
   return (
     <section className="cinema-hero" aria-labelledby="cinema-title">
-      <div className="cinema-atmosphere" aria-hidden="true" />
+      <div
+        className="cinema-atmosphere"
+        style={{backgroundImage: `url(${posterUrl})`}}
+        aria-hidden="true"
+      />
       {allowed && !failed && (
         <video
           ref={video}
           className="cinema-video"
           src={videoUrl}
+          poster={posterUrl}
           autoPlay
           muted
           loop
