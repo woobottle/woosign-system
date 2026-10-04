@@ -1,7 +1,7 @@
 /**
  * Checkbox component - Web implementation. controlled, role=checkbox.
  */
-import React, {forwardRef, useCallback, useMemo} from 'react';
+import React, {forwardRef, useCallback, useMemo, useId} from 'react';
 import type {CheckboxWebProps} from './types';
 import {
   getCheckboxStyles,
@@ -28,6 +28,7 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxWebProps>(
     },
     ref,
   ) {
+    const labelId = useId();
     const handleClick = useCallback(() => {
       if (!disabled) {
         onCheckedChange?.(!checked);
@@ -76,6 +77,7 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxWebProps>(
           ref={ref}
           type="button"
           role="checkbox"
+          aria-labelledby={label != null ? labelId : undefined}
           aria-checked={indeterminate ? 'mixed' : checked}
           disabled={disabled}
           onClick={handleClick}
@@ -88,7 +90,10 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxWebProps>(
           )}
         </button>
         {label != null && (
-          <span style={labelStyle} onClick={disabled ? undefined : handleClick}>
+          <span
+            id={labelId}
+            style={labelStyle}
+            onClick={disabled ? undefined : handleClick}>
             {label}
           </span>
         )}
