@@ -1420,10 +1420,92 @@ td:last-child {
   min-height: 820px;
   height: calc(100svh - 0px);
   max-height: 1200px;
-  background: #171513;
+  background: transparent;
   color: #fff;
   overflow: hidden;
   isolation: isolate;
+}
+.home-experience {
+  position: relative;
+  isolation: isolate;
+  background: #171513;
+  color: #f4efe6;
+  --ink: #f4efe6;
+  --muted: #c5bbae;
+  --line: rgba(244, 239, 230, 0.22);
+  --surface: rgba(244, 239, 230, 0.08);
+  --ember: #f39a57;
+}
+.home-atmosphere {
+  position: sticky;
+  top: 0;
+  height: 100lvh;
+  margin-bottom: -100lvh;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.home-sections {
+  position: relative;
+  background: linear-gradient(
+    to bottom,
+    rgba(23, 21, 19, 0.76),
+    rgba(23, 21, 19, 0.9) 55%,
+    rgba(23, 21, 19, 0.55)
+  );
+}
+.home-experience .shared-api {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+.home-experience .hero-specimen,
+.home-experience .pick-preview {
+  --paper: #f4efe6;
+  --ink: #171513;
+  --muted: #746e65;
+  --surface: #eae4d8;
+  --line: #d8d0c3;
+  color: var(--ink);
+  background: var(--surface);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.25);
+}
+:root[data-theme='dark'] .home-experience .hero-specimen,
+:root[data-theme='dark'] .home-experience .pick-preview {
+  --paper: #171513;
+  --ink: #f4efe6;
+  --muted: #b9b1a5;
+  --surface: #2a2622;
+  --line: #494239;
+}
+.home-experience .manifesto {
+  background: rgba(244, 239, 230, 0.06);
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+.home-experience .closing {
+  background: transparent;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+.home-experience .shared-api-copy .code {
+  border: 1px solid var(--line);
+  background: rgba(23, 21, 19, 0.82);
+}
+.site-footer-cinema {
+  max-width: none;
+  background: #171513;
+  color: #f4efe6;
+  border-color: #494239;
+}
+.site-footer-cinema p {
+  color: #b9b1a5;
+}
+@media (max-width: 700px) {
+  .home-experience .shared-api,
+  .home-experience .closing {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
 }
 .cinema-atmosphere,
 .cinema-video,
