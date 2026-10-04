@@ -430,8 +430,8 @@ export function Demo({
       return (
         <W.Breadcrumb
           items={[
-            {label: '홈', href: '#/'},
-            {label: '컴포넌트', href: '#/components'},
+            {label: '홈', href: '/woosign/'},
+            {label: '컴포넌트', href: '/woosign/components/'},
             {label: 'Breadcrumb'},
           ]}
         />

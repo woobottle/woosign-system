@@ -85,7 +85,7 @@
     "storybook:native:ios": "STORYBOOK_ENABLED=true react-native run-ios",
     "storybook:native:android": "STORYBOOK_ENABLED=true react-native run-android",
     "site:dev": "vite --config site/vite.config.ts",
-    "site:build": "vite build --config site/vite.config.ts",
+    "site:build": "vite build --config site/vite.config.ts && vite build --config site/vite.config.ts --ssr src/prerender.tsx --outDir .ssr && node site/scripts/prerender.cjs",
     "site:preview": "vite preview --config site/vite.config.ts",
     "site:typecheck": "tsc --project site/tsconfig.json --noEmit",
     "site:test": "jest --config site/jest.config.cjs --runInBand"

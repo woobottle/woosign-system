@@ -44,3 +44,5 @@ android/build/
 # Showcase site
 /site/dist/
 /site/coverage/
+
+/site/.ssr/
