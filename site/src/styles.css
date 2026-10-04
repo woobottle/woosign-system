@@ -1397,3 +1397,429 @@ td:last-child {
     scroll-behavior: auto !important;
   }
 }
+
+/* Cinematic entrance: the same Higgsfield film used by WooBottle Labs. */
+.site-header-cinema {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 10;
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  max-width: none;
+  background: transparent;
+}
+.site-header-cinema .brand-mark {
+  border-color: rgba(255, 255, 255, 0.75);
+}
+.site-header-cinema .theme-button {
+  color: white;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.cinema-hero {
+  position: relative;
+  min-height: 820px;
+  height: calc(100svh - 0px);
+  max-height: 1200px;
+  background: #171513;
+  color: #fff;
+  overflow: hidden;
+  isolation: isolate;
+}
+.cinema-atmosphere,
+.cinema-video,
+.cinema-scrim {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.cinema-atmosphere {
+  background: radial-gradient(ellipse at 75% 25%, #614735 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 70%, #244438 0%, #171513 70%);
+}
+.cinema-video {
+  object-fit: cover;
+  opacity: 0.85;
+}
+.cinema-scrim {
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.12)),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.7), transparent 60%);
+}
+.cinema-scrim:after {
+  content: '';
+  position: absolute;
+  inset: 45% 0 0;
+  backdrop-filter: blur(14px);
+  -webkit-mask-image: linear-gradient(to top, #000, transparent);
+  mask-image: linear-gradient(to top, #000, transparent);
+}
+.cinema-content {
+  position: relative;
+  z-index: 2;
+  width: min(1440px, 100%);
+  margin: auto;
+  padding: 190px 64px 140px;
+  animation: cinema-arrive 0.8s ease-out both;
+}
+.platform-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.platform-badges > span {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(8px);
+}
+.cinema-content h1 {
+  font: clamp(64px, 7.4vw, 112px) / 1.02 var(--display);
+  letter-spacing: -0.035em;
+  margin: 0 0 26px;
+  text-wrap: balance;
+  color: #fff;
+}
+.cinema-lead {
+  font-size: 26px;
+  line-height: 1.5;
+  margin-bottom: 18px;
+  letter-spacing: -0.03em;
+}
+.cinema-description {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.9;
+  margin-bottom: 32px;
+  max-width: 500px;
+}
+.cinema-actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.cinema-native-link {
+  font-size: 13px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 10px 0;
+}
+.cinema-native-link:hover {
+  border-color: white;
+}
+.cinema-bottom {
+  position: absolute;
+  bottom: 28px;
+  left: 64px;
+  right: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  z-index: 2;
+}
+.cinema-scroll {
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.cinema-scroll span {
+  font-size: 24px;
+}
+.cinema-version {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  opacity: 0.65;
+  margin-left: auto;
+}
+.cinema-motion {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+  font-size: 12px;
+}
+.cinema-motion span {
+  font-size: 10px;
+}
+@keyframes cinema-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.shared-api {
+  scroll-margin-top: 32px;
+}
+.shared-api-copy h2 {
+  font-size: 54px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0 0 24px;
+}
+.shared-api-copy > p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.9;
+}
+.shared-api-copy .code {
+  margin: 28px 0;
+}
+.shared-api-copy .preview-disclosure {
+  font-size: 11px;
+  max-width: 420px;
+  margin-top: 18px;
+}
+.native-badges > span {
+  border-color: var(--line);
+  background: var(--surface);
+  backdrop-filter: none;
+  color: var(--ink);
+}
+.home-map {
+  padding: 0 64px 64px;
+  max-width: 1440px;
+  margin: auto;
+}
+.home-map-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  border-top: 1px solid var(--line);
+}
+.home-map-grid > a {
+  padding: 24px 0 0;
+}
+.home-map-grid h3 {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 17px;
+  letter-spacing: -0.02em;
+}
+.home-map-grid h3 span {
+  color: var(--ember);
+}
+.home-map-grid p {
+  font-size: 12px;
+  color: var(--muted);
+}
+.home-map-grid > a:hover h3 {
+  color: var(--ember);
+}
+.native-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  padding-bottom: 32px;
+}
+.native-intro h2 {
+  font-size: 22px;
+  letter-spacing: -0.03em;
+}
+.native-intro p {
+  font-size: 14px;
+  color: var(--muted);
+}
+.site-map-main {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.site-map-main a {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 14px;
+  background: var(--surface);
+}
+.site-map-main a:hover {
+  color: var(--ember);
+}
+.site-map-groups {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+.site-map-groups h3 {
+  font-size: 14px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 16px;
+}
+.site-map-groups a {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 0;
+}
+.site-map-groups a strong {
+  font-size: 13px;
+  font-weight: 550;
+}
+.site-map-groups a span {
+  font-size: 11px;
+  color: var(--muted);
+}
+.site-map-groups a:hover strong {
+  color: var(--ember);
+}
+.site-footer > div {
+  flex-wrap: wrap;
+}
+@media (max-width: 1100px) {
+  .cinema-content {
+    padding: 170px 40px 130px;
+  }
+  .cinema-bottom {
+    left: 40px;
+    right: 40px;
+  }
+  .home-map {
+    padding: 0 40px 56px;
+  }
+  .home-map-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .site-header nav {
+    gap: 20px;
+  }
+  .site-footer > div {
+    gap: 16px;
+  }
+  .shared-api-copy h2 {
+    font-size: 44px;
+  }
+}
+@media (max-width: 760px) {
+  .cinema-hero {
+    height: auto;
+    min-height: 860px;
+  }
+  .cinema-content {
+    padding: 190px 24px 150px;
+  }
+  .cinema-content h1 {
+    font-size: clamp(54px, 10vw, 76px);
+  }
+  .cinema-lead {
+    font-size: 22px;
+  }
+  .cinema-description {
+    font-size: 13px;
+  }
+  .cinema-actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .cinema-bottom {
+    left: 24px;
+    right: 24px;
+    bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .cinema-version {
+    display: none;
+  }
+  .platform-badges {
+    margin-bottom: 24px;
+    gap: 6px;
+  }
+  .platform-badges > span {
+    font-size: 10px;
+    padding: 7px 10px;
+  }
+  .home-map {
+    padding: 0 24px 48px;
+  }
+  .shared-api-copy h2 {
+    font-size: 38px;
+  }
+  .native-intro {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .site-map-main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .site-map-groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .site-header nav {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .site-header-cinema nav {
+    row-gap: 4px;
+  }
+  .site-footer p {
+    flex-basis: 100%;
+  }
+  .site-footer > div {
+    justify-content: flex-start;
+    gap: 16px;
+  }
+}
+@media (max-width: 480px) {
+  .cinema-hero {
+    min-height: 820px;
+  }
+  .cinema-content h1 {
+    font-size: 53px;
+  }
+  .cinema-content {
+    padding-top: 190px;
+  }
+  .home-map-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .home-map-grid > a {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 12px;
+  }
+  .site-map-main,
+  .site-map-groups {
+    grid-template-columns: 1fr;
+  }
+  .site-header nav {
+    gap: 18px;
+    font-size: 11px;
+  }
+  .cinema-content .action {
+    font-size: 12px;
+  }
+  .cinema-lead {
+    font-size: 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cinema-content {
+    animation: none;
+  }
+  .cinema-video {
+    display: none;
+  }
+  .cinema-scroll {
+    scroll-behavior: auto;
+  }
+}

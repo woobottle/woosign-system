@@ -49,6 +49,15 @@ jobs:
       - name: Smoke tests
         run: pnpm test
 
+      - name: Showcase type check
+        run: pnpm site:typecheck
+
+      - name: Showcase routing and hydration tests
+        run: pnpm site:test
+
+      - name: Build searchable showcase pages
+        run: pnpm site:build
+
       - name: Build package
         run: pnpm build
 

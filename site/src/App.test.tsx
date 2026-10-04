@@ -1,4 +1,7 @@
-import {render, screen, fireEvent, cleanup} from '@testing-library/react';
+import {hydrateRoot} from 'react-dom/client';
+import {StrictMode} from 'react';
+import {render as prerender} from './prerender';
+import {render, screen, fireEvent, cleanup, act} from '@testing-library/react';
 import {ThemeProvider, ToastProvider} from 'woosign-system';
 import {App} from './App';
 import {Demo, names} from './demos';
@@ -11,7 +14,12 @@ function mount(children: React.ReactNode) {
   );
 }
 beforeEach(() => {
-  window.location.hash = '#/';
+  window.history.replaceState(null, '', '/woosign/');
+  window.matchMedia = jest.fn().mockReturnValue({
+    matches: false,
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+  });
   localStorage.clear();
   window.scrollTo = jest.fn();
 });
@@ -64,4 +72,105 @@ it('handles unknown routes', () => {
   window.location.hash = '#/missing';
   mount(<App />);
   expect(screen.getByText('페이지를 찾을 수 없어요')).toBeInTheDocument();
+});
+
+it('opens the native guide from the homepage without losing navigation', () => {
+  mount(<App />);
+  fireEvent.click(
+    screen.getByRole('link', {name: 'React Native로 시작하기 ↗'}),
+  );
+  expect(window.location.pathname).toBe('/woosign/react-native/');
+  expect(
+    screen.getByRole('heading', {name: '앱에서도, WooSign.'}),
+  ).toBeInTheDocument();
+  expect(document.title).toContain('React Native');
+});
+it('preserves old hash links as clean URLs', () => {
+  window.location.hash = '#/components/button';
+  mount(<App />);
+  expect(window.location.pathname).toBe('/woosign/components/button/');
+  expect(window.location.hash).toBe('');
+  expect(screen.getByRole('button', {name: '시작하기 ↗'})).toBeEnabled();
+});
+it('opens a detail page directly by pathname', () => {
+  window.history.replaceState(null, '', '/woosign/components/slider/');
+  mount(<App />);
+  expect(screen.getByRole('slider', {name: '볼륨'})).toBeInTheDocument();
+});
+it('groups all components in a navigable sitemap', () => {
+  window.history.replaceState(null, '', '/woosign/sitemap/');
+  mount(<App />);
+  for (const name of names)
+    expect(
+      screen.getByRole('link', {name: new RegExp('^' + name + ' ')}),
+    ).toHaveAttribute(
+      'href',
+      '/woosign/components/' + name.toLowerCase() + '/',
+    );
+});
+it('does not load the film when reduced motion is requested', () => {
+  window.matchMedia = jest.fn().mockReturnValue({
+    matches: true,
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+  });
+  const {container} = mount(<App />);
+  expect(container.querySelector('video')).not.toBeInTheDocument();
+});
+it('updates route when browser back navigation fires', () => {
+  mount(<App />);
+  fireEvent.click(
+    screen.getByRole('link', {name: 'React Native로 시작하기 ↗'}),
+  );
+  window.history.replaceState(null, '', '/woosign/tokens/');
+  fireEvent(window, new PopStateEvent('popstate'));
+  expect(screen.getByRole('heading', {name: '팔레트'})).toBeInTheDocument();
+});
+it('restores saved dark theme on mount', () => {
+  localStorage.setItem('woosign-theme', 'dark');
+  mount(<App />);
+  expect(document.documentElement.dataset.theme).toBe('dark');
+  expect(localStorage.getItem('woosign-theme')).toBe('dark');
+});
+
+it.each(['/', '/react-native', '/components/button', '/components/calendar'])(
+  'hydrates prerendered %s without replacing the page',
+  async route => {
+    window.history.replaceState(
+      null,
+      '',
+      '/woosign' + (route === '/' ? '/' : route + '/'),
+    );
+    const container = document.createElement('div');
+    container.innerHTML = prerender(route);
+    document.body.appendChild(container);
+    const errors: unknown[] = [];
+    let root: ReturnType<typeof hydrateRoot>;
+    await act(async () => {
+      root = hydrateRoot(
+        container,
+        <StrictMode>
+          <ThemeProvider>
+            <ToastProvider>
+              <App initialRoute={route} />
+            </ToastProvider>
+          </ThemeProvider>
+        </StrictMode>,
+        {onRecoverableError: error => errors.push(error)},
+      );
+    });
+    expect(errors).toEqual([]);
+    await act(async () => root!.unmount());
+    container.remove();
+  },
+);
+it('does not override in-page anchor scrolling', () => {
+  mount(<App />);
+  (window.scrollTo as jest.Mock).mockClear();
+  window.history.replaceState(null, '', '/woosign/#shared-api');
+  fireEvent(window, new HashChangeEvent('hashchange'));
+  expect(window.scrollTo).not.toHaveBeenCalled();
+  expect(
+    screen.getByRole('heading', {name: 'One language. Web & Native.'}),
+  ).toBeInTheDocument();
 });

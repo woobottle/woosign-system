@@ -3,7 +3,10 @@ module.exports = {
   testEnvironment: 'jsdom',
   testMatch: ['<rootDir>/site/src/**/*.test.tsx'],
   moduleFileExtensions: ['web.tsx', 'web.ts', 'tsx', 'ts', 'js', 'json'],
-  moduleNameMapper: {'^woosign-system$': '<rootDir>/src/index.ts'},
+  moduleNameMapper: {
+    '^woosign-system$': '<rootDir>/src/index.ts',
+    '^react-dom/server$': require.resolve('react-dom/server.node'),
+  },
   transform: {
     '^.+\\.tsx?$': [
       'ts-jest',

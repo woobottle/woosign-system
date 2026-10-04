@@ -1,10 +1,19 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useRef} from 'react';
 import * as W from 'woosign-system';
 import {Demo, descriptions, groups, names, type ComponentName} from './demos';
 import catalog from './catalog.json';
+import {CinematicHero} from './CinematicHero';
+import {NativeGuide} from './NativeGuide';
+import {
+  basePath,
+  pagePath,
+  readRoute,
+  componentRoute,
+  metadata,
+  origin,
+} from './routes';
 
-const slug = (name: string) => name.toLowerCase();
-const url = (name: string) => `#/components/${slug(name)}`;
+const url = (name: string) => pagePath(componentRoute(name));
 const github = 'https://github.com/woobottle/woosign-system';
 function Code({children}: {children: string}) {
   const [status, setStatus] = useState('복사');
@@ -68,35 +77,33 @@ function Home() {
   const [done, setDone] = useState(false);
   return (
     <>
-      <section className="hero">
-        <div className="hero-copy">
-          <div className="eyebrow">
-            <span className="ember-dot" /> WOOSIGN SYSTEM / v0.6.0
+      <CinematicHero />
+      <section className="hero shared-api" id="shared-api">
+        <div className="shared-api-copy">
+          <div className="platform-badges native-badges">
+            <span>React Web</span>
+            <span>React Native</span>
           </div>
-          <h1>
-            Paper & Ink.
+          <h2>
+            같은 API.
             <br />
-            On every
-            <br />
-            <em>screen.</em>
-          </h1>
+            각자의 화면.
+          </h2>
           <p>
-            따뜻한 화면을 만드는 작은 디테일.
+            Button, Checkbox, Card부터 디자인 토큰까지.
             <br />
-            React와 React Native를 위한 하나의 디자인 시스템.
+            웹과 네이티브 앱에서 같은 이름, 같은 API로 사용하세요.
           </p>
-          <div className="hero-actions">
-            <a className="action" href="#/components">
-              컴포넌트 둘러보기 <span>↗</span>
-            </a>
-            <a className="text-link" href="#/getting-started">
-              시작하기 →
-            </a>
-          </div>
-          <div className="install-mini">
-            <code>npm install woosign-system</code>
-            <span>WEB + NATIVE</span>
-          </div>
+          <Code>{`import {Button} from 'woosign-system';
+
+<Button onPress={handlePress}>시작하기</Button>`}</Code>
+          <a className="text-link" href="/woosign/react-native/">
+            iOS · Android 사용법 보기 ↗
+          </a>
+          <p className="preview-disclosure">
+            옆의 데모는 실제 웹 구현입니다. 네이티브 구현은 React Native 앱에서
+            렌더링됩니다.
+          </p>
         </div>
         <div className="hero-specimen">
           <div className="specimen-label">
@@ -152,6 +159,49 @@ function Home() {
           </div>
         </div>
       </section>
+      <section className="home-map">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">EXPLORE WOOSIGN</p>
+            <h2>필요한 곳부터 시작하세요.</h2>
+          </div>
+          <a className="text-link" href="/woosign/sitemap/">
+            전체 사이트맵 보기 ↗
+          </a>
+        </div>
+        <div className="home-map-grid">
+          {[
+            [
+              '/getting-started',
+              '시작하기',
+              '설치부터 첫 화면까지, Web·Native 예제를 따라 시작하세요.',
+            ],
+            [
+              '/react-native',
+              'React Native',
+              'iOS·Android 설정과 네이티브 UI 사용법을 확인하세요.',
+            ],
+            [
+              '/components',
+              '컴포넌트',
+              '50개 실제 데모를 조작하고 사용 코드를 가져가세요.',
+            ],
+            [
+              '/tokens',
+              '디자인 토큰',
+              '같은 팔레트, 글자, 여백으로 화면을 연결하세요.',
+            ],
+          ].map(([path, title, description]) => (
+            <a key={path} href={pagePath(path)}>
+              <h3>
+                {title}
+                <span>↗</span>
+              </h3>
+              <p>{description}</p>
+            </a>
+          ))}
+        </div>
+      </section>
       <section className="manifesto">
         <p className="eyebrow">ONE LANGUAGE. MANY POSSIBILITIES.</p>
         <div className="manifesto-grid">
@@ -179,7 +229,7 @@ function Home() {
             <p className="eyebrow">THE BUILDING BLOCKS</p>
             <h2>작은 요소에서 시작하세요.</h2>
           </div>
-          <a className="text-link" href="#/components">
+          <a className="text-link" href="/woosign/components/">
             전체 컴포넌트 →
           </a>
         </div>
@@ -207,7 +257,7 @@ function Home() {
           <br />
           starts here.
         </h2>
-        <a className="action light" href="#/getting-started">
+        <a className="action light" href="/woosign/getting-started/">
           설치하고 시작하기 ↗
         </a>
       </section>
@@ -431,7 +481,7 @@ function Detail({name}: {name: ComponentName}) {
           공통 API 기준입니다. 플랫폼별 style, className 및 세부 타입은 타입
           정의에서 확인하세요.
         </p>
-        <a className="text-link" href="#/components">
+        <a className="text-link" href="/woosign/components/">
           ← 전체 컴포넌트로 돌아가기
         </a>
       </main>
@@ -603,10 +653,52 @@ function GettingStarted() {
           컴포넌트의 상태를 바꾸고, 사용 코드를 복사하고, 제품의 이야기를
           담아보세요.
         </p>
-        <a className="action" href="#/components">
+        <a className="action" href="/woosign/components/">
           컴포넌트 둘러보기 ↗
         </a>
       </article>
+    </section>
+  );
+}
+function SiteMap() {
+  return (
+    <section className="page sitemap-page">
+      <div className="page-heading">
+        <p className="eyebrow">FIND YOUR NEXT SCREEN</p>
+        <h1>WooSign 사이트맵</h1>
+        <p>
+          React Web부터 React Native까지. 필요한 문서와 컴포넌트로 바로
+          이동하세요.
+        </p>
+      </div>
+      <div className="site-map-main">
+        {[
+          ['/', '홈'],
+          ['/getting-started', '시작하기'],
+          ['/react-native', 'React Native · iOS & Android'],
+          ['/tokens', '디자인 토큰'],
+          ['/components', '컴포넌트 갤러리'],
+        ].map(([path, label]) => (
+          <a key={path} href={pagePath(path)}>
+            {label}
+            <span>↗</span>
+          </a>
+        ))}
+      </div>
+      <h2 className="subheading">50개 컴포넌트</h2>
+      <div className="site-map-groups">
+        {Object.entries(groups).map(([group, items]) => (
+          <section key={group}>
+            <h3>{group}</h3>
+            {items.map(name => (
+              <a key={name} href={url(name)}>
+                <strong>{name}</strong>
+                <span>{descriptions[name]}</span>
+              </a>
+            ))}
+          </section>
+        ))}
+      </div>
     </section>
   );
 }
@@ -617,17 +709,55 @@ function initialTheme(): 'light' | 'dark' {
     return 'light';
   }
 }
-export function App() {
-  const [route, setRoute] = useState(location.hash || '#/');
-  const [scheme, setScheme] = useState(initialTheme);
+export function App({initialRoute}: {initialRoute?: string} = {}) {
+  const [route, setRoute] = useState(() => initialRoute ?? readRoute());
+  const routeRef = useRef(route);
+  const [scheme, setScheme] = useState<'light' | 'dark'>('light');
+  const [savedScheme] = useState(initialTheme);
+  useEffect(() => setScheme(savedScheme), [savedScheme]);
   const {setColorScheme} = W.useTheme();
   useEffect(() => {
     const update = () => {
-      setRoute(location.hash || '#/');
-      window.scrollTo?.(0, 0);
+      const next = readRoute();
+      if (window.location.hash.startsWith('#/'))
+        window.history.replaceState(null, '', pagePath(next));
+      const previous = routeRef.current;
+      routeRef.current = next;
+      setRoute(next);
+      if (previous !== next) window.scrollTo?.(0, 0);
+    };
+    const click = (event: MouseEvent) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      )
+        return;
+      const link = (event.target as Element).closest?.('a');
+      if (!link || link.target || link.hasAttribute('download')) return;
+      const target = new URL(link.href, window.location.href);
+      if (
+        target.origin !== window.location.origin ||
+        !target.pathname.startsWith(basePath) ||
+        target.hash
+      )
+        return;
+      event.preventDefault();
+      window.history.pushState(null, '', target.pathname + target.search);
+      update();
     };
     window.addEventListener('hashchange', update);
-    return () => window.removeEventListener('hashchange', update);
+    window.addEventListener('popstate', update);
+    document.addEventListener('click', click);
+    if (window.location.hash.startsWith('#/')) update();
+    return () => {
+      window.removeEventListener('hashchange', update);
+      window.removeEventListener('popstate', update);
+      document.removeEventListener('click', click);
+    };
   }, []);
   useEffect(() => {
     setColorScheme(scheme);
@@ -638,29 +768,40 @@ export function App() {
       /* Storage is optional. */
     }
   }, [scheme, setColorScheme]);
-  const name = names.find(n => route === url(n));
+  const name = names.find(n => route === componentRoute(n));
   const page =
-    route === '#/'
+    route === '/'
       ? 'home'
-      : route === '#/components' || name
+      : route === '/components' || name
       ? 'components'
-      : route === '#/tokens'
+      : route === '/tokens'
       ? 'tokens'
-      : route === '#/getting-started'
+      : route === '/getting-started'
       ? 'getting-started'
+      : route === '/react-native'
+      ? 'react-native'
+      : route === '/sitemap'
+      ? 'sitemap'
       : 'unknown';
   useEffect(() => {
-    document.title = `${
-      name ||
-      {
-        home: 'Paper & Ink',
-        components: '컴포넌트',
-        tokens: '디자인 토큰',
-        'getting-started': '시작하기',
-        unknown: '페이지를 찾을 수 없습니다',
-      }[page]
-    } — WooSign`;
-  }, [page, name]);
+    const info = metadata(route);
+    document.title = info.title;
+    document
+      .querySelector('meta[name="description"]')
+      ?.setAttribute('content', info.description);
+    document
+      .querySelector('meta[property="og:title"]')
+      ?.setAttribute('content', info.title);
+    document
+      .querySelector('meta[property="og:description"]')
+      ?.setAttribute('content', info.description);
+    document
+      .querySelector('meta[property="og:url"]')
+      ?.setAttribute('content', origin + pagePath(route));
+    document
+      .querySelector('link[rel="canonical"]')
+      ?.setAttribute('href', origin + pagePath(route));
+  }, [route]);
   return (
     <>
       <a
@@ -673,8 +814,11 @@ export function App() {
         }}>
         본문으로 건너뛰기
       </a>
-      <header className="site-header">
-        <a className="brand" href="#/" aria-label="WooSign 홈">
+      <header
+        className={`site-header ${
+          page === 'home' ? 'site-header-cinema' : ''
+        }`}>
+        <a className="brand" href="/woosign/" aria-label="WooSign 홈">
           <span className="brand-mark">w.</span>
           <span>
             woosign<span className="brand-caption">PAPER & INK</span>
@@ -682,17 +826,22 @@ export function App() {
         </a>
         <nav aria-label="주요 탐색">
           <a
-            href="#/components"
+            href="/woosign/react-native/"
+            aria-current={page === 'react-native' ? 'page' : undefined}>
+            React Native
+          </a>
+          <a
+            href="/woosign/components/"
             aria-current={page === 'components' ? 'page' : undefined}>
             컴포넌트
           </a>
           <a
-            href="#/tokens"
+            href="/woosign/tokens/"
             aria-current={page === 'tokens' ? 'page' : undefined}>
             디자인 토큰
           </a>
           <a
-            href="#/getting-started"
+            href="/woosign/getting-started/"
             aria-current={page === 'getting-started' ? 'page' : undefined}>
             시작하기
           </a>
@@ -724,6 +873,10 @@ export function App() {
           <Gallery />
         ) : page === 'tokens' ? (
           <Tokens />
+        ) : page === 'react-native' ? (
+          <NativeGuide Code={Code} />
+        ) : page === 'sitemap' ? (
+          <SiteMap />
         ) : page === 'getting-started' ? (
           <GettingStarted />
         ) : (
@@ -732,7 +885,7 @@ export function App() {
               title="페이지를 찾을 수 없어요"
               description="아래 버튼으로 다시 시작해 보세요."
               action={
-                <a className="action" href="#/">
+                <a className="action" href="/woosign/">
                   홈으로 돌아가기
                 </a>
               }
@@ -741,13 +894,14 @@ export function App() {
         )}
       </div>
       <footer className="site-footer">
-        <a className="brand footer-brand" href="#/">
+        <a className="brand footer-brand" href="/woosign/">
           woosign
           <span className="ember-dot" />
         </a>
         <p>작은 디테일로 만드는 좋은 경험.</p>
         <div>
-          <span>v0.6.0 · WooBottle</span>
+          <span>v0.6.0 · Web + React Native</span>
+          <a href="/woosign/sitemap/">사이트맵</a>
           <a href="https://woo-bottle.com/">WooBottle Labs ↗</a>
           <a
             href="https://www.npmjs.com/package/woosign-system"

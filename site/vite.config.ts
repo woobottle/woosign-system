@@ -3,7 +3,7 @@ import path from 'node:path';
 
 export default defineConfig({
   root: path.resolve(__dirname),
-  base: './',
+  base: '/woosign/',
   resolve: {
     alias: {
       'woosign-system': path.resolve(__dirname, '../src/index.ts'),
