@@ -21,6 +21,7 @@ export const groups = {
     'ScrollArea',
     'ListItem',
     'Carousel',
+    'Table',
   ],
   '폼과 입력': [
     'Input',
@@ -86,6 +87,7 @@ export const descriptions: Record<ComponentName, string> = {
   ScrollArea: '긴 콘텐츠를 위한 스크롤 영역',
   ListItem: '반복되는 정보를 정리하는 행',
   Carousel: '옆으로 넘겨 보는 슬라이드',
+  Table: '정렬할 수 있는 데이터 표',
   Input: '한 줄 텍스트 입력',
   Textarea: '여러 줄의 생각을 담는 입력',
   Select: '목록에서 하나를 선택',
@@ -477,6 +479,30 @@ export function Demo({
             </div>
           ))}
         </W.Carousel>
+      );
+    case 'Table':
+      return (
+        <W.Table
+          caption="팔레트 재고"
+          style={{width: '100%', maxWidth: 520}}
+          rowKey={row => row.name}
+          data={[
+            {name: 'Paper', stock: 120, price: 3000},
+            {name: 'Ink', stock: 8, price: 12000},
+            {name: 'Ember', stock: 45, price: 7500},
+          ]}
+          columns={[
+            {key: 'name', header: '이름', sortable: true},
+            {key: 'stock', header: '재고', align: 'right', sortable: true},
+            {
+              key: 'price',
+              header: '가격',
+              align: 'right',
+              sortable: true,
+              render: row => `${row.price.toLocaleString('ko-KR')}원`,
+            },
+          ]}
+        />
       );
     case 'Stepper':
       return (

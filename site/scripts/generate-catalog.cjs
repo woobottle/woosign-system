@@ -26,8 +26,8 @@ function visit(node) {
   ts.forEachChild(node, visit);
 }
 visit(demoAst);
-if (cases.length !== 52)
-  throw new Error(`Expected 52 demos, found ${cases.length}`);
+if (cases.length !== 53)
+  throw new Error(`Expected 53 demos, found ${cases.length}`);
 for (const [, name, jsx] of cases) {
   const declarations = [];
   if (/\bid\b/.test(jsx)) declarations.push('const id = useId();');

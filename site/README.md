@@ -1,6 +1,6 @@
 # WooSign showcase
 
-Paper & Ink 스타일의 React + Vite 사이트입니다. 실제 라이브러리 소스를 가져와 52개 컴포넌트를 보여줍니다.
+Paper & Ink 스타일의 React + Vite 사이트입니다. 실제 라이브러리 소스를 가져와 53개 컴포넌트를 보여줍니다.
 
 ```sh
 pnpm site:dev        # http://127.0.0.1:5173/woosign/
@@ -32,7 +32,7 @@ node site/scripts/install-into-labs.cjs /path/to/woobottle-labs
 
 ## 탐색과 SEO
 
-홈, 컴포넌트 갤러리, 52개 상세, React Native 가이드, 디자인 토큰, 시작하기, 시각적 사이트맵을 제공합니다. 총 58개 HTML과 sitemap.xml을 빌드 시 생성합니다. 페이지별 title, description, canonical, Open Graph, JSON-LD를 포함합니다. WooBottle의 루트 robots.txt에는 `Sitemap: https://woo-bottle.com/woosign/sitemap.xml`을 등록합니다.
+홈, 컴포넌트 갤러리, 53개 상세, React Native 가이드, 디자인 토큰, 시작하기, 시각적 사이트맵을 제공합니다. 총 59개 HTML과 sitemap.xml을 빌드 시 생성합니다. 페이지별 title, description, canonical, Open Graph, JSON-LD를 포함합니다. WooBottle의 루트 robots.txt에는 `Sitemap: https://woo-bottle.com/woosign/sitemap.xml`을 등록합니다.
 
 홈 미디어는 WooSign을 위해 Higgsfield에서 새로 제작했습니다. Paper & Ink 재질의 웹·모바일 화면을 같은 컴포넌트로 연결하는 구도입니다. GPT Image 2.5 기준 이미지와 Kling 3.0 표준 모드의 8초 무음 영상을 `public/media/`에서 직접 제공합니다. 재생 제어, 미디어 오류 시 새 기준 이미지 표시, prefers-reduced-motion 대응을 포함합니다. 제작 기록은 `media-provenance.json`에 남깁니다.
 

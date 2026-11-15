@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Add cross-platform Table: columns with custom cells, alignment and widths;
+  client-side sorting (controlled/uncontrolled) with `aria-sort` on web and
+  labelled sort buttons on native; empty state, striped rows, horizontal scroll
+  on native.
 - Add cross-platform Carousel: full-width slides with scroll-snap (web) or paging
   ScrollView (native), previous/next buttons, dot indicators, arrow keys on web,
   controlled/uncontrolled index. Off-screen slides are hidden from screen readers.

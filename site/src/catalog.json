@@ -33,6 +33,7 @@
     "Pagination": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [number, setNumber] = useState(1);\n  return (\n    <W.Pagination\n      totalPages={5}\n      page={Math.min(number, 5)}\n      onPageChange={setNumber}\n      disabled={false}\n    />\n  );\n}\n",
     "SegmentedControl": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [value, setValue] = useState('paper');\n  const options = [\n    { value: 'paper', label: 'Paper' },\n    { value: 'ink', label: 'Ink' },\n    { value: 'ember', label: 'Ember' },\n  ];\n  return (\n    <W.SegmentedControl\n      label=\"팔레트 선택\"\n      items={options}\n      value={value}\n      onValueChange={setValue}\n      disabled={false}\n    />\n  );\n}\n",
     "Carousel": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  return (\n    <W.Carousel label=\"팔레트 소개\" style={{ width: '100%', maxWidth: 420 }}>\n      {['Paper', 'Ink', 'Ember'].map((name, i) => (\n        <div\n          key={name}\n          style={{\n            height: 180,\n            display: 'grid',\n            placeItems: 'center',\n            fontSize: 22,\n            background: ['#E4D8C6', '#1F1B16', '#E2572B'][i],\n            color: i === 0 ? '#1F1B16' : '#FFFFFF',\n          }}\n        >\n          {name}\n        </div>\n      ))}\n    </W.Carousel>\n  );\n}\n",
+    "Table": "import * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  return (\n    <W.Table\n      caption=\"팔레트 재고\"\n      style={{ width: '100%', maxWidth: 520 }}\n      rowKey={(row) => row.name}\n      data={[\n        { name: 'Paper', stock: 120, price: 3000 },\n        { name: 'Ink', stock: 8, price: 12000 },\n        { name: 'Ember', stock: 45, price: 7500 },\n      ]}\n      columns={[\n        { key: 'name', header: '이름', sortable: true },\n        { key: 'stock', header: '재고', align: 'right', sortable: true },\n        {\n          key: 'price',\n          header: '가격',\n          align: 'right',\n          sortable: true,\n          render: (row) => `${row.price.toLocaleString('ko-KR')}원`,\n        },\n      ]}\n    />\n  );\n}\n",
     "Stepper": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [value, setValue] = useState('paper');\n  return (\n    <W.Stepper\n      label=\"주문 단계\"\n      steps={[\n        { value: 'paper', label: '장바구니' },\n        { value: 'ink', label: '배송지', description: '받는 분 정보' },\n        { value: 'ember', label: '결제' },\n      ]}\n      value={value}\n      onValueChange={setValue}\n      navigable\n    />\n  );\n}\n",
     "Toggle": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [checked, setChecked] = useState(false);\n  return (\n    <W.Toggle\n      label=\"즐겨찾기\"\n      pressed={checked}\n      onPressedChange={setChecked}\n      disabled={false}\n    >\n      ★\n    </W.Toggle>\n  );\n}\n",
     "ToggleGroup": "import { useState } from 'react';\nimport * as W from 'woosign-system';\n\n// ThemeProvider와 ToastProvider 안에서 렌더링하세요.\nexport function Example() {\n  const [many, setMany] = useState<readonly string[]>([]);\n  return (\n    <W.ToggleGroup\n      label=\"텍스트 스타일\"\n      items={[\n        { value: 'bold', label: '굵게' },\n        { value: 'italic', label: '기울임' },\n      ]}\n      value={many}\n      onValueChange={setMany}\n      multiple\n      disabled={false}\n    />\n  );\n}\n",
@@ -1600,6 +1601,68 @@
         "type": "string",
         "required": true,
         "description": "Accessible name for the carousel."
+      }
+    ],
+    "Table": [
+      {
+        "name": "columns",
+        "type": "readonly TableColumn<T>[]",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "data",
+        "type": "readonly T[]",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "rowKey",
+        "type": "(row: T, index: number) => string",
+        "required": true,
+        "description": ""
+      },
+      {
+        "name": "caption",
+        "type": "string",
+        "required": true,
+        "description": "Accessible name; shown as a caption on web."
+      },
+      {
+        "name": "hideCaption",
+        "type": "boolean",
+        "required": false,
+        "description": "Hide the caption visually while keeping it for screen readers."
+      },
+      {
+        "name": "emptyText",
+        "type": "string",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "striped",
+        "type": "boolean",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "sort",
+        "type": "TableSort | null",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "defaultSort",
+        "type": "TableSort | null",
+        "required": false,
+        "description": ""
+      },
+      {
+        "name": "onSortChange",
+        "type": "(sort: TableSort) => void",
+        "required": false,
+        "description": ""
       }
     ],
     "Stepper": [
