@@ -44,7 +44,7 @@ jobs:
             "src/core/**/*.tsx" \
             "src/components/**/!(*.stories).ts" \
             "src/components/**/!(*.stories).tsx" \
-            --max-warnings 9999
+            --max-warnings 148
 
       - name: Smoke tests
         run: pnpm test
