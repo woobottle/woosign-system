@@ -902,7 +902,7 @@ export function App({initialRoute}: {initialRoute?: string} = {}) {
         </a>
         <p>작은 디테일로 만드는 좋은 경험.</p>
         <div>
-          <span>v0.6.0 · Web + React Native</span>
+          <span>v0.7.0 · Web + React Native</span>
           <a href="/woosign/sitemap/">사이트맵</a>
           <a href="https://woo-bottle.com/">WooBottle Labs ↗</a>
           <a
