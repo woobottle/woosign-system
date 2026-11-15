@@ -28,9 +28,9 @@ it.each(names)('renders %s with a corresponding code sample', name => {
   mount(<Demo name={name} />);
   expect(catalog.snippets[name]).toContain('export function Example');
 });
-it('contains 51 unique component demos', () => {
-  expect(new Set(names).size).toBe(51);
-  expect(Object.keys(catalog.snippets).length).toBe(51);
+it('contains 52 unique component demos', () => {
+  expect(new Set(names).size).toBe(52);
+  expect(Object.keys(catalog.snippets).length).toBe(52);
 });
 it('filters the gallery and resets empty results', () => {
   window.location.hash = '#/components';
@@ -40,7 +40,7 @@ it('filters the gallery and resets empty results', () => {
   });
   expect(screen.getByText('검색 결과가 없어요')).toBeInTheDocument();
   fireEvent.click(screen.getByRole('button', {name: '필터 초기화'}));
-  expect(screen.getByText('51개 컴포넌트')).toBeInTheDocument();
+  expect(screen.getByText('52개 컴포넌트')).toBeInTheDocument();
   fireEvent.change(screen.getByLabelText('갤러리 검색'), {
     target: {value: 'Button'},
   });

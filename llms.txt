@@ -28,6 +28,7 @@ WooSign provides a consistent set of UI components that work seamlessly across R
 - [Button](src/components/Button/types.ts): Cross-platform component; public props and contracts.
 - [Calendar](src/components/Calendar/types.ts): Cross-platform component; public props and contracts.
 - [Card](src/components/Card/types.ts): Cross-platform component; public props and contracts.
+- [Carousel](src/components/Carousel/types.ts): Cross-platform component; public props and contracts.
 - [Checkbox](src/components/Checkbox/types.ts): Cross-platform component; public props and contracts.
 - [Chip](src/components/Chip/types.ts): Cross-platform component; public props and contracts.
 - [Collapsible](src/components/Collapsible/types.ts): Cross-platform component; public props and contracts.

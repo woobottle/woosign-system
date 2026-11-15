@@ -20,6 +20,7 @@ export const groups = {
     'AspectRatio',
     'ScrollArea',
     'ListItem',
+    'Carousel',
   ],
   '폼과 입력': [
     'Input',
@@ -84,6 +85,7 @@ export const descriptions: Record<ComponentName, string> = {
   AspectRatio: '일정한 비율을 유지하는 콘텐츠',
   ScrollArea: '긴 콘텐츠를 위한 스크롤 영역',
   ListItem: '반복되는 정보를 정리하는 행',
+  Carousel: '옆으로 넘겨 보는 슬라이드',
   Input: '한 줄 텍스트 입력',
   Textarea: '여러 줄의 생각을 담는 입력',
   Select: '목록에서 하나를 선택',
@@ -456,6 +458,25 @@ export function Demo({
           onValueChange={setValue}
           disabled={disabled}
         />
+      );
+    case 'Carousel':
+      return (
+        <W.Carousel label="팔레트 소개" style={{width: '100%', maxWidth: 420}}>
+          {['Paper', 'Ink', 'Ember'].map((name, i) => (
+            <div
+              key={name}
+              style={{
+                height: 180,
+                display: 'grid',
+                placeItems: 'center',
+                fontSize: 22,
+                background: ['#E4D8C6', '#1F1B16', '#E2572B'][i],
+                color: i === 0 ? '#1F1B16' : '#FFFFFF',
+              }}>
+              {name}
+            </div>
+          ))}
+        </W.Carousel>
       );
     case 'Stepper':
       return (

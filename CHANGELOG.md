@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Add cross-platform Carousel: full-width slides with scroll-snap (web) or paging
+  ScrollView (native), previous/next buttons, dot indicators, arrow keys on web,
+  controlled/uncontrolled index. Off-screen slides are hidden from screen readers.
 - Add cross-platform Stepper: horizontal/vertical layout, complete/current/upcoming
   status, optional step descriptions, and `navigable` back-navigation to completed
   steps. Web uses an ordered list with `aria-current="step"`; native announces
