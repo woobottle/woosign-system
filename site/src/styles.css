@@ -700,6 +700,7 @@ code {
   font: 64px/1.15 var(--display);
   margin-bottom: 12px;
   letter-spacing: -0.02em;
+  overflow-wrap: break-word;
 }
 .detail-description {
   color: var(--muted);
@@ -1384,7 +1385,8 @@ td:last-child {
     font-size: 22px;
   }
   .component-detail > h1 {
-    font-size: 46px;
+    /* Long names (SegmentedControl, DropdownMenu) must fit a 390px phone. */
+    font-size: clamp(30px, 11vw, 46px);
   }
 }
 @media (prefers-reduced-motion: reduce) {
