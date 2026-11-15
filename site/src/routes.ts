@@ -29,11 +29,11 @@ export const pages = [
     route: '/',
     title: 'WooSign — React & React Native 디자인 시스템',
     description:
-      'React와 React Native를 위한 Paper & Ink 디자인 시스템. Web, iOS, Android에서 사용하는 52개 컴포넌트와 디자인 토큰.',
+      'React와 React Native를 위한 Paper & Ink 디자인 시스템. Web, iOS, Android에서 사용하는 53개 컴포넌트와 디자인 토큰.',
   },
   {
     route: '/components',
-    title: '52개 컴포넌트 — WooSign',
+    title: '53개 컴포넌트 — WooSign',
     description:
       '검색과 분류로 탐색하는 React·React Native 컴포넌트. 실제 웹 데모, 사용 코드와 공통 API를 확인하세요.',
   },
@@ -59,7 +59,7 @@ export const pages = [
     route: '/sitemap',
     title: '사이트맵 — WooSign',
     description:
-      'WooSign의 시작하기, React Native, 디자인 토큰과 52개 컴포넌트를 한눈에 탐색하세요.',
+      'WooSign의 시작하기, React Native, 디자인 토큰과 53개 컴포넌트를 한눈에 탐색하세요.',
   },
   ...names.map(name => ({
     route: componentRoute(name),

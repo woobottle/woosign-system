@@ -19,6 +19,7 @@ export * from './Progress';
 export * from './Radio';
 export * from './StatusDot';
 export * from './Switch';
+export * from './Table';
 export * from './Tabs';
 export * from './Text';
 export * from './Toast';
