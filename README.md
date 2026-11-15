@@ -298,14 +298,15 @@ colors, public TypeScript contracts, Storybook examples and behavior tests.
 | 상태 | Skeleton · Spinner · Alert · EmptyState | 로딩·진행·인라인 알림·빈 화면 |
 | 폼 | Label · FormField | 라벨·설명·오류·필수 표시와 접근성 연결 |
 | 콘텐츠 | Accordion · Collapsible · ListItem · AspectRatio · ScrollArea | 접기·펼치기, 목록 행, 비율과 스크롤 |
-| 탐색·선택 | Breadcrumb · Pagination · SegmentedControl · Toggle · ToggleGroup | 경로, 페이지, 단일·복수 선택 |
+| 탐색·선택 | Breadcrumb · Pagination · SegmentedControl · Stepper · Toggle · ToggleGroup | 경로, 페이지, 단계 진행, 단일·복수 선택 |
 | 입력 | Slider · InputOTP · Combobox | 범위 값, 숫자 인증 코드, 검색 선택 |
 | 날짜 | Calendar · DatePicker | YYYY-MM-DD 날짜와 선택 제한 |
 | 보조 UI | Tooltip · Popover · DropdownMenu | 도움말·보조 콘텐츠·액션 메뉴 |
 
 Stateful controls support controlled and uncontrolled usage. `Accordion` and
 `ToggleGroup` use arrays of values and support `multiple`; `SegmentedControl`
-uses a single string. Supply stable, unique `id` values to Accordion, Collapsible,
+uses a single string. `Stepper` takes the current step's `value`; earlier steps
+show as complete, and `navigable` lets people press a completed step to go back. Supply stable, unique `id` values to Accordion, Collapsible,
 Combobox, Tooltip and FormField for accessible relationships across SSR and hydration.
 
 Calendar / DatePicker values and bounds are strict local `YYYY-MM-DD` dates.

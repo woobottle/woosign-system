@@ -57,6 +57,7 @@ WooSign provides a consistent set of UI components that work seamlessly across R
 - [Skeleton](src/components/Skeleton/types.ts): Cross-platform component; public props and contracts.
 - [Slider](src/components/Slider/types.ts): Cross-platform component; public props and contracts.
 - [Spinner](src/components/Spinner/types.ts): Cross-platform component; public props and contracts.
+- [Stepper](src/components/Stepper/types.ts): Cross-platform component; public props and contracts.
 - [StatusDot](src/components/StatusDot/types.ts): Cross-platform component; public props and contracts.
 - [Switch](src/components/Switch/types.ts): Cross-platform component; public props and contracts.
 - [Tabs](src/components/Tabs/types.ts): Cross-platform component; public props and contracts.
