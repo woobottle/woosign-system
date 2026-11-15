@@ -1296,3 +1296,893 @@ export type DropdownMenuProps = DropdownMenuBaseProps & {
   className?: string;
 };
 ```
+
+### BottomSheet
+
+Source: src/components/BottomSheet/types.ts
+
+```ts
+import type {ReactNode} from 'react';
+import type {ViewStyle} from 'react-native';
+
+/** web/native 공통 컨테이너 props. */
+export interface BottomSheetBaseProps {
+  /** 표시 여부 (controlled). */
+  open: boolean;
+  /** scrim 클릭 / Esc / Android back / 드래그 디스미스 시 호출. */
+  onClose: () => void;
+  /** scrim 클릭으로 닫을지. 기본 true. */
+  closeOnScrimClick?: boolean;
+  /** Esc(web) / Android back(native)로 닫을지. 기본 true. */
+  closeOnEsc?: boolean;
+  /** 핸들 드래그로 닫을지. true면 grabber 핸들을 자동 렌더. 기본 true. */
+  dragToClose?: boolean;
+  /** 화면 높이 대비 시트 최대 높이 비율(0~1). 기본 0.9. */
+  maxHeightRatio?: number;
+  children?: ReactNode;
+  testID?: string;
+}
+
+export interface BottomSheetWebProps extends BottomSheetBaseProps {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export interface BottomSheetNativeProps extends BottomSheetBaseProps {
+  style?: ViewStyle;
+}
+
+export type BottomSheetProps = BottomSheetBaseProps & {
+  className?: string;
+  style?: ViewStyle | React.CSSProperties;
+};
+
+/** 서브컴포넌트 공통 props. */
+export interface BottomSheetSectionProps {
+  children?: ReactNode;
+  style?: ViewStyle | React.CSSProperties;
+  className?: string;
+}
+
+export type BottomSheetHeaderProps = BottomSheetSectionProps;
+export type BottomSheetTitleProps = BottomSheetSectionProps;
+export type BottomSheetDescriptionProps = BottomSheetSectionProps;
+export type BottomSheetBodyProps = BottomSheetSectionProps;
+export type BottomSheetFooterProps = BottomSheetSectionProps;
+
+/** aria id 전달용 context 값 (web 한정 의미). */
+export interface BottomSheetContextValue {
+  titleId: string;
+  descriptionId: string;
+  /** BottomSheetTitle이 마운트되면 true로 등록 (aria-labelledby 연결용). */
+  registerTitle: (present: boolean) => void;
+  /** BottomSheetDescription이 마운트되면 true로 등록 (aria-describedby 연결용). */
+  registerDescription: (present: boolean) => void;
+}
+```
+
+### Checkbox
+
+Source: src/components/Checkbox/types.ts
+
+```ts
+import type {ReactNode} from 'react';
+import type {ViewStyle, PressableProps} from 'react-native';
+
+export type CheckboxSize = 'sm' | 'default' | 'lg';
+
+export interface CheckboxBaseProps {
+  /** 체크 여부 (controlled). */
+  checked?: boolean;
+  /** 중간 상태 — 체크 대신 대시(–). checked보다 우선해 시각/aria에 반영. */
+  indeterminate?: boolean;
+  /** 누르면 onCheckedChange(!checked) 호출. */
+  onCheckedChange?: (checked: boolean) => void;
+  disabled?: boolean;
+  /** 우측 라벨. */
+  label?: ReactNode;
+  size?: CheckboxSize;
+  testID?: string;
+}
+
+export interface CheckboxWebProps extends CheckboxBaseProps {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export interface CheckboxNativeProps extends CheckboxBaseProps {
+  style?: ViewStyle;
+  pressableProps?: Omit<PressableProps, 'onPress' | 'disabled' | 'style'>;
+}
+
+export type CheckboxProps = CheckboxBaseProps & {
+  style?: ViewStyle | React.CSSProperties;
+  className?: string;
+};
+```
+
+### Chip
+
+Source: src/components/Chip/types.ts
+
+```ts
+import type {ReactNode} from 'react';
+import type {ViewStyle, TextStyle, PressableProps} from 'react-native';
+
+/** Chip tone — square-cornered tag used for tight chrome (cards, tabs). */
+export type ChipTone = 'default' | 'solid' | 'outline';
+
+export interface ChipBaseProps {
+  tone?: ChipTone;
+  disabled?: boolean;
+  children?: ReactNode;
+  onPress?: () => void;
+  leftAdornment?: ReactNode;
+  rightAdornment?: ReactNode;
+  testID?: string;
+}
+
+export interface ChipWebProps extends ChipBaseProps {
+  className?: string;
+  style?: React.CSSProperties;
+  type?: 'button' | 'submit';
+}
+
+export interface ChipNativeProps extends ChipBaseProps {
+  style?: ViewStyle;
+  textStyle?: TextStyle;
+  pressableProps?: Omit<PressableProps, 'onPress' | 'disabled' | 'style'>;
+}
+
+export type ChipProps = ChipBaseProps & {
+  style?: ViewStyle | React.CSSProperties;
+  className?: string;
+};
+```
+
+### Dialog
+
+Source: src/components/Dialog/types.ts
+
+```ts
+import type {ReactNode} from 'react';
+import type {ViewStyle} from 'react-native';
+
+/** Dialog 표면 폭 프리셋. */
+export type DialogSize = 'sm' | 'md' | 'lg';
+
+/** web/native 공통 컨테이너 props. */
+export interface DialogBaseProps {
+  /** 표시 여부 (controlled). */
+  open: boolean;
+  /** scrim 클릭 / Esc / Android back 시 호출. */
+  onClose: () => void;
+  /** 표면 폭 프리셋. 기본 'md'. */
+  size?: DialogSize;
+  /** scrim 클릭으로 닫을지. 기본 true. */
+  closeOnScrimClick?: boolean;
+  /** Esc(web) / Android back(native)로 닫을지. 기본 true. */
+  closeOnEsc?: boolean;
+  children?: ReactNode;
+  testID?: string;
+}
+
+export interface DialogWebProps extends DialogBaseProps {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export interface DialogNativeProps extends DialogBaseProps {
+  style?: ViewStyle;
+}
+
+export type DialogProps = DialogBaseProps & {
+  className?: string;
+  style?: ViewStyle | React.CSSProperties;
+};
+
+/** 서브컴포넌트 공통 props. */
+export interface DialogSectionProps {
+  children?: ReactNode;
+  style?: ViewStyle | React.CSSProperties;
+  className?: string;
+}
+
+export type DialogHeaderProps = DialogSectionProps;
+export type DialogTitleProps = DialogSectionProps;
+export type DialogDescriptionProps = DialogSectionProps;
+export type DialogBodyProps = DialogSectionProps;
+export type DialogFooterProps = DialogSectionProps;
+
+/** aria id 전달용 context 값 (web 한정 의미). */
+export interface DialogContextValue {
+  titleId: string;
+  descriptionId: string;
+  /** DialogTitle가 마운트되면 true로 등록 (aria-labelledby 연결용). */
+  registerTitle: (present: boolean) => void;
+  /** DialogDescription가 마운트되면 true로 등록 (aria-describedby 연결용). */
+  registerDescription: (present: boolean) => void;
+}
+
+/** useDialog().confirm(...) 옵션. */
+export interface ConfirmOptions {
+  title: ReactNode;
+  description?: ReactNode;
+  /** 확인 버튼 라벨. 기본 '확인'. */
+  confirmText?: string;
+  /** 취소 버튼 라벨. 기본 '취소'. */
+  cancelText?: string;
+  /** 'destructive'면 확인 버튼이 destructive variant. 기본 'default'. */
+  tone?: 'default' | 'destructive';
+}
+
+/** useDialog().alert(...) 옵션. */
+export interface AlertOptions {
+  title: ReactNode;
+  description?: ReactNode;
+  /** 확인 버튼 라벨. 기본 '확인'. */
+  confirmText?: string;
+}
+
+/** useDialog().prompt(...) 옵션. */
+export interface PromptOptions {
+  title: ReactNode;
+  description?: ReactNode;
+  /** Input placeholder. */
+  placeholder?: string;
+  /** Input 초기값. 기본 ''. */
+  defaultValue?: string;
+  /** 확인 버튼 라벨. 기본 '확인'. */
+  confirmText?: string;
+  /** 취소 버튼 라벨. 기본 '취소'. */
+  cancelText?: string;
+}
+
+/** useDialog()가 반환하는 임퍼러티브 API. */
+export interface DialogApi {
+  /** 확인=true, 취소/scrim/Esc=false. */
+  confirm(options: ConfirmOptions): Promise<boolean>;
+  /** 닫히면 resolve. */
+  alert(options: AlertOptions): Promise<void>;
+  /** 확인=입력 문자열(빈 값이면 ''), 취소/scrim/Esc=null. */
+  prompt(options: PromptOptions): Promise<string | null>;
+}
+
+/** 내부 큐 엔트리 — id/resolve는 상태머신이 부여. */
+export type DialogEntry =
+  | {
+      id: string;
+      kind: 'confirm';
+      options: ConfirmOptions;
+      resolve: (value: boolean) => void;
+    }
+  | {
+      id: string;
+      kind: 'alert';
+      options: AlertOptions;
+      resolve: () => void;
+    }
+  | {
+      id: string;
+      kind: 'prompt';
+      options: PromptOptions;
+      resolve: (value: string | null) => void;
+    };
+
+export interface DialogProviderProps {
+  children?: ReactNode;
+}
+```
+
+### Divider
+
+Source: src/components/Divider/types.ts
+
+```ts
+import type {ViewStyle} from 'react-native';
+
+/** Divider tone — default (hairline on light) or inverse (hairline on ink). */
+export type DividerTone = 'default' | 'inverse';
+
+export interface DividerBaseProps {
+  tone?: DividerTone;
+  orientation?: 'horizontal' | 'vertical';
+  testID?: string;
+}
+
+export interface DividerWebProps extends DividerBaseProps {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export interface DividerNativeProps extends DividerBaseProps {
+  style?: ViewStyle;
+}
+
+export type DividerProps = DividerBaseProps & {
+  style?: ViewStyle | React.CSSProperties;
+  className?: string;
+};
+```
+
+### Drawer
+
+Source: src/components/Drawer/types.ts
+
+```ts
+import type {ReactNode} from 'react';
+import type {ViewStyle} from 'react-native';
+
+/** web/native 공통 컨테이너 props. */
+export interface DrawerBaseProps {
+  /** 표시 여부 (controlled). */
+  open: boolean;
+  /** scrim 클릭 / Esc / Android back 시 호출. */
+  onClose: () => void;
+  /** 패널 폭(px). 기본 320. 화면폭보다 크면 화면폭으로 클램프(native). */
+  width?: number;
+  /** scrim 클릭으로 닫을지. 기본 true. */
+  closeOnScrimClick?: boolean;
+  /** Esc(web) / Android back(native)로 닫을지. 기본 true. */
+  closeOnEsc?: boolean;
+  children?: ReactNode;
+  testID?: string;
+}
+
+export interface DrawerWebProps extends DrawerBaseProps {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export interface DrawerNativeProps extends DrawerBaseProps {
+  style?: ViewStyle;
+}
+
+export type DrawerProps = DrawerBaseProps & {
+  className?: string;
+  style?: ViewStyle | React.CSSProperties;
+};
+
+/** 서브컴포넌트 공통 props. */
+export interface DrawerSectionProps {
+  children?: ReactNode;
+  style?: ViewStyle | React.CSSProperties;
+  className?: string;
+}
+
+export type DrawerHeaderProps = DrawerSectionProps;
+export type DrawerTitleProps = DrawerSectionProps;
+export type DrawerDescriptionProps = DrawerSectionProps;
+export type DrawerBodyProps = DrawerSectionProps;
+export type DrawerFooterProps = DrawerSectionProps;
+
+/** aria id 전달용 context 값 (web 한정 의미). */
+export interface DrawerContextValue {
+  titleId: string;
+  descriptionId: string;
+  /** DrawerTitle이 마운트되면 true로 등록 (aria-labelledby 연결용). */
+  registerTitle: (present: boolean) => void;
+  /** DrawerDescription이 마운트되면 true로 등록 (aria-describedby 연결용). */
+  registerDescription: (present: boolean) => void;
+}
+```
+
+### Eyebrow
+
+Source: src/components/Eyebrow/types.ts
+
+```ts
+import type {ReactNode} from 'react';
+import type {TextStyle} from 'react-native';
+
+/** Eyebrow tone — secondary ink (default), ember brand accent, or ceremonial gold. */
+export type EyebrowTone = 'default' | 'brand' | 'gold' | 'inverse';
+
+export interface EyebrowBaseProps {
+  tone?: EyebrowTone;
+  children?: ReactNode;
+  testID?: string;
+}
+
+export interface EyebrowWebProps extends EyebrowBaseProps {
+  className?: string;
+  style?: React.CSSProperties;
+  as?: 'span' | 'div' | 'p';
+}
+
+export interface EyebrowNativeProps extends EyebrowBaseProps {
+  style?: TextStyle;
+}
+
+export type EyebrowProps = EyebrowBaseProps & {
+  style?: TextStyle | React.CSSProperties;
+  className?: string;
+};
+```
+
+### Fab
+
+Source: src/components/Fab/types.ts
+
+```ts
+import type {ReactNode} from 'react';
+import type {ViewStyle, PressableProps} from 'react-native';
+
+/** FAB tone — ember (default), ink, or gold ceremonial. */
+export type FabTone = 'ember' | 'ink' | 'gold';
+export type FabSize = 'default' | 'lg';
+
+export interface FabBaseProps {
+  tone?: FabTone;
+  size?: FabSize;
+  disabled?: boolean;
+  onPress?: () => void;
+  children?: ReactNode;
+  accessibilityLabel?: string;
+  testID?: string;
+}
+
+export interface FabWebProps extends FabBaseProps {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export interface FabNativeProps extends FabBaseProps {
+  style?: ViewStyle;
+  pressableProps?: Omit<PressableProps, 'onPress' | 'disabled' | 'style'>;
+}
+
+export type FabProps = FabBaseProps & {
+  style?: ViewStyle | React.CSSProperties;
+  className?: string;
+};
+```
+
+### FeatureBand
+
+Source: src/components/FeatureBand/types.ts
+
+```ts
+import type {ReactNode} from 'react';
+import type {ViewStyle} from 'react-native';
+
+/** Feature band tone — inverse (ink900), ember (CTA orange), reward (cream-300), or forest (deep evergreen). */
+export type FeatureBandTone = 'inverse' | 'ember' | 'reward' | 'forest';
+
+export interface FeatureBandBaseProps {
+  tone?: FeatureBandTone;
+  /** Large radius for hero-style bands; defaults to `lg` (16px). */
+  rounded?: boolean;
+  children?: ReactNode;
+  testID?: string;
+}
+
+export interface FeatureBandWebProps extends FeatureBandBaseProps {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export interface FeatureBandNativeProps extends FeatureBandBaseProps {
+  style?: ViewStyle;
+}
+
+export type FeatureBandProps = FeatureBandBaseProps & {
+  style?: ViewStyle | React.CSSProperties;
+  className?: string;
+};
+```
+
+### Pill
+
+Source: src/components/Pill/types.ts
+
+```ts
+import type {ReactNode} from 'react';
+import type {ViewStyle, TextStyle, PressableProps} from 'react-native';
+
+/** Selectable pill used for category filters, etc. */
+export interface PillBaseProps {
+  active?: boolean;
+  disabled?: boolean;
+  children?: ReactNode;
+  onPress?: () => void;
+  testID?: string;
+}
+
+export interface PillWebProps extends PillBaseProps {
+  className?: string;
+  style?: React.CSSProperties;
+  type?: 'button' | 'submit';
+}
+
+export interface PillNativeProps extends PillBaseProps {
+  style?: ViewStyle;
+  textStyle?: TextStyle;
+  pressableProps?: Omit<PressableProps, 'onPress' | 'disabled' | 'style'>;
+}
+
+export type PillProps = PillBaseProps & {
+  style?: ViewStyle | React.CSSProperties;
+  className?: string;
+};
+```
+
+### Progress
+
+Source: src/components/Progress/types.ts
+
+```ts
+import type {ViewStyle} from 'react-native';
+
+export type ProgressTone = 'gold' | 'ember' | 'ink';
+export type ProgressSurface = 'light' | 'inverse';
+export type ProgressSize = 'sm' | 'default' | 'lg';
+
+export interface ProgressBaseProps {
+  /** Fill value (0-1 or 0-100, inferred from range). */
+  value: number;
+  /** Maximum value (default 1 if value ≤ 1, else 100). */
+  max?: number;
+  tone?: ProgressTone;
+  /** Rail surface — on light canvas or on inverse ink band. */
+  surface?: ProgressSurface;
+  size?: ProgressSize;
+  testID?: string;
+}
+
+export interface ProgressWebProps extends ProgressBaseProps {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export interface ProgressNativeProps extends ProgressBaseProps {
+  style?: ViewStyle;
+}
+
+export type ProgressProps = ProgressBaseProps & {
+  style?: ViewStyle | React.CSSProperties;
+  className?: string;
+};
+```
+
+### Radio
+
+Source: src/components/Radio/types.ts
+
+```ts
+import type {ReactNode} from 'react';
+import type {ViewStyle} from 'react-native';
+
+export type RadioSize = 'sm' | 'default' | 'lg';
+
+export interface RadioGroupBaseProps {
+  /** 현재 선택 값 (controlled). */
+  value?: string;
+  onValueChange?: (value: string) => void;
+  /** 그룹 전체 비활성. */
+  disabled?: boolean;
+  /** web 라디오 name 그룹(선택). */
+  name?: string;
+  children?: ReactNode;
+  testID?: string;
+}
+
+export interface RadioGroupWebProps extends RadioGroupBaseProps {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export interface RadioGroupNativeProps extends RadioGroupBaseProps {
+  style?: ViewStyle;
+}
+
+export interface RadioBaseProps {
+  /** 이 라디오의 값(필수). */
+  value: string;
+  label?: ReactNode;
+  /** 개별 비활성(그룹 disabled와 OR). */
+  disabled?: boolean;
+  size?: RadioSize;
+  testID?: string;
+}
+
+export interface RadioWebProps extends RadioBaseProps {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export interface RadioNativeProps extends RadioBaseProps {
+  style?: ViewStyle;
+}
+
+export interface RadioContextValue {
+  value: string | undefined;
+  onValueChange: ((value: string) => void) | undefined;
+  disabled: boolean;
+  name: string | undefined;
+}
+
+export type RadioGroupProps = RadioGroupBaseProps & {
+  style?: ViewStyle | React.CSSProperties;
+  className?: string;
+};
+export type RadioProps = RadioBaseProps & {
+  style?: ViewStyle | React.CSSProperties;
+  className?: string;
+};
+```
+
+### Select
+
+Source: src/components/Select/types.ts
+
+```ts
+import type {CSSProperties} from 'react';
+import type {ViewStyle} from 'react-native';
+import type {InputSize, InputVariant} from '../Input/types';
+
+export interface SelectOption {
+  label: string;
+  value: string;
+  disabled?: boolean;
+}
+export interface SelectBaseProps {
+  options: readonly SelectOption[];
+  value?: string;
+  defaultValue?: string;
+  onValueChange?: (value: string) => void;
+  placeholder?: string;
+  /** Visible label and accessible name. */
+  label?: string;
+  disabled?: boolean;
+  variant?: InputVariant;
+  size?: InputSize;
+  fullWidth?: boolean;
+  testID?: string;
+}
+export interface SelectWebProps extends SelectBaseProps {
+  style?: CSSProperties;
+  className?: string;
+  id?: string;
+  name?: string;
+  required?: boolean;
+}
+export interface SelectNativeProps extends SelectBaseProps {
+  style?: ViewStyle;
+}
+export type SelectProps = SelectBaseProps & {style?: CSSProperties | ViewStyle};
+```
+
+### StatusDot
+
+Source: src/components/StatusDot/types.ts
+
+```ts
+import type {ReactNode} from 'react';
+import type {ViewStyle, TextStyle} from 'react-native';
+
+/** Status tone — tinted circle wrapper around an icon or glyph. */
+export type StatusDotTone = 'success' | 'danger' | 'brand' | 'neutral';
+export type StatusDotSize = 'sm' | 'default' | 'lg';
+
+export interface StatusDotBaseProps {
+  tone?: StatusDotTone;
+  size?: StatusDotSize;
+  /** Glyph / icon rendered inside the circle (e.g. '✓', '!', Lucide icon) */
+  children?: ReactNode;
+  testID?: string;
+}
+
+export interface StatusDotWebProps extends StatusDotBaseProps {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export interface StatusDotNativeProps extends StatusDotBaseProps {
+  style?: ViewStyle;
+  textStyle?: TextStyle;
+}
+
+export type StatusDotProps = StatusDotBaseProps & {
+  style?: ViewStyle | React.CSSProperties;
+  className?: string;
+};
+```
+
+### Switch
+
+Source: src/components/Switch/types.ts
+
+```ts
+/**
+ * Switch component types
+ * shadcn/ui inspired toggle switch
+ */
+
+import type {ViewStyle, PressableProps} from 'react-native';
+
+// Switch sizes
+export type SwitchSize = 'default' | 'sm' | 'lg';
+
+// Common props shared between web and native
+export interface SwitchBaseProps {
+  /** Whether the switch is on */
+  checked?: boolean;
+  /** Called when the value changes */
+  onCheckedChange?: (checked: boolean) => void;
+  /** Switch size */
+  size?: SwitchSize;
+  /** Disabled state */
+  disabled?: boolean;
+  /** Label text displayed next to the switch */
+  label?: string;
+  /** Test ID for testing */
+  testID?: string;
+}
+
+// Web-specific props
+export interface SwitchWebProps extends SwitchBaseProps {
+  /** Additional CSS class name */
+  className?: string;
+  /** Custom inline styles */
+  style?: React.CSSProperties;
+}
+
+// Native-specific props
+export interface SwitchNativeProps extends SwitchBaseProps {
+  /** Custom container style */
+  style?: ViewStyle;
+  /** Additional Pressable props */
+  pressableProps?: Omit<PressableProps, 'onPress' | 'disabled' | 'style'>;
+}
+
+// Union type for platform-agnostic usage
+export type SwitchProps = SwitchBaseProps & {
+  style?: ViewStyle | React.CSSProperties;
+  className?: string;
+};
+```
+
+### Tabs
+
+Source: src/components/Tabs/types.ts
+
+```ts
+import type {ReactNode} from 'react';
+import type {ViewStyle, TextStyle} from 'react-native';
+
+/** One tab definition. */
+export interface TabItem {
+  key: string;
+  label: ReactNode;
+  disabled?: boolean;
+}
+
+export interface TabsBaseProps {
+  items: TabItem[];
+  value: string;
+  onChange: (key: string) => void;
+  /** Inverse surface (for deep-ink feature bands). */
+  inverse?: boolean;
+  testID?: string;
+}
+
+export interface TabsWebProps extends TabsBaseProps {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export interface TabsNativeProps extends TabsBaseProps {
+  style?: ViewStyle;
+  tabStyle?: ViewStyle;
+  labelStyle?: TextStyle;
+}
+
+export type TabsProps = TabsBaseProps & {
+  style?: ViewStyle | React.CSSProperties;
+  className?: string;
+};
+```
+
+### Textarea
+
+Source: src/components/Textarea/types.ts
+
+```ts
+import type {InputProps, InputWebProps, InputNativeProps} from '../Input/types';
+
+type Excluded = 'multiline' | 'type' | 'secureTextEntry';
+export type TextareaProps = Omit<InputProps, Excluded>;
+export type TextareaWebProps = Omit<InputWebProps, Excluded>;
+export type TextareaNativeProps = Omit<InputNativeProps, Excluded>;
+```
+
+### Toast
+
+Source: src/components/Toast/types.ts
+
+```ts
+import type {ReactNode} from 'react';
+import type {ViewStyle, TextStyle} from 'react-native';
+
+/** Toast tone — drives the accompanying status dot color. */
+export type ToastTone = 'success' | 'danger' | 'brand' | 'neutral';
+
+export interface ToastBaseProps {
+  tone?: ToastTone;
+  title: ReactNode;
+  description?: ReactNode;
+  /** Optional custom glyph for the leading status dot. */
+  glyph?: ReactNode;
+  /** Hide the leading status dot. */
+  hideIcon?: boolean;
+  testID?: string;
+}
+
+/**
+ * Options passed to `useToast().show(...)` and the tone helpers.
+ *
+ * Same shape as the dumb Toast props plus `duration` (ms before auto-dismiss,
+ * default 4000; pass 0 to keep open until manually dismissed).
+ */
+export interface ToastOptions {
+  tone?: ToastTone;
+  title: ReactNode;
+  description?: ReactNode;
+  glyph?: ReactNode;
+  hideIcon?: boolean;
+  /** Auto-dismiss delay in ms. Default 4000. `0` disables auto-dismiss. */
+  duration?: number;
+}
+
+/** Internal queue entry — `id` is assigned by the provider. */
+export interface ToastEntry extends ToastOptions {
+  id: string;
+}
+
+/**
+ * Imperative API returned by `useToast()`.
+ *
+ * Every method returns the new toast's `id` so callers can dismiss
+ * a specific toast later. `dismiss()` with no arg dismisses all.
+ */
+export interface ToastApi {
+  show(options: ToastOptions): string;
+  success(options: Omit<ToastOptions, 'tone'>): string;
+  error(options: Omit<ToastOptions, 'tone'>): string;
+  brand(options: Omit<ToastOptions, 'tone'>): string;
+  neutral(options: Omit<ToastOptions, 'tone'>): string;
+  dismiss(id?: string): void;
+}
+
+/** Position for the toast stack on screen. Default: bottom. */
+export type ToastPosition = 'top' | 'bottom';
+
+export interface ToastProviderProps {
+  children?: ReactNode;
+  /** Default duration applied to toasts that don't specify one. Default 4000. */
+  duration?: number;
+  /** Stack position. Default 'bottom'. */
+  position?: ToastPosition;
+  /** Max concurrent visible toasts. Older ones are dismissed. Default 5. */
+  max?: number;
+  /** Bottom/top offset in px. Default 24. */
+  offset?: number;
+}
+
+export interface ToastWebProps extends ToastBaseProps {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+export interface ToastNativeProps extends ToastBaseProps {
+  style?: ViewStyle;
+  titleStyle?: TextStyle;
+  descriptionStyle?: TextStyle;
+}
+
+export type ToastProps = ToastBaseProps & {
+  style?: ViewStyle | React.CSSProperties;
+  className?: string;
+};
+```
