@@ -1,4 +1,4 @@
-import {Pressable, Text} from 'react-native';
+import {Pressable, StyleSheet, Text} from 'react-native';
 import {useResolvedColors} from '../../core/hooks';
 import {BottomSheet} from '../BottomSheet/BottomSheet.native';
 import {useControllableState} from '../_shared/state';
@@ -29,13 +29,10 @@ export function DropdownMenu({
         accessibilityState={{disabled, expanded: expanded && !disabled}}
         testID={testID}
         onPress={() => setExpanded(!expanded)}
-        style={{
-          padding: 12,
-          borderRadius: 999,
-          borderWidth: 1,
-          borderColor: c.borderDefault,
-          backgroundColor: c.card,
-        }}>
+        style={[
+          styles.trigger,
+          {borderColor: c.borderDefault, backgroundColor: c.card},
+        ]}>
         {typeof trigger === 'string' ? (
           <Text style={{color: c.textPrimary}}>{trigger}</Text>
         ) : (
@@ -61,7 +58,7 @@ export function DropdownMenu({
                 setExpanded(false);
                 item.onSelect?.();
               }}
-              style={{padding: 14, opacity: item.disabled ? 0.5 : 1}}>
+              style={[styles.item, item.disabled && styles.disabled]}>
               <Text
                 style={{
                   color: item.destructive ? c.actionDanger : c.textPrimary,
@@ -75,3 +72,9 @@ export function DropdownMenu({
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  trigger: {padding: 12, borderRadius: 999, borderWidth: 1},
+  item: {padding: 14},
+  disabled: {opacity: 0.5},
+});

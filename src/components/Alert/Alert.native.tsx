@@ -1,4 +1,4 @@
-import {View, Text, Pressable} from 'react-native';
+import {View, Text, Pressable, StyleSheet} from 'react-native';
 import {useResolvedColors} from '../../core/hooks';
 import type {AlertNativeProps} from './types';
 export function Alert({
@@ -15,23 +15,20 @@ export function Alert({
       accessibilityLiveRegion={tone === 'danger' ? 'assertive' : 'polite'}
       testID={testID}
       style={[
+        styles.root,
         {
-          padding: 16,
-          borderRadius: 12,
           backgroundColor:
             tone === 'danger'
               ? c.errorTint
               : tone === 'success'
               ? c.successTint
               : c.section,
-          flexDirection: 'row',
-          gap: 12,
         },
         style,
       ]}>
-      <View style={{flex: 1}}>
+      <View style={styles.body}>
         {title && (
-          <Text style={{color: c.textPrimary, fontWeight: '600'}}>{title}</Text>
+          <Text style={[styles.title, {color: c.textPrimary}]}>{title}</Text>
         )}
         {typeof children === 'string' || typeof children === 'number' ? (
           <Text style={{color: c.textPrimary}}>{children}</Text>
@@ -51,3 +48,9 @@ export function Alert({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  root: {padding: 16, borderRadius: 12, flexDirection: 'row', gap: 12},
+  body: {flex: 1},
+  title: {fontWeight: '600'},
+});

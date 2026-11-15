@@ -1,4 +1,4 @@
-import {View, Text, Pressable} from 'react-native';
+import {View, Text, Pressable, StyleSheet} from 'react-native';
 import {useResolvedColors} from '../../core/hooks';
 import {useControllableState} from '../_shared/state';
 import type {SegmentedControlNativeProps} from './types';
@@ -23,16 +23,7 @@ export function SegmentedControl({
       accessibilityRole="radiogroup"
       accessibilityLabel={label}
       testID={testID}
-      style={[
-        {
-          flexDirection: 'row',
-          backgroundColor: c.section,
-          padding: 4,
-          borderRadius: 999,
-          gap: 4,
-        },
-        style,
-      ]}>
+      style={[styles.container, {backgroundColor: c.section}, style]}>
       {items.map(item => (
         <Pressable
           key={item.value}
@@ -44,15 +35,35 @@ export function SegmentedControl({
           }}
           disabled={disabled || item.disabled}
           onPress={() => setSelected(item.value)}
-          style={{
-            borderRadius: 999,
-            padding: 12,
-            backgroundColor: selected === item.value ? c.card : 'transparent',
-            opacity: disabled || item.disabled ? 0.5 : 1,
-          }}>
+          style={[
+            styles.segment,
+            selected === item.value
+              ? {backgroundColor: c.card}
+              : styles.transparent,
+            (disabled || item.disabled) && styles.disabled,
+          ]}>
           <Text style={{color: c.textPrimary}}>{item.label}</Text>
         </Pressable>
       ))}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    padding: 4,
+    borderRadius: 999,
+    gap: 4,
+  },
+  segment: {
+    borderRadius: 999,
+    padding: 12,
+  },
+  transparent: {
+    backgroundColor: 'transparent',
+  },
+  disabled: {
+    opacity: 0.5,
+  },
+});

@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Pressable, Text, View, TextInput} from 'react-native';
+import {Pressable, StyleSheet, Text, View, TextInput} from 'react-native';
 import {useResolvedColors} from '../../core/hooks';
 import {BottomSheet} from '../BottomSheet/BottomSheet.native';
 import {useControllableState} from '../_shared/state';
@@ -33,7 +33,7 @@ export function Combobox({
   );
   return (
     <View style={style}>
-      <Text style={{color: c.textPrimary, marginBottom: 8}}>{label}</Text>
+      <Text style={[styles.label, {color: c.textPrimary}]}>{label}</Text>
       <Pressable
         testID={testID}
         disabled={disabled}
@@ -45,16 +45,14 @@ export function Combobox({
           setOpen(true);
           setQuery('');
         }}
-        style={{
-          height: 44,
-          justifyContent: 'center',
-          borderRadius: 12,
-          paddingHorizontal: 14,
-          borderWidth: 1,
-          borderColor: error ? c.actionDanger : c.borderDefault,
-          backgroundColor: c.card,
-          opacity: disabled ? 0.5 : 1,
-        }}>
+        style={[
+          styles.trigger,
+          {
+            borderColor: error ? c.actionDanger : c.borderDefault,
+            backgroundColor: c.card,
+          },
+          disabled && styles.disabled,
+        ]}>
         <Text style={{color: c.textPrimary}}>{selectedLabel}</Text>
       </Pressable>
       <BottomSheet open={open && !disabled} onClose={() => setOpen(false)}>
@@ -67,14 +65,10 @@ export function Combobox({
             value={query}
             onChangeText={setQuery}
             autoCorrect={false}
-            style={{
-              height: 44,
-              borderWidth: 1,
-              borderColor: c.borderDefault,
-              borderRadius: 12,
-              color: c.textPrimary,
-              paddingHorizontal: 12,
-            }}
+            style={[
+              styles.search,
+              {borderColor: c.borderDefault, color: c.textPrimary},
+            ]}
           />
         </BottomSheet.Header>
         <BottomSheet.Body>
@@ -93,12 +87,14 @@ export function Combobox({
                   setSelected(option.value);
                   setOpen(false);
                 }}
-                style={{
-                  padding: 14,
-                  backgroundColor:
-                    option.value === selected ? c.section : c.card,
-                  opacity: option.disabled ? 0.5 : 1,
-                }}>
+                style={[
+                  styles.option,
+                  {
+                    backgroundColor:
+                      option.value === selected ? c.section : c.card,
+                  },
+                  option.disabled && styles.disabled,
+                ]}>
                 <Text style={{color: c.textPrimary}}>{option.label}</Text>
               </Pressable>
             ))
@@ -114,3 +110,22 @@ export function Combobox({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  label: {marginBottom: 8},
+  trigger: {
+    height: 44,
+    justifyContent: 'center',
+    borderRadius: 12,
+    paddingHorizontal: 14,
+    borderWidth: 1,
+  },
+  search: {
+    height: 44,
+    borderWidth: 1,
+    borderRadius: 12,
+    paddingHorizontal: 12,
+  },
+  option: {padding: 14},
+  disabled: {opacity: 0.5},
+});

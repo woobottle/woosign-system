@@ -1,4 +1,4 @@
-import {View, Text, Pressable} from 'react-native';
+import {View, Text, Pressable, StyleSheet} from 'react-native';
 import {useResolvedColors} from '../../core/hooks';
 import {useControllableState} from '../_shared/state';
 import type {CollapsibleNativeProps} from './types';
@@ -25,13 +25,13 @@ export function Collapsible({
         accessibilityState={{expanded, disabled}}
         disabled={disabled}
         onPress={() => setExpanded(!expanded)}
-        style={{borderRadius: 999, backgroundColor: c.section, padding: 12}}>
+        style={[styles.trigger, {backgroundColor: c.section}]}>
         <Text style={{color: c.textPrimary}}>
           {title} {expanded ? '−' : '+'}
         </Text>
       </Pressable>
       {expanded && (
-        <View style={{paddingVertical: 12}}>
+        <View style={styles.content}>
           {typeof children === 'string' ? (
             <Text style={{color: c.textPrimary}}>{children}</Text>
           ) : (
@@ -42,3 +42,8 @@ export function Collapsible({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  trigger: {borderRadius: 999, padding: 12},
+  content: {paddingVertical: 12},
+});

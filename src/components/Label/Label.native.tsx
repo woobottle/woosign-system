@@ -1,4 +1,4 @@
-import {Text} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import {useResolvedColors} from '../../core/hooks';
 import type {LabelNativeProps} from './types';
 export function Label({
@@ -13,12 +13,9 @@ export function Label({
     <Text
       testID={testID}
       style={[
-        {
-          color: c.textPrimary,
-          fontSize: 14,
-          fontWeight: '500',
-          opacity: disabled ? 0.5 : 1,
-        },
+        styles.label,
+        {color: c.textPrimary},
+        disabled && styles.disabled,
         style,
       ]}>
       {children}
@@ -31,3 +28,8 @@ export function Label({
     </Text>
   );
 }
+
+const styles = StyleSheet.create({
+  label: {fontSize: 14, fontWeight: '500'},
+  disabled: {opacity: 0.5},
+});

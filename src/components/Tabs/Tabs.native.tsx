@@ -1,5 +1,5 @@
 import {forwardRef} from 'react';
-import {Pressable, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import type {TabsNativeProps} from './types';
 import {getTabsStyles} from './Tabs.styles';
 import {useResolvedColors} from '../../core/hooks';
@@ -31,7 +31,7 @@ export const Tabs = forwardRef<View, TabsNativeProps>(function Tabs(
             style={[
               s.tab,
               active ? s.tabActive : null,
-              item.disabled ? {opacity: 0.5} : null,
+              item.disabled ? styles.disabled : null,
               tabStyle,
             ]}>
             {typeof item.label === 'string' ? (
@@ -50,3 +50,9 @@ export const Tabs = forwardRef<View, TabsNativeProps>(function Tabs(
 });
 
 Tabs.displayName = 'Tabs';
+
+const styles = StyleSheet.create({
+  disabled: {
+    opacity: 0.5,
+  },
+});

@@ -1,4 +1,4 @@
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {useResolvedColors} from '../../core/hooks';
 import type {EmptyStateNativeProps} from './types';
 export function EmptyState({
@@ -11,17 +11,15 @@ export function EmptyState({
 }: EmptyStateNativeProps) {
   const c = useResolvedColors();
   return (
-    <View
-      testID={testID}
-      style={[{padding: 32, alignItems: 'center', gap: 12}, style]}>
+    <View testID={testID} style={[styles.container, style]}>
       {icon}
       <Text
         accessibilityRole="header"
-        style={{color: c.textPrimary, fontWeight: '600', fontSize: 18}}>
+        style={[styles.title, {color: c.textPrimary}]}>
         {title}
       </Text>
       {description && (
-        <Text style={{color: c.textSecondary, textAlign: 'center'}}>
+        <Text style={[styles.description, {color: c.textSecondary}]}>
           {description}
         </Text>
       )}
@@ -29,3 +27,9 @@ export function EmptyState({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {padding: 32, alignItems: 'center', gap: 12},
+  title: {fontWeight: '600', fontSize: 18},
+  description: {textAlign: 'center'},
+});

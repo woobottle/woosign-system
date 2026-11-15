@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Image, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import {useResolvedColors} from '../../core/hooks';
 import type {AvatarNativeProps} from './types';
 function Picture({
@@ -48,10 +48,8 @@ export function Avatar({
       accessibilityLabel={name || '아바타'}
       testID={testID}
       style={[
+        styles.root,
         {
-          alignItems: 'center',
-          justifyContent: 'center',
-          overflow: 'hidden',
           width: size,
           height: size,
           borderRadius: size / 2,
@@ -78,3 +76,7 @@ export function Avatar({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  root: {alignItems: 'center', justifyContent: 'center', overflow: 'hidden'},
+});

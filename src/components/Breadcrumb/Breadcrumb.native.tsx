@@ -1,4 +1,4 @@
-import {View, Text, Pressable, Linking} from 'react-native';
+import {View, Text, Pressable, Linking, StyleSheet} from 'react-native';
 import {useResolvedColors} from '../../core/hooks';
 import type {BreadcrumbNativeProps} from './types';
 export function Breadcrumb({
@@ -12,9 +12,9 @@ export function Breadcrumb({
     <View
       accessibilityLabel={label}
       testID={testID}
-      style={[{flexDirection: 'row', flexWrap: 'wrap', gap: 8}, style]}>
+      style={[styles.root, style]}>
       {items.map((item, i) => (
-        <View key={i} style={{flexDirection: 'row', gap: 8}}>
+        <View key={i} style={styles.item}>
           {i > 0 && (
             <Text accessible={false} style={{color: c.textTertiary}}>
               /
@@ -27,6 +27,8 @@ export function Breadcrumb({
                 if (item.onPress) {
                   item.onPress();
                 } else if (item.href) {
+                  // Fire-and-forget: navigation result is intentionally not awaited.
+                  // eslint-disable-next-line no-void
                   void Linking.openURL(item.href);
                 }
               }}>
@@ -50,3 +52,8 @@ export function Breadcrumb({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  root: {flexDirection: 'row', flexWrap: 'wrap', gap: 8},
+  item: {flexDirection: 'row', gap: 8},
+});

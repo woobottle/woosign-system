@@ -1,4 +1,4 @@
-import {View, Text, Pressable} from 'react-native';
+import {View, Text, Pressable, StyleSheet} from 'react-native';
 import {useResolvedColors} from '../../core/hooks';
 import {useControllableState} from '../_shared/state';
 import type {AccordionNativeProps} from './types';
@@ -26,7 +26,7 @@ export function Accordion({
         return (
           <View
             key={item.value}
-            style={{borderBottomWidth: 1, borderBottomColor: c.borderDefault}}>
+            style={[styles.item, {borderBottomColor: c.borderDefault}]}>
             <Pressable
               accessibilityRole="button"
               accessibilityLabel={item.title}
@@ -41,13 +41,13 @@ export function Accordion({
                     : [item.value],
                 )
               }
-              style={{padding: 16, opacity: blocked ? 0.5 : 1}}>
-              <Text style={{color: c.textPrimary, fontWeight: '600'}}>
+              style={[styles.header, blocked && styles.disabled]}>
+              <Text style={[styles.title, {color: c.textPrimary}]}>
                 {item.title} {open ? '−' : '+'}
               </Text>
             </Pressable>
             {open && (
-              <View style={{padding: 16}}>
+              <View style={styles.content}>
                 {typeof item.content === 'string' ? (
                   <Text style={{color: c.textPrimary}}>{item.content}</Text>
                 ) : (
@@ -61,3 +61,11 @@ export function Accordion({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  item: {borderBottomWidth: 1},
+  header: {padding: 16},
+  disabled: {opacity: 0.5},
+  title: {fontWeight: '600'},
+  content: {padding: 16},
+});

@@ -1,4 +1,4 @@
-import {View, Text, Pressable} from 'react-native';
+import {View, Text, Pressable, StyleSheet} from 'react-native';
 import {useResolvedColors} from '../../core/hooks';
 import type {ListItemNativeProps} from './types';
 export function ListItem({
@@ -15,10 +15,10 @@ export function ListItem({
   const content = (
     <>
       {leading}
-      <View style={{flex: 1}}>
-        <Text style={{color: c.textPrimary, fontWeight: '500'}}>{title}</Text>
+      <View style={styles.content}>
+        <Text style={[styles.title, {color: c.textPrimary}]}>{title}</Text>
         {description && (
-          <Text style={{color: c.textSecondary, fontSize: 13}}>
+          <Text style={[styles.description, {color: c.textSecondary}]}>
             {description}
           </Text>
         )}
@@ -55,3 +55,9 @@ export function ListItem({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  content: {flex: 1},
+  title: {fontWeight: '500'},
+  description: {fontSize: 13},
+});
