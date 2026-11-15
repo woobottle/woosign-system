@@ -39,6 +39,7 @@ export * from './ScrollArea';
 export * from './Breadcrumb';
 export * from './Pagination';
 export * from './SegmentedControl';
+export * from './Stepper';
 export * from './Toggle';
 export * from './ToggleGroup';
 export * from './Slider';

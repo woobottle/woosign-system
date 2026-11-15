@@ -41,6 +41,7 @@ export const groups = {
     'Breadcrumb',
     'Pagination',
     'SegmentedControl',
+    'Stepper',
     'Toggle',
     'ToggleGroup',
   ],
@@ -100,6 +101,7 @@ export const descriptions: Record<ComponentName, string> = {
   Breadcrumb: '현재 위치와 상위 경로',
   Pagination: '페이지 단위로 콘텐츠 탐색',
   SegmentedControl: '짧은 선택지를 나란히 배치',
+  Stepper: '여러 단계의 진행 위치 안내',
   Toggle: '하나의 상태를 전환',
   ToggleGroup: '여러 상태를 묶어서 선택',
   Avatar: '사람을 표현하는 프로필',
@@ -453,6 +455,20 @@ export function Demo({
           value={value}
           onValueChange={setValue}
           disabled={disabled}
+        />
+      );
+    case 'Stepper':
+      return (
+        <W.Stepper
+          label="주문 단계"
+          steps={[
+            {value: 'paper', label: '장바구니'},
+            {value: 'ink', label: '배송지', description: '받는 분 정보'},
+            {value: 'ember', label: '결제'},
+          ]}
+          value={value}
+          onValueChange={setValue}
+          navigable
         />
       );
     case 'Toggle':

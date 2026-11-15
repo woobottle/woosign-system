@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- Add cross-platform Stepper: horizontal/vertical layout, complete/current/upcoming
+  status, optional step descriptions, and `navigable` back-navigation to completed
+  steps. Web uses an ordered list with `aria-current="step"`; native announces
+  each step's position and status.
+- Move literal native component styles into `StyleSheet.create`; lint now runs
+  with zero warnings.
+
 ## 0.6.0
 
 - Add cross-platform Select and Textarea.
