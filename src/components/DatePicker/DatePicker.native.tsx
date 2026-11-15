@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Calendar} from '../Calendar/Calendar.native';
 import {Popover} from '../Popover/Popover.native';
 import {useControllableState} from '../_shared/state';
@@ -39,7 +39,7 @@ export function DatePicker({
           max={max}
           isDateDisabled={isDateDisabled}
           locale={locale}
-          style={{width: '100%'}}
+          style={styles.calendar}
           onValueChange={date => {
             setSelected(date);
             setOpen(false);
@@ -49,3 +49,7 @@ export function DatePicker({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  calendar: {width: '100%'},
+});

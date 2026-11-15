@@ -93,13 +93,10 @@ export const Input = forwardRef<TextInput, InputNativeProps>(function Input(
       style={[
         styles.container,
         containerStyles,
-        multiline && {
-          height: undefined,
-          minHeight: (numberOfLines ?? 3) * 24 + 20,
-          paddingTop: 10,
-          paddingBottom: 10,
-          alignItems: 'flex-start',
-        },
+        multiline && [
+          styles.multilineContainer,
+          {height: undefined, minHeight: (numberOfLines ?? 3) * 24 + 20},
+        ],
         fullWidth && styles.fullWidth,
         (disabled || readOnly) && disabledStyle,
         isFocused && focusedStyle,
@@ -111,11 +108,10 @@ export const Input = forwardRef<TextInput, InputNativeProps>(function Input(
         style={[
           styles.input,
           textStyles,
-          multiline && {
-            minHeight: (numberOfLines ?? 3) * 24,
-            lineHeight: 24,
-            textAlignVertical: 'top',
-          },
+          multiline && [
+            styles.multilineInput,
+            {minHeight: (numberOfLines ?? 3) * 24},
+          ],
           inputStyle,
         ]}
         placeholder={placeholder}
@@ -192,6 +188,15 @@ const styles = StyleSheet.create({
   iconContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  multilineContainer: {
+    paddingTop: 10,
+    paddingBottom: 10,
+    alignItems: 'flex-start',
+  },
+  multilineInput: {
+    lineHeight: 24,
+    textAlignVertical: 'top',
   },
 });
 

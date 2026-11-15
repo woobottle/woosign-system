@@ -36,15 +36,8 @@ jobs:
       - name: Type check
         run: pnpm typecheck
 
-      # Lint runs against core + components (skips the noisy stories/examples).
-      - name: Lint (core + components)
-        run: |
-          pnpm exec eslint \
-            "src/core/**/*.ts" \
-            "src/core/**/*.tsx" \
-            "src/components/**/!(*.stories).ts" \
-            "src/components/**/!(*.stories).tsx" \
-            --max-warnings 148
+      - name: Lint
+        run: pnpm lint --max-warnings 0
 
       - name: Smoke tests
         run: pnpm test

@@ -1,4 +1,4 @@
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {useResolvedColors} from '../../core/hooks';
 import type {SkeletonNativeProps} from './types';
 export function Skeleton({
@@ -19,11 +19,17 @@ export function Skeleton({
         {
           width: width ?? (circle ? height : '100%'),
           height,
-          borderRadius: circle ? height / 2 : 8,
-          backgroundColor: c.section,
         },
+        circle ? {borderRadius: height / 2} : styles.rounded,
+        {backgroundColor: c.section},
         style,
       ]}
     />
   );
 }
+
+const styles = StyleSheet.create({
+  rounded: {
+    borderRadius: 8,
+  },
+});

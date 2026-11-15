@@ -1,4 +1,4 @@
-import {View, Text, Pressable} from 'react-native';
+import {View, Text, Pressable, StyleSheet} from 'react-native';
 import {useResolvedColors} from '../../core/hooks';
 import {useControllableState} from '../_shared/state';
 import {pageItems} from './pages';
@@ -35,13 +35,13 @@ export function Pagination({
       accessibilityState={{disabled: !!disabled || blocked, selected}}
       disabled={disabled || blocked}
       onPress={() => setPage(n)}
-      style={{
-        borderRadius: 999,
-        borderWidth: 1,
-        borderColor: c.borderDefault,
-        padding: 10,
-        backgroundColor: selected ? c.actionPrimary : c.card,
-      }}>
+      style={[
+        styles.button,
+        {
+          borderColor: c.borderDefault,
+          backgroundColor: selected ? c.actionPrimary : c.card,
+        },
+      ]}>
       <Text style={{color: selected ? c.primaryForeground : c.textPrimary}}>
         {text}
       </Text>
@@ -51,10 +51,7 @@ export function Pagination({
     <View
       accessibilityLabel={label}
       testID={testID}
-      style={[
-        {flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', gap: 8},
-        style,
-      ]}>
+      style={[styles.container, style]}>
       {button(current - 1, '이전', current === 1)}
       {pageItems(current, total).map((n, i) =>
         n === 'gap' ? (
@@ -72,3 +69,17 @@ export function Pagination({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  button: {
+    borderRadius: 999,
+    borderWidth: 1,
+    padding: 10,
+  },
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: 8,
+  },
+});

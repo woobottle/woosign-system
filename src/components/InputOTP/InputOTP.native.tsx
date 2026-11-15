@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {View, Text, TextInput} from 'react-native';
+import {View, Text, TextInput, StyleSheet} from 'react-native';
 import {useResolvedColors} from '../../core/hooks';
 import {useControllableState} from '../_shared/state';
 import type {InputOTPNativeProps} from './types';
@@ -25,40 +25,27 @@ export function InputOTP({
   const current = raw.replace(/[^0-9]/g, '').slice(0, count);
   const [focused, setFocused] = useState(false);
   return (
-    <View
-      style={[
-        {
-          flexDirection: 'row',
-          maxWidth: '100%',
-          gap: 8,
-          opacity: disabled ? 0.5 : 1,
-        },
-        style,
-      ]}>
+    <View style={[styles.container, disabled && styles.disabled, style]}>
       <View
         accessibilityElementsHidden
         importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
-        style={{flexDirection: 'row', flex: 1, gap: 8}}>
+        style={styles.cells}>
         {Array.from({length: count}, (_, i) => (
           <View
             key={i}
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              flex: 1,
-              maxWidth: 40,
-              height: 48,
-              borderRadius: 8,
-              borderWidth: 1,
-              borderColor: error
-                ? c.actionDanger
-                : focused && i === Math.min(current.length, count - 1)
-                ? c.borderFocus
-                : c.borderDefault,
-              backgroundColor: c.card,
-            }}>
-            <Text style={{color: c.textPrimary, fontSize: 20}}>
+            style={[
+              styles.cell,
+              {
+                borderColor: error
+                  ? c.actionDanger
+                  : focused && i === Math.min(current.length, count - 1)
+                  ? c.borderFocus
+                  : c.borderDefault,
+                backgroundColor: c.card,
+              },
+            ]}>
+            <Text style={[styles.cellText, {color: c.textPrimary}]}>
               {current[i] ?? ''}
             </Text>
           </View>
@@ -82,15 +69,32 @@ export function InputOTP({
           }
         }}
         caretHidden
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: 48,
-          opacity: 0.01,
-        }}
+        style={styles.hiddenInput}
       />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {flexDirection: 'row', maxWidth: '100%', gap: 8},
+  disabled: {opacity: 0.5},
+  cells: {flexDirection: 'row', flex: 1, gap: 8},
+  cell: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+    maxWidth: 40,
+    height: 48,
+    borderRadius: 8,
+    borderWidth: 1,
+  },
+  cellText: {fontSize: 20},
+  hiddenInput: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: 48,
+    opacity: 0.01,
+  },
+});

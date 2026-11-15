@@ -1,4 +1,4 @@
-import {Text, Pressable} from 'react-native';
+import {Text, Pressable, StyleSheet} from 'react-native';
 import {useResolvedColors} from '../../core/hooks';
 import {useControllableState} from '../_shared/state';
 import type {ToggleNativeProps} from './types';
@@ -27,14 +27,12 @@ export function Toggle({
       onPress={() => setActive(!active)}
       testID={testID}
       style={[
+        styles.toggle,
         {
-          padding: 12,
-          borderRadius: 999,
-          borderWidth: 1,
           borderColor: c.borderDefault,
           backgroundColor: active ? c.actionPrimary : c.card,
-          opacity: disabled ? 0.5 : 1,
         },
+        disabled && styles.disabled,
         style,
       ]}>
       {typeof children === 'string' ||
@@ -49,3 +47,14 @@ export function Toggle({
     </Pressable>
   );
 }
+
+const styles = StyleSheet.create({
+  toggle: {
+    padding: 12,
+    borderRadius: 999,
+    borderWidth: 1,
+  },
+  disabled: {
+    opacity: 0.5,
+  },
+});

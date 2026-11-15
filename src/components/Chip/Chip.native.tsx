@@ -1,5 +1,5 @@
 import {forwardRef, useCallback} from 'react';
-import {Pressable, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import type {ChipNativeProps} from './types';
 import {getChipStyles} from './Chip.styles';
 import {useResolvedColors} from '../../core/hooks';
@@ -49,7 +49,7 @@ export const Chip = forwardRef<View, ChipNativeProps>(function Chip(
         style={({pressed}) => [
           container,
           pressed && !disabled ? {transform: [{scale: 0.96}]} : undefined,
-          disabled ? {opacity: 0.5} : undefined,
+          disabled ? styles.disabled : undefined,
           style,
         ]}
         {...pressableProps}>
@@ -62,10 +62,14 @@ export const Chip = forwardRef<View, ChipNativeProps>(function Chip(
     <View
       ref={ref}
       testID={testID}
-      style={[container, disabled ? {opacity: 0.5} : undefined, style]}>
+      style={[container, disabled ? styles.disabled : undefined, style]}>
       {inner}
     </View>
   );
 });
 
 Chip.displayName = 'Chip';
+
+const styles = StyleSheet.create({
+  disabled: {opacity: 0.5},
+});

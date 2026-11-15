@@ -1,4 +1,4 @@
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Toggle} from '../Toggle/Toggle.native';
 import {useControllableState} from '../_shared/state';
 import type {ToggleGroupNativeProps} from './types';
@@ -22,7 +22,7 @@ export function ToggleGroup({
     <View
       accessibilityLabel={label}
       testID={testID}
-      style={[{flexDirection: 'row', flexWrap: 'wrap', gap: 8}, style]}>
+      style={[styles.container, style]}>
       {items.map(item => (
         <Toggle
           key={item.value}
@@ -43,3 +43,11 @@ export function ToggleGroup({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+  },
+});

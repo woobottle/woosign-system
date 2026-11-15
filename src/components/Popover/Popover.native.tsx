@@ -1,4 +1,4 @@
-import {Pressable, Text} from 'react-native';
+import {Pressable, StyleSheet, Text} from 'react-native';
 import {useResolvedColors} from '../../core/hooks';
 import {BottomSheet} from '../BottomSheet/BottomSheet.native';
 import {useControllableState} from '../_shared/state';
@@ -29,13 +29,10 @@ export function Popover({
         accessibilityState={{disabled, expanded: expanded && !disabled}}
         onPress={() => setExpanded(!expanded)}
         testID={testID}
-        style={{
-          padding: 12,
-          borderRadius: 999,
-          borderWidth: 1,
-          borderColor: c.borderDefault,
-          backgroundColor: c.card,
-        }}>
+        style={[
+          styles.trigger,
+          {borderColor: c.borderDefault, backgroundColor: c.card},
+        ]}>
         {typeof trigger === 'string' || typeof trigger === 'number' ? (
           <Text style={{color: c.textPrimary}}>{trigger}</Text>
         ) : (
@@ -61,11 +58,7 @@ export function Popover({
             accessibilityRole="button"
             accessibilityLabel="닫기"
             onPress={() => setExpanded(false)}
-            style={{
-              padding: 12,
-              borderRadius: 999,
-              backgroundColor: c.section,
-            }}>
+            style={[styles.close, {backgroundColor: c.section}]}>
             <Text style={{color: c.textPrimary}}>닫기</Text>
           </Pressable>
         </BottomSheet.Footer>
@@ -73,3 +66,15 @@ export function Popover({
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  trigger: {
+    padding: 12,
+    borderRadius: 999,
+    borderWidth: 1,
+  },
+  close: {
+    padding: 12,
+    borderRadius: 999,
+  },
+});

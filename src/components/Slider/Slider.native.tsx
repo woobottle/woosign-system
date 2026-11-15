@@ -1,5 +1,5 @@
 import {useRef, useState} from 'react';
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {useResolvedColors} from '../../core/hooks';
 import {useControllableState, normalizeRange} from '../_shared/state';
 import type {SliderNativeProps} from './types';
@@ -90,33 +90,47 @@ export function Slider({
         )
       }
       onResponderRelease={() => onValueCommit?.(last.current)}
-      style={[
-        {height: 44, justifyContent: 'center', opacity: blocked ? 0.5 : 1},
-        style,
-      ]}>
+      style={[styles.container, blocked && styles.disabled, style]}>
       <View
         pointerEvents="none"
-        style={{height: 4, borderRadius: 999, backgroundColor: c.section}}>
+        style={[styles.track, {backgroundColor: c.section}]}>
         <View
-          style={{
-            height: 4,
-            width: `${ratio * 100}%`,
-            borderRadius: 999,
-            backgroundColor: c.actionPrimary,
-          }}
+          style={[
+            styles.track,
+            {width: `${ratio * 100}%`, backgroundColor: c.actionPrimary},
+          ]}
         />
       </View>
       <View
         pointerEvents="none"
-        style={{
-          position: 'absolute',
-          left: Math.max(0, (width - 20) * ratio),
-          width: 20,
-          height: 20,
-          borderRadius: 10,
-          backgroundColor: c.actionPrimary,
-        }}
+        style={[
+          styles.thumb,
+          {
+            left: Math.max(0, (width - 20) * ratio),
+            backgroundColor: c.actionPrimary,
+          },
+        ]}
       />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    height: 44,
+    justifyContent: 'center',
+  },
+  disabled: {
+    opacity: 0.5,
+  },
+  track: {
+    height: 4,
+    borderRadius: 999,
+  },
+  thumb: {
+    position: 'absolute',
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+  },
+});

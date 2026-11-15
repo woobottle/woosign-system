@@ -1,4 +1,4 @@
-import {View} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import type {AspectRatioNativeProps} from './types';
 export function AspectRatio({
   ratio = 16 / 9,
@@ -6,18 +6,14 @@ export function AspectRatio({
   testID,
   style,
 }: AspectRatioNativeProps) {
+  const aspectRatio = Number.isFinite(ratio) && ratio > 0 ? ratio : 1;
   return (
-    <View
-      testID={testID}
-      style={[
-        {
-          width: '100%',
-          aspectRatio: Number.isFinite(ratio) && ratio > 0 ? ratio : 1,
-          overflow: 'hidden',
-        },
-        style,
-      ]}>
+    <View testID={testID} style={[styles.root, {aspectRatio}, style]}>
       {children}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  root: {width: '100%', overflow: 'hidden'},
+});

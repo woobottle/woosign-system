@@ -1,5 +1,5 @@
 import {forwardRef, useState} from 'react';
-import {Pressable, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {BottomSheet} from '../BottomSheet/BottomSheet.native';
 import {useResolvedColors} from '../../core/hooks';
 import {
@@ -31,11 +31,9 @@ export const Select = forwardRef<View, SelectNativeProps>(function Select(
   const selected = options.find(option => option.value === selectedValue);
   const colors = useResolvedColors();
   return (
-    <View style={fullWidth ? {width: '100%'} : undefined}>
+    <View style={fullWidth ? styles.fullWidth : undefined}>
       {label && (
-        <Text style={{color: colors.textPrimary, marginBottom: 8}}>
-          {label}
-        </Text>
+        <Text style={[{color: colors.textPrimary}, styles.label]}>{label}</Text>
       )}
       <Pressable
         ref={ref}
@@ -48,7 +46,7 @@ export const Select = forwardRef<View, SelectNativeProps>(function Select(
         accessibilityState={{disabled, expanded: open && !disabled}}
         style={[
           getInputContainerVariants(colors)({variant, size}),
-          disabled && {opacity: 0.5},
+          disabled && styles.disabled,
           style,
         ]}>
         <Text
@@ -84,12 +82,16 @@ export const Select = forwardRef<View, SelectNativeProps>(function Select(
                 onValueChange?.(option.value);
                 setOpen(false);
               }}
-              style={{
-                padding: 14,
-                opacity: option.disabled ? 0.5 : 1,
-                backgroundColor:
-                  selectedValue === option.value ? colors.section : colors.card,
-              }}>
+              style={[
+                styles.option,
+                option.disabled && styles.disabled,
+                {
+                  backgroundColor:
+                    selectedValue === option.value
+                      ? colors.section
+                      : colors.card,
+                },
+              ]}>
               <Text style={{color: colors.textPrimary}}>{option.label}</Text>
             </Pressable>
           ))}
@@ -99,3 +101,18 @@ export const Select = forwardRef<View, SelectNativeProps>(function Select(
   );
 });
 Select.displayName = 'Select';
+
+const styles = StyleSheet.create({
+  fullWidth: {
+    width: '100%',
+  },
+  label: {
+    marginBottom: 8,
+  },
+  disabled: {
+    opacity: 0.5,
+  },
+  option: {
+    padding: 14,
+  },
+});
