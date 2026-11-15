@@ -51,7 +51,7 @@ function Directory({selected}: {selected?: string}) {
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
-        <kbd>51</kbd>
+        <kbd>52</kbd>
       </label>
       {Object.entries(groups).map(([group, items]) => (
         <div className="directory-group" key={group}>
@@ -183,7 +183,7 @@ function Home() {
             [
               '/components',
               '컴포넌트',
-              '51개 실제 데모를 조작하고 사용 코드를 가져가세요.',
+              '52개 실제 데모를 조작하고 사용 코드를 가져가세요.',
             ],
             [
               '/tokens',
@@ -217,7 +217,7 @@ function Home() {
             제품의 이야기에 집중하세요.
           </p>
           <div className="stat">
-            <strong>51</strong>
+            <strong>52</strong>
             <span>컴포넌트 · 두 플랫폼</span>
           </div>
         </div>
@@ -281,7 +281,7 @@ function Gallery() {
         <h1>
           작은 디테일,
           <br />
-          <em>51가지 가능성.</em>
+          <em>52가지 가능성.</em>
         </h1>
         <p>직접 눌러보고, 조합하고, 당신의 화면으로 가져가세요.</p>
       </div>
@@ -684,7 +684,7 @@ function SiteMap() {
           </a>
         ))}
       </div>
-      <h2 className="subheading">51개 컴포넌트</h2>
+      <h2 className="subheading">52개 컴포넌트</h2>
       <div className="site-map-groups">
         {Object.entries(groups).map(([group, items]) => (
           <section key={group}>

@@ -82,13 +82,13 @@ export function CinematicHero({children}: {children?: ReactNode}) {
             같은 API로 만드는 좋은 화면.
           </p>
           <p className="cinema-description">
-            React와 React Native를 위한 51개의 컴포넌트.
+            React와 React Native를 위한 52개의 컴포넌트.
             <br />
             Paper & Ink의 색, 여백, 디테일을 모든 화면에.
           </p>
           <div className="cinema-actions">
             <a className="action light" href={pagePath('/components')}>
-              51개 컴포넌트 탐색 <span>↗</span>
+              52개 컴포넌트 탐색 <span>↗</span>
             </a>
             <a className="cinema-native-link" href={pagePath('/react-native')}>
               React Native로 시작하기 ↗
