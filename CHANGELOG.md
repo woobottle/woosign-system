@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.7.0
 
 - Add cross-platform Table: columns with custom cells, alignment and widths;
   client-side sorting (controlled/uncontrolled) with `aria-sort` on web and
@@ -15,6 +15,7 @@
   each step's position and status.
 - Move literal native component styles into `StyleSheet.create`; lint now runs
   with zero warnings.
+- Complete `llms-full.txt` contracts for every component.
 
 ## 0.6.0
 

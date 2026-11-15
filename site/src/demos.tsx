@@ -174,7 +174,7 @@ export function Demo({
         <div className="demo-row">
           <W.Badge>New</W.Badge>
           <W.Badge variant="gold">Member</W.Badge>
-          <W.Badge variant="outline">v0.6.0</W.Badge>
+          <W.Badge variant="outline">v0.7.0</W.Badge>
         </div>
       );
     case 'Chip':

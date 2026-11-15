@@ -99,7 +99,7 @@ export function CinematicHero({children}: {children?: ReactNode}) {
           <a href="#shared-api" className="cinema-scroll">
             같은 코드, 다른 화면 <span>↓</span>
           </a>
-          <span className="cinema-version">woosign-system / v0.6.0</span>
+          <span className="cinema-version">woosign-system / v0.7.0</span>
           {allowed && !failed && (
             <button
               className="cinema-motion"
